@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  rabbitMq:
+    image: rabbitmq:3.7-management
+    hostname: localhost
+    container_name: rabbitmq_server
+    environment:
+      - RABBITMQ_ERL_COOKIE=jupiterbakakeu
+    networks:
+      - rabbitmq_network
+    tty: true
+    ports:
+      - 15672:15672
+      - 5672:5672
+    labels:
+      NAME: "rabbitMQ"
+
+networks:
+  rabbitmq_network:
+    driver: overlay

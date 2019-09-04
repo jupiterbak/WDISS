@@ -1,0 +1,89 @@
+{
+   "nodes":[
+      {
+         "name":"Grid"
+      },
+      {
+         "name":"Buffer"
+      },
+      {
+         "name":"PSU"
+      },
+      {
+         "name":"V90"
+      },
+      {
+         "name":"PLC(S7 1500)"
+      },
+      {
+         "name":"Ethernet-Switch(Scalance M764)"
+      },
+      {
+         "name":"WLAN Switch(Scalance W700)"
+      },
+      {
+         "name":"Nanobox(IPC 227E)"
+      },
+	  {
+         "name":"IO-Modul(ET200 SP)"
+      },
+      {
+         "name":"DC Motor"
+      },
+      {
+         "name":"AC Motor"
+      }
+   ],
+   "links":[
+	  {
+         "source":0,
+         "target":3,
+         "value":55.0
+      },
+      {
+         "source":0,
+         "target":2,
+         "value":60.0
+      },
+	  {
+         "source":1,
+         "target":2,
+         "value":0.1
+      },
+      {
+         "source":2,
+         "target":4,
+         "value":1.5
+      },
+      {
+         "source":2,
+         "target":5,
+         "value":1.0
+      },
+      {
+         "source":2,
+         "target":6,
+         "value":1.0
+      },
+      {
+         "source":2,
+         "target":7,
+         "value":2.0
+      },
+      {
+         "source":2,
+         "target":8,
+         "value":1.0
+      },
+      {
+         "source":2,
+         "target":9,
+         "value":50.0
+      },
+      {
+         "source":3,
+         "target":10,
+         "value":50.0
+      }
+   ]
+}
