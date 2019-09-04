@@ -15,6 +15,21 @@ services:
       - 5672:5672
     labels:
       NAME: "rabbitMQ"
+  
+  SkillVis:
+    build:
+      context: ./SkillVisualisation
+      dockerfile: Dockerfile
+    image: skillvis
+    hostname: localhost
+    container_name: SkillVis
+    networks:
+      - rabbitmq_network
+    tty: true
+    ports:
+      - 8080:8080
+    labels:
+      NAME: "SkillVis"
 
 networks:
   rabbitmq_network:
