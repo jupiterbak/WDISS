@@ -1,0 +1,59 @@
+{
+    "nodeKeyProperty": "id",
+    "nodeDataArray": [
+        { "key": "RunningState", "id": "RunningState", "text": "Running", "isGroup": true, "group": "ClearedState", "isHighlighted": true },
+        { "key": "ClearedState", "id": "ClearedState", "text": "Cleared", "isGroup": true, "isHighlighted": true },
+        { "id": "Aborted", "text": "Aborted", "trans": 0, "loc": "600 850" },
+        { "id": "Aborting", "text": "Aborting", "trans": 1, "loc": " 370 850" },
+
+        { "id": "Stopped", "text": "Stopped", "trans": 0, "group": "ClearedState", "isHighlighted": true, "loc": "150 650" },
+        { "id": "Clearing", "text": "Clearing", "trans": 1, "group": "ClearedState", "loc": "600 700" },
+        { "id": "Stopping", "text": "Stopping", "trans": 1, "group": "ClearedState", "loc": "370 650" },
+
+        { "id": "Resetting", "text": "Resetting", "trans": 1, "group": "RunningState", "isGroup": true, "loc": "150 500" },
+        { "id": "CheckComponent", "text": "Check Res.", "trans": 1, "group": "Resetting", "isHighlighted": true, "loc": "0 450" },
+        { "id": "InitializeComponent", "text": "Init. Res.", "trans": 1, "group": "Resetting", "loc": "300 450" },
+        { "id": "SkillInitialized", "text": "Skill Res. Init.", "trans": 1, "group": "Resetting", "loc": "150 400" },
+
+        { "id": "Idle", "text": "Idle", "trans": 0, "group": "RunningState", "isGroup": true, "loc": "150 250" },
+        { "id": "InitializeSkill", "text": "Init. Skill", "trans": 0, "group": "Idle", "isHighlighted": true, "loc": "150 270" },
+        { "id": "SkillReady", "text": "Skill Ready", "trans": 0, "group": "Idle", "loc": "150 200" },
+
+
+        { "id": "Execute", "text": "Execute", "trans": 0, "group": "RunningState", "loc": "400 200" },
+        { "id": "Completing", "text": "Completing", "trans": 1, "group": "RunningState", "loc": "600 200" },
+        { "id": "Completed", "text": "Completed", "trans": 0, "group": "RunningState", "loc": "800 200" },
+
+        { "id": "Hold", "text": "Hold", "trans": 0, "group": "RunningState", "isGroup": true, "isHighlighted": true, "loc": "350 50" },
+        { "id": "Holding", "text": "Holding", "trans": 1, "group": "Hold", "loc": "200 50" },
+        { "id": "Held", "text": "Held", "trans": 0, "group": "Hold", "loc": "400 50" },
+        { "id": "UnHolding", "text": "UnHolding", "trans": 1, "group": "Hold", "loc": "600 50" }
+    ],
+    "linkDataArray": [
+
+        { "from": "ClearedState", "to": "Aborting", "curviness": 0, "text": "Abort" },
+        { "from": "Aborting", "to": "Aborted", "curviness": 0, "text": "SC" },
+        { "from": "Aborted", "to": "Clearing", "curviness": 0, "text": "Clear" },
+        { "from": "Clearing", "to": "Stopped", "curviness": 50, "text": "SC" },
+        { "from": "Stopped", "to": "Resetting", "curviness": 0, "text": "Reset" },
+
+        { "from": "SkillInitialized", "to": "Idle", "curviness": 0, "text": "SC" },
+        { "from": "CheckComponent", "to": "SkillInitialized", "curviness": 20, "text": "OK" },
+        { "from": "CheckComponent", "to": "InitializeComponent", "curviness": 0, "text": "n.OK" },
+        { "from": "InitializeComponent", "to": "CheckComponent", "curviness": 50, "text": "SC" },
+
+
+        { "from": "SkillReady", "to": "Execute", "curviness": 0, "text": "CallSkill" },
+        { "from": "InitializeSkill", "to": "SkillReady", "curviness": 0, "text": "SC" },
+
+        { "from": "Execute", "to": "Completing", "curviness": 0, "text": "SC" },
+        { "from": "Completing", "to": "Completed", "curviness": 0, "text": "SC" },
+        { "from": "Completed", "to": "Resetting", "curviness": 90, "text": "Reset" },
+        { "from": "Execute", "to": "Hold", "curviness": 0, "text": "Hold" },
+        { "from": "Holding", "to": "Held", "curviness": 0, "text": "SC" },
+        { "from": "Held", "to": "UnHolding", "curviness": 0, "text": "UnHold" },
+        { "from": "UnHolding", "to": "Execute", "curviness": 0, "text": "SC" },
+        { "from": "RunningState", "to": "Stopping", "curviness": 0, "text": "Stop" },
+        { "from": "Stopping", "to": "Stopped", "curviness": 0, "text": "SC" }
+    ]
+}

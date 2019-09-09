@@ -1,0 +1,16 @@
+default:
+  server:
+    port: 4840
+    buildInfo:
+      productName: "DummySkillServer"
+      buildNumber: "0001"
+    ip: "0.0.0.0"
+    endpointName: 'OPCUA@Siemens'
+    username: 'root'
+    password: 'root'
+    allowAnonymous: false,
+    serverInfo:
+      applicationUri: "http://siemens.com/SkillOPCUA"
+      productUri: "faps.fau.de/ESYS_DEMONSTRATOR_example"
+      applicationName: "ESYS_DEMONSTRATOR@FAPS" 
+    serverNodeSet: ["AutomationSkillType.xml","test.xml"]
