@@ -18,22 +18,22 @@ services:
 
   DummyOPCUASkill:
     build:
-      context: ./Ressources/DummyMachine/
+      context: ./ressources/dummymachine/
       dockerfile: Dockerfile
-    image: DummyOPCUASkill
+    image: dummyopcuaskill
     hostname: localhost
     container_name: DummyOPCUASkill
     networks:
       - rabbitmq_network
     tty: true
     ports:
-      - 8080:8080
+      - 4840:4840
     labels:
       NAME: "DummyOPCUASkill"
   
   SkillVis:
     build:
-      context: ./SkillVisualisation/
+      context: ./skillvisualisation/
       dockerfile: Dockerfile
     image: skillvis
     hostname: localhost
