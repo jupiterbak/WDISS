@@ -13,7 +13,7 @@ const logger = winston.createLogger({
         }),
         winston.format.colorize({ all: true }),
         winston.format.printf((log) => {
-            return `${log.timestamp} | [${log.service}] ${log.level}: ${log.message}`;
+            return `${log.timestamp} - [${log.level}] | [${log.service}] : ${log.message}`;
         })
     ),
     defaultMeta: { service: 'Dummy Server' },

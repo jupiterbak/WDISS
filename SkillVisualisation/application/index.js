@@ -1,7 +1,7 @@
 /**
  * Copyright 2018 Siemens AG.
  * 
- * File: LEMS.js
+ * File: SkillVis.js
  * Project: SP 164
  * Author:
  *  - Jupiter Bakakeu
@@ -100,7 +100,7 @@ module.exports = {
 
         configurator.init(httpServer, this, userSettings);
         // log the step
-        log.info("LEMS initialized successfully.");
+        log.info("SkillVis initialized successfully.");
 
         return when.resolve();
     },
@@ -125,9 +125,9 @@ module.exports = {
         });
 
         // Start the application
-        console.log("\n\n===============================\n" + "LEMS engine.welcome\n===============================\n");
+        console.log("\n\n===============================\n" + "SkillVis engine.welcome\n===============================\n");
         if (setting_manager && setting_manager.version) {
-            log.info("runtime.version LEMS :" + setting_manager.version);
+            log.info("runtime.version SkillVis :" + setting_manager.version);
         }
         log.info("runtime.version Node JS" + process.version);
         log.info(os.type() + " " + os.release() + " " + os.arch() + " " + os.endianness());
@@ -140,12 +140,7 @@ module.exports = {
 
         // Start all module
         configurator.start();
-        log.info("LEMS start successfully.");
-
-        // ########### TEST #############
-        setTimeout(function() {
-            self.eventBus.emit("ConnectPLC", { ip: "192.168.43.1", port: 4840, serverName: "SP164DEMO", socketID: "8548585858" })
-        }, 2000);
+        log.info("SkillVis start successfully.");
 
         // setInterval(function() {
         //     self.eventBus.emit("ExecutePLCAction", {
@@ -173,7 +168,7 @@ module.exports = {
         started = false;
         // Stop all modules
         configurator.stop();
-        log.info("LEMS stopped successfully.");
+        log.info("SkillVis stopped successfully.");
         return when.resolve();
     },
 

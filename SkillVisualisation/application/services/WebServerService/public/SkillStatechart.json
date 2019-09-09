@@ -2,11 +2,10 @@
     "nodeKeyProperty": "id",
     "nodeDataArray": [
         { "key": "RunningState", "id": "RunningState", "text": "Running", "isGroup": true, "group": "ClearedState", "isHighlighted": true },
+        { "id": "Stopped", "text": "Stopped", "trans": 0, "group": "ClearedState", "isHighlighted": true, "loc": "150 650" },
         { "key": "ClearedState", "id": "ClearedState", "text": "Cleared", "isGroup": true, "isHighlighted": true },
         { "id": "Aborted", "text": "Aborted", "trans": 0, "loc": "600 850" },
         { "id": "Aborting", "text": "Aborting", "trans": 1, "loc": " 370 850" },
-
-        { "id": "Stopped", "text": "Stopped", "trans": 0, "group": "ClearedState", "isHighlighted": true, "loc": "150 650" },
         { "id": "Clearing", "text": "Clearing", "trans": 1, "group": "ClearedState", "loc": "600 700" },
         { "id": "Stopping", "text": "Stopping", "trans": 1, "group": "ClearedState", "loc": "370 650" },
 

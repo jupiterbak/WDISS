@@ -42,7 +42,7 @@ OPCUAClientInterface.prototype.init = function(_app, _settings) {
     self.settings.modulesetting = self.settings.modulesetting || {
         interval: 10,
         ip: "localhost",
-        port: 48020,
+        port: 4840,
         defaultObjectModel: { CURRENT_STATES: [], STATES: [], KPI: [], ACTIONS: [] }
     };
     self.settings.defaultObjectModel = self.settings.defaultObjectModel || {};
@@ -147,7 +147,8 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
                             el["value"] = dataValue.value.value;
                         }
 
-                        if (self.started) self.app.eventBus.emit("KPIChanged", el);
+                        if (self.started)
+                            self.app.eventBus.emit("KPIChanged", el);
                     });
                 }
                 iii++;
@@ -366,107 +367,107 @@ function subscribeToEventBus(bus, self, fCallBack) {
     // ExecuteAction
     self.app.eventBus.addListener("ExecutePLCAction", function(arg) {
         //Initialize a new client
-        if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.actionName) {
-            var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
-            if (client) {
-                if (client.connected === true) {
-                    var action = null;
-                    for (var i = 0; i < self.settings.modulesetting.defaultObjectModel.ACTIONS.length; i++) {
-                        if (self.settings.modulesetting.defaultObjectModel.ACTIONS[i].name === arg.actionName) {
-                            action = self.settings.modulesetting.defaultObjectModel.ACTIONS[i];
-                            break;
-                        }
-                    }
-                    if (action) {
-                        async.series(
-                            [
-                                // Set the target load variable if the action is start or load change
-                                function(callback) {
-                                    if (arg.actionName === "ChangeLoad" || arg.actionName === "Start") {
-                                        // Initialize the parameters
-                                        let targetLoadAC = arg.parameters[0].value;
-                                        let targetLoadDC = arg.parameters[1].value;
+        // if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.actionName) {
+        //     var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
+        //     if (client) {
+        //         if (client.connected === true) {
+        //             var action = null;
+        //             for (var i = 0; i < self.settings.modulesetting.defaultObjectModel.ACTIONS.length; i++) {
+        //                 if (self.settings.modulesetting.defaultObjectModel.ACTIONS[i].name === arg.actionName) {
+        //                     action = self.settings.modulesetting.defaultObjectModel.ACTIONS[i];
+        //                     break;
+        //                 }
+        //             }
+        //             if (action) {
+        //                 async.series(
+        //                     [
+        //                         // Set the target load variable if the action is start or load change
+        //                         function(callback) {
+        //                             if (arg.actionName === "ChangeLoad" || arg.actionName === "Start") {
+        //                                 // Initialize the parameters
+        //                                 let targetLoadAC = arg.parameters[0].value;
+        //                                 let targetLoadDC = arg.parameters[1].value;
 
-                                        // Initialize the parameters
-                                        let _variable = null;
-                                        for (let i = 0; i < self.settings.modulesetting.defaultObjectModel.KPI.length; i++) {
-                                            const element = self.settings.modulesetting.defaultObjectModel.KPI[i];
-                                            if (element.name === "TargetLoad") {
-                                                _variable = element;
-                                            }
-                                        }
-                                        if (_variable) {
-                                            let _value = {
-                                                value: { /* Variant */
-                                                    dataType: opcua.DataType.Float,
-                                                    value: targetLoadAC
-                                                }
-                                            };
+        //                                 // Initialize the parameters
+        //                                 let _variable = null;
+        //                                 for (let i = 0; i < self.settings.modulesetting.defaultObjectModel.KPI.length; i++) {
+        //                                     const element = self.settings.modulesetting.defaultObjectModel.KPI[i];
+        //                                     if (element.name === "TargetLoad") {
+        //                                         _variable = element;
+        //                                     }
+        //                                 }
+        //                                 if (_variable) {
+        //                                     let _value = {
+        //                                         value: { /* Variant */
+        //                                             dataType: opcua.DataType.Float,
+        //                                             value: targetLoadAC
+        //                                         }
+        //                                     };
 
-                                            client.write(_variable.nodeId.ns, _variable.nodeId.nid, _value, function(err, statusCode) {
-                                                if (err) {
-                                                    self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not write variable [" + arg.name + "] : " + err);
-                                                } else {
-                                                    self.app.log.error("MICROSERVICE[" + self.settings.name + "] write variable executed with : " + statusCode);
-                                                }
-                                            });
-                                        }
-                                    }
-                                    callback();
-                                },
-                                function(callback) {
-                                    if (action.objectId && action.methodId && client) {
-                                        // Initialize the parameters
-                                        var inputArguments = [];
-                                        if (arg.parameters) {
-                                            var k = 0;
-                                            arg.parameters.forEach(function(el) {
-                                                inputArguments.push({
-                                                    dataType: arg.parameters[k].dataType || el.dataType, //DataType.Double,
-                                                    arrayType: arg.parameters[k].arrayType || el.arrayType, //VariantArrayType.Scalar,
-                                                    value: arg.parameters[k].value || el.defaultValue
-                                                });
-                                                k++;
-                                            });
-                                        }
+        //                                     client.write(_variable.nodeId.ns, _variable.nodeId.nid, _value, function(err, statusCode) {
+        //                                         if (err) {
+        //                                             self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not write variable [" + arg.name + "] : " + err);
+        //                                         } else {
+        //                                             self.app.log.error("MICROSERVICE[" + self.settings.name + "] write variable executed with : " + statusCode);
+        //                                         }
+        //                                     });
+        //                                 }
+        //                             }
+        //                             callback();
+        //                         },
+        //                         function(callback) {
+        //                             if (action.objectId && action.methodId && client) {
+        //                                 // Initialize the parameters
+        //                                 var inputArguments = [];
+        //                                 if (arg.parameters) {
+        //                                     var k = 0;
+        //                                     arg.parameters.forEach(function(el) {
+        //                                         inputArguments.push({
+        //                                             dataType: arg.parameters[k].dataType || el.dataType, //DataType.Double,
+        //                                             arrayType: arg.parameters[k].arrayType || el.arrayType, //VariantArrayType.Scalar,
+        //                                             value: arg.parameters[k].value || el.defaultValue
+        //                                         });
+        //                                         k++;
+        //                                     });
+        //                                 }
 
-                                        client.callMethod(action.objectId.ns, action.objectId.nid, action.methodId.ns, action.methodId.nid, inputArguments, function(err, response) {
-                                            if (err) {
-                                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not execute action [" + arg.actionName + "] : " + err);
-                                            } else {
-                                                if (response[0].statusCode == 0) {
-                                                    /*
-                                                        UseCase:
-                                                        Walze --> 1. Antrieb Haupantrieb
-                                                                  2. Antrieb Versorgung
+        //                                 client.callMethod(action.objectId.ns, action.objectId.nid, action.methodId.ns, action.methodId.nid, inputArguments, function(err, response) {
+        //                                     if (err) {
+        //                                         self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not execute action [" + arg.actionName + "] : " + err);
+        //                                     } else {
+        //                                         if (response[0].statusCode == 0) {
+        //                                             /*
+        //                                                 UseCase:
+        //                                                 Walze --> 1. Antrieb Haupantrieb
+        //                                                           2. Antrieb Versorgung
 
-                                                    */
-                                                    // TODO: Check the Feedback if the method triggers any state change
-                                                    if (response[0].outputArguments.length > 0) {
-                                                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] executed action [" + arg.actionName + "] successfully. The result is :" + response[0].outputArguments[0].value);
-                                                    } else {
-                                                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] executed action [" + arg.actionName + "] successfully with errorCode: " + response[0].statusCode);
-                                                    }
+        //                                             */
+        //                                             // TODO: Check the Feedback if the method triggers any state change
+        //                                             if (response[0].outputArguments.length > 0) {
+        //                                                 self.app.log.info("MICROSERVICE[" + self.settings.name + "] executed action [" + arg.actionName + "] successfully. The result is :" + response[0].outputArguments[0].value);
+        //                                             } else {
+        //                                                 self.app.log.info("MICROSERVICE[" + self.settings.name + "] executed action [" + arg.actionName + "] successfully with errorCode: " + response[0].statusCode);
+        //                                             }
 
-                                                    self.app.eventBus.emit("PLCActionExecuted", arg);
-                                                } else {
-                                                    self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not execute action [" + arg.actionName + "] with errorCode: " + response[0].statusCode);
-                                                }
-                                            }
-                                        });
-                                    }
-                                    callback();
-                                }
-                            ],
-                            function(err) {
+        //                                             self.app.eventBus.emit("PLCActionExecuted", arg);
+        //                                         } else {
+        //                                             self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not execute action [" + arg.actionName + "] with errorCode: " + response[0].statusCode);
+        //                                         }
+        //                                     }
+        //                                 });
+        //                             }
+        //                             callback();
+        //                         }
+        //                     ],
+        //                     function(err) {
 
-                            });
-                    }
-                }
-            } else {
-                self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not execute action. Client is disconnected.");
-            }
-        }
+        //                     });
+        //             }
+        //         }
+        //     } else {
+        //         self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not execute action. Client is disconnected.");
+        //     }
+        // }
     });
 
     // WriteVariable
@@ -530,9 +531,9 @@ function unSubscribeToEventBus(bus, self, fCallBack) {
 function checkServerModel(bus, self, client, arg, fCallBack) {
     var rslts = [];
     async.series([
-            function(callback) { // Check if a PackMLObject exist
+            function(callback) { // Check if a SkillMLObject exist
                 self.app.log.warn("MICROSERVICE[" + self.settings.name + "] Client starts parsing PLC information model....");
-                getPackMLObject(client, { ns: 0, nid: 85 },
+                getSkillObject(client, { ns: 0, nid: 85 },
                     rslts).then(
                     function(foundedObjects) {
                         if (foundedObjects.length > 0) {
@@ -540,7 +541,7 @@ function checkServerModel(bus, self, client, arg, fCallBack) {
                             rslts = foundedObjects;
                             callback();
                         } else {
-                            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] No PACKMLObject exists in the PLC information model.");
+                            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] No SkillObject exists in the PLC information model.");
                             callback("");
                         }
                     });
@@ -548,14 +549,13 @@ function checkServerModel(bus, self, client, arg, fCallBack) {
             function(callback) {
                 let ObjModel = {};
                 if (rslts.length > 0) {
-                    parseEFlexObject(client, {
+                    parseSkillObject(client, {
                             ns: rslts[0].namespace,
                             nid: rslts[0].value
                         }, ObjModel, self.settings.modulesetting.defaultObjectModel)
                         .then(
                             function(parsedModel) {
                                 self.app.log.info("MICROSERVICE[" + self.settings.name + "] Client validated the EFLEX Object and extracted STATES, KPI and METHODS successfully.");
-                                //console.log(JSON.stringify(parsedModel));
                                 callback();
                             }
                         );
@@ -568,8 +568,7 @@ function checkServerModel(bus, self, client, arg, fCallBack) {
         });
 }
 
-async function getPackMLObject(client, nodeId, rslts) {
-
+async function getSkillObject(client, nodeId, rslts) {
     return await new Promise((resolve, reject) => {
         client.browseNode(nodeId.ns, nodeId.nid, function(err, browse_results) {
             if (err) {
@@ -587,11 +586,11 @@ async function getPackMLObject(client, nodeId, rslts) {
         for (let i = 0; i < references.length; i++) {
             var desc = references[i];
             try {
-                let founded = await isPackMLBaseObjectType(client, { ns: desc.nodeId.namespace, nid: desc.nodeId.value });
+                let founded = await isSkillObjectType(client, { ns: desc.nodeId.namespace, nid: desc.nodeId.value });
                 if (founded) {
                     _rslts.push(desc.nodeId);
                 } else {
-                    await getPackMLObject(client, { ns: desc.nodeId.namespace, nid: desc.nodeId.value }, _rslts);
+                    await getSkillObject(client, { ns: desc.nodeId.namespace, nid: desc.nodeId.value }, _rslts);
                 }
             } catch (err) {
                 return _rslts;
@@ -599,11 +598,9 @@ async function getPackMLObject(client, nodeId, rslts) {
         }
         return _rslts;
     });
-
-
 }
 
-function isPackMLBaseObjectType(client, nodeId) {
+function isSkillObjectType(client, nodeId) {
     return new Promise((resolve, reject) => {
         let founded = false;
         client.browseNodeByReferenceType(nodeId.ns, nodeId.nid, "HasTypeDefinition", async function(type_err, type_browse_results) {
@@ -617,8 +614,8 @@ function isPackMLBaseObjectType(client, nodeId) {
                         const element = type_browse_results[0].references[k];
                         const NodeClass = element.nodeClass;
 
-                        // Check if type is PackMLBaseMachineType
-                        if (element.nodeId.namespace === client.getNamespaceIndexOfURI("http://siemens.com/PackML_Eflex/") && element.nodeId.value === 1007) {
+                        // Check if type is SkillObjectType
+                        if (element.nodeId.namespace === client.getNamespaceIndexOfURI("http://www.siemens.com/AutomationSkills") && element.nodeId.value === 1032) {
                             founded = true;
                             break;
                         }
@@ -715,7 +712,7 @@ async function superTypeStateChangePropertiesType(types) {
     return false;
 }
 
-async function parseEFlexObject(client, BaseObjectNodeId, ObjectResult, RootObject) {
+async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObject) {
     var ObjectResult = ObjectResult || {};
     // Prepare the Object
     return await new Promise((resolve, reject) => {
@@ -742,6 +739,7 @@ async function parseEFlexObject(client, BaseObjectNodeId, ObjectResult, RootObje
                                 ns: opcuaType.nodeId.namespace,
                                 nid: opcuaType.nodeId.value
                             }, [opcuaType]);
+
                             // Check if it has a supertype StateMachineType
                             if (await superTypeContainsStateMachineType(types)) {
                                 type = "StateMachineType";
@@ -763,7 +761,7 @@ async function parseEFlexObject(client, BaseObjectNodeId, ObjectResult, RootObje
                                 },
                                 type: type
                             };
-                            await parseEFlexObject(client, {
+                            await parseSkillObject(client, {
                                 ns: element.nodeId.namespace,
                                 nid: element.nodeId.value
                             }, item, RootObject);
@@ -827,19 +825,19 @@ async function parseEFlexObject(client, BaseObjectNodeId, ObjectResult, RootObje
                                 },
                                 type: type
                             };
-                            await parseEFlexObject(client, {
+                            await parseSkillObject(client, {
                                 ns: element.nodeId.namespace,
                                 nid: element.nodeId.value
                             }, item, RootObject);
 
+                            RootObject.CURRENT_STATES = RootObject.CURRENT_STATES || [];
                             if (RootObject._states.includes(element.browseName.name)) {
-                                RootObject.CURRENT_STATES = RootObject.CURRENT_STATES || [];
                                 item.interval = 50;
                                 RootObject.CURRENT_STATES.push(item);
                             }
+                            RootObject.KPI = RootObject.KPI || [];
                             if (RootObject._kpi.includes(element.browseName.name)) {
                                 item.interval = 50;
-                                RootObject.KPI = RootObject.KPI || [];
                                 RootObject.KPI.push(item);
                             }
                         } else if (NodeClass === "Method") {
@@ -856,13 +854,13 @@ async function parseEFlexObject(client, BaseObjectNodeId, ObjectResult, RootObje
                                 },
                                 type: type
                             };
-                            await parseEFlexObject(client, {
+                            await parseSkillObject(client, {
                                 ns: element.nodeId.namespace,
                                 nid: element.nodeId.value
                             }, item, RootObject);
 
+                            RootObject.ACTIONS = RootObject.ACTIONS || [];
                             if (RootObject._actions.includes(element.browseName.name)) {
-                                RootObject.ACTIONS = RootObject.ACTIONS || [];
                                 RootObject.ACTIONS.push(item);
                             }
                         }

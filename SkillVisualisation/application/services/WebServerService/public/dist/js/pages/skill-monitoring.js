@@ -1,8 +1,9 @@
 let myDiagram;
-let gIP = "192.168.43.1";
+let gIP = "localhost";
 let gPORT = 4840;
 let gSERVERNAME = "SP164DEMO";
 let gSOCKETId = "8548585858";
+var globalStateConfiguration;
 $(function() {
 
     'use strict';
@@ -155,65 +156,53 @@ $(function() {
 
                 }
             });
-
-        // Send the state of the AI CheckBox
-        let dataActivated = {
-            activated: !($('#AICheckBox').is(":checked"))
-        };
-        $.getJSON("/activateLM", { action: JSON.stringify(dataActivated) },
-            function(result) {
-                // TODO
-                if (result.err) {
-
-                }
-            });
     });
 
-    // // Listen to all events
-    // socket.on("serverstatus", function(data) {
-    //     if (data.connection) {
-    //         $('#PLCStatus').removeClass("text-red").addClass("text-green");
-    //         $('#PLCStatusMsg').text("connected");
-    //     } else {
-    //         $('#PLCStatus').removeClass("text-green").addClass("text-red");
-    //         $('#PLCStatusMsg').text("not connected");
-    //     }
-    //     if (data.ip) {
-    //         $('#PLCStatusIP').text(data.ip);
-    //     }
-    //     if (data.port) {
-    //         $('#PLCStatusPORT').text(data.port);
-    //     }
-    // });
+    // Listen to all events
+    socket.on("serverstatus", function(data) {
+        if (data.connection) {
+            $('#ressourceStatus').removeClass("text-red").addClass("text-green");
+            $('#ressourceStatus').text("Connected");
+        } else {
+            $('#ressourceStatus').removeClass("text-green").addClass("text-red");
+            $('#ressourceStatus').text("Not connected");
+        }
+        if (data.ip) {
+            $('#ressourceIP').text(data.ip);
+        }
+        if (data.port) {
+            $('#ressourcePort').text(data.port);
+        }
+    });
 
-    // socket.on("StatesChanged", function(data) {
-    //     // Highlight the current state
-    //     let keyObj = statesArr[data.state.value];
-    //     if (keyObj) {
-    //         highlightNode(keyObj.id);
-    //         $('span#CurrentState').text(keyObj.id);
-    //     } else {
-    //         highlightNode('Stopped');
-    //         $('span#CurrentState').text('Stopped');
-    //     }
+    socket.on("StatesChanged", function(data) {
+        // Highlight the current state
+        var keyObj = globalStateConfiguration.nodeDataArray[data.state.value];
+        if (keyObj) {
+            highlightNode(keyObj.id);
+            $('span#CurrentState').text(keyObj.id);
+        } else {
+            highlightNode('Stopped');
+            $('span#CurrentState').text('Stopped');
+        }
 
-    //     // Change the transitions
-    //     data.transitions.forEach(function(elem) {
-    //         if (elem && elem.hasCause) {
-    //             let enabled = elem.EnableFlag.value;
-    //             let txt_class = "text-red";
-    //             let hidden_class = "hidden";
-    //             if (enabled && enabled === true) {
-    //                 txt_class = "text-green";
-    //                 hidden_class = "";
-    //             }
+        // // Change the transitions
+        // data.transitions.forEach(function(elem) {
+        //     if (elem && elem.hasCause) {
+        //         let enabled = elem.EnableFlag.value;
+        //         let txt_class = "text-red";
+        //         let hidden_class = "hidden";
+        //         if (enabled && enabled === true) {
+        //             txt_class = "text-green";
+        //             hidden_class = "";
+        //         }
 
-    //             $('#' + elem.hasCause.name).removeClass("hidden").addClass(hidden_class);
-    //             $('#' + elem.hasCause.name + " i").removeClass("text-red").removeClass("text-green").addClass(txt_class);
-    //             //$('#' + elem.hasCause.name + " span.info-box-number").text(elem.LoadGradient.value.toFixed(2) + ' W ');
-    //         }
-    //     });
-    // });
+        //         $('#' + elem.hasCause.name).removeClass("hidden").addClass(hidden_class);
+        //         $('#' + elem.hasCause.name + " i").removeClass("text-red").removeClass("text-green").addClass(txt_class);
+        //         //$('#' + elem.hasCause.name + " span.info-box-number").text(elem.LoadGradient.value.toFixed(2) + ' W ');
+        //     }
+        // });
+    });
 
     // socket.on("TRANSITIONDescriptionChanged", function(elem) {
     //     if (elem && elem.hasCause) {
@@ -231,14 +220,6 @@ $(function() {
     //     }
     // });
 
-    /*
-    socket.on("KPIChanged", function(data) {
-        $('span#currentMachSpeed').text(data.KPI[1].value);
-    });
-    socket.on("KPIChanged", function(data) {
-        $('span#currentMachSpeed').text(data.KPI[1].value);
-    });
-    */
 
     $('#SetParameters').click(function(params) {
         let value = $('#load_parameter_1').val() / 100.0;
@@ -260,6 +241,7 @@ $(function() {
             }
         );
     });
+
     $('#ResetParameters').click(function(params) {
         $('#load_parameter_1').val(0);
     });
@@ -485,6 +467,7 @@ function initGoJsGraph(id) {
 
 function load() {
     $.getJSON("./SkillStatechart.json", function(json) {
+        globalStateConfiguration = json;
         myDiagram.model = go.Model.fromJson(json);
     });
 }

@@ -36,7 +36,7 @@ var WebServerService = function() {
     this.sockets = {};
     this.connectionMsg = {
         msg: "Not connected",
-        ip: "192.168.0.1",
+        ip: "0.0.0.0",
         port: "4840",
         connection: false
     };
@@ -98,19 +98,8 @@ WebServerService.prototype.init = function(_app, _settings) {
 
 WebServerService.prototype.start = function() {
     var self = this;
-
-    self.wapp.get('/activateLM', function(req, res) {
-        let action = JSON.parse(req.query.action);
-
-
-        self.app.eventBus.emit("activateLM", action);
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ err: null }));
-    });
     self.wapp.get('/executeAction', function(req, res) {
         let action = JSON.parse(req.query.action);
-
-
         self.app.eventBus.emit("ExecutePLCAction", action);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({ err: null }));
@@ -128,7 +117,7 @@ WebServerService.prototype.start = function() {
     self.wapp.get('/connect', function(req, res) {
         let params = JSON.parse(req.query.parameter);
 
-        //TODO: self.app.eventBus.emit("ConnectPLC", params);
+        self.app.eventBus.emit("ConnectPLC", params);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({ err: null }));
     });
