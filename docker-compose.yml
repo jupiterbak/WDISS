@@ -7,8 +7,7 @@ services:
     container_name: rabbitmq_server
     environment:
       - RABBITMQ_ERL_COOKIE=jupiterbakakeu
-    networks:
-      - rabbitmq_network
+    network_mode: "host"
     tty: true
     ports:
       - 15672:15672
@@ -23,8 +22,7 @@ services:
     image: dummyopcuaskill
     hostname: localhost
     container_name: DummyOPCUASkill
-    networks:
-      - rabbitmq_network
+    network_mode: "host"
     tty: true
     ports:
       - 4840:4840
@@ -38,14 +36,9 @@ services:
     image: skillvis
     hostname: localhost
     container_name: SkillVis
-    networks:
-      - rabbitmq_network
+    network_mode: "host"
     tty: true
     ports:
       - 8080:8080
     labels:
       NAME: "SkillVis"
-
-networks:
-  rabbitmq_network:
-    driver: overlay

@@ -4,6 +4,9 @@ const opcua = require("node-opcua");
 var yaml_config = require('node-yaml-config');
 var config = yaml_config.load(__dirname + '/config.yml');
 
+var Skill = require("./Skill.js");
+var internal_kill = null;
+
 const winston = require('winston');
 const logger = winston.createLogger({
     transports: [new winston.transports.Console()],
@@ -62,23 +65,39 @@ const server = new opcua.OPCUAServer({
 });
 
 function post_initialize() {
+    // Initialize the internal state machine
+    internal_kill = new Skill(logger, server);
+    internal_kill.initialize();
+
     server.start(function() {
         process.title = "LEMS SP 164";
         logger.info("Server is now listening ... ( press CTRL+C to stop)");
         logger.info("port " + server.endpoints[0].port);
         const endpointUrl = server.endpoints[0].endpointDescriptions()[0].endpointUrl;
         logger.info(" the primary server endpoint url is" + endpointUrl);
+
+        // Start the state machine
+        internal_kill.start();
+
+        // Start the state machine
+        setTimeout(() => {
+            internal_kill.skill_state_machine.resetSkill({ delay: 5000 });
+        }, 5000);
     });
 }
 server.initialize(post_initialize);
-process.on('uncaughtException', function(err) {
-    logger.info('[LEMS] Uncaught Exception:' + err.stack);
-    process.exit(1);
-});
+// process.on('uncaughtException', function(err) {
+//     logger.info('[LEMS] Uncaught Exception:' + err.stack);
+
+//     process.exit(1);
+// });
 
 // Stop the platform if the user request it
 process.on('SIGINT', function() {
     logger.info("Shuting down Server  ... ( press CTRL+C to stop)");
+    internal_kill.stop();
+    internal_kill.clear();
+
     server.shutdown();
     process.exit(0);
 });

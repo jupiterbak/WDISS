@@ -555,6 +555,7 @@ function checkServerModel(bus, self, client, arg, fCallBack) {
                         }, ObjModel, self.settings.modulesetting.defaultObjectModel)
                         .then(
                             function(parsedModel) {
+                                // console.log(JSON.stringify(parsedModel, 4));
                                 self.app.log.info("MICROSERVICE[" + self.settings.name + "] Client validated the EFLEX Object and extracted STATES, KPI and METHODS successfully.");
                                 callback();
                             }
