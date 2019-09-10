@@ -88,7 +88,8 @@ WebServerService.prototype.init = function(_app, _settings) {
 
     // Configure the webserver
     this.wapp.disable('x-powered-by');
-    this.wapp.use(self.express.static(__dirname + '/public'));
+    this.wapp.use(self.express.static('public'));
+    this.wapp.use('/static', self.express.static(__dirname + '/public'));
     this.wapp.use(self.sessionMiddleware);
 
 
@@ -98,6 +99,11 @@ WebServerService.prototype.init = function(_app, _settings) {
 
 WebServerService.prototype.start = function() {
     var self = this;
+
+    self.wapp.get('/', function (req, res) {
+        res.send('Hello World!');
+      });
+
     self.wapp.get('/executeAction', function(req, res) {
         let action = JSON.parse(req.query.action);
         self.app.eventBus.emit("ExecutePLCAction", action);
@@ -124,7 +130,7 @@ WebServerService.prototype.start = function() {
 
     // Start the webserver
     self.webServer.listen(self.settings.uiPort, function() {
-        self.app.log.info("MICROSERVICE[" + self.settings.name + "] ######### ==> Web app listening on port 8080.");
+        self.app.log.info("MICROSERVICE[" + self.settings.name + "] ######### ==> Web app listening on port "+ self.settings.uiPort +".");
         self.app.log.info("MICROSERVICE[" + self.settings.name + "] started successfully.");
     });
 

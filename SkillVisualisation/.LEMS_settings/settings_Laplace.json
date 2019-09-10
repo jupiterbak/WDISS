@@ -19,9 +19,9 @@
  "requireHttps": false,
  "functionGlobalContext": {
   "os": {
+   "EOL": "\r\n",
    "constants": {
     "UV_UDP_REUSEADDR": 4,
-    "dlopen": {},
     "errno": {
      "E2BIG": 7,
      "EACCES": 13,
@@ -169,17 +169,8 @@
      "SIGTERM": 15,
      "SIGBREAK": 21,
      "SIGWINCH": 28
-    },
-    "priority": {
-     "PRIORITY_LOW": 19,
-     "PRIORITY_BELOW_NORMAL": 10,
-     "PRIORITY_NORMAL": 0,
-     "PRIORITY_ABOVE_NORMAL": -7,
-     "PRIORITY_HIGH": -14,
-     "PRIORITY_HIGHEST": -20
     }
-   },
-   "EOL": "\r\n"
+   }
   }
  },
  "runtimeMetricInterval": 60000,
@@ -194,7 +185,7 @@
   {
    "name": "WebServerService0",
    "type": "WebServerService",
-   "uiPort": 8080,
+   "uiPort": 1717,
    "uiHost": "127.0.0.1"
   },
   {
@@ -248,7 +239,7 @@
    }
   }
  ],
- "settingsFile": "c:\\Users\\Administrator\\Desktop\\SP347\\100_Dissertation_Workspace\\SkillVisualisation\\default_settings.js",
- "userDir": "c:\\Users\\Administrator\\Desktop\\SP347\\100_Dissertation_Workspace\\SkillVisualisation\\.LEMS_settings",
+ "settingsFile": "C:\\GitHub\\WDISS\\SkillVisualisation\\default_settings.js",
+ "userDir": "C:\\GitHub\\WDISS\\SkillVisualisation\\.LEMS_settings",
  "verbose": true
 }

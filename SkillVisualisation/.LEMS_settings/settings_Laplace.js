@@ -151,7 +151,7 @@ module.exports = {
         {
             name: "WebServerService0",
             type: "WebServerService",
-            uiPort: 8080,
+            uiPort: 1717,
             uiHost: "127.0.0.1"
         },
         {

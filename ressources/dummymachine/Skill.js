@@ -172,6 +172,14 @@ class Skill {
                 } else {
                     this.running_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: this.skill_state_machine.current_state.cleared.running },
                         opcua.StatusCodes.Good, new Date());
+                    this.execute_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+                        opcua.StatusCodes.Good, new Date());
+                    this.hold_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+                        opcua.StatusCodes.Good, new Date());
+                    this.idle_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+                        opcua.StatusCodes.Good, new Date());
+                    this.resetting_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+                        opcua.StatusCodes.Good, new Date());
                 }
             } else {
                 this.cleared_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: this.skill_state_machine.current_state.cleared },
@@ -194,8 +202,6 @@ class Skill {
     clear() {
         this.skill_state_machine.clear();
     }
-
-
 }
 
 module.exports = Skill;
