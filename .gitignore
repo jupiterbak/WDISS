@@ -1,33 +1,8 @@
-.sw?
-.*.sw?
-*.beam
-*.pem
-erl_crash.dump
-MnesiaCore.*
-.erlang.mk/
-/cover/
-/debug/
-/deps/
-/doc/
-/ebin/
-/logs/
-/plugins/
-/xrefr
 
-rabbitmq_management.d
-.rabbitmq_management.plt
+# Created by https://www.gitignore.io/api/node
+# Edit at https://www.gitignore.io/?templates=node
 
-# Common Test
-ct_run*
-all_runs.html
-index.html
-ct_default.css
-ct_log_cache
-variables-ct*
-
-*.coverdata
-
-## NodeJs
+### Node ###
 # Logs
 logs
 *.log
@@ -116,3 +91,7 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# LEM
+.idea 
+.LEMS_settings
