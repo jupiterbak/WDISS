@@ -28,6 +28,7 @@
         "i18next": "^1.10.6",
         "ip": "^1.1.4",
         "is-utf8": "^0.2.1",
+        "isomorphic-fetch": "^2.2.1",
         "long": "^3.2.0",
         "md5": "^2.2.1",
         "node-opcua": "0.2.1",
@@ -35,8 +36,9 @@
         "on-headers": "^1.0.1",
         "portfinder": "^1.0.12",
         "socket.io": "^2.2.0",
+        "sparql-http-client": "^1.1.1",
         "uglify-js": "^2.8.29",
-        "util": "^0.10.3",
+        "util": "^0.10.4",
         "when": "^3.7.8"
     },
     "engines": {

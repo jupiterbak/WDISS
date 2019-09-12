@@ -71,24 +71,24 @@ class SkillStateMachine {
         };
 
         this.resetting_state_machine_definition = {
-            initial: 'check_ressource',
+            initial: 'check_resource',
             states: {
-                check_ressource: {
+                check_resource: {
                     on: {
-                        OK: 'check_ressource_initialized',
-                        NOK: 'initialize_ressource'
+                        OK: 'skill_initialized',
+                        NOK: 'initialize_resource'
 
                     },
                     after: {
-                        1000: 'check_ressource_initialized'
+                        1000: 'skill_initialized'
                     }
                 },
-                initialize_ressource: {
+                initialize_resource: {
                     after: {
-                        1000: 'check_ressource'
+                        1000: 'check_resource'
                     }
                 },
-                check_ressource_initialized: {
+                skill_initialized: {
                     type: 'final'
                 }
             },
@@ -99,24 +99,24 @@ class SkillStateMachine {
             initial: 'resetting',
             states: {
                 resetting: {
-                    initial: 'check_ressource',
+                    initial: 'check_resource',
                     states: {
-                        check_ressource: {
+                        check_resource: {
                             on: {
-                                OK: 'check_ressource_initialized',
-                                NOK: 'initialize_ressource'
+                                OK: 'skill_initialized',
+                                NOK: 'initialize_resource'
 
                             },
                             after: {
-                                1000: 'check_ressource_initialized'
+                                1000: 'skill_initialized'
                             }
                         },
-                        initialize_ressource: {
+                        initialize_resource: {
                             after: {
-                                1000: 'check_ressource'
+                                1000: 'check_resource'
                             }
                         },
-                        check_ressource_initialized: {
+                        skill_initialized: {
                             type: 'final'
                         }
                     },
@@ -209,24 +209,24 @@ class SkillStateMachine {
                     initial: 'resetting',
                     states: {
                         resetting: {
-                            initial: 'check_ressource',
+                            initial: 'check_resource',
                             states: {
-                                check_ressource: {
+                                check_resource: {
                                     on: {
-                                        OK: 'check_ressource_initialized',
-                                        NOK: 'initialize_ressource'
+                                        OK: 'skill_initialized',
+                                        NOK: 'initialize_resource'
 
                                     },
                                     after: {
-                                        1000: 'check_ressource_initialized'
+                                        1000: 'skill_initialized'
                                     }
                                 },
-                                initialize_ressource: {
+                                initialize_resource: {
                                     after: {
-                                        1000: 'check_ressource'
+                                        1000: 'check_resource'
                                     }
                                 },
-                                check_ressource_initialized: {
+                                skill_initialized: {
                                     type: 'final'
                                 }
                             },
@@ -346,24 +346,24 @@ class SkillStateMachine {
                             initial: 'resetting',
                             states: {
                                 resetting: {
-                                    initial: 'check_ressource',
+                                    initial: 'check_resource',
                                     states: {
-                                        check_ressource: {
+                                        check_resource: {
                                             on: {
-                                                OK: 'check_ressource_initialized',
-                                                NOK: 'initialize_ressource'
+                                                OK: 'skill_initialized',
+                                                NOK: 'initialize_resource'
 
                                             },
                                             after: {
-                                                1000: 'check_ressource_initialized'
+                                                1000: 'skill_initialized'
                                             }
                                         },
-                                        initialize_ressource: {
+                                        initialize_resource: {
                                             after: {
-                                                1000: 'check_ressource'
+                                                1000: 'check_resource'
                                             }
                                         },
-                                        check_ressource_initialized: {
+                                        skill_initialized: {
                                             type: 'final'
                                         }
                                     },

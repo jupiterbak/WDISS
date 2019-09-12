@@ -151,7 +151,7 @@ module.exports = {
         {
             name: "WebServerService0",
             type: "WebServerService",
-            uiPort: 1717,
+            uiPort: 8080,
             uiHost: "127.0.0.1"
         },
         {
@@ -166,7 +166,7 @@ module.exports = {
                 defaultObjectModel: {
                     _states: ["CurrentStateExt", "CurrentState"],
                     _kpi: ["CurrentLoads", "CurrentLoad", "CurrMachSpeed", "TargetLoad", "Product", "MachSpeed", "StateChangeInProgress", "Interlocked", "EnergySource", "SupportedModes", "Version", "MachSpeed_AC", "MachSpeed_DC"],
-                    _actions: ["Abort", "Clear", "Reset", "Stop", "Hold", "Start", "UnHold"],
+                    _actions: ["Abort", "Clear", "Reset", "Stop", "Hold", "Start", "UnHold", "GetResult"],
                     _data: [{
                         name: "",
                         nodeId: {

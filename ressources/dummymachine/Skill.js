@@ -142,6 +142,21 @@ class Skill {
 
     updateOPCUAServerCurrentStateValues(skill_state) {
         // Skill State machine current state
+        this.skill_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+            opcua.StatusCodes.Good, new Date());
+        this.cleared_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+            opcua.StatusCodes.Good, new Date());
+        this.running_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+            opcua.StatusCodes.Good, new Date());
+        this.execute_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+            opcua.StatusCodes.Good, new Date());
+        this.hold_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+            opcua.StatusCodes.Good, new Date());
+        this.idle_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+            opcua.StatusCodes.Good, new Date());
+        this.resetting_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
+            opcua.StatusCodes.Good, new Date());
+
         if (hasOwnNestedProperty(this.skill_state_machine.current_state, "cleared")) {
             this.skill_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "cleared" },
                 opcua.StatusCodes.Good, new Date());
@@ -168,17 +183,8 @@ class Skill {
                         opcua.StatusCodes.Good, new Date());
                     this.execute_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: this.skill_state_machine.current_state.cleared.running.execute },
                         opcua.StatusCodes.Good, new Date());
-
                 } else {
                     this.running_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: this.skill_state_machine.current_state.cleared.running },
-                        opcua.StatusCodes.Good, new Date());
-                    this.execute_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
-                        opcua.StatusCodes.Good, new Date());
-                    this.hold_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
-                        opcua.StatusCodes.Good, new Date());
-                    this.idle_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
-                        opcua.StatusCodes.Good, new Date());
-                    this.resetting_state_machine_cs.setValueFromSource({ dataType: opcua.DataType.String, value: "--" },
                         opcua.StatusCodes.Good, new Date());
                 }
             } else {

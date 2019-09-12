@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
     <!-- bootstrap-toggle -->
     <link rel="stylesheet" href="bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css">
-    <!-- D3 Sandkey -->
-    <link rel="stylesheet" href="bower_components/d3/sk.d3.min.css">
+
+    <!-- bootstrap-threeview -->
+    <link rel="stylesheet" href="bower_components/bootstrap-treeview/extended/themes/proton/style.min.css" />
 
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.css">
@@ -103,63 +104,178 @@
                 <div class="row connectedSortable">
                     <div class="col-md-6">
                         <div class="nav-tabs-custom">
-                            <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#tab_1" data-toggle="tab">Tab 1</a></li>
-                                    <li><a href="#tab_2" data-toggle="tab">Tab 2</a></li>
-                                    <li><a href="#tab_3" data-toggle="tab">Tab 3</a></li>
-                                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                            <ul class="nav nav-tabs " role="tablist">
+                                    <li role="presentation" class="active"><a href="#treeview" data-toggle="tab">Treeview</a></li>
+                                    <li role="presentation" ><a href="#graph" data-toggle="tab">Graph</a></li>
+                                    <li role="presentation" class="pull-right"><a href="#" class="text-muted" data-toggle="modal" data-target="#addKG"><i class="fa fa-cloud-download"></i></a></li>                                    
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" id="tab_1">
+                                <div class="tab-pane active" role="tabpanel" id="treeview" style="min-height: 70vh">
+                                    <div class="row">
+                                        <div class="col-md-12" id="tree_header">   
+                                            <h4 class="bg-info">SPARQL Server</h4>                                         
+                                            <span class="col-md-2 font-weight-bold" >IP: </span> <span class="col-md-10" id="labelKGIP">No Connection </span>
+                                            <span class="col-md-2 font-weight-bold">Port: </span> <span class="col-md-10" id="labelKGPort">No Connection</span>                                            
+                                        </div>
+                                    </div>
+                                    <div class="row" id="tree_content">
+                                        <div class="col-md-12" id="knowledge_tree">
+                                            <h4 class=" bg-info">Product</h4>
+                                            <div id="product_tree" class="proton-demo">
+                                                <span class="nodata">No Connection</span>
+                                            </div>
+                                            <h4 class="bg-info">Process</h4>
+                                            <div id="process_tree"  class="proton-demo">
+                                                <span class="nodata">No Connection</span>
+                                            </div>
+                                            <h4 class="bg-info">Ressource</h4>
+                                            <div id="resource_tree"  class="proton-demo">
+                                                <span class="nodata">No Connection</span>
+                                            </div>
+                                            <h4 class="bg-info">Skill</h4>
+                                            <div id="skill_tree" class="proton-demo">
+                                                <span class="nodata">No Connection</span>
+                                            </div>
+                                        </div>
+                                            <!-- /.col -->
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.row -->
+                                </div> <!--.tab-pane #tab_1-->
+                                <div class="tab-pane" role="tabpanel" id="graph">
                                     <div class="row">
                                         <div class="col-md-12 col-xs-20 col-sm-12">
                                             <div class="chart">
                                                 <!-- State Charts -->
-                                                <div id="StateChart" style="height: 70vh; width: 100%;"></div>
+                                                <div id="StateChart" style="min-height: 70vh; width: 100%;"></div>
                                             </div>
                                             <!-- /.chart-responsive -->
                                         </div>
                                         <!-- /.col -->
                                     </div>
                                     <!-- /.row -->
-                                </div> <!--.tab-pane #tab_1-->
+                                </div> <!--.tab-pane #graph-->
                             </div> <!--/ .tab-content-->
                         </div>
                         <!-- nav-tabs-custom -->
+                        <div class="modal fade" id="addKG">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title">Connect to Knowledge Graph</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="paramIP">IP: </label>
+                                                <div class="col-sm-9">
+                                                    <input  data-slider-orientation="horizontal" class="form-control" id="paramIP" placeholder="localhost" value="localhost"/>       
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="paramPort">Port: </label>
+                                                <div class="col-sm-9">
+                                                    <input type="number" class="form-control" id="paramPort" placeholder="3800" value="3800" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                        <button type="button" id="connectKG" class="btn btn-primary">Execute</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
                     </div> <!-- /.col -->
                     <div class="col-md-6">
                         <div class="box box-solid">
                             <div class="box-header">
                                 <h3 class="box-title text-uppercase">Avialable Skills</h3>
                                 <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-toggle="modal" data-target="#addRessource"><i class="fa fa-search"></i></button>
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
-
                                 </div>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
-                                <div class="row  clearfix">
-                                    <div class="col-md-12">
+                                <div class="row  clearfix ">
+                                    <div class="col-md-12 hidden" id="opcua_header"> 
+                                        <h4 class="bg-info">SPARQL Server</h4>                                          
+                                        <span class="col-md-2 font-weight-bold" >IP: </span> <span class="col-md-10" id="labelOPCIP">No Connection </span>
+                                        <span class="col-md-2 font-weight-bold">Port: </span> <span class="col-md-10" id="labelOPCPort">No Connection</span>                                            
+                                    </div>
+                                </div>
+                                <div class="row clearfix hidden" id="opcua_overlay">
+                                    <div class="overlay card col-md-2 col-md-offset-5" style="min-height: 10vh;">
+                                        <i class="fa fa-refresh fa-spin"></i>
+                                    </div>    
+                                </div>                         
+                                <div class="row  clearfix">                                    
+                                    <div class="col-md-12 hidden" id="opcua_content">
                                         <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-md-4">InsertSkill</th>
+                                                    <th>IP</th>
+                                                    <th>Port</th>
+                                                    <th>Details</th>
+                                                </tr>
+                                            </thead>
                                             <tbody>
                                                 <tr>
-                                                    <th style="width:80%">Load</th>
-                                                    <td><span id="EnergySource" class="pull-right label label-success label-medium">##</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Unload</th>
-                                                    <td><span id="CurrentState" class="pull-right label label-success label-medium">##</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Insert</th>
-                                                    <td><span id="CurrentLoad" class="pull-right label label-success label-medium">##</span></td>
-                                                </tr>
+                                                    <td>Insert</td>
+                                                    <td>localhost</td>
+                                                    <td>4840</td>
+                                                    <td> <a href="http://localhost:8080/skill-monitoring.html?skill=insert" target="_blank"><span id="CurrentLoad" class="pull-left label label-success label-small">...</span></a></td>
+                                                </tr>                                                
                                             </tbody>
+                        
                                         </table>
                                     </div>
                                 </div>
                                 <!-- /.row -->
+                                <!-- nav-tabs-custom -->
+                                <div class="modal fade" id="addRessource">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">×</span></button>
+                                                <h4 class="modal-title">Connect  OPC UA Server</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-horizontal" role="form">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label" for="paramIPOPCUA">IP: </label>
+                                                        <div class="col-sm-9">
+                                                            <input  data-slider-orientation="horizontal" class="form-control" id="paramIPOPCUA" placeholder="localhost" value="localhost"/>       
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label" for="paramPortOPCUA">Port: </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="number" class="form-control" id="paramPortOPCUA" placeholder="4840" value="4840" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                                <button type="button" id="connectOPCUA" class="btn btn-primary">Execute</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
+                        <!-- /.modal -->
                             </div>
                             <!-- /.box-body -->
                         </div>
@@ -222,9 +338,7 @@
     <!-- bootstrap-toggle -->
     <script src="bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
 
-    <!-- D3 Sandkey -->
-    <script src="bower_components/d3/d3.min.js"></script>
-    <script src="bower_components/d3/sk.d3.min.js"></script>
+    <script src="bower_components/bootstrap-treeview/extended/jstree.min.js"></script>
 
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>

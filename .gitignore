@@ -95,3 +95,6 @@ typings/
 # LEM
 .idea 
 .LEMS_settings
+
+# Ontology client
+ontology_client/

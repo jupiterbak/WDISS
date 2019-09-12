@@ -27,7 +27,8 @@
 
 var when = require('when');
 var util = require("util");
-
+var KGEnpoints = {};
+var kg_enpoints = require("./sparql_endpoint");
 
 var WebServerService = function() {
     this.http = require('http');
@@ -41,10 +42,7 @@ var WebServerService = function() {
         connection: false
     };
 
-    this.lastStateChangeEvent = {
-        state: { name: 'Stopped' },
-        transitions: []
-    };
+    this.lastStateChangeEvent = {};
 
     this.lastKPIChangedEvent = {};
     this.lastSTATESDescriptionChangedEvent = null;
@@ -87,9 +85,9 @@ WebServerService.prototype.init = function(_app, _settings) {
     });
 
     // Configure the webserver
+    // Configure the webserver
     this.wapp.disable('x-powered-by');
-    this.wapp.use(self.express.static('public'));
-    this.wapp.use('/static', self.express.static(__dirname + '/public'));
+    this.wapp.use(self.express.static(__dirname + '/public'));
     this.wapp.use(self.sessionMiddleware);
 
 
@@ -99,10 +97,6 @@ WebServerService.prototype.init = function(_app, _settings) {
 
 WebServerService.prototype.start = function() {
     var self = this;
-
-    self.wapp.get('/', function (req, res) {
-        res.send('Hello World!');
-      });
 
     self.wapp.get('/executeAction', function(req, res) {
         let action = JSON.parse(req.query.action);
@@ -128,9 +122,84 @@ WebServerService.prototype.start = function() {
         res.send(JSON.stringify({ err: null }));
     });
 
+    // Configure Knowledege Base Endpoints
+    self.wapp.get('/connectKG', function(req, res) {
+        let kg_ip = req.query.ip;
+        let kg_port = req.query.port;
+        var _endpoint = new kg_enpoints(kg_ip, kg_port);
+        KGEnpoints["" + _endpoint.ID] = _endpoint;
+
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify({ err: null, ID: "" + _endpoint.ID }));
+    });
+
+    self.wapp.get('/getAllProcess', function(req, res) {
+        var ID = req.query.ID;
+        var parentID = req.query.parent.id;
+        var _endpoint = KGEnpoints[ID];
+        if (_endpoint) {
+            if (parentID && parentID === "#") {
+                _endpoint.getAllProcess(res);
+            } else {
+                _endpoint.getChildBySubType(res, parentID);
+            }
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify([]));
+        }
+    });
+
+    self.wapp.get('/getAllProduct', function(req, res) {
+        var ID = req.query.ID;
+        var parentID = req.query.parent.id;
+        var _endpoint = KGEnpoints[ID];
+        if (_endpoint) {
+            if (parentID && parentID === "#") {
+                _endpoint.getAllProduct(res);
+            } else {
+                _endpoint.getChildBySubType(res, parentID);
+            }
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify([]));
+        }
+    });
+
+    self.wapp.get('/getAllResource', function(req, res) {
+        var ID = req.query.ID;
+        var _endpoint = KGEnpoints[ID];
+        var parentID = req.query.parent.id;
+        if (_endpoint) {
+            if (parentID && parentID === "#") {
+                _endpoint.getAllResource(res);
+            } else {
+                _endpoint.getChildBySubType(res, parentID);
+            }
+
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify([]));
+        }
+    });
+
+    self.wapp.get('/getChildBySubType', function(req, res) {
+        var ID = req.query.ID;
+        var parentID = req.query.parentID;
+
+        var _endpoint = KGEnpoints[ID];
+        if (_endpoint) {
+            _endpoint.getChildBySubType(res, parentID);
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify([]));
+        }
+    });
+
+
+
     // Start the webserver
     self.webServer.listen(self.settings.uiPort, function() {
-        self.app.log.info("MICROSERVICE[" + self.settings.name + "] ######### ==> Web app listening on port "+ self.settings.uiPort +".");
+        self.app.log.info("MICROSERVICE[" + self.settings.name + "] ######### ==> Web app listening on port " + self.settings.uiPort + ".");
         self.app.log.info("MICROSERVICE[" + self.settings.name + "] started successfully.");
     });
 
@@ -140,9 +209,10 @@ WebServerService.prototype.start = function() {
         self.emitAll("serverstatus", arg);
     });
     self.app.eventBus.addListener("StatesChanged", function(arg) {
-        self.emitAll("StatesChanged", arg);
-        self.lastStateChangeEvent = arg;
+        self.lastStateChangeEvent[arg.state.ID] = arg;
+        self.emitAll("StatesChanged", self.lastStateChangeEvent);
     });
+
     self.app.eventBus.addListener("KPIChanged", function(arg) {
 
         self.lastKPIChangedEvent[arg.name] = arg;

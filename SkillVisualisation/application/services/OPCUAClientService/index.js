@@ -50,6 +50,7 @@ OPCUAClientInterface.prototype.init = function(_app, _settings) {
     self.started = false;
     self.manager = new DAISYOPCClientManager(self.app.eventBus);
     self.app.log.info("MICROSERVICE[" + self.settings.name + "] initialized successfully!");
+    self.current_state_objects = [];
 };
 OPCUAClientInterface.prototype.start = function() {
     var self = this;
@@ -88,102 +89,112 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
         function(callback) { // Monitor the current state Machines
             var ii = 0;
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring CURRENT STATES.");
-            self.settings.modulesetting.defaultObjectModel.CURRENT_STATES.forEach(function(el) {
-                if (el.nodeId && client) {
-                    client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, el.interval, function(err) {
-                        if (err) {
-                            self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
-                        }
-                    }, function(dataValue) {
-                        if (dataValue.value) {
-                            el["value"] = dataValue.value.value;
-                            self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE = dataValue.value.value;
-                        } else {
-                            el["value"] = 1;
-                            self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE = 1;
-                        }
-                        //TODO Optimize SocketIO Communication
-                        // Wait 500 ms to get all notification changes before sending the result
-                        if (self.started) {
-                            setTimeout(function() {
-                                // Collect all transitions that are enabled
-                                let transitions = [];
-                                let transitionsObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
-                                for (const key in transitionsObj) {
-                                    if (transitionsObj.hasOwnProperty(key)) {
-                                        const trans = transitionsObj[key];
-                                        if (trans.EnableFlag) {
-                                            //if (trans.EnableFlag.value) {
-                                            transitions.push(trans);
-                                            //}
+            var _current_states = self.settings.modulesetting.defaultObjectModel.CURRENT_STATES;
+            if (_current_states) {
+                _current_states.forEach(function(el) {
+                    if (el.nodeId && client) {
+                        client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, el.interval, function(err) {
+                            if (err) {
+                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
+                            }
+                        }, function(dataValue) {
+                            if (dataValue.value) {
+                                el["value"] = dataValue.value.value;
+                                el["ID"] = "ns=" + el.nodeId.ns + ";i=" + el.nodeId.nid;
+                                self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE = dataValue.value.value;
+                            } else {
+                                el["value"] = 1;
+                                self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE = 1;
+                            }
+                            //TODO Optimize SocketIO Communication
+                            // Wait 500 ms to get all notification changes before sending the result
+                            if (self.started) {
+                                setTimeout(function() {
+                                    // Collect all transitions that are enabled
+                                    let transitions = [];
+                                    let transitionsObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
+                                    for (const key in transitionsObj) {
+                                        if (transitionsObj.hasOwnProperty(key)) {
+                                            const trans = transitionsObj[key];
+                                            if (trans.EnableFlag) {
+                                                //if (trans.EnableFlag.value) {
+                                                transitions.push(trans);
+                                                //}
+                                            }
                                         }
                                     }
-                                }
 
-                                self.app.eventBus.emit("StatesChanged", {
-                                    state: el,
-                                    transitions: transitions
-                                });
-                            }, 500);
-                        }
-                        //self.app.eventBus.emit("StatesChanged", self.settings.modulesetting.defaultObjectModel);
-                    });
-                }
-                ii++;
-            });
+                                    self.app.eventBus.emit("StatesChanged", {
+                                        state: el,
+                                        transitions: transitions
+                                    });
+                                }, 500);
+                            }
+                            //self.app.eventBus.emit("StatesChanged", self.settings.modulesetting.defaultObjectModel);
+                        });
+                    }
+                    ii++;
+                });
+            }
             callback();
         },
         function(callback) { // Monitor KPI
             var iii = 0;
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring KPIS.");
-            self.settings.modulesetting.defaultObjectModel.KPI.forEach(function(el) {
-                if (el.nodeId && client) {
-                    client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, 20, function(err) { //el.interval
-                        if (err) {
-                            self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
-                        }
-                    }, function(dataValue) {
-                        if (dataValue.value) {
-                            el["value"] = dataValue.value.value;
-                        }
+            var _kpis = self.settings.modulesetting.defaultObjectModel.KPI;
+            if (_kpis) {
+                _kpis.forEach(function(el) {
+                    if (el.nodeId && client) {
+                        client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, 20, function(err) { //el.interval
+                            if (err) {
+                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
+                            }
+                        }, function(dataValue) {
+                            if (dataValue.value) {
+                                el["value"] = dataValue.value.value;
+                            }
 
-                        if (self.started)
-                            self.app.eventBus.emit("KPIChanged", el);
-                    });
-                }
-                iii++;
-            });
+                            if (self.started)
+                                self.app.eventBus.emit("KPIChanged", el);
+                        });
+                    }
+                    iii++;
+                });
+            }
+
             callback();
         },
         function(callback) { // Monitor all STATES DESCRIPTIONS
             var iiii = 0;
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring possibles STATES.");
-            let statesObj = self.settings.modulesetting.defaultObjectModel.STATES;
-            for (const key in statesObj) {
-                if (statesObj.hasOwnProperty(key)) {
-                    const eState = statesObj[key];
-                    //Monitors Properties and Variable of this state
-                    for (const key_ in eState) {
-                        if (eState.hasOwnProperty(key_) && key_ != "name" && key_ !== "nodeId" && key_ !== "type" && key_ !== "parent" && key_ !== "interval" && key_ !== "hasCause") {
-                            const eStateProp = eState[key_];
-                            if (eStateProp.type === "Variable") {
-                                client.monitorNode(eStateProp.nodeId.ns, eStateProp.nodeId.nid, eStateProp.name, eStateProp.interval, function(err) {
-                                    if (err) {
-                                        self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + eStateProp.name + "] - [" + eStateProp.nodeId.ns + ":" + eStateProp.nodeId.nid + "]: " + err);
-                                    }
-                                }, function(dataValue) {
-                                    if (dataValue.value) {
-                                        eStateProp["value"] = dataValue.value.value;
-                                    }
-                                    if (self.started && self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE) { // === eState.StateNumber.value) {
-                                        self.app.eventBus.emit("STATESDescriptionChanged", eState);
-                                    }
-                                });
+            var statesObj = self.settings.modulesetting.defaultObjectModel.STATES;
+            if (statesObj) {
+                for (const key in statesObj) {
+                    if (statesObj.hasOwnProperty(key)) {
+                        const eState = statesObj[key];
+                        //Monitors Properties and Variable of this state
+                        for (const key_ in eState) {
+                            if (eState.hasOwnProperty(key_) && key_ != "name" && key_ !== "nodeId" && key_ !== "type" && key_ !== "parent" && key_ !== "interval" && key_ !== "hasCause") {
+                                const eStateProp = eState[key_];
+                                if (eStateProp.type === "Variable") {
+                                    client.monitorNode(eStateProp.nodeId.ns, eStateProp.nodeId.nid, eStateProp.name, eStateProp.interval, function(err) {
+                                        if (err) {
+                                            self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + eStateProp.name + "] - [" + eStateProp.nodeId.ns + ":" + eStateProp.nodeId.nid + "]: " + err);
+                                        }
+                                    }, function(dataValue) {
+                                        if (dataValue.value) {
+                                            eStateProp["value"] = dataValue.value.value;
+                                        }
+                                        if (self.started && self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE) { // === eState.StateNumber.value) {
+                                            self.app.eventBus.emit("STATESDescriptionChanged", eState);
+                                        }
+                                    });
+                                }
+
                             }
-
                         }
-                    }
 
+                    }
                 }
             }
             callback();
@@ -192,28 +203,30 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
             var iiii = 0;
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring possibles TRANSITIONS.");
             let transitionObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
-            for (const key in transitionObj) {
-                if (transitionObj.hasOwnProperty(key)) {
-                    const eTransition = transitionObj[key];
-                    //Monitors Properties and Variable of this state
-                    for (const key_ in eTransition) {
-                        if (eTransition.hasOwnProperty(key_) && key_ != "name" && key_ !== "nodeId" && key_ !== "type" && key_ !== "parent" && key_ !== "interval" && key_ !== "hasCause") {
-                            const eTransitionProp = eTransition[key_];
-                            if (eTransitionProp.type === "Variable") {
-                                client.monitorNode(eTransitionProp.nodeId.ns, eTransitionProp.nodeId.nid, eTransitionProp.name, eTransitionProp.interval, function(err) {
-                                    if (err) {
-                                        self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + eTransitionProp.name + "] - [" + eTransitionProp.nodeId.ns + ":" + eTransitionProp.nodeId.nid + "]: " + err);
-                                    }
-                                }, function(dataValue) {
-                                    if (dataValue.value) {
-                                        eTransitionProp["value"] = dataValue.value.value;
-                                    }
-                                    if (eTransition.EnableFlag) {
-                                        if (self.started) {
-                                            self.app.eventBus.emit("TRANSITIONDescriptionChanged", eTransition);
+            if (transitionObj) {
+                for (const key in transitionObj) {
+                    if (transitionObj.hasOwnProperty(key)) {
+                        const eTransition = transitionObj[key];
+                        //Monitors Properties and Variable of this state
+                        for (const key_ in eTransition) {
+                            if (eTransition.hasOwnProperty(key_) && key_ != "name" && key_ !== "nodeId" && key_ !== "type" && key_ !== "parent" && key_ !== "interval" && key_ !== "hasCause") {
+                                const eTransitionProp = eTransition[key_];
+                                if (eTransitionProp.type === "Variable") {
+                                    client.monitorNode(eTransitionProp.nodeId.ns, eTransitionProp.nodeId.nid, eTransitionProp.name, eTransitionProp.interval, function(err) {
+                                        if (err) {
+                                            self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + eTransitionProp.name + "] - [" + eTransitionProp.nodeId.ns + ":" + eTransitionProp.nodeId.nid + "]: " + err);
                                         }
-                                    }
-                                });
+                                    }, function(dataValue) {
+                                        if (dataValue.value) {
+                                            eTransitionProp["value"] = dataValue.value.value;
+                                        }
+                                        if (eTransition.EnableFlag) {
+                                            if (self.started) {
+                                                self.app.eventBus.emit("TRANSITIONDescriptionChanged", eTransition);
+                                            }
+                                        }
+                                    });
+                                }
                             }
                         }
                     }

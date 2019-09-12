@@ -177,31 +177,17 @@ $(function() {
 
     socket.on("StatesChanged", function(data) {
         // Highlight the current state
-        var keyObj = globalStateConfiguration.nodeDataArray[data.state.value];
-        if (keyObj) {
-            highlightNode(keyObj.id);
-            $('span#CurrentState').text(keyObj.id);
-        } else {
-            highlightNode('Stopped');
-            $('span#CurrentState').text('Stopped');
+        var _keys = [];
+        for (var prop in data) {
+            if (Object.prototype.hasOwnProperty.call(data, prop)) {
+                const candidates = globalStateConfiguration.nodeDataArray.filter(item => item.id === data[prop].state.value);
+                if (candidates.length > 0) {
+                    _keys.push(candidates[0].id);
+                    $('span#CurrentState').text(candidates[0].id);
+                }
+            }
         }
-
-        // // Change the transitions
-        // data.transitions.forEach(function(elem) {
-        //     if (elem && elem.hasCause) {
-        //         let enabled = elem.EnableFlag.value;
-        //         let txt_class = "text-red";
-        //         let hidden_class = "hidden";
-        //         if (enabled && enabled === true) {
-        //             txt_class = "text-green";
-        //             hidden_class = "";
-        //         }
-
-        //         $('#' + elem.hasCause.name).removeClass("hidden").addClass(hidden_class);
-        //         $('#' + elem.hasCause.name + " i").removeClass("text-red").removeClass("text-green").addClass(txt_class);
-        //         //$('#' + elem.hasCause.name + " span.info-box-number").text(elem.LoadGradient.value.toFixed(2) + ' W ');
-        //     }
-        // });
+        highlightNode(_keys);
     });
 
     // socket.on("TRANSITIONDescriptionChanged", function(elem) {
@@ -260,22 +246,29 @@ $(function() {
 
 function isNumber(n) { return !isNaN(parseFloat(n)) && !isNaN(n - 0) }
 
-function highlightNode(key) {
+function highlightNode(keys) {
+    var nodes = myDiagram.nodes.filter(node => keys.includes(node.key));
     myDiagram.nodes.each(function(node) {
-        if (node.key === key) {
-            let diagram = node.diagram;
-            diagram.startTransaction("highlight");
-            // remove any previous highlighting
-            diagram.clearHighlighteds();
-            // for each Link coming out of the Node, set Link.isHighlighted
-            node.findLinksOutOf().each(function(l) { l.isHighlighted = true; });
-            // for each Node destination for the Node, set Node.isHighlighted
-            node.findNodesOutOf().each(function(n) { n.isHighlighted = true; });
-            //node.isHighlighted = true;
-            diagram.commitTransaction("highlight");
-        }
+        node.findLinksOutOf().each(function(l) { l.isHighlighted = false; });
+        node.isHighlighted = false;
     });
-    myDiagram.select(myDiagram.findNodeForKey(key));
+    nodes.each(function(node) {
+        //if (node.key === key) {
+        //let diagram = node.diagram;
+        //diagram.startTransaction("highlight");
+        // remove any previous highlighting
+        //diagram.clearHighlighteds();
+
+        // for each Link coming out of the Node, set Link.isHighlighted
+        node.findLinksOutOf().each(function(l) { l.isHighlighted = true; });
+
+        // for each Node destination for the Node, set Node.isHighlighted
+        // node.findNodesOutOf().each(function(n) { n.isHighlighted = true; });
+        node.isHighlighted = true;
+        //diagram.commitTransaction("highlight");
+        //}
+    });
+    //myDiagram.select(myDiagram.findNodeForKey(key));
 }
 
 function initGoJsGraph(id) {
@@ -290,7 +283,7 @@ function initGoJsGraph(id) {
                 // start everything in the middle of the viewport
                 initialContentAlignment: go.Spot.Center,
                 // no more than 1 element can be selected at a time
-                maxSelectionCount: 1,
+                maxSelectionCount: 10,
                 // have mouse wheel events zoom in and out instead of scroll up and down
                 "toolManager.mouseWheelBehavior": go.ToolManager.WheelZoom,
                 // support double-click in background creating a new node
@@ -333,12 +326,12 @@ function initGoJsGraph(id) {
                     toLinkableSelfNode: false,
                     toLinkableDuplicates: false,
                     cursor: "pointer"
-                }
-                //, new go.Binding("fill", "isHighlighted", function(h) { return h ? _(go.Brush, "Linear", { 0: "#2387AA" }) : _(go.Brush, "Linear", { 0: "#afbcc6" }); }).ofObject(),
+                },
+                new go.Binding("fill", "isHighlighted", function(h) { return h ? _(go.Brush, "Linear", { 0: "#41aaaa" }) : _(go.Brush, "Linear", { 0: "#afbcc6" }); }).ofObject(),
                 // new go.Binding("strokeWidth", "isHighlighted", function(h, srcData, model) {
                 //     return h || srcData.isInitState ? 2.5 : 1.0;
                 // }).ofObject(),
-                // new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#2387AA" : "#444"; }).ofObject()
+                new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#41aaaa" : "#444"; }).ofObject()
             ),
             _(go.TextBlock, {
                     font: "12pt helvetica, arial, sans-serif",
@@ -346,7 +339,7 @@ function initGoJsGraph(id) {
                     editable: false // editing the text automatically updates the model data
                 },
                 new go.Binding("font", "isHighlighted", function(h) { return h ? "bold 11pt helvetica, arial, sans-serif" : "11pt helvetica, arial, sans-serif"; }).ofObject(),
-                new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#ffffff" : "#444"; }).ofObject(),
+                // new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#ffffff" : "#444"; }).ofObject(),
                 new go.Binding("text").makeTwoWay()
             ), {
                 toolTip: //  define a tooltip for each group that displays its information
@@ -394,11 +387,17 @@ function initGoJsGraph(id) {
             _(go.Panel, "Auto",
                 _(go.Shape, "Rectangle", {
 
-                    name: "GROUPOBJSHAPE",
-                    fill: "#EEEEEE",
-                    stroke: "#000000",
-                    strokeWidth: 0.5
-                }),
+                        name: "GROUPOBJSHAPE",
+                        fill: "#EEEEEE",
+                        stroke: "#000000",
+                        strokeWidth: 0.5
+                    },
+                    //new go.Binding("fill", "isHighlighted", function(h) { return h ? _(go.Brush, "Linear", { 0: "#faa50a" }) : _(go.Brush, "Linear", { 0: "#afbcc6" }); }).ofObject(),
+                    new go.Binding("strokeWidth", "isHighlighted", function(h, srcData, model) {
+                        return h ? 3.0 : 0.5;
+                    }).ofObject(),
+                    new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#41aaaa" : "#444"; }).ofObject()
+                ),
                 _(go.Placeholder, { padding: 30 })
             ),
             _(go.TextBlock, {
@@ -432,12 +431,12 @@ function initGoJsGraph(id) {
             _(go.Shape, // the link shape
                 { strokeWidth: 1.5 },
                 new go.Binding("strokeWidth", "isHighlighted", function(h) { return h ? 2.5 : 1.5; }).ofObject(),
-                new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#2387AA" : "#444"; }).ofObject()
+                new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#41aaaa" : "#444"; }).ofObject()
             ),
             _(go.Shape, // the arrowhead
                 { toArrow: "standard", stroke: null },
-                new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#2387AA" : "#444"; }).ofObject(),
-                new go.Binding("fill", "isHighlighted", function(h) { return h ? "#2387AA" : "#444"; }).ofObject()
+                new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#41aaaa" : "#444"; }).ofObject(),
+                new go.Binding("fill", "isHighlighted", function(h) { return h ? "#41aaaa" : "#444"; }).ofObject()
             ),
             _(go.Panel, "Auto",
                 _(go.Shape, // the label background, which becomes transparent around the edges
@@ -452,7 +451,8 @@ function initGoJsGraph(id) {
                         margin: 4,
                         editable: false // enable in-place editing
                     },
-                    new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#2387AA" : "#444"; }).ofObject(),
+                    new go.Binding("font", "isHighlighted", function(h) { return h ? "bold 11pt helvetica, arial, sans-serif" : "11pt helvetica, arial, sans-serif"; }).ofObject(),
+                    new go.Binding("stroke", "isHighlighted", function(h) { return h ? "#41aaaa" : "#444"; }).ofObject(),
                     // editing the text automatically updates the model data
                     new go.Binding("text").makeTwoWay())
             )
