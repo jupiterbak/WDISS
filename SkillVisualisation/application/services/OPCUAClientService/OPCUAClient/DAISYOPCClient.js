@@ -90,8 +90,8 @@ var DAISYOPCClient = function(ip, port, serverName, socketID, socketHandler) {
             initialDelay: 4000,
             maxDelay: 50000
         },
-        securityMode: opcua.MessageSecurityMode.get("NONE"),
-        securityPolicy: opcua.SecurityPolicy.get("None"),
+        securityMode: opcua.MessageSecurityMode.NONE,
+        securityPolicy: opcua.SecurityPolicy.None,
         requestedSessionTimeout: 20000,
         //serverCertificate: serverCertificate,
         defaultSecureTokenLifetime: 40000,
@@ -952,8 +952,9 @@ DAISYOPCClient.prototype.getArgumentDefinition = function(ns, methodNodeId, call
 
     var type = guidtest(methodNodeId);
     var method_nodes_to_read = "ns=" + ns + ";" + type + "=" + methodNodeId;
+    var methodNodeID = opcua.resolveNodeId(method_nodes_to_read);
 
-    this.session.getArgumentDefinition(method_nodes_to_read, function(err, inputArguments, outputArguments) {
+    this.session.getArgumentDefinition(methodNodeID, function(err, inputArguments, outputArguments) {
         callback(err, inputArguments, outputArguments);
     });
 };
@@ -1008,8 +1009,8 @@ DAISYOPCClient.prototype.callMethod = function(object_ns, objectNodeId, method_n
 
     // Initialize the method call request
     var methodsToCall = [{
-        objectId: object_nodes_to_call,
-        methodId: method_nodes_to_call,
+        objectId: opcua.resolveNodeId(object_nodes_to_call),
+        methodId: opcua.resolveNodeId(method_nodes_to_call),
         inputArguments: inputArguments
     }];
 

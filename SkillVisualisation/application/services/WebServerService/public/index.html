@@ -219,22 +219,23 @@
                                 </div>                         
                                 <div class="row  clearfix">                                    
                                     <div class="col-md-12 hidden" id="opcua_content">
-                                        <table class="table">
+                                        <table class="table" id="opcua_content_table">
                                             <thead>
                                                 <tr>
-                                                    <th class="col-md-4">InsertSkill</th>
+                                                    <th class="col-md-4">Name</th>
                                                     <th>IP</th>
                                                     <th>Port</th>
+                                                    <th>NodeId</th>
                                                     <th>Details</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
+                                            <tbody id="opcua_content_table_tbody">
+                                                <!-- <tr>
                                                     <td>Insert</td>
                                                     <td>localhost</td>
                                                     <td>4840</td>
                                                     <td> <a href="http://localhost:8080/skill-monitoring.html?skill=insert" target="_blank"><span id="CurrentLoad" class="pull-left label label-success label-small">...</span></a></td>
-                                                </tr>                                                
+                                                </tr>                                                 -->
                                             </tbody>
                         
                                         </table>
@@ -297,6 +298,17 @@
 
     <!-- ./wrapper -->
 
+    <!-- Template 7 Avialable SKills-->
+    <script id="Skilltemplate" type="text/template7">
+        <tr>
+            <td>{{name}}</td>
+            <td>{{ip}}</td>
+            <td>{{port}}</td>
+            <td>{{nodeId}}</td>
+            <td> <a href="http://localhost:8080/skill-monitoring.html?skill={{name}}&ip={{ip}}&port={{port}}" target="_blank"><span class="pull-left label label-success label-small">...</span></a></td>
+        </tr>
+    </script>
+
     <!-- jQuery 3 -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -339,6 +351,9 @@
     <script src="bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
 
     <script src="bower_components/bootstrap-treeview/extended/jstree.min.js"></script>
+
+    <!-- Template 7 -->
+    <script src="bower_components/template7/template7.min.js"></script>
 
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>

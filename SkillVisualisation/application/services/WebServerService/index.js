@@ -29,6 +29,7 @@ var when = require('when');
 var util = require("util");
 var KGEnpoints = {};
 var kg_enpoints = require("./sparql_endpoint");
+var gFoundedSkills = {};
 
 var WebServerService = function() {
     this.http = require('http');
@@ -64,6 +65,7 @@ WebServerService.prototype.init = function(_app, _settings) {
         self.sockets[socket.id.replace("/#", "")] = socket;
         socket.emit("connected", socket.id.replace("/#", ""));
         socket.emit("serverstatus", self.connectionMsg);
+        socket.emit("skillModels", gFoundedSkills);
         socket.emit("StatesChanged", self.lastStateChangeEvent);
         socket.emit("KPIChanged", self.lastKPIChangedEvent);
         socket.emit("STATESDescriptionChanged", self.lastSTATESDescriptionChangedEvent);
@@ -98,9 +100,9 @@ WebServerService.prototype.init = function(_app, _settings) {
 WebServerService.prototype.start = function() {
     var self = this;
 
-    self.wapp.get('/executeAction', function(req, res) {
+    self.wapp.get('/ExecuteMethod', function(req, res) {
         let action = JSON.parse(req.query.action);
-        self.app.eventBus.emit("ExecutePLCAction", action);
+        self.app.eventBus.emit("ExecuteMethod", action);
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify({ err: null }));
     });
@@ -204,9 +206,22 @@ WebServerService.prototype.start = function() {
     });
 
     // Listen  to the EventBus
+    self.app.eventBus.addListener("PLCConnected", function(arg) {
+        self.connectionMsg = arg;
+        self.emitAll("serverstatus", arg);
+    });
+    self.app.eventBus.addListener("PLCDisconnected", function(arg) {
+        self.connectionMsg = arg;
+        self.emitAll("serverstatus", arg);
+    });
     self.app.eventBus.addListener("serverstatus", function(arg) {
         self.connectionMsg = arg;
         self.emitAll("serverstatus", arg);
+    });
+    // Listen  to the EventBus
+    self.app.eventBus.addListener("skillModelFounded", function(arg) {
+        gFoundedSkills["" + arg.ip + "_" + arg.port + "_" + arg.skill.name] = arg;
+        self.emitAll("skillModels", gFoundedSkills);
     });
     self.app.eventBus.addListener("StatesChanged", function(arg) {
         self.lastStateChangeEvent[arg.state.ID] = arg;

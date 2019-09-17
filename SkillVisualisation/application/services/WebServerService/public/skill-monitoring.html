@@ -152,7 +152,7 @@
                                         <table class="table table-condensed">
                                             <thead>
                                                 <tr>
-                                                    <th class="col-md-4">Ressource</th>
+                                                    <th class="col-md-4">Skill</th>
                                                     <th ></th>
                                                 </tr>
                                             </thead>
@@ -214,21 +214,11 @@
                                                 <tr>
                                                     <th class="col-md-4">Parameter Name</th>
                                                     <th>Type</th>
+                                                    <th>DataType</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Position</td>
-                                                    <td>Input</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Material</td>
-                                                    <td>Input</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>ResultStatus</td>
-                                                    <td>SyncOut</td>
-                                                </tr>
+                                            <tbody id="parameter_table_tbody">
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -250,7 +240,7 @@
                                 </div>
                             </div>
                             <div class="box-footer no-padding">
-                                <ul class="nav nav-pills nav-stacked" id="transitionsHolder">
+                                <ul class="nav nav-pills nav-stacked" id="modelActionBtn">
                                     <li id="Start" >
                                         <a href="#" class="EFlexAction" data-action="Start" data-argumentcount="1">
                                             <span class="info-box-text">Start<i class="fa fa-circle text-red pull-right "></i> </span>
@@ -269,108 +259,9 @@
                             <!-- /.footer -->
                         </div>
                     </div>
-                    <div class="modal fade" id="paramModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                          <span aria-hidden="true">×</span></button>
-                                    <h4 class="modal-title">Input Parameter for the method <span id="paramHeader">Start</span>()</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="paramAll">Machine Load (%)</label>
-                                            <div class="col-sm-9">
-                                                <input type="range" class="" min="0.1" max="100.0"
-                                                       step="0.001" value="50.00" data-slider-orientation="horizontal"
-                                                       data-slider-selection="before" data-slider-tooltip="Machine Load" data-slider-id="blue" id="paramAll"/>
+                    <div id="modalContainers">
 
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="paramACLoad">AC Load (%)</label>
-                                            <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="paramACLoad" placeholder="0,001" min="0.0" max="100.0" step="0.001" value="50.0" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="paramDCLoad">DC Load (%) </label>
-                                            <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="paramDCLoad" placeholder="0,001" min="0.0" max="100.0" step="0.001" value="50.0" />
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                                    <button type="button" id="executeMethod" class="btn btn-primary">Execute</button>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
                     </div>
-                    <!-- /.modal -->
-                    <div class="modal fade" id="paramModalChangeLoad">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                              <span aria-hidden="true">×</span></button>
-                                    <h4 class="modal-title">Input Parameter for the method <span id="paramHeaderCL">Start</span>()</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal" role="form">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="paramAllCL">Machine Load (%)</label>
-                                            <div class="col-sm-9">
-                                                <input type="range" class="" min="0.1" max="100.0"
-                                                       step="0.001" value="50.00" data-slider-orientation="horizontal"
-                                                       data-slider-selection="before" data-slider-tooltip="Machine Load" data-slider-id="blue" id="paramAllCL"/>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="paramACLoadCL">AC Load (%)</label>
-                                            <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="paramACLoadCL" placeholder="0,001" min="0.0" max="100.0" step="0.001" value="50.00" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="paramDCLoadCL">DC Load (%)</label>
-                                            <div class="col-sm-9">
-                                                <input type="number" class="form-control" id="paramDCLoadCL" placeholder="0,001" min="0.0" max="100.0" step="0.001" value="50.00" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="EnergySourceID">Energy Source ID</label>
-                                            <div class="col-sm-9">
-                                                <!-- <input type="number" class="form-control" id="EnergySourceID" placeholder="0,001" min="0.0" max="1.0" step="0.001" value="0" /> -->
-                                                <select class="form-control" id="EnergySourceID"  >
-                                                    <option value="0">Buffer</option>
-                                                    <option value="1" selected="selected">PSU</option>
-                                                  </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label" for="EnergySourceLoad">Energy Source Load</label>
-                                            <div class="col-sm-9">
-                                                <input disabled type="number" class="form-control" id="EnergySourceLoad" placeholder="0,001" min="0.0" max="1.0" step="0.001" value="100.00" readonly/>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                                    <button type="button" id="executeChangeLoadMethod" class="btn btn-primary">Execute</button>
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!-- /.modal -->
                 </div>
             </section>
         </div>
@@ -387,6 +278,73 @@
     </footer>
 
     <!-- ./wrapper -->
+    <!-- Template 7 Avialable SKills-->
+    <script id="SkillParameterTemplate" type="text/template7">
+        {{#each skillModel.Invokation.Start.parameters.inputArguments}}  
+        <tr>
+            <td>{{name}}</td>
+            <td>Input</td>
+            <td>Int16</td>
+        </tr>
+        {{/each}}
+
+        {{#each skillModel.Invokation.Start.parameters.outputArguments}}  
+        <tr>
+            <td>{{name}}</td>
+            <td>SyncOut</td>
+            <td>Int16</td>
+        </tr>
+        {{/each}}
+
+        {{#each skillModel.Invokation.GetResult.parameters.inputArguments}}  
+        <tr>
+            <td>{{name}}</td>
+            <td>AsyncOut</td>
+            <td>Int16</td>
+        </tr>
+        {{/each}}
+        
+    </script>
+
+    <script id="SkillParameterModal" type="text/template7">
+    <div class="modal"  role="dialog" tabindex="-1" id="paramModal{{name}}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title"><span id="paramHeader">{{name}}</span>()</h4>
+                </div>                
+                <div class="modal-body">
+                    <form  role="form">
+                        {{#each parameters.inputArguments}}
+                        <div class="form-group">
+                            <label class="control-label" for="param{{name}}">{{name}}  <span class="label label-default label-small"> {{#js_if "this.valueRank > 0"}}Array of {{dataType}} {{else}} {{dataType}} {{/js_if}} </span></label>
+                            <input type="text" class="form-control" id="param{{name}}" data-dataType="{{dataType}}" data-arrayType=0x00 placeholder=""  />                            
+                        </div>
+                        {{/each}}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" id="execute{{name}}" data-actionName="{{name}}" class="btn btn-primary executeMethod">Execute</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    </script>
+
+    <script id="SkillActionList" type="text/template7">
+        <li id="Start" >
+            <a href="#" class="EFlexAction" data-toggle="modal" data-target="#paramModal{{name}}" data-action="{{name}}">
+                <span class="info-box-text">{{name}}<i class="fa fa-circle text-red pull-right "></i> </span>
+                <span class="info-box-number" id="{{name}}_method_label"></span>
+            </a>
+        </li>
+    </script>
 
     <!-- jQuery 3 -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -394,15 +352,6 @@
     <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $(document).on('input', '#paramAll', function() {
-            $('#paramACLoad').val( $(this).val() );
-            $('#paramDCLoad').val( $(this).val() );
-        });
-        $(document).on('input', '#paramAllCL', function() {
-            $('#paramACLoadCL').val( $(this).val() );
-            $('#paramDCLoadCL').val( $(this).val() );
-        });
-
         $.widget.bridge('uibutton', $.ui.button);
         function enterFullscreen(element) {
             if (element.requestFullscreen) {
@@ -431,6 +380,9 @@
     <!-- GoJS -->
     <script src="bower_components/GoJS/go.js"></script>
     <!-- <script src="bower_components/GoJS/ParallelLayout.js"></script> -->
+
+    <!-- Template 7 -->
+    <script src="bower_components/template7/template7.min.js"></script>
 
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.js"></script>

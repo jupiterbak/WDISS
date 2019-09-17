@@ -1,12 +1,24 @@
+'use strict';
+
 let myDiagram;
 let gIP = "localhost";
 let gPORT = 4840;
-let gSERVERNAME = "SP164DEMO";
+let gSkill = "";
+let gSERVERNAME = "SP347DEMO";
 let gSOCKETId = "8548585858";
 var globalStateConfiguration;
-$(function() {
+// Get all Parameters
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
 
-    'use strict';
+$(function() {
+    gIP = getUrlParameter('ip');
+    gPORT = getUrlParameter('port');
+    gSkill = getUrlParameter('skill');
 
     // Make the dashboard widgets sortable Using jquery UI
     $('.connectedSortable').sortable({
@@ -31,118 +43,37 @@ $(function() {
 
     initGoJsGraph("StateChart");
 
-
-    // Add the listener
-    $('.EFlexAction').click(function(params) {
+    function executeMethod(self, params) {
+        var all_parameters = $(self).parent().parent().find("input");
         let data = {
             ip: gIP,
             port: gPORT,
             serverName: gSERVERNAME,
             socketID: gSOCKETId,
-            actionName: $(this).data("action"),
-            parameters: [{
-                dataType: 11, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-                arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-                value: Math.floor(Math.random() * 1000)
-            }, {
-                dataType: 11, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-                arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-                value: Math.floor(Math.random() * 1000)
-            }]
+            actionName: self.dataset["actionname"],
+            parameters: []
         };
-        let hasArgument = $(this).data("argumentcount");
-        if (hasArgument) {
-            // Change the title
-            if ($(this).data("action") === "ChangeLoad") {
-                $('#paramHeaderCL').text($(this).data("action"));
-                $('#paramModalChangeLoad').modal();
-            } else {
-                $('#paramHeader').text($(this).data("action"));
-                $('#paramModal').modal();
-            }
 
-        } else {
-            $.getJSON("/executeAction", { action: JSON.stringify(data) },
-                function(result) {
-                    // TODO
-                    if (result.err) {
-
-                    }
-                });
+        for (let index = 0; index < all_parameters.length; index++) {
+            const el = all_parameters[index];
+            data.parameters.push({
+                dataType: el.dataset["datatype"], // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
+                arrayType: el.dataset["arraytype"], //Scalar: 0x00, Array: 0x01, Matrix: 0x02
+                value: el.value
+            });
         }
-    });
 
-    $('#executeMethod').click(function(params) {
-        let paramValueAC = eval($('#paramACLoad').val());
-        let paramValueDC = eval($('#paramDCLoad').val());
-
-        let data = {
-            ip: gIP,
-            port: gPORT,
-            serverName: gSERVERNAME,
-            socketID: gSOCKETId,
-            actionName: $('#paramHeader').text(),
-            parameters: [{
-                dataType: 10, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-                arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-                value: paramValueAC / 100.0 //Math.floor(Math.random())
-            }, {
-                dataType: 10, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-                arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-                value: paramValueDC / 100.0 //Math.floor(Math.random() * 1000)
-            }]
-        };
-
-        $.getJSON("/executeAction", { action: JSON.stringify(data) },
+        $.getJSON("/ExecuteMethod", { action: JSON.stringify(data) },
             function(result) {
-                // TODO
                 if (result.err) {
-
+                    // TODO: make a nice error feedback
+                } else {
+                    $('.modal').modal('hide');
                 }
-                $('#paramModal').modal('hide');
-            });
-    });
+            }
+        );
+    }
 
-    $('#executeChangeLoadMethod').click(function(params) {
-        let paramValueACCL = eval($('#paramACLoadCL').val());
-        let paramValueDCCL = eval($('#paramDCLoadCL').val());
-        let paramValueEnergySourceID = eval($('#EnergySourceID').val());
-        let paramValueEnergySourceLoad = eval($('#EnergySourceLoad').val());
-
-        let data = {
-            ip: gIP,
-            port: gPORT,
-            serverName: gSERVERNAME,
-            socketID: gSOCKETId,
-            actionName: $('#paramHeaderCL').text(),
-            parameters: [{
-                dataType: 10, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-                arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-                value: paramValueACCL / 100.0 //Math.floor(Math.random())
-            }, {
-                dataType: 10, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-                arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-                value: paramValueDCCL / 100.0 //Math.floor(Math.random() * 1000)
-            }, {
-                dataType: 1, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-                arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-                value: paramValueEnergySourceID !== 1
-            }, {
-                dataType: 10, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-                arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-                value: paramValueEnergySourceLoad / 100.0
-            }]
-        };
-
-        $.getJSON("/executeAction", { action: JSON.stringify(data) },
-            function(result) {
-                // TODO
-                if (result.err) {
-
-                }
-                $('#paramModalChangeLoad').modal('hide');
-            });
-    });
 
     /** SOCKET IO Handler **/
     const socket = io("http://localhost:8080/");
@@ -171,7 +102,10 @@ $(function() {
             $('#ressourceIP').text(data.ip);
         }
         if (data.port) {
-            $('#ressourcePort').text(data.port);
+            $('#ressourceName').text(gSkill);
+        }
+        if (data.ip) {
+            $('#ressourceIP').text(data.ip);
         }
     });
 
@@ -190,22 +124,37 @@ $(function() {
         highlightNode(_keys);
     });
 
-    // socket.on("TRANSITIONDescriptionChanged", function(elem) {
-    //     if (elem && elem.hasCause) {
-    //         let enabled = elem.EnableFlag.value;
-    //         let txt_class = "text-red";
-    //         let hidden_class = "hidden";
-    //         if (enabled && enabled === true) {
-    //             txt_class = "text-green";
-    //             hidden_class = "";
-    //         }
+    socket.on("skillModels", function(arg) {
+        if (arg) {
+            for (var prop in arg) {
+                var el = arg[prop];
+                if (el.ip === gIP && el.port === gPORT && el.skill.name === gSkill) {
+                    // Dismiss all modal
+                    $('.modal').modal('hide');
+                    $("#modalContainers").empty();
+                    $("#modelActionBtn").empty();
+                    // extract the methods --> TODO: Make it more generic
+                    var methods = [el.skillModel.Invokation.Start, el.skillModel.Invokation.GetResult];
+                    methods.forEach(m => {
+                        // Generate Parameter View                        
+                        var template = $('#SkillParameterModal').html();
+                        var compiledTemplate = Template7.compile(template);
+                        var html = compiledTemplate(m);
+                        $("#modalContainers").append(html);
+                        var template = $('#SkillActionList').html();
+                        var compiledTemplate = Template7.compile(template);
+                        var html = compiledTemplate(m);
+                        $("#modelActionBtn").append(html);
+                    });
 
-    //         $('#' + elem.hasCause.name).removeClass("hidden").addClass(hidden_class);
-    //         $('#' + elem.hasCause.name + " i").removeClass("text-red").removeClass("text-green").addClass(txt_class);
-    //         //$('#' + elem.hasCause.name + " span.info-box-number").text(elem.LoadGradient.value.toFixed(2) + ' W ');
-    //     }
-    // });
-
+                    // Add the listener
+                    $('.executeMethod').click(function(params) {
+                        executeMethod(this, params);
+                    });
+                }
+            }
+        }
+    });
 
     $('#SetParameters').click(function(params) {
         let value = $('#load_parameter_1').val() / 100.0;

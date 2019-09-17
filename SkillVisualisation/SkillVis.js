@@ -126,10 +126,10 @@ LEMS.start().then(function() {
 
 
 
-process.on('uncaughtException', function(err) {
-    console.log('[LEMS] Uncaught Exception:' + err.stack);
-    //     process.exit(1);
-});
+// process.on('uncaughtException', function(err) {
+//     console.log('[LEMS] Uncaught Exception:' + err.stack);
+//     //     process.exit(1);
+// });
 
 // Stop the platform if the user request it
 process.on('SIGINT', function() {
