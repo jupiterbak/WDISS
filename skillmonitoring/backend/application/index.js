@@ -1,7 +1,7 @@
 /**
  * Copyright 2018 Siemens AG.
  * 
- * File: SkillVis.js
+ * File: SkillMonitoring.js
  * Project: SP 164
  * Author:
  *  - Jupiter Bakakeu
@@ -27,11 +27,10 @@
 
 var when = require('when');
 var path = require('path');
-var fs = require("fs");
 var os = require("os");
+var http = require('http');
+var express = require("express");
 
-var eventBus = require("./eventBus");
-var configurationBus = require("./configurationBus");
 var storage = require("./storage");
 var setting_manager = require("./setting_manager");
 
@@ -42,11 +41,10 @@ var log = require("./log");
 var configurator = require("./configurator");
 
 var started = false;
-process.env.LEMS_HOME = process.env.LEMS_HOME || path.resolve(__dirname + "/..");
+process.env.SKILLMONITORING_HOME = process.env.SKILLMONITORING_HOME || path.resolve(__dirname + "/..");
 
 // Internal variable
 var server = null;
-
 var version;
 
 function getVersion() {
@@ -78,46 +76,39 @@ function reportMetrics() {
 }
 
 module.exports = {
-    init: function(httpServer, userSettings) {
+    init: function(userSettings) {
 
         // Check that the user settings are consistent
-        if (!userSettings) {
-            userSettings = httpServer;
-            httpServer = null;
-        }
-
         storage.init(userSettings.userDir, 'settings_' + require('os').hostname() + '.json', userSettings)
             .then(function() {
-                return setting_manager.load(storage)
+                return setting_manager.load(storage);
             });
 
-        // Initialize all the modules from the settings
-        // configurator
-        var current_settings = setting_manager.getGlobalSetting();
         log.init(userSettings);
         setting_manager.init(userSettings);
-        server = httpServer;
+        /** Configure the application webserver */
+        var app = express();
+        server = http.createServer(function(req, res) { app(req, res); });
 
-        configurator.init(httpServer, this, userSettings);
+        configurator.init(server, this, userSettings);
         // log the step
-        log.info("SkillVis initialized successfully.");
+        log.info("SkillMonitoring initialized successfully.");
 
         return when.resolve();
     },
 
     start: function() {
         started = true;
-        var self = this;
 
         // Add a listener to the configuration changes
-        storage.addConfigFileListener(function(_path, stats) {
+        storage.addConfigFileListener(function(_path) {
             if (path.basename(_path) === storage.getGlobalSettingsFile()) {
                 var new_settings = setting_manager.load(storage);
-                var state = isStarted();
+                var state = this.isStarted();
                 if (state) {
                     configurator.stop();
                 }
-                configurator.init(httpServer, new_settings);
+                configurator.init(server, new_settings);
                 if (state) {
                     configurator.start();
                 }
@@ -125,9 +116,9 @@ module.exports = {
         });
 
         // Start the application
-        console.log("\n\n===============================\n" + "SkillVis engine.welcome\n===============================\n");
+        console.log("\n\n===============================\n" + "SkillMonitoring engine.welcome\n===============================\n");
         if (setting_manager && setting_manager.version) {
-            log.info("runtime.version SkillVis :" + setting_manager.version);
+            log.info("runtime.version SkillMonitoring :" + setting_manager.version);
         }
         log.info("runtime.version Node JS" + process.version);
         log.info(os.type() + " " + os.release() + " " + os.arch() + " " + os.endianness());
@@ -140,39 +131,18 @@ module.exports = {
 
         // Start all module
         configurator.start();
-        log.info("SkillVis start successfully.");
-
-        // setInterval(function() {
-        //     self.eventBus.emit("ExecutePLCAction", {
-        //         ip: "localhost",
-        //         port: 48022,
-        //         serverName: "DEMO",
-        //         socketID: "8548585858",
-        //         actionName: "Clear",
-        //         parameters: [{
-        //             dataType: 11, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-        //             arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-        //             value: Math.floor(Math.random() * 1000)
-        //         }, {
-        //             dataType: 11, // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
-        //             arrayType: 0x00, //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-        //             value: Math.floor(Math.random() * 1000)
-        //         }]
-        //     });
-        // }, 20000);
-
-        // ########### TEST #############
+        log.info("SkillMonitoring start successfully.");
         return when.resolve();
     },
     stop: function() {
         started = false;
         // Stop all modules
         configurator.stop();
-        log.info("SkillVis stopped successfully.");
+        log.info("SkillMonitoring stopped successfully.");
         return when.resolve();
     },
 
-    restart: function(new_setting) {
+    restart: function() {
         stop();
         start();
     },
@@ -181,18 +151,15 @@ module.exports = {
     storage: storage,
     log: log,
     version: getVersion,
-    log: log,
     settings: setting_manager,
     util: util,
-    eventBus: eventBus,
-    configurationBus: configurationBus,
     isStarted: function() {
-        return started
+        return started;
     },
-
-    getConfigurator: function() { return configurator },
-    getSettingManager: function() { return setting_manager },
-    getStorage: function() { return storage },
-    getApp: function() { return this },
-    getServer: function() { return server }
+    server: server,
+    getConfigurator: function() { return configurator; },
+    getSettingManager: function() { return setting_manager; },
+    getStorage: function() { return storage; },
+    getApp: function() { return this; },
+    getServer: function() { return server; }
 };

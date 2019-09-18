@@ -26,9 +26,9 @@
  **/
 
 var when = require('when');
-var util = require("util");
 var KGEnpoints = {};
 var kg_enpoints = require("./sparql_endpoint");
+var OPCUAClientService = require("./OPCUAClientService");
 var gFoundedSkills = {};
 
 var WebServerService = function() {
@@ -48,6 +48,8 @@ var WebServerService = function() {
     this.lastKPIChangedEvent = {};
     this.lastSTATESDescriptionChangedEvent = null;
     this.lastTRANSITIONDescriptionChangedEvent = null;
+    this.opcuaclientservice = new OPCUAClientService();
+
 };
 
 WebServerService.prototype.init = function(_app, _settings) {
@@ -81,7 +83,6 @@ WebServerService.prototype.init = function(_app, _settings) {
         resave: false,
         saveUninitialized: true
     });
-
     this.io.use(function(socket, next) {
         self.sessionMiddleware(socket.request, socket.request.res, next);
     });
@@ -92,7 +93,8 @@ WebServerService.prototype.init = function(_app, _settings) {
     this.wapp.use(self.express.static(__dirname + '/public'));
     this.wapp.use(self.sessionMiddleware);
 
-
+    // Initialize the opc ua Client service
+    this.opcuaclientservice.init(self.app, self, self.settings.opcuaclient);
     self.app.log.info("MICROSERVICE[" + self.settings.name + "] initialized successfully!");
     return when.resolve();
 };
@@ -100,28 +102,32 @@ WebServerService.prototype.init = function(_app, _settings) {
 WebServerService.prototype.start = function() {
     var self = this;
 
+    // Initialize the OPCUA Client Service
+    self.opcuaclientservice.start();
+
     self.wapp.get('/ExecuteMethod', function(req, res) {
         let action = JSON.parse(req.query.action);
-        self.app.eventBus.emit("ExecuteMethod", action);
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ err: null }));
+        self.opcuaclientservice.ExecuteMethod(action, function(err, results) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify({ err: err, results: results }));
+        });
     });
 
     self.wapp.get('/writeVariable', function(req, res) {
         let variable = JSON.parse(req.query.action);
 
-
-        self.app.eventBus.emit("WriteVariable", variable);
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ err: null }));
+        self.opcuaclientservice.WriteVariable(variable, function(err, results) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify({ err: err, results: results }));
+        });
     });
 
     self.wapp.get('/connect', function(req, res) {
         let params = JSON.parse(req.query.parameter);
-
-        self.app.eventBus.emit("ConnectPLC", params);
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ err: null }));
+        self.opcuaclientservice.ConnectPLC(params, self, function(err, results) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify({ err: err, results: results }));
+        });
     });
 
     // Configure Knowledege Base Endpoints
@@ -197,62 +203,55 @@ WebServerService.prototype.start = function() {
         }
     });
 
-
-
     // Start the webserver
     self.webServer.listen(self.settings.uiPort, function() {
         self.app.log.info("MICROSERVICE[" + self.settings.name + "] ######### ==> Web app listening on port " + self.settings.uiPort + ".");
         self.app.log.info("MICROSERVICE[" + self.settings.name + "] started successfully.");
     });
-
-    // Listen  to the EventBus
-    self.app.eventBus.addListener("PLCConnected", function(arg) {
-        self.connectionMsg = arg;
-        self.emitAll("serverstatus", arg);
-    });
-    self.app.eventBus.addListener("PLCDisconnected", function(arg) {
-        self.connectionMsg = arg;
-        self.emitAll("serverstatus", arg);
-    });
-    self.app.eventBus.addListener("serverstatus", function(arg) {
-        self.connectionMsg = arg;
-        self.emitAll("serverstatus", arg);
-    });
-    // Listen  to the EventBus
-    self.app.eventBus.addListener("skillModelFounded", function(arg) {
-        gFoundedSkills["" + arg.ip + "_" + arg.port + "_" + arg.skill.name] = arg;
-        self.emitAll("skillModels", gFoundedSkills);
-    });
-    self.app.eventBus.addListener("StatesChanged", function(arg) {
-        self.lastStateChangeEvent[arg.state.ID] = arg;
-        self.emitAll("StatesChanged", self.lastStateChangeEvent);
-    });
-
-    self.app.eventBus.addListener("KPIChanged", function(arg) {
-
-        self.lastKPIChangedEvent[arg.name] = arg;
-        self.emitAll("KPIChanged", self.lastKPIChangedEvent);
-    });
-    self.app.eventBus.addListener("STATESDescriptionChanged", function(arg) {
-        self.emitAll("STATESDescriptionChanged", arg);
-        self.lastSTATESDescriptionChangedEvent = arg;
-    });
-    self.app.eventBus.addListener("TRANSITIONDescriptionChanged", function(arg) {
-        self.emitAll("TRANSITIONDescriptionChanged", arg);
-        self.lastTRANSITIONDescriptionChangedEvent = arg;
-    });
     return when.resolve();
 };
 WebServerService.prototype.stop = function() {
     var self = this;
-    this.webServer.close();
+    // Initialize the OPCUA Client Service
+    self.opcuaclientservice.stop();
+    self.webServer.close();
     self.app.log.info("MICROSERVICE[" + self.settings.name + "] ######### ==> Web app stopped listening on port 8080.");
     self.app.log.info("MICROSERVICE[" + self.settings.name + "] stopped successfully!");
     return when.resolve();
 };
 
-WebServerService.prototype.emitAll = function(eventID, data) {
+WebServerService.prototype.emit = function(eventID, data) {
     var self = this;
+    if (eventID === "PLCConnected") {
+        self.connectionMsg = data;
+        self.emitAll("serverstatus", data);
+    } else if (eventID === "PLCDisconnected") {
+        self.connectionMsg = data;
+        self.emitAll("serverstatus", data);
+    } else if (eventID === "serverstatus") {
+        self.connectionMsg = data;
+        self.emitAll("serverstatus", data);
+    } else if (eventID === "skillModelFounded") {
+        gFoundedSkills["" + data.ip + "_" + data.port + "_" + data.skill.name] = data;
+        self.emitAll("skillModels", gFoundedSkills);
+    } else if (eventID === "StatesChanged") {
+        self.lastStateChangeEvent[data.state.ID] = data;
+        self.emitAll("StatesChanged", self.lastStateChangeEvent);
+    } else if (eventID === "KPIChanged") {
+        self.lastKPIChangedEvent[data.name] = data;
+        self.emitAll("KPIChanged", self.lastKPIChangedEvent);
+    } else if (eventID === "STATESDescriptionChanged") {
+        self.lastSTATESDescriptionChangedEvent = data;
+        self.emitAll("STATESDescriptionChanged", data);
+    } else if (eventID === "TRANSITIONDescriptionChanged") {
+        self.emitAll("TRANSITIONDescriptionChanged", data);
+        self.lastTRANSITIONDescriptionChangedEvent = data;
+    }
+
+    self.app.log.info("MICROSERVICE[" + self.settings.name + "] Socket IO Event: " + eventID);
+};
+
+WebServerService.prototype.emitAll = function(eventID, data) {
     this.io.emit(eventID, data);
 };
 

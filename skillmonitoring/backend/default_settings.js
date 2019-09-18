@@ -152,30 +152,30 @@ module.exports = {
             name: "WebServerService0",
             type: "WebServerService",
             uiPort: 8080,
-            uiHost: "127.0.0.1"
-        },
-        {
-            name: "OPCUAClientService0",
-            type: "OPCUAClientService",
-            id: "IOTRuntime_0",
-            level: "info",
-            modulesetting: {
-                interval: 10,
-                ip: "0.0.0.0",
-                port: 4840,
-                defaultObjectModel: {
-                    _states: ["CurrentStateExt", "CurrentState"],
-                    _kpi: ["CurrentLoads", "CurrentLoad", "CurrMachSpeed", "TargetLoad", "Product", "MachSpeed", "StateChangeInProgress", "Interlocked", "EnergySource", "SupportedModes", "Version", "MachSpeed_AC", "MachSpeed_DC"],
-                    _actions: ["Abort", "Clear", "Reset", "Stop", "Hold", "Start", "UnHold", "GetResult"],
-                    _data: [{
-                        name: "",
-                        nodeId: {
-                            nsuri: "",
-                            nid: ""
-                        }
-                    }]
-                }
-            },
+            uiHost: "127.0.0.1",
+            opcuaclient: {
+                name: "OPCUAClientService0",
+                type: "OPCUAClientService",
+                id: "IOTRuntime_0",
+                level: "info",
+                modulesetting: {
+                    interval: 10,
+                    ip: "0.0.0.0",
+                    port: 4840,
+                    defaultObjectModel: {
+                        _states: ["CurrentStateExt", "CurrentState"],
+                        _kpi: ["CurrentLoads", "CurrentLoad", "CurrMachSpeed", "TargetLoad", "Product", "MachSpeed", "StateChangeInProgress", "Interlocked", "EnergySource", "SupportedModes", "Version", "MachSpeed_AC", "MachSpeed_DC"],
+                        _actions: ["Abort", "Clear", "Reset", "Stop", "Hold", "Start", "UnHold", "GetResult"],
+                        _data: [{
+                            name: "",
+                            nodeId: {
+                                nsuri: "",
+                                nid: ""
+                            }
+                        }]
+                    }
+                },
+            }
         }
     ],
 };

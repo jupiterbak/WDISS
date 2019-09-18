@@ -27,12 +27,11 @@
 var when = require('when');
 var async = require("async");
 var opcua = require("node-opcua");
-var NodeId = opcua.NodeId;
 
 var DAISYOPCClientManager = require('./OPCUAClient/DAISYOPCClientManager');
 
 var OPCUAClientInterface = function() {};
-OPCUAClientInterface.prototype.init = function(_app, _settings) {
+OPCUAClientInterface.prototype.init = function(_app, sio, _settings) {
     var self = this;
     this.app = _app;
     self.settings = _settings;
@@ -48,7 +47,7 @@ OPCUAClientInterface.prototype.init = function(_app, _settings) {
     self.settings.defaultObjectModel = self.settings.defaultObjectModel || {};
 
     self.started = false;
-    self.manager = new DAISYOPCClientManager(self.app.eventBus);
+    self.manager = new DAISYOPCClientManager(sio);
     self.app.log.info("MICROSERVICE[" + self.settings.name + "] initialized successfully!");
     self.current_state_objects = [];
 };
@@ -57,40 +56,241 @@ OPCUAClientInterface.prototype.start = function() {
     if (self.started) {
         self.app.log.warn("MICROSERVICE[" + self.settings.name + "] already started !");
         return when.resolve();
+    } else {
+        self.started = true;
+        self.app.log.info("MICROSERVICE[" + self.settings.name + "] started successfully!");
     }
-
-    subscribeToEventBus(self.app.eventBus, self, function(err) {
-        if (err) {
-            self.app.log.info("MICROSERVICE[" + self.settings.name + "] could not start: " + err);
-            self.stop();
-            self.started = false;
-        } else {
-            self.started = true;
-            self.app.log.info("MICROSERVICE[" + self.settings.name + "] started successfully!");
-        }
-    });
-
     return when.resolve();
 };
+
 OPCUAClientInterface.prototype.stop = function() {
     var self = this;
-    unSubscribeToEventBus(self.app.eventBus, self, function(err) {
-        self.started = false;
-        self.manager.close(function(err) {
-            self.app.log.info("MICROSERVICE[" + self.settings.name + "] stopped successfully!");
-        });
+    self.started = false;
+    self.manager.close(function() {
+        self.app.log.info("MICROSERVICE[" + self.settings.name + "] stopped successfully!");
     });
-
     return when.resolve();
 };
 
-function monitorServerInformationModel(bus, self, client, fCallBack) {
+
+// ---------------------------------------------------------------------------------------------------
+// -------------  Secondary functions 
+// ---------------------------------------------------------------------------------------------------
+OPCUAClientInterface.prototype.ConnectPLC = function(arg, sio, fCallBack) {
+    var self = this;
+    var client = null;
+    if (arg.ip && arg.socketID && arg.port && arg.serverName) {
+        async.series([
+            function(callback) { // Get the client
+                client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
+                if (client) {
+                    self.app.log.warn("MICROSERVICE[" + self.settings.name + "] client already exist.");
+                    callback(null, true);
+                } else {
+                    client = self.manager.addNewOPCClient(arg.ip, arg.port, arg.serverName, arg.socketID);
+                    self.app.log.info("MICROSERVICE[" + self.settings.name + "] new client initialized.");
+                    callback(null, true);
+                }
+
+            },
+            function(callback) { // Connect the client to the server
+                if (client.connected === false) {
+                    client.connect(arg.ip, arg.port, arg.serverName, arg.socketID, function(err) {
+                        if (err) {
+                            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] new client could connect to server: " + client.url);
+                            callback(err, false);
+                        } else {
+                            self.app.log.info("MICROSERVICE[" + self.settings.name + "] new client connected to server: " + client.url);
+                            callback(null, true);
+                        }
+                    });
+                } else {
+                    callback(null, true);
+                }
+            },
+            function(callback) { // Check the server information model
+                // Check Server Model
+                checkServerModel(self, client, sio, function(err) {
+                    if (err) {
+                        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server is not compatible to LEMS.");
+                        callback(err, false);
+                    } else {
+                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server is compatible with Information model. Client will start monitoring.");
+                        callback(null, true);
+                    }
+                });
+            },
+            function(callback) { // Monitor the PLC assuming that it is compatible to our model
+                monitorServerInformationModel(self, client, sio, function(err) {
+                    if (err) {
+                        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server Information model could not be monitored.");
+                        callback(err, false);
+                    } else {
+                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server Information model is being monitored.");
+                        callback(null, true);
+                    }
+                });
+            }
+        ], function(err, results) {
+            fCallBack(err, results);
+        });
+    } else {
+        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] invalid Argument for method ConnectPLC.");
+        fCallBack({ text: "Invalid Arguments" }, false);
+    }
+};
+
+OPCUAClientInterface.prototype.DisconnectPLC = function(arg, fCallBack) {
+    var self = this;
+    var client = null;
+    //Initialize a new client
+    if (arg.ip && arg.socketID && arg.port && arg.serverName) {
+        var client = manager.getClient(manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
+        if (client) {
+            if (client.connected === true) {
+                client.disconnect(function(err) {
+                    if (err) {
+                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] client could disconnect from server.");
+                        fCallBack(null, false);
+                    } else {
+                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] client disconnected from server.");
+                        fCallBack(null, true);
+                    }
+                });
+            }
+        } else {
+            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not disconnect client.");
+            fCallBack({ text: "Invalid Arguments" }, false);
+        }
+    } else {
+        fCallBack({ text: "Invalid Arguments" }, false);
+    }
+};
+
+OPCUAClientInterface.prototype.ExecuteMethod = function(arg, fCallBack) {
+    var self = this;
+    //Initialize a new client
+    if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.actionName) {
+        var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
+        if (client) {
+            if (client.connected === true) {
+                var action = null;
+                for (var i = 0; i < self.settings.modulesetting.defaultObjectModel.ACTIONS.length; i++) {
+                    if (self.settings.modulesetting.defaultObjectModel.ACTIONS[i].name === arg.actionName) {
+                        action = self.settings.modulesetting.defaultObjectModel.ACTIONS[i];
+                        break;
+                    }
+                }
+                if (action) {
+                    if (action.objectId && action.methodId && client) {
+                        // Initialize the parameters
+                        var inputArguments = [];
+                        if (action.parameters) {
+                            var k = 0;
+                            action.parameters.inputArguments.forEach(function(el) {
+                                // Filter Datatype
+                                // TODO: Only basic datatypes are supported
+                                //const keys = Object.keys(opcua.DataType).filter(k => opcua.DataType[k] === el.dataType.value);
+                                /*
+                                 *     nodeId = opcua.coerceNodeId("ns=2;s=Scalar_Static_ImagePNG");
+                                 *     session.getBuildInDataType(nodeId,function(err,dataType) {
+                                 *        assert(dataType === opcua.DataType.ByteString);
+                                 *     });
+                                 * */
+                                inputArguments.push({
+                                    dataType: el.dataType.value, // only basic datatypes are supported
+                                    arrayType: el.valueRank !== -1 ? opcua.VariantArrayType.Array : opcua.VariantArrayType.Scalar,
+                                    value: el.valueRank !== -1 ? [0] : 0
+                                });
+                                k++;
+                            });
+                        }
+
+                        client.callMethod(action.objectId.ns, action.objectId.nid, action.methodId.ns, action.methodId.nid, inputArguments, function(err, response) {
+                            if (err) {
+                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not execute action [" + arg.actionName + "] : " + err);
+                                fCallBack({ text: "Could not execute action.", err: err }, null);
+                            } else {
+                                if (response[0].statusCode == 0) {
+                                    self.app.log.info("MICROSERVICE[" + self.settings.name + "] executed action [" + arg.actionName + "] successfully with errorCode: " + response[0].statusCode);
+                                    fCallBack(null, response[0]);
+                                } else {
+                                    self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not execute action [" + arg.actionName + "] with errorCode: " + response[0].statusCode);
+                                    fCallBack({ text: "Could not execute action [" + arg.actionName + "] with errorCode: " + response[0].statusCode }, response[0]);
+                                }
+                            }
+                        });
+                    }
+                } else {
+                    fCallBack({ text: "Could not execute action. Action was not found on OPC UA Server." }, null);
+                    self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not execute action. Action was not found on OPC UA Server.");
+                }
+            }
+        } else {
+            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not execute action. Client is disconnected.");
+            fCallBack({ text: "Could not execute action. Client is disconnected." }, null);
+        }
+    } else {
+        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not execute action. Invalid Arguments.");
+        fCallBack({ text: "Invalid Arguments" }, null);
+    }
+};
+
+OPCUAClientInterface.prototype.WriteVariable = function(arg, fCallBack) {
+    var self = this;
+    let _variable = null;
+    for (let i = 0; i < self.settings.modulesetting.defaultObjectModel.KPI.length; i++) {
+        const element = self.settings.modulesetting.defaultObjectModel.KPI[i];
+        if (element.name === arg.name) {
+            _variable = element;
+        }
+    }
+    if (_variable) {
+        if (arg.ip && arg.socketID && arg.port && arg.serverName) {
+            var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
+            if (client) {
+                if (client.connected === true && _variable.nodeId) {
+                    // Initialize the parameters
+                    let _value = {
+                        value: { /* Variant */
+                            dataType: opcua.DataType.Float,
+                            value: arg.value
+                        }
+                    };
+                    client.write(_variable.nodeId.ns, _variable.nodeId.nid, _value, function(err, statusCode) {
+                        if (err) {
+                            self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not write variable [" + arg.name + "] : " + err);
+                            fCallBack({ text: "Could not write variable [" + arg.name + "] : ", err: err }, null);
+                        } else {
+                            self.app.log.log("MICROSERVICE[" + self.settings.name + "] write variable [" + arg.name + "] : executed with : " + statusCode);
+                            fCallBack(null, statusCode);
+                        }
+                    });
+                }
+
+            } else {
+                self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Client is disconnected.");
+                fCallBack({ text: "Could not execute action. Client is disconnected." }, null);
+            }
+        } else {
+            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Client is disconnected.");
+            fCallBack({ text: "Could not execute action. Client is disconnected." }, null);
+        }
+    } else {
+        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Invalid arguments.");
+        fCallBack({ text: "Invalid Arguments" }, null);
+    }
+};
+
+// ---------------------------------------------------------------------------------------------------
+
+function monitorServerInformationModel(self, client, sio, fCallBack) {
     async.series([
         function(callback) { // Monitor the current state Machines
-            var ii = 0;
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring CURRENT STATES.");
             var _current_states = self.settings.modulesetting.defaultObjectModel.CURRENT_STATES;
             if (_current_states) {
+                var ii = 0;
                 _current_states.forEach(function(el) {
                     if (el.nodeId && client) {
                         client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, el.interval, function(err) {
@@ -124,7 +324,7 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
                                         }
                                     }
 
-                                    self.app.eventBus.emit("StatesChanged", {
+                                    sio.emit("StatesChanged", {
                                         ip: "" + client.ip,
                                         port: "" + client.port,
                                         state: el,
@@ -132,7 +332,6 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
                                     });
                                 }, 500);
                             }
-                            //self.app.eventBus.emit("StatesChanged", self.settings.modulesetting.defaultObjectModel);
                         });
                     }
                     ii++;
@@ -141,7 +340,6 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
             callback();
         },
         function(callback) { // Monitor KPI
-            var iii = 0;
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring KPIS.");
             var _kpis = self.settings.modulesetting.defaultObjectModel.KPI;
             if (_kpis) {
@@ -157,7 +355,7 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
                             }
 
                             if (self.started)
-                                self.app.eventBus.emit("KPIChanged", {
+                                sio("KPIChanged", {
                                     ip: "" + client.ip,
                                     port: "" + client.port,
                                     item: el
@@ -171,7 +369,6 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
             callback();
         },
         function(callback) { // Monitor all STATES DESCRIPTIONS
-            var iiii = 0;
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring possibles STATES.");
             var statesObj = self.settings.modulesetting.defaultObjectModel.STATES;
             if (statesObj) {
@@ -192,7 +389,7 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
                                             eStateProp["value"] = dataValue.value.value;
                                         }
                                         if (self.started && self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE) { // === eState.StateNumber.value) {
-                                            self.app.eventBus.emit("STATESDescriptionChanged", {
+                                            sio("STATESDescriptionChanged", {
                                                 ip: "" + client.ip,
                                                 port: "" + client.port,
                                                 item: eState
@@ -210,7 +407,6 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
             callback();
         },
         function(callback) { // Monitor all TRANSITION DESCRIPTIONS
-            var iiii = 0;
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring possibles TRANSITIONS.");
             let transitionObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
             if (transitionObj) {
@@ -232,7 +428,7 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
                                         }
                                         if (eTransition.EnableFlag) {
                                             if (self.started) {
-                                                self.app.eventBus.emit("TRANSITIONDescriptionChanged", {
+                                                sio.emit("TRANSITIONDescriptionChanged", {
                                                     ip: "" + client.ip,
                                                     port: "" + client.port,
                                                     item: eTransition
@@ -253,287 +449,7 @@ function monitorServerInformationModel(bus, self, client, fCallBack) {
     });
 }
 
-// function monitorStateTransitions(stateName, bus, self, client, fCallBack) {
-//     async.series([
-//         function(callback) { // UnMonitor the old states transitions data
-//             if (self.settings.modulesetting.defaultObjectModel.STATES_MONITORING[stateName]) {
-//                 let objStateMon = self.settings.modulesetting.defaultObjectModel.STATES_MONITORING[stateName];
-
-//                 for (const key in objStateMon) {
-//                     if (objStateMon.hasOwnProperty(key) && (key === "") && (key === "") && (key === "")) {
-//                         const el = objStateMon[key];
-//                         client.unmonitorNode(el.nodeId.ns, el.nodeId.nid, function(err) {
-//                             if (err) {
-//                                 self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not unmonitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
-//                             }
-//                         });
-//                     }
-//                 }
-//             }
-//             callback();
-//         },
-//         function(callback) { // Monitor the new state
-//             if (self.settings.modulesetting.defaultObjectModel.STATES_MONITORING[stateName]) {
-//                 let objStateMon = self.settings.modulesetting.defaultObjectModel.STATES_MONITORING[stateName];
-//                 for (const key in objStateMon) {
-//                     if (objStateMon.hasOwnProperty(key) && (key === "") && (key === "") && (key === "")) {
-//                         const el = objStateMon[key];
-//                         if (el.nodeId && client) {
-//                             client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, el.interval, function(err) {
-//                                 if (err) {
-//                                     self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
-//                                 }
-//                             }, function(dataValue) {
-//                                 el["value"] = dataValue.value.value;
-//                                 if (self.started) self.app.eventBus.emit("KPIChanged", self.settings.modulesetting.defaultObjectModel);
-//                             });
-//                         }
-//                     }
-//                 }
-//             }
-//             callback();
-//         },
-//         function(callback) { // Publish changes
-
-//             callback();
-//         }
-//     ], function(err) {
-//         fCallBack(err);
-//     });
-// }
-
-
-function subscribeToEventBus(bus, self, fCallBack) {
-    var client = null;
-    // Connect PLC
-    self.app.eventBus.addListener("ConnectPLC", function(arg) {
-        if (arg.ip && arg.socketID && arg.port && arg.serverName) async.series([
-            function(callback) { // Get the client
-                client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
-                if (client) {
-                    self.app.log.warn("MICROSERVICE[" + self.settings.name + "] client already exist.");
-                    callback();
-                } else {
-                    client = self.manager.addNewOPCClient(arg.ip, arg.port, arg.serverName, arg.socketID);
-                    self.app.log.info("MICROSERVICE[" + self.settings.name + "] new client initialized.");
-                    callback();
-                }
-
-            },
-            function(callback) { // Connect the client to the server
-                if (client.connected === false) {
-                    client.connect(arg.ip, arg.port, arg.serverName, arg.socketID, function(err) {
-                        if (err) {
-                            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] new client could connect to server: " + client.url);
-                            callback(err);
-                        } else {
-                            self.app.log.info("MICROSERVICE[" + self.settings.name + "] new client connected to server: " + client.url);
-                            self.app.eventBus.emit("PLCConnected", {
-                                ip: "" + client.ip,
-                                port: "" + client.port,
-                                connection: "connected",
-                                item: arg
-                            });
-                            callback();
-                        }
-                    });
-                } else {
-                    callback();
-                }
-            },
-            function(callback) { // Check the server information model
-                // Check Server Model
-                checkServerModel(bus, self, client, arg, function(err) {
-                    if (err) {
-                        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server is not compatible to LEMS.");
-                        callback(err);
-                    } else {
-                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server is compatible with Information model. Client will start monitoring.");
-                        callback();
-                    }
-                });
-            },
-            function(callback) { // Monitor the PLC assuming that it is compatible to our model
-                monitorServerInformationModel(bus, self, client, function(err) {
-                    if (err) {
-                        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server Information model could not be monitored.");
-                        callback(err);
-                    } else {
-                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server Information model is being monitored.");
-                        callback();
-                    }
-                });
-            }
-        ], function(err) {
-            if (err) {
-                if (err.errorCode > 0) fCallBack(err);
-            }
-        });
-    });
-
-    // Disconnect PLC
-    self.app.eventBus.addListener("DisconnectPLC", function(arg) {
-        //Initialize a new client
-        if (arg.ip && arg.socketID && arg.port && arg.serverName) {
-            var client = manager.getClient(manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
-            if (client) {
-                if (client.connected === true) {
-                    client.disconnect(function(err) {
-                        if (err) {
-                            self.app.log.info("MICROSERVICE[" + self.settings.name + "] client could disconnect from server.");
-                        } else {
-                            self.app.log.info("MICROSERVICE[" + self.settings.name + "] client disconnected from server.");
-                            self.app.eventBus.emit("PLCDisconnected", {
-                                ip: "" + client.ip,
-                                port: "" + client.port,
-                                item: arg
-                            });
-                        }
-                    });
-                }
-            } else {
-                self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not disconnect client.");
-            }
-        }
-    });
-
-    // SeverStatus
-    self.app.eventBus.addListener("serverstatus", function(arg) {});
-
-    // ExecuteAction
-    self.app.eventBus.addListener("ExecuteMethod", function(arg) {
-        //Initialize a new client
-        if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.actionName) {
-            var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
-            if (client) {
-                if (client.connected === true) {
-                    var action = null;
-                    for (var i = 0; i < self.settings.modulesetting.defaultObjectModel.ACTIONS.length; i++) {
-                        if (self.settings.modulesetting.defaultObjectModel.ACTIONS[i].name === arg.actionName) {
-                            action = self.settings.modulesetting.defaultObjectModel.ACTIONS[i];
-                            break;
-                        }
-                    }
-                    if (action) {
-                        async.series(
-                            [
-                                function(callback) {
-                                    if (action.objectId && action.methodId && client) {
-                                        // Initialize the parameters
-                                        var inputArguments = [];
-                                        if (action.parameters) {
-                                            var k = 0;
-                                            action.parameters.inputArguments.forEach(function(el) {
-                                                // Filter Datatype
-                                                // TODO: Only basic datatypes are supported
-                                                //const keys = Object.keys(opcua.DataType).filter(k => opcua.DataType[k] === el.dataType.value);
-                                                /*
-                                                 *     nodeId = opcua.coerceNodeId("ns=2;s=Scalar_Static_ImagePNG");
-                                                 *     session.getBuildInDataType(nodeId,function(err,dataType) {
-                                                 *        assert(dataType === opcua.DataType.ByteString);
-                                                 *     });
-                                                 * */
-                                                inputArguments.push({
-                                                    dataType: el.dataType.value, // only basic datatypes are supported
-                                                    arrayType: el.valueRank !== -1 ? opcua.VariantArrayType.Array : opcua.VariantArrayType.Scalar,
-                                                    value: el.valueRank !== -1 ? [0] : 0
-                                                });
-                                                k++;
-                                            });
-                                        }
-
-                                        client.callMethod(action.objectId.ns, action.objectId.nid, action.methodId.ns, action.methodId.nid, inputArguments, function(err, response) {
-
-                                            if (err) {
-                                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not execute action [" + arg.actionName + "] : " + err);
-                                            } else {
-                                                if (response[0].statusCode == 0) {
-                                                    if (response[0].outputArguments.length > 0) {
-                                                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] executed action [" + arg.actionName + "] successfully. The result is :" + response[0].outputArguments[0].value);
-                                                    } else {
-                                                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] executed action [" + arg.actionName + "] successfully with errorCode: " + response[0].statusCode);
-                                                    }
-
-                                                    self.app.eventBus.emit("PLCActionExecuted", arg);
-                                                } else {
-                                                    self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not execute action [" + arg.actionName + "] with errorCode: " + response[0].statusCode);
-                                                }
-                                            }
-                                        });
-                                    }
-                                    callback();
-                                }
-                            ],
-                            function(err) {
-
-                            });
-                    }
-                }
-            } else {
-                self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not execute action. Client is disconnected.");
-            }
-        }
-    });
-
-    // WriteVariable
-    self.app.eventBus.addListener("WriteVariable", function(arg) {
-        let _variable = null;
-        for (let i = 0; i < self.settings.modulesetting.defaultObjectModel.KPI.length; i++) {
-            const element = self.settings.modulesetting.defaultObjectModel.KPI[i];
-            if (element.name === arg.name) {
-                _variable = element;
-            }
-        }
-
-        if (_variable) {
-            if (arg.ip && arg.socketID && arg.port && arg.serverName) {
-                var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
-                if (client) {
-                    if (client.connected === true) {
-                        async.series(
-                            [
-                                function(callback) { // Write Data to the PLC
-                                    if (_variable.nodeId) {
-                                        // Initialize the parameters
-                                        let _value = {
-                                            value: { /* Variant */
-                                                dataType: opcua.DataType.Float,
-                                                value: arg.value
-                                            }
-                                        };
-
-
-
-                                        client.write(_variable.nodeId.ns, _variable.nodeId.nid, _value, function(err, statusCode) {
-                                            if (err) {
-                                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not write variable [" + arg.name + "] : " + err);
-                                            } else {
-                                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] write variable executed with : " + statusCode);
-                                            }
-                                        });
-                                    }
-                                    callback();
-                                }
-                            ],
-                            function(err) {
-
-                            });
-                    }
-                } else {
-                    self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Client is disconnected.");
-                }
-            }
-        }
-    });
-    fCallBack(null);
-}
-
-function unSubscribeToEventBus(bus, self, fCallBack) {
-    //self.app.eventBus.removeAllListeners();
-    fCallBack(null);
-}
-
-function checkServerModel(bus, self, client, arg, fCallBack) {
+function checkServerModel(self, client, sio, fCallBack) {
     var rslts = [];
     async.series([
             function(callback) { // Check if a SkillMLObject exist
@@ -562,7 +478,7 @@ function checkServerModel(bus, self, client, arg, fCallBack) {
                             .then(
                                 function(parsedModel) {
                                     // propagate the model to the clients
-                                    self.app.eventBus.emit("skillModelFounded", {
+                                    sio.emit("skillModelFounded", {
                                         ip: "" + client.ip,
                                         port: "" + client.port,
                                         skill: el,
@@ -570,7 +486,7 @@ function checkServerModel(bus, self, client, arg, fCallBack) {
                                     });
 
                                     // console.log(JSON.stringify(parsedModel, 4));
-                                    self.app.log.info("MICROSERVICE[" + self.settings.name + "] Client validated the EFLEX Object and extracted STATES, KPI and METHODS successfully.");
+                                    self.app.log.info("MICROSERVICE[" + self.settings.name + "] Client validated the Skill Object and extracted STATES, KPI and METHODS successfully.");
                                     callback();
                                 }
                             );
@@ -628,7 +544,6 @@ function isSkillObjectType(client, nodeId) {
                 } else {
                     for (let k = 0; k < type_browse_results[0].references.length; k++) {
                         const element = type_browse_results[0].references[k];
-                        const NodeClass = element.nodeClass;
 
                         // Check if type is SkillObjectType
                         if (element.nodeId.namespace === client.getNamespaceIndexOfURI("http://www.siemens.com/AutomationSkills") && element.nodeId.value === 1032) {
@@ -645,7 +560,6 @@ function isSkillObjectType(client, nodeId) {
 
 function getOpcUAType(client, nodeId) {
     return new Promise((resolve, reject) => {
-        let founded = false;
         client.browseNodeByReferenceType(nodeId.ns, nodeId.nid, "HasTypeDefinition", async function(type_err, type_browse_results) {
             if (type_err) {
                 reject(type_err);
@@ -683,7 +597,7 @@ async function getGetAllSuperTypes(client, nodeId, rslts) {
                 }
                 return _rslts;
             }
-        }, function(err) {
+        }, function() {
             return _rslts;
         });
 }
@@ -870,9 +784,9 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                                 },
                                 type: type
                             };
-                            await new Promise((resolve, reject) => {
+                            await new Promise((resolve) => {
 
-                                client.getArgumentDefinition(element.nodeId.namespace, element.nodeId.value, async function(err, inputArguments, outputArguments) {
+                                client.getArgumentDefinition(element.nodeId.namespace, element.nodeId.value, async function(err, inputArguments) {
                                     item.parameters = inputArguments;
                                     resolve(item);
                                 });
@@ -911,7 +825,7 @@ async function getStateParent(client, item) {
             } else {
                 return references[0].references[0];
             }
-        }, function(err) {
+        }, function() {
             return null;
         });
     if (pStateMachine) {
@@ -922,7 +836,7 @@ async function getStateParent(client, item) {
                 } else {
                     return references[0].references[0];
                 }
-            }, function(err) {
+            }, function() {
                 return null;
             });
         return pState;
@@ -940,7 +854,7 @@ async function getTransitionCause(client, item) {
             } else {
                 return references[0].references[0];
             }
-        }, function(err) {
+        }, function() {
             return null;
         });
 }

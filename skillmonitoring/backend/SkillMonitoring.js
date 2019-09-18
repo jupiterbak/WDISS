@@ -1,7 +1,7 @@
 /**
  * Copyright 2018 Siemens AG.
  * 
- * File: LEMS.js
+ * File: application.js
  * Project: SP 164
  * Author:
  *  - Jupiter Bakakeu
@@ -20,31 +20,35 @@
  * 
  * --------------------------------------------------------------------
  * ###################### Changes #####################################
- * -- 10.02.2018
+ * -- 01.09.2019
  *      Initial implementation
  * --------------------------------------------------------------------
  **/
 
-var http = require('http');
-var https = require('https');
-var util = require("util");
-var express = require("express");
-var crypto = require("crypto");
 var path = require("path");
 var fs = require("fs-extra");
-var when = require('when');
+var os = require('os');
 
-var LEMS = require("./application");
-global.LEMS = LEMS;
+var getNetworkInterface = function() {
+    var ifaces = os.networkInterfaces();
+    var address = "*";
+    for (var dev in ifaces) {
+        var iface = ifaces[dev].filter(function(details) {
+            return details.family === 'IPv4' && details.internal === false;
+        });
+        if (iface.length > 0) address = iface[0].address;
+    }
 
-var server;
-var app = express();
+    return address;
+};
+
+
+var application = require("./application");
+global.application = application;
 
 // Configure the settings
-
 var settings = {};
-
-var userDir = path.join(__dirname, ".LEMS_settings"); //process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE
+var userDir = path.join(__dirname, ".application_settings"); //process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE
 var userSettingsFile = path.join(userDir, 'settings_' + require('os').hostname() + '.js');
 var userSettingsFileJson = path.join(userDir, 'settings_' + require('os').hostname() + '.json');
 
@@ -78,8 +82,7 @@ try {
     // Check and configure the setting file
     settings.verbose = true;
     settings.uiPort = settings.uiPort || 1717;
-    settings.uiHost = settings.uiHost || "127.0.0.1";
-
+    settings.uiHost = settings.uiHost || getNetworkInterface();
 
 } catch (err) {
     console.log("Error loading settings file: " + settingsFile);
@@ -93,46 +96,31 @@ try {
     process.exit();
 }
 
-
-
-
-/** Configure the webserver */
-server = http.createServer(function(req, res) { app(req, res); });
-
 /** initialize the plattform */
 try {
-    LEMS.init(server, settings);
+    application.init(settings);
 } catch (err) {
-    console.log("Failed to initialize LEMS CLIENT: " + err);
+    console.log("Failed to initialize application CLIENT: " + err);
     process.exit(1);
 }
 
 // Start the plattform
-LEMS.start().then(function() {
-    process.title = "LEMS SP 164";
-
-    // server.on('error', function(err) {
-    //     console.log("server.uncaught-exception: " + err);
-    //     process.exit(1);
-    // });
-
-    // // TODO: configure everything before starting!
-    // server.listen(settings.uiPort, settings.uiHost, function() {});
-
+application.start().then(function() {
+    process.title = "Application SP 164";
 }).otherwise(function(err) {
-    console.log("server.failed-to-start" + err);
+    console.log("Application failed to start!" + err);
     process.exit(1);
 });
 
 
 
 // process.on('uncaughtException', function(err) {
-//     console.log('[LEMS] Uncaught Exception:' + err.stack);
+//     console.log('[application] Uncaught Exception:' + err.stack);
 //     //     process.exit(1);
 // });
 
 // Stop the platform if the user request it
 process.on('SIGINT', function() {
-    LEMS.stop();
+    application.stop();
     process.exit(0);
 });

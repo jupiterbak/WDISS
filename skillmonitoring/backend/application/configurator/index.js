@@ -26,15 +26,30 @@
  **/
 
 var app = null;
+var http_server = null;
+var userSettings = null;
 var when = require('when');
-microservices = [];
+micro_services = [];
 
 module.exports = {
     app: app,
-    init: function(httpServer, _app, userSettings) {
+    init: function(_http_server, _app, _userSettings) {
         app = _app;
+        userSettings = _userSettings;
+        http_server = _http_server;
+        // Initialize all required services
+        // ------- Web Debugging server ------
 
-        // Initialize all the services
+        http_server.on('error', function(err) {
+            app.log.error("server.uncaught-exception: " + err);
+        });
+
+
+
+        // ...
+        // -----------------------------------
+
+        // Initialize all the optional services
         userSettings.services = userSettings.services || [];
         var _apis = userSettings.services || [];
         if (_apis.length > 0) {
@@ -43,14 +58,14 @@ module.exports = {
                     var apiModule = require("../services/" + el.type);
                     var instance = new apiModule();
                     instance.init(app, el);
-                    microservices.push(instance);
+                    micro_services.push(instance);
                 } catch (error) {
-                    app.log.warn("MICRO SERVICE module cannot be initialized. Module: " + el.name + " - Error: " + error);
+                    app.log.warn("SERVICE module cannot be initialized. Module: " + el.name + " - Error: " + error);
                     console.log(error.stack);
                 }
             });
         } else {
-            app.log.warn("No MICRO SERVICE settings defined");
+            app.log.warn("No SERVICE settings defined");
         }
 
         // log the step
@@ -58,8 +73,21 @@ module.exports = {
         return when.resolve();
     },
     start: function() {
-        // Start all micro services
-        microservices.forEach(function(s_el) {
+
+        // Start all required services
+        // ------- Web Debugging server ------
+        http_server.listen(userSettings.uiPort, userSettings.uiHost, function() {
+            app.log.info("Configurator webserver initialized successfully.");
+        });
+
+
+
+
+        // ...
+        // -----------------------------------
+
+        // Start all optional  services
+        micro_services.forEach(function(s_el) {
             s_el.start();
         });
 
@@ -68,11 +96,11 @@ module.exports = {
     },
     stop: function() {
         // Stop all services
-        microservices.forEach(function(s_el) {
+        micro_services.forEach(function(s_el) {
             try {
                 s_el.stop();
             } catch (error) {
-                app.log.warn("MICRO SERVICE module cannot be stopped. Module: " + s_el.name + " - Error: " + error);
+                app.log.warn("SERVICE module cannot be stopped. Module: " + s_el.name + " - Error: " + error);
                 console.log(error.stack);
             }
         });
@@ -81,6 +109,7 @@ module.exports = {
         return when.resolve();
     },
 
-    getMicroServices: function() { return apis },
-    getApp: function() { return app }
+    getMicroServices: function() { return micro_services; },
+    getApp: function() { return app; },
+    getServer: function() { return http_server; }
 };

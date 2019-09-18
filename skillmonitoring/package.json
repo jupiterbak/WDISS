@@ -1,11 +1,11 @@
 {
-    "name": "skillVis",
+    "name": "SkillMonitoring",
     "version": "0.0.1",
-    "description": "First implementation of Skill Vis",
-    "main": "open_access.js",
+    "description": "First implementation of Skill Monitoring",
+    "main": "SkillMonitoring.js",
     "scripts": {
         "prestart": "echo \"Please run npm start and make sure to have an internet connection.",
-        "start": "node skillVis.js",
+        "start": "node backend/SkillMonitoring.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "contributors": [
@@ -45,15 +45,13 @@
         "node": ">=0.10"
     },
     "keywords": [
-        "OPC",
+        "OPC UA",
         "UA;",
-        "Open",
-        "Access;",
+        "Skill",
         "I4.0;",
-        "CPS;",
-        "Stream"
+        "CPS;"
     ],
-    "author": "SP 142",
-    "license": "ISC",
+    "author": "Jupiter Bakakeu",
+    "license": "MIT",
     "devDependencies": {}
 }
