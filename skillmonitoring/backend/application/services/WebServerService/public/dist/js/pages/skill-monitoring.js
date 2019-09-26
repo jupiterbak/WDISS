@@ -114,7 +114,11 @@ $(function() {
         var _keys = [];
         for (var prop in data) {
             if (Object.prototype.hasOwnProperty.call(data, prop)) {
-                const candidates = globalStateConfiguration.nodeDataArray.filter(item => item.id === data[prop].state.value);
+                var candidates = globalStateConfiguration.nodeDataArray.filter(item => item.id === data[prop].state.value);
+                // filter with the nodeId
+                if (candidates.length == 0) {
+                    candidates = globalStateConfiguration.nodeDataArray.filter(item => ("" + data[prop].state.value).indexOf("" + item.nid) >= 0);
+                }
                 if (candidates.length > 0) {
                     _keys.push(candidates[0].id);
                     $('span#CurrentState').text(candidates[0].id);

@@ -124,7 +124,7 @@ WebServerService.prototype.start = function() {
 
     self.wapp.get('/connect', function(req, res) {
         let params = JSON.parse(req.query.parameter);
-        self.opcuaclientservice.ConnectPLC(params, self, function(err, results) {
+        self.opcuaclientservice.ConnectPLC(params, self, function(err, client, results) {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify({ err: err, results: results }));
         });

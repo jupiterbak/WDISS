@@ -208,7 +208,8 @@
      "defaultObjectModel": {
       "_states": [
        "CurrentStateExt",
-       "CurrentState"
+       "CurrentState",
+       "Id"
       ],
       "_kpi": [
        "CurrentLoads",

@@ -78,65 +78,67 @@ OPCUAClientInterface.prototype.stop = function() {
 // ---------------------------------------------------------------------------------------------------
 OPCUAClientInterface.prototype.ConnectPLC = function(arg, sio, fCallBack) {
     var self = this;
-    var client = null;
     if (arg.ip && arg.socketID && arg.port && arg.serverName) {
-        async.series([
+        async.waterfall([
             function(callback) { // Get the client
-                client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
+                var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
                 if (client) {
                     self.app.log.warn("MICROSERVICE[" + self.settings.name + "] client already exist.");
-                    callback(null, true);
                 } else {
                     client = self.manager.addNewOPCClient(arg.ip, arg.port, arg.serverName, arg.socketID);
                     self.app.log.info("MICROSERVICE[" + self.settings.name + "] new client initialized.");
-                    callback(null, true);
                 }
-
+                if (client) {
+                    callback(null, client);
+                } else {
+                    callback({ text: "Client not found!" }, null);
+                }
             },
-            function(callback) { // Connect the client to the server
+            function(client, callback) { // Connect the client to the server
                 if (client.connected === false) {
                     client.connect(arg.ip, arg.port, arg.serverName, arg.socketID, function(err) {
                         if (err) {
                             self.app.log.warn("MICROSERVICE[" + self.settings.name + "] new client could connect to server: " + client.url);
-                            callback(err, false);
+                            callback(err, null);
                         } else {
                             self.app.log.info("MICROSERVICE[" + self.settings.name + "] new client connected to server: " + client.url);
-                            callback(null, true);
+                            callback(null, client);
                         }
                     });
                 } else {
-                    callback(null, true);
+                    self.app.log.info("MICROSERVICE[" + self.settings.name + "] client is already connected to " + client.url);
+                    callback(null, client);
                 }
             },
-            function(callback) { // Check the server information model
+            function(client, callback) { // Check the server information model
                 // Check Server Model
-                checkServerModel(self, client, sio, function(err) {
+                checkServerModel(self, client, sio, function(err, skillArray) {
                     if (err) {
-                        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server is not compatible to LEMS.");
-                        callback(err, false);
+                        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server is not compatible to the Skill model.");
+                        callback(err, client, []);
                     } else {
-                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server is compatible with Information model. Client will start monitoring.");
-                        callback(null, true);
+                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server implements compatible Automation Skill. Client will start monitoring.");
+                        callback(null, client, skillArray);
                     }
                 });
             },
-            function(callback) { // Monitor the PLC assuming that it is compatible to our model
-                monitorServerInformationModel(self, client, sio, function(err) {
+            function(client, skillArray, callback) { // Monitor the PLC assuming that it is compatible to our model
+                monitorServerInformationModel(self, client, sio, skillArray, function(err) {
                     if (err) {
                         self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server Information model could not be monitored.");
-                        callback(err, false);
+                        callback(err, client, []);
                     } else {
                         self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server Information model is being monitored.");
-                        callback(null, true);
+                        callback(null, client, skillArray);
                     }
                 });
             }
-        ], function(err, results) {
-            fCallBack(err, results);
+        ], function(err, client, results) {
+            fCallBack(err, client, results);
         });
     } else {
         self.app.log.warn("MICROSERVICE[" + self.settings.name + "] invalid Argument for method ConnectPLC.");
-        fCallBack({ text: "Invalid Arguments" }, false);
+        fCallBack({ text: "Invalid Arguments" }, null, []);
     }
 };
 
@@ -284,7 +286,7 @@ OPCUAClientInterface.prototype.WriteVariable = function(arg, fCallBack) {
 
 // ---------------------------------------------------------------------------------------------------
 
-function monitorServerInformationModel(self, client, sio, fCallBack) {
+function monitorServerInformationModel(self, client, sio, skillArray, fCallBack) {
     async.series([
         function(callback) { // Monitor the current state Machines
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring CURRENT STATES.");
@@ -450,53 +452,62 @@ function monitorServerInformationModel(self, client, sio, fCallBack) {
 }
 
 function checkServerModel(self, client, sio, fCallBack) {
-    var rslts = [];
-    async.series([
+    async.waterfall([
             function(callback) { // Check if a SkillMLObject exist
                 self.app.log.warn("MICROSERVICE[" + self.settings.name + "] Client starts parsing PLC information model....");
-                getSkillObject(client, { ns: 0, nid: 85 },
-                    rslts).then(
+                getSkillObject(client, { ns: 0, nid: 85 }, []).then(
                     function(foundedObjects) {
                         if (foundedObjects.length > 0) {
                             self.app.log.warn("MICROSERVICE[" + self.settings.name + "] Client found a EFLEX LObject with the nodeId: " + JSON.stringify(foundedObjects[0]));
-                            rslts = foundedObjects;
-                            callback();
+                            callback(null, foundedObjects);
                         } else {
                             self.app.log.warn("MICROSERVICE[" + self.settings.name + "] No SkillObject exists in the PLC information model.");
-                            callback("");
+                            callback({ text: "No Skill Object founded." }, []);
                         }
                     });
             },
-            function(callback) {
-                let ObjModel = {};
-                if (rslts.length > 0) {
-                    rslts.forEach(el => {
-                        parseSkillObject(client, {
-                                ns: el.nodeId.namespace,
-                                nid: el.nodeId.value
-                            }, ObjModel, self.settings.modulesetting.defaultObjectModel)
-                            .then(
-                                function(parsedModel) {
-                                    // propagate the model to the clients
-                                    sio.emit("skillModelFounded", {
-                                        ip: "" + client.ip,
-                                        port: "" + client.port,
-                                        skill: el,
-                                        skillModel: parsedModel
-                                    });
-
-                                    // console.log(JSON.stringify(parsedModel, 4));
-                                    self.app.log.info("MICROSERVICE[" + self.settings.name + "] Client validated the Skill Object and extracted STATES, KPI and METHODS successfully.");
-                                    callback();
-                                }
-                            );
+            function(foundedObjects, callback) {
+                if (foundedObjects.length > 0) {
+                    var FindTasks = [];
+                    foundedObjects.forEach(el => {
+                        FindTasks.push(
+                            new Promise((resolve, reject) => {
+                                parseSkillObject(client, {
+                                        ns: el.nodeId.namespace,
+                                        nid: el.nodeId.value
+                                    }, {}, self.settings.modulesetting.defaultObjectModel)
+                                    .then(
+                                        function(parsedModel) {
+                                            // propagate the model to the clients
+                                            sio.emit("skillModelFounded", {
+                                                ip: "" + client.ip,
+                                                port: "" + client.port,
+                                                skill: el,
+                                                skillModel: parsedModel
+                                            });
+                                            resolve({
+                                                ip: "" + client.ip,
+                                                port: "" + client.port,
+                                                skill: el,
+                                                skillModel: parsedModel
+                                            });
+                                        }
+                                    );
+                            })
+                        );
                     });
-                }
 
+                    Promise.all(FindTasks)
+                        .then(values => {
+                            // console.log(JSON.stringify(values, 4));
+                            self.app.log.info("MICROSERVICE[" + self.settings.name + "] Client validated the Skill Object and extracted STATES, KPI and METHODS successfully.");
+                            callback(null, values);
+                        });
+                }
             }
         ],
-        function(err) {
-            fCallBack(err);
+        function(err, _results) {
+            fCallBack(err, _results);
         });
 }
 
