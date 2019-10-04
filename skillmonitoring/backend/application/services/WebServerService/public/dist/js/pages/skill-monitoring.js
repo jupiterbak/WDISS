@@ -117,7 +117,12 @@ $(function() {
                 var candidates = globalStateConfiguration.nodeDataArray.filter(item => item.id === data[prop].state.value);
                 // filter with the nodeId
                 if (candidates.length == 0) {
-                    candidates = globalStateConfiguration.nodeDataArray.filter(item => ("" + data[prop].state.value).indexOf("" + item.nid) >= 0);
+                    candidates = globalStateConfiguration.nodeDataArray.filter(function(item) {
+                        var src = data[prop].state.value;
+                        var target = item.nid;
+                        var rslt = ("" + src).indexOf(target);
+                        return rslt >= 0;
+                    });
                 }
                 if (candidates.length > 0) {
                     _keys.push(candidates[0].id);

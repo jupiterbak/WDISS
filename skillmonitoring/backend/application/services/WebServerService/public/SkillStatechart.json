@@ -51,7 +51,7 @@
 
         { "from": "execute_skill", "to": "completing", "curviness": 0, "text": "SC" },
         { "from": "completing", "to": "completed", "curviness": 0, "text": "SC" },
-        { "from": "completed", "to": "resetting", "curviness": 90, "text": "Reset" },
+        { "from": "completed", "to": "init_skill", "curviness": 180, "text": "Reset" },
         { "from": "execute", "to": "hold", "curviness": 0, "text": "hold" },
         { "from": "holding", "to": "held", "curviness": 0, "text": "SC" },
         { "from": "held", "to": "unholding", "curviness": 0, "text": "UnHold" },

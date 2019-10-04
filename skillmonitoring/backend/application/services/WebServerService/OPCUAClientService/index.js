@@ -311,28 +311,48 @@ function monitorServerInformationModel(self, client, sio, skillArray, fCallBack)
                             //TODO Optimize SocketIO Communication
                             // Wait 500 ms to get all notification changes before sending the result
                             if (self.started) {
-                                setTimeout(function() {
-                                    // Collect all transitions that are enabled
-                                    let transitions = [];
-                                    let transitionsObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
-                                    for (const key in transitionsObj) {
-                                        if (transitionsObj.hasOwnProperty(key)) {
-                                            const trans = transitionsObj[key];
-                                            if (trans.EnableFlag) {
-                                                //if (trans.EnableFlag.value) {
-                                                transitions.push(trans);
-                                                //}
-                                            }
+                                // Collect all transitions that are enabled
+                                let transitions = [];
+                                let transitionsObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
+                                for (const key in transitionsObj) {
+                                    if (transitionsObj.hasOwnProperty(key)) {
+                                        const trans = transitionsObj[key];
+                                        if (trans.EnableFlag) {
+                                            //if (trans.EnableFlag.value) {
+                                            transitions.push(trans);
+                                            //}
                                         }
                                     }
+                                }
 
-                                    sio.emit("StatesChanged", {
-                                        ip: "" + client.ip,
-                                        port: "" + client.port,
-                                        state: el,
-                                        transitions: transitions
-                                    });
-                                }, 500);
+                                sio.emit("StatesChanged", {
+                                    ip: "" + client.ip,
+                                    port: "" + client.port,
+                                    state: el,
+                                    transitions: transitions
+                                });
+                                // setTimeout(function() {
+                                //     // Collect all transitions that are enabled
+                                //     let transitions = [];
+                                //     let transitionsObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
+                                //     for (const key in transitionsObj) {
+                                //         if (transitionsObj.hasOwnProperty(key)) {
+                                //             const trans = transitionsObj[key];
+                                //             if (trans.EnableFlag) {
+                                //                 //if (trans.EnableFlag.value) {
+                                //                 transitions.push(trans);
+                                //                 //}
+                                //             }
+                                //         }
+                                //     }
+
+                                //     sio.emit("StatesChanged", {
+                                //         ip: "" + client.ip,
+                                //         port: "" + client.port,
+                                //         state: el,
+                                //         transitions: transitions
+                                //     });
+                                // }, 500);
                             }
                         });
                     }
