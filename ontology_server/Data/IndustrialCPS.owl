@@ -1,0 +1,403 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY schema "http://schema.org/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY cps "http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#" >
+]>
+
+
+<rdf:RDF xmlns="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#"
+     xml:base="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:schema="http://schema.org/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:cps="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps">
+        <rdfs:label>Industrial CPS Ontology</rdfs:label>
+        <rdfs:comment>Ontology for Industrial Cyber-Physical Systems (CPS)</rdfs:comment>
+        <owl:imports rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#consistsOf -->
+
+    <owl:ObjectProperty rdf:about="&cps;consistsOf">
+        <rdfs:label>consistsOf</rdfs:label>
+        <rdfs:comment>expresses a composition relation between two processes; used to build compositional hierarchies of process segments</rdfs:comment>
+        <rdfs:range rdf:resource="&cps;Process"/>
+        <rdfs:domain rdf:resource="&cps;Process"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#dependsOn -->
+
+    <owl:ObjectProperty rdf:about="&cps;dependsOn">
+        <rdfs:label>dependsOn</rdfs:label>
+        <rdfs:comment>expresses general dependencies between processes</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#exhibitsFeature -->
+
+    <owl:ObjectProperty rdf:about="&cps;exhibitsFeature">
+        <rdfs:label>exhibitsFeature</rdfs:label>
+        <rdfs:comment>Materials exhibit material features, such as a screw exhibits the feature of a thread, or a block of metal can have a drilling hole</rdfs:comment>
+        <rdfs:domain rdf:resource="&cps;Material"/>
+        <rdfs:range rdf:resource="&cps;MaterialFeature"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#involves -->
+
+    <owl:ObjectProperty rdf:about="&cps;involves">
+        <rdfs:label>involves</rdfs:label>
+        <rdfs:comment>the involves relation expresses that a certain process involves certain material (that is being processed) or part of machinery (that is being affected)</rdfs:comment>
+        <rdfs:domain rdf:resource="&cps;Process"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&cps;Machinery"/>
+                    <rdf:Description rdf:about="&cps;Material"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#involvesInitialMachinery -->
+
+    <owl:ObjectProperty rdf:about="&cps;involvesInitialMachinery">
+        <rdfs:label>involvesInitialMachinery</rdfs:label>
+        <rdfs:comment>Relates a process to some involved machinery as it is before performing this process</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&cps;involvesMachinery"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#involvesInitialMaterial -->
+
+    <owl:ObjectProperty rdf:about="&cps;involvesInitialMaterial">
+        <rdfs:label>involvesInitialMaterial</rdfs:label>
+        <rdfs:comment>Relates a process to some involved material as it is before performing this process</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&cps;involvesMaterial"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#involvesMachinery -->
+
+    <owl:ObjectProperty rdf:about="&cps;involvesMachinery">
+        <rdfs:label>involvesMachinery</rdfs:label>
+        <rdfs:comment>Relates a process to some involved machinery</rdfs:comment>
+        <rdfs:range rdf:resource="&cps;Machinery"/>
+        <rdfs:subPropertyOf rdf:resource="&cps;involves"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#involvesMaterial -->
+
+    <owl:ObjectProperty rdf:about="&cps;involvesMaterial">
+        <rdfs:label>involvesMaterial</rdfs:label>
+        <rdfs:comment>Relates a process to some involved material</rdfs:comment>
+        <rdfs:range rdf:resource="&cps;Material"/>
+        <rdfs:subPropertyOf rdf:resource="&cps;involves"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#involvesResultingMachinery -->
+
+    <owl:ObjectProperty rdf:about="&cps;involvesResultingMachinery">
+        <rdfs:label>involvesResultingMachinery</rdfs:label>
+        <rdfs:comment>Relates a process to some involved machinery as it is after performing this process</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&cps;involvesMachinery"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#involvesResultingMaterial -->
+
+    <owl:ObjectProperty rdf:about="&cps;involvesResultingMaterial">
+        <rdfs:label>involvesResultingMaterial</rdfs:label>
+        <rdfs:comment>Relates a process to some involved material as it is after performing this process</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&cps;involvesMaterial"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#isFollowedBy -->
+
+    <owl:ObjectProperty rdf:about="&cps;isFollowedBy">
+        <rdfs:label>isFollowedBY</rdfs:label>
+        <rdfs:comment>expresses successor relationship between two processes</rdfs:comment>
+        <rdfs:range rdf:resource="&cps;Process"/>
+        <rdfs:domain rdf:resource="&cps;Process"/>
+        <rdfs:subPropertyOf rdf:resource="&cps;dependsOn"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#performs -->
+
+    <owl:ObjectProperty rdf:about="&cps;performs">
+        <rdfs:label>performs</rdfs:label>
+        <rdfs:comment>the performs relation expresses that a certain production resource performs a certain process</rdfs:comment>
+        <rdfs:range rdf:resource="&cps;Process"/>
+        <rdfs:domain rdf:resource="&cps;Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#processes -->
+
+    <owl:ObjectProperty rdf:about="&cps;processes">
+        <rdfs:label>processes</rdfs:label>
+        <rdfs:comment>Denotes the relation of a production resource processing some material (e.g. a milling machine processing a metal block)</rdfs:comment>
+        <rdfs:domain rdf:resource="&cps;Machinery"/>
+        <rdfs:range rdf:resource="&cps;Material"/>
+        <rdfs:domain rdf:resource="&cps;Resource"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#producesFeature -->
+
+    <owl:ObjectProperty rdf:about="&cps;producesFeature">
+        <rdfs:label>producesFeature</rdfs:label>
+        <rdfs:comment>Processes can produce (cause) features, such as a drilling process produces a drilling hole in e.g. a block of metal.</rdfs:comment>
+        <rdfs:range rdf:resource="&cps;MaterialFeature"/>
+        <rdfs:domain rdf:resource="&cps;Process"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ControlModule -->
+
+    <owl:Class rdf:about="&cps;ControlModule">
+        <rdfs:label>ControlModule (ISA95)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;Machinery"/>
+        <rdfs:comment>A control module according to ISA95.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#EquipmentModule -->
+
+    <owl:Class rdf:about="&cps;EquipmentModule">
+        <rdfs:label>EquipmentModule (ISA95)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;Machinery"/>
+        <rdfs:comment>An equipment module according to ISA95.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Machinery -->
+
+    <owl:Class rdf:about="&cps;Machinery">
+        <rdfs:label>Machinery</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;Resource"/>
+        <rdfs:comment>A machinery is any any technical piece of equipment that runs industrial processes. Examples are &apos;machine&apos;, &apos;device&apos;, &apos;robot&apos;, conveyor&apos;, &apos;tank&apos;, &apos;connection cable&apos;, &apos;controller&apos;, &apos;fixture for holding work pieces&apos;, etc.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Material -->
+
+    <owl:Class rdf:about="&cps;Material">
+        <rdfs:label>Material</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalObject"/>
+        <rdfs:comment>Material constitutes anything that is being handled or processes on industrial machinery. Examples are &apos;work piece&apos;, &apos;metal block&apos;, &apos;screw&apos;, &apos;processed liquid&apos;, etc.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#MaterialFeature -->
+
+    <owl:Class rdf:about="&cps;MaterialFeature">
+        <rdfs:label>MaterialFeature</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#InformationObject"/>
+        <rdfs:comment>A feature of some material, such as a drilling whole in a block of metal. A feature abstracts specific geometric properties at a symbolic level. (Mostly, features are used in the sense of geometric features of objects in the context of CAD and discrete manufacturing.)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Operation -->
+
+    <owl:Class rdf:about="&cps;Operation">
+        <rdfs:label>Operation</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;Process"/>
+        <rdfs:comment>An operation is an atomic activity in a process that is not composed of other processes.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#PersonnelResource -->
+
+    <owl:Class rdf:about="&cps;PersonnelResource">
+        <rdfs:label>PersonnelResource</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;Resource"/>
+        <rdfs:comment>A person that performs work in the production context, such as a human worker that performs e.g. assembly tasks.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Plant -->
+
+    <owl:Class rdf:about="&cps;Plant">
+        <rdfs:label>Plant (ISA95)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;Machinery"/>
+        <rdfs:comment>A plant according to ISA 95.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#PlantArea -->
+
+    <owl:Class rdf:about="&cps;PlantArea">
+        <rdfs:label>Plant Area (ISA95)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;WorkCenter"/>
+        <rdfs:comment>A pülant area according to ISA95.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Process -->
+
+    <owl:Class rdf:about="&cps;Process">
+        <rdfs:label>Process</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#InformationObject"/>
+        <rdfs:comment>A process represents any type of process that runs on industrial machinery. Processes can be composed of other processes or, finally, of operations.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProcessCell -->
+
+    <owl:Class rdf:about="&cps;ProcessCell">
+        <rdfs:label>ProcessCell (ISA95)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;WorkCenter"/>
+        <rdfs:comment>A process cell according to ISA95.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Product -->
+
+    <owl:Class rdf:about="&cps;Product">
+        <rdfs:label>Product</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;Material"/>
+        <rdfs:comment>A product is a material that is target of a production process - after processing material a product will be the eventual outcome.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionLine -->
+
+    <owl:Class rdf:about="&cps;ProductionLine">
+        <rdfs:label>Production Line (ISA95)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;WorkCenter"/>
+        <rdfs:comment>A production line according to ISA95.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit -->
+
+    <owl:Class rdf:about="&cps;ProductionUnit">
+        <rdfs:label>ProductionUnit</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;WorkUnit"/>
+        <rdfs:comment>A work unit (according to ISA95) which is used for actual production tasks (e.g. assembly in discrete manufacturing, or mixing in process automation)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Resource -->
+
+    <owl:Class rdf:about="&cps;Resource">
+        <rdfs:label>Resource</rdfs:label>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalObject"/>
+        <rdfs:comment>A resource in the context of production, such as a specific manufacturing machine or a human worker, that can perform specific types of processes.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#StorageZone -->
+
+    <owl:Class rdf:about="&cps;StorageZone">
+        <rdfs:label>StorageZone (ISA95)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;WorkCenter"/>
+        <rdfs:comment>A storage zone according to ISA95.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#TransportationUnit -->
+
+    <owl:Class rdf:about="&cps;TransportationUnit">
+        <rdfs:label>TransportationUnit</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;WorkUnit"/>
+        <rdfs:comment>A work unit (according to ISA95) which is used for transportation of material (e.g. conveyor belts  in discrete manufacturing, or pipes in process automation)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#WorkCenter -->
+
+    <owl:Class rdf:about="&cps;WorkCenter">
+        <rdfs:label>WorkCenter (ISA95)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;Machinery"/>
+        <rdfs:comment>A work center according to ISA95.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#WorkUnit -->
+
+    <owl:Class rdf:about="&cps;WorkUnit">
+        <rdfs:label>WorkUnit (ISA95)</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&cps;Machinery"/>
+        <rdfs:comment>A work unit according to ISA95.</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

@@ -1,0 +1,301 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#"
+     xml:base="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx"
+     xmlns:schema="http://schema.org/"
+     xmlns:iuo="http://siemens.com/knowledge_graph/industrial_upper_ontology#"
+     xmlns:prd="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#"
+     xmlns:pmEx="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:industrial_cps_df="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx">
+        <owl:imports rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma"/>
+        <owl:imports rdf:resource="http://siemens.com/knowledgegraph/presentation"/>
+        <rdfs:comment>A plant model example product for Smart Automation </rdfs:comment>
+        <rdfs:label>SMA Plant Model Product example</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#Glass -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#Glass">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df#MaterialType"/>
+        <rdfs:comment>Material type of Glass</rdfs:comment>
+        <rdfs:label>Glass</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#Img_DemoPlantModelProduct -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#Img_DemoPlantModelProduct">
+        <rdf:type rdf:resource="http://schema.org/ImageObject"/>
+        <schema:contentUrl>/assets/images/sma/DemoPlantModelProduct.png</schema:contentUrl>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#Plastic -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#Plastic">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df#MaterialType"/>
+        <rdfs:comment>Material type of Plastic</rdfs:comment>
+        <rdfs:label>Plastic</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_base -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_base">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlantModelBaseplate"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port1a"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port2a"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port3a"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port4a"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port5a"/>
+        <rdfs:label>Demo Base</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port1a"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port1b"/>
+        <rdfs:label>demo connection 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port2a"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port2b"/>
+        <rdfs:label>demo connection 2
+
+</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection3 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection3">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port3a"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port3b"/>
+        <rdfs:label>demo connection 3</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection4 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection4">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port4a"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port4b"/>
+        <rdfs:label>demo connection 4</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection5 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_connection5">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port5a"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port5b"/>
+        <rdfs:label>demo connection 5</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_plantModel_product -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_plantModel_product">
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_base"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop1"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop2"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop3"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop4"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop5"/>
+        <schema:image rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#Img_DemoPlantModelProduct"/>
+        <rdfs:label>Demo PlantModel Product</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port1a -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port1a">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <prd:hasPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</prd:hasPosition>
+        <rdfs:label>port 1a</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port1b -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port1b">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:label>port 1b</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port2a -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port2a">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <prd:hasPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</prd:hasPosition>
+        <rdfs:label>port 2a</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port2b -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port2b">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:label>port 2b</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port3a -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port3a">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <prd:hasPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</prd:hasPosition>
+        <rdfs:label>port 3a</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port3b -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port3b">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:label>port 3b</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port4a -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port4a">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <prd:hasPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</prd:hasPosition>
+        <rdfs:label>port 4a</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port4b -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port4b">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:label>port 4b</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port5a -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port5a">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <prd:hasPosition rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</prd:hasPosition>
+        <rdfs:label>port 5a</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port5b -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port5b">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:label>port 5b</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SaltboxRoof"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port1b"/>
+        <prd:hasColor>#95ABB9</prd:hasColor>
+        <rdfs:label>Demo RoofTop 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#FlatRoof"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port2b"/>
+        <prd:hasColor>#8197A4</prd:hasColor>
+        <rdfs:label>Demo RoofTop 2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop3 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop3">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SawtoothRoof"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port3b"/>
+        <rdfs:label>Demo RoofTop 3</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop4 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop4">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ShedRoof"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port4b"/>
+        <prd:hasColor>#516979</prd:hasColor>
+        <rdfs:label>Demo RoofTop 4</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop5 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_rooftop5">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlatformRoof"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/plantModelEx#demo_port5b"/>
+        <prd:hasColor>#516979</prd:hasColor>
+        <rdfs:label>Demo RoofTop 5</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

@@ -1,0 +1,807 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#"
+     xml:base="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment"
+     xmlns:schema="http://schema.org/"
+     xmlns:iuo="http://siemens.com/knowledge_graph/industrial_upper_ontology#"
+     xmlns:df="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:eqp="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment">
+        <owl:imports rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://schema.org/contentUrl -->
+
+    <owl:AnnotationProperty rdf:about="http://schema.org/contentUrl"/>
+    
+
+
+    <!-- http://schema.org/image -->
+
+    <owl:AnnotationProperty rdf:about="http://schema.org/image"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#position -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#position">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>Position on object, e.g. used for ports of an object</rdfs:comment>
+        <rdfs:label>Position</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AdditiveManufacturingModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AdditiveManufacturingModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>An SmA module for 3D printing.</rdfs:comment>
+        <rdfs:label>AdditiveManufacturingModule</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>An assembly module is a module which performs tasks for assembling in the context of the SmA.</rdfs:comment>
+        <rdfs:label>Assembly Module</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#CompactRobotModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#CompactRobotModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>(TODO: ask Felix for a good description)</rdfs:comment>
+        <rdfs:label>CompactRobotModule</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EmptyModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EmptyModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>An empty module represents a fundamental framework which includes a transfer unit to carry the workpiece from the (mini)backbone into the module, an interface to connect the module with (mini)backbone and a logic to register to the system.
+In stage 1 the Idle Module is used to disassemble the products manually.
+The basic idea of this module is to provide a framework for future projects.
+</rdfs:comment>
+        <rdfs:label>Empty Module</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EnhancedPortalRobotAssemblyModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EnhancedPortalRobotAssemblyModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule"/>
+        <rdfs:comment>An Sma assmebly module based on a 3D portal robot with an additional axis for turning a workpice</rdfs:comment>
+        <rdfs:label>EnhancedPortalRobotAssemblyModule</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#Hexagon -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#Hexagon">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#TransportationUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>The Hexagon Backbone is the backbone for SMA stage 2.</rdfs:comment>
+        <rdfs:label>Hexagon Backbone</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#IndustrialRobotAssemblyModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#IndustrialRobotAssemblyModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule"/>
+        <rdfs:comment>An Sma assembly module based on an industrial robot.</rdfs:comment>
+        <rdfs:label>IndustrialRobotAssemblyModule</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#IndustrialRobotModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#IndustrialRobotModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>An SmA Module with multi-pupose manufacturing capabilities realized by means of an industrial robot</rdfs:comment>
+        <rdfs:label>IndustrialRobotModule</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ManualWorkingModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ManualWorkingModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>An SmA module where a human worker can perform manual tasks, such as assembly.</rdfs:comment>
+        <rdfs:label>ManualWorkingModule</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiddlePartBackbone -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiddlePartBackbone">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#TransportationUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>TODO: ask Felix for a good name + description</rdfs:comment>
+        <rdfs:label>MiddlePartBackbone</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiniBackbone -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiniBackbone">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#TransportationUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>The Mini Backbone is the backbone for stage 1 of SMA.
+
+It can supply up to two other modules with voltage, network and compressed air. On top it has a conveyor which may transport carriers with workpieces to/from those two modules.</rdfs:comment>
+        <rdfs:label>Mini Backbone</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <rdfs:comment>A physical connection between two SmA modules via their ports. Such a connection implies that material can be transported from one module to the other via the ports.</rdfs:comment>
+        <rdfs:label>ModuleConnection</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PackagingModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PackagingModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>An SmA module for packaging products.</rdfs:comment>
+        <rdfs:label>PackagingModule</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortalRobotAssemblyModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortalRobotAssemblyModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule"/>
+        <rdfs:comment>An SmA assembly module based on a 3D portal robot.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#QualityCheckModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#QualityCheckModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>A Quality Check Module performs quality checks i.e. if the product fulfills the requirements.</rdfs:comment>
+        <rdfs:label>Quality Check Module</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#RecyclingModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#RecyclingModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>A Recycling Module disassembles and sorts the parts into recycling containers.</rdfs:comment>
+        <rdfs:label>Recycling Module</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#position"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label>SMA 2: Port</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#WorkUnit"/>
+        <rdfs:comment>An SmA Module is a complex kind of Machinery for the SmA plant. It contains all equipment belonging to a workplace including communication equipment and controllers etc.</rdfs:comment>
+        <rdfs:label>SmAModule</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#StorageModule -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#StorageModule">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionUnit"/>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SmAModule"/>
+        <rdfs:comment>A storage module stores material. These may be material for production, workpieces or final products.</rdfs:comment>
+        <rdfs:label>Storage Module</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#TransportationBackbone -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#TransportationBackbone">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#PlantArea"/>
+        <rdfs:comment>A Backbone is a module which serves as supply unit in a production center.
+
+It serves as a transport medium for the workpieces and it may provide the other modules in the production center with voltage, compressed air, network and other resources, depending on the specific production center.</rdfs:comment>
+        <rdfs:label>Backbone</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortalRobotAssemblyModule"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule1"/>
+        <rdfs:comment>SmA Assembly Module 1 is the assembly module in the production line in stage 1.</rdfs:comment>
+        <rdfs:label>SmA Assembly Module 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#IndustrialRobotAssemblyModule"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule2"/>
+        <rdfs:comment>It&apos;s an assembly module for SMA-2.</rdfs:comment>
+        <rdfs:label>SmA Assembly Module 2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule3 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule3">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EnhancedPortalRobotAssemblyModule"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule3"/>
+        <rdfs:comment>It&apos;s an assembly module for SMA-2.</rdfs:comment>
+        <rdfs:label>SmA Assembly Module 3</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#Backbone1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#Backbone1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#TransportationUnit"/>
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#TransportationBackbone"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#BackboneStorageModule"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#Hexagon1"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiddlePartBackbone1"/>
+        <rdfs:comment>This is the transportation backbone for the SmA-2 setup, which includes a hexagon, middle and end part.</rdfs:comment>
+        <rdfs:label>SmA Backbone 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#BackboneStorageModule -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#BackboneStorageModule">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#StorageModule"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortEndpart"/>
+        <rdfs:comment>The Storage Module in the Backbone
+(TODO: ask Felix for a better name + description)</rdfs:comment>
+        <rdfs:label>Backbone StorageModule</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition1"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortRecyclingModule1"/>
+        <rdfs:comment>Connection for Hexagon at position 1</rdfs:comment>
+        <rdfs:label>ConnectionHexagon1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule1"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition2"/>
+        <rdfs:comment>Connection for Hexagon at position 2</rdfs:comment>
+        <rdfs:label>ConnectionHexagon2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon3 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon3">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule2"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition3"/>
+        <rdfs:comment>Connection for Hexagon at position 3</rdfs:comment>
+        <rdfs:label>ConnectionHexagon3</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon4 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon4">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule3"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition4"/>
+        <rdfs:comment>Connection for Hexagon at position 4</rdfs:comment>
+        <rdfs:label>ConnectionHexagon4</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon5 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon5">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortEmptyModule1"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition5"/>
+        <rdfs:comment>Connection for Hexagon at position 5</rdfs:comment>
+        <rdfs:label>ConnectionHexagon5</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon6 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionHexagon6">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition6"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiddlepartPosition1"/>
+        <rdfs:comment>Connection for Hexagon at position 6</rdfs:comment>
+        <rdfs:label>ConnectionHexagon6</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition1"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortIndustrialRobotModule1"/>
+        <rdfs:comment>Connection between IndustrialRobotModule1 and Hexagon at port 1</rdfs:comment>
+        <rdfs:label>ConnectionIndustrialRobot1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition2"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortIndustrialRobotModule1"/>
+        <rdfs:comment>Connection between IndustrialRobotModule1 and Hexagon at port 2</rdfs:comment>
+        <rdfs:label>ConnectionIndustrialRobot2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot3 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot3">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition3"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortIndustrialRobotModule1"/>
+        <rdfs:comment>Connection between IndustrialRobotModule1 and Hexagon at port 2</rdfs:comment>
+        <rdfs:label>ConnectionIndustrialRobot3</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot4 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot4">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition4"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortIndustrialRobotModule1"/>
+        <rdfs:comment>Connection between IndustrialRobotModule1 and Hexagon at port 4</rdfs:comment>
+        <rdfs:label>ConnectionIndustrialRobot4</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot5 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIndustrialRobot5">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition5"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortIndustrialRobotModule1"/>
+        <rdfs:comment>Connection between IndustrialRobotModule1 and Hexagon at port 5</rdfs:comment>
+        <rdfs:label>ConnectionIndustrialRobot5</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIntraBackbone -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ConnectionIntraBackbone">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ModuleConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortEndpart"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiddlepartPosition2"/>
+        <rdfs:comment>connects the middle and end parts of the transportation backbone</rdfs:comment>
+        <rdfs:label>ConnectionIntraBackbone</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EmptyModule1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EmptyModule1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EmptyModule"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortEmptyModule1"/>
+        <rdfs:comment>SmA Empty Module 1 is the empty module in the production line in stage 1.  It includes a transfer unit to carry the workpiece from the (mini)backbone into the module, an interface to connect the module with (mini)backbone and a logic to register to the system. In stage 1 the Empty Module is used to disassemble the products manually. </rdfs:comment>
+        <rdfs:label>SmA Empty Module 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#Hexagon1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#Hexagon1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#TransportationUnit"/>
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#Hexagon"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition1"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition2"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition3"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition4"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition5"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition6"/>
+        <rdfs:comment>It&apos;s a hexagonbackbone for SMA-2.</rdfs:comment>
+        <rdfs:label>SmA Hexagon 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#IndustrialRobotModule1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#IndustrialRobotModule1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#IndustrialRobotModule"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortIndustrialRobotModule1"/>
+        <rdfs:comment>This is the central robot that sits in the Hexagon</rdfs:comment>
+        <rdfs:label>IndustrialRobotModule1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiddlePartBackbone1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiddlePartBackbone1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiddlePartBackbone"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiddlepartPosition1"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiddlepartPosition2"/>
+        <rdfs:comment>TODO: ask Felix for a good name + description</rdfs:comment>
+        <rdfs:label>MiddlePartBackbone1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiniBackbone1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiniBackbone1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiniBackbone"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiniBackbone1Position1"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiniBackbone1Position2"/>
+        <rdfs:label>SmA Mini Backbone 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the AssemblyModule1.</rdfs:comment>
+        <rdfs:label>PortAssemblyModule1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the AssemblyModule2.</rdfs:comment>
+        <rdfs:label>PortAssemblyModule2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule3 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortAssemblyModule3">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the AssemblyModule3.</rdfs:comment>
+        <rdfs:label>PortAssemblyModule3</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortEmptyModule1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortEmptyModule1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the EmptyModule1.</rdfs:comment>
+        <rdfs:label>PortEmptyModule</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortEndpart -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortEndpart">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the end part of the transportation backbone.</rdfs:comment>
+        <rdfs:label>PortEndpart</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the hexagon backbone for a Module at position 1.</rdfs:comment>
+        <rdfs:label>PortHexagonPosition1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</position>
+        <rdfs:comment>It&apos;s a port of the hexagon backbone for a Module at position 2.</rdfs:comment>
+        <rdfs:label>PortHexagonPosition2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition3 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition3">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</position>
+        <rdfs:comment>It&apos;s a port of the hexagon backbone for a Module at position 3.</rdfs:comment>
+        <rdfs:label>PortHexagonPosition3</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition4 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition4">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</position>
+        <rdfs:comment>It&apos;s a port of the hexagon backbone for a Module at position 4.</rdfs:comment>
+        <rdfs:label>PortHexagonPosition4</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition5 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition5">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</position>
+        <rdfs:comment>It&apos;s a port of the hexagon backbone for a Module at position 5.</rdfs:comment>
+        <rdfs:label>PortHexagonPosition5</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition6 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortHexagonPosition6">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</position>
+        <rdfs:comment>It&apos;s a port of the hexagon backbone for a Module at position 6.</rdfs:comment>
+        <rdfs:label>PortHexagonPosition6</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortIndustrialRobotModule1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortIndustrialRobotModule1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the hexagon backbone for a Module.</rdfs:comment>
+        <rdfs:label>PortIndustrialRobotModule1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiddlepartPosition1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiddlepartPosition1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the middle part of the transportation backbone at position 1.</rdfs:comment>
+        <rdfs:label>PortMiddlePartPosition1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiddlepartPosition2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiddlepartPosition2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</position>
+        <rdfs:comment>It&apos;s a port of the middle part of the transportation backbone at position 2.</rdfs:comment>
+        <rdfs:label>PortMiddlePartPosition2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiniBackbone1Position1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiniBackbone1Position1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the Minibackbone.</rdfs:comment>
+        <rdfs:label>PortMiniBackbone1Position1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiniBackbone1Position2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortMiniBackbone1Position2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</position>
+        <rdfs:comment>It&apos;s a port of the Minibackbone.</rdfs:comment>
+        <rdfs:label>PortMiniBackbone1Position2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortRecyclingModule1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortRecyclingModule1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#SMAPort"/>
+        <position rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</position>
+        <rdfs:comment>It&apos;s a port of the RecyclingModule1.</rdfs:comment>
+        <rdfs:label>PortRecyclingModule1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ProductionLineStage1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ProductionLineStage1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionLine"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule1"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EmptyModule1"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#MiniBackbone1"/>
+        <rdfs:comment>SmA Production Line Stage 1 ist the production line of the SmA project in the first stage of expansion.</rdfs:comment>
+        <rdfs:label>SmA Production Line Stage 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ProductionLineStage2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#ProductionLineStage2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#ProductionLine"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule1"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule2"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#AssemblyModule3"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#Backbone1"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#EmptyModule1"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#IndustrialRobotModule1"/>
+        <iuo:hasProperPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#RecyclingModule1"/>
+        <rdfs:comment>SmA Production Line Stage 2 ist the production line of the SmA project in the second stage of expansion.</rdfs:comment>
+        <rdfs:label>SmA Production Line Stage 2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#RecyclingModule1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#RecyclingModule1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#RecyclingModule"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#PortRecyclingModule1"/>
+        <rdfs:comment>It&apos;s a recycling module for SMA-2.</rdfs:comment>
+        <rdfs:label>SmA Recycling Module 1</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

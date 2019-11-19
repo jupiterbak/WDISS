@@ -98,3 +98,6 @@ typings/
 
 # Ontology client
 ontology_client/
+
+#TDB files
+tdb/
