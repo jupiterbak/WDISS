@@ -1,0 +1,660 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#"
+     xml:base="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product"
+     xmlns:schema="http://schema.org/"
+     xmlns:df="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df#"
+     xmlns:prd="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <owl:Ontology rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product">
+        <owl:imports rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df"/>
+        <owl:imports rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps"/>
+        <owl:imports rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology"/>
+        <rdfs:comment>Products for the SmA Usecase</rdfs:comment>
+        <rdfs:label>SMA Product Ontology</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint1x -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint1x">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Material"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:label>GrippingPoint1x</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint1y -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint1y">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Material"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:label>GrippingPoint1y</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint1z -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint1z">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Material"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:label>GrippingPoint1z</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint2x -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint2x">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Material"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:label>GrippingPoint2x</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint2y -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint2y">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Material"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:label>GrippingPoint2y</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint2z -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GrippingPoint2z">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Material"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:label>GrippingPoint2z</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Thickness -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Thickness">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Material"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <rdfs:label>Thickness</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#baseCapacity -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#baseCapacity">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlantModelBaseplate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:label>base capacity</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#hasColor -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#hasColor">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalObject"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>The color given as a string in html syntax. It may be either one of the color names defined for html or an hexadecimal rgb value: &quot;x22AAFF&quot;</rdfs:comment>
+        <rdfs:label>has Color</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#hasPosition -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#hasPosition">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:label>has Position</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#orientation -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#orientation">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:label>orientation (in degrees)</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#plateText -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#plateText">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SignPlate"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>the text for/of a signplate</rdfs:comment>
+        <rdfs:label>plate text</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#substanceType -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#substanceType">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Material"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>substance type indicates the material of the subject</rdfs:comment>
+        <rdfs:label>substance type</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#svgPathForShape -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#svgPathForShape">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlock"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment>The shape is defined via the class of the building block.
+The svgPathForShape property is an additional property which gives a vector graphic representation of a cross section of a building block.</rdfs:comment>
+        <rdfs:label>svg Path for Shape</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#typeID -->
+
+    <owl:DatatypeProperty rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#typeID">
+        <rdfs:subPropertyOf rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+        <rdfs:domain rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Product"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>The building block type ID from TeamCenter</rdfs:comment>
+        <rdfs:label>type ID</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Product -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Product"/>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#AluminiumPlate -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#AluminiumPlate">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SignPlate"/>
+        <rdfs:comment>A sign plate made of aluminium</rdfs:comment>
+        <rdfs:label>Aluminium Plate</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#AnodizedAluminiumPlate -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#AnodizedAluminiumPlate">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SignPlate"/>
+        <rdfs:comment>A sign plate made of anodized aluminium</rdfs:comment>
+        <rdfs:label>Anodized Aluminium Plate</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Baseplate -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Baseplate">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df#AtomicWorkpiece"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlock"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SignPlate"/>
+        <rdfs:comment>A generic baseplate that can host a number of blocks</rdfs:comment>
+        <rdfs:label>Baseplate</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlock -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlock">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df#AtomicWorkpiece"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SignPlate"/>
+        <rdfs:comment>A generic building block as part of a product assembled in the context of the SmA plant</rdfs:comment>
+        <rdfs:label>Building Block</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlockMagazine -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlockMagazine">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Machinery"/>
+        <rdfs:comment>A magazine for building blocks as used in the SmA assembly modules</rdfs:comment>
+        <rdfs:label>BuildingBlockMagazine</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlockSupportedByAssemblyModule1 -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlockSupportedByAssemblyModule1">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#FlatRoof"/>
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SaltboxRoof"/>
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ShedRoof"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlock"/>
+        <rdfs:comment>The class of all building block that are currently supported by AssemblyModule1 given its magazin configuration (notice that the class definition behind this type is updated dynamically by the SmA backend)</rdfs:comment>
+        <rdfs:label>BuildingBlockSupportedByAssemblyModule1</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlockSupportedByAssemblyModule2 -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlockSupportedByAssemblyModule2">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#FlatRoof"/>
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SaltboxRoof"/>
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SawtoothRoof"/>
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ShedRoof"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlock"/>
+        <rdfs:comment>The class of all building block that are currently supported by AssemblyModule2 given its magazin configuration (notice that the class definition behind this type is updated dynamically by the SmA backend)</rdfs:comment>
+        <rdfs:label>BuildingBlockSupportedByAssemblyModule1</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlockSupportedByAssemblyModule3 -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlockSupportedByAssemblyModule3">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#FlatRoof"/>
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlatformRoof"/>
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SaltboxRoof"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlock"/>
+        <rdfs:comment>The class of all building block that are currently supported by AssemblyModule3 given its magazin configuration (notice that the class definition behind this type is updated dynamically by the SmA backend)</rdfs:comment>
+        <rdfs:label>BuildingBlockSupportedByAssemblyModule1</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#CopperPlate -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#CopperPlate">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SignPlate"/>
+        <rdfs:comment>A sign plate made of copper</rdfs:comment>
+        <rdfs:label>Copper Plate</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ET200SP -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ET200SP">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GlassBlock"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#EmergencyStop"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#MindSphere"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PLC1500"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sinamics"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sma"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Surprise"/>
+        <rdfs:comment>A glass block with a ET200SP representation inside</rdfs:comment>
+        <rdfs:label>ET200SP</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#EmergencyStop -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#EmergencyStop">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GlassBlock"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#MindSphere"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PLC1500"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sinamics"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sma"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Surprise"/>
+        <rdfs:comment>A glass block with a Emergency Stop Button representation inside</rdfs:comment>
+        <rdfs:label>EmergencyStop</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#FlatRoof -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#FlatRoof">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#svgPathForShape"/>
+                        <owl:hasValue>M 0 120 L40 120 L40 20 L0 20 Z</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlatformRoof"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SaltboxRoof"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SawtoothRoof"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ShedRoof"/>
+        <rdfs:comment>A RoofTop building block with a flat roof</rdfs:comment>
+        <rdfs:label>Flat Roof</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GiveAwayBaseplate -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GiveAwayBaseplate">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Baseplate"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlantModelBaseplate"/>
+        <rdfs:comment>A base plate for hosting up to four glass blocks of a give-away product</rdfs:comment>
+        <rdfs:label>GiveAway Baseplate</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GiveAwayProduct -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GiveAwayProduct">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Product"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlantModelProduct"/>
+        <rdfs:comment>A give-away product to be handed out to a special audience of SmA demonstrations</rdfs:comment>
+        <rdfs:label>GiveAway Product</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GlassBlock -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GlassBlock">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlock"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+        <rdfs:comment>Glass block as part of give-away product assembled on SmA plant</rdfs:comment>
+        <rdfs:label>Glass Block</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#MindSphere -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#MindSphere">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GlassBlock"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PLC1500"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sinamics"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sma"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Surprise"/>
+        <rdfs:comment>A glass block with a MindSphere representation inside</rdfs:comment>
+        <rdfs:label>MindSphere</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PLC1500 -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PLC1500">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GlassBlock"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sinamics"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sma"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Surprise"/>
+        <rdfs:comment>A glass block with a S7-1500 representation inside</rdfs:comment>
+        <rdfs:label>PLC1500</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlantModelBaseplate -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlantModelBaseplate">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Baseplate"/>
+        <rdfs:comment>A baseplate for the SmA plant model product that hosts up to five rooftop building blocks</rdfs:comment>
+        <rdfs:label>PlantModel Baseplate</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlantModelProduct -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlantModelProduct">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Product"/>
+        <rdfs:comment>A plant model product as produced by the SmA plant as an example of high variant production. (It resembles a factory building with different types of roof tops at different positions with different color and orientation)</rdfs:comment>
+        <rdfs:label>PlantModel Product</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlatformRoof -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PlatformRoof">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#svgPathForShape"/>
+                        <owl:hasValue>M 0 120 L40 120 L40 0 L30 0 L0 20 Z</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SaltboxRoof"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SawtoothRoof"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ShedRoof"/>
+        <rdfs:comment>A RoofTop building block with a platform roof</rdfs:comment>
+        <rdfs:label>Platform Roof </rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Product -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Product">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#Product"/>
+        <rdfs:comment>A superclass for all products produced by SmA</rdfs:comment>
+        <rdfs:label>SmA Product</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#BuildingBlock"/>
+        <rdfs:comment>A rooftop block to be assembled on a factory model baseplate</rdfs:comment>
+        <rdfs:label>Roof Top</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SaltboxRoof -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SaltboxRoof">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#svgPathForShape"/>
+                        <owl:hasValue>M 0 120 L40 120 L40 20 L20 20 L0 40 Z</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SawtoothRoof"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ShedRoof"/>
+        <rdfs:comment>A RoofTop building block with a saltbox roof</rdfs:comment>
+        <rdfs:label>Saltbox Roof</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SawtoothRoof -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SawtoothRoof">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#svgPathForShape"/>
+                        <owl:hasValue>M 0 120 L40 120 L40 20 L30 20 L30 0 L0 20 Z</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ShedRoof"/>
+        <rdfs:comment>A RoofTop building block with a sawtooth roof</rdfs:comment>
+        <rdfs:label>Sawtooth Roof</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ShedRoof -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ShedRoof">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#svgPathForShape"/>
+                        <owl:hasValue>M 0 120 L40 120 L40 0 L0 20 Z</owl:hasValue>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#RoofTop"/>
+        <rdfs:comment>A RoofTop building block with a shed roof</rdfs:comment>
+        <rdfs:label>Shed Roof</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SignPlate -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#SignPlate">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df#AtomicWorkpiece"/>
+        <rdfs:comment>A SignPlate is a small metal plate which can be engraved with a name or other signature. It is intended to be connected to some product.</rdfs:comment>
+        <rdfs:label>SignPlate</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sinamics -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sinamics">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GlassBlock"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sma"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Surprise"/>
+        <rdfs:comment>A glass block with a Sinamics representation inside</rdfs:comment>
+        <rdfs:label>Sinamics</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sma -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Sma">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GlassBlock"/>
+        <owl:disjointWith rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Surprise"/>
+        <rdfs:comment>A glass block with a Sma representation inside</rdfs:comment>
+        <rdfs:label>Sma</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Surprise -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#Surprise">
+        <rdfs:subClassOf rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GlassBlock"/>
+        <rdfs:comment>A surprise glass block</rdfs:comment>
+        <rdfs:label>Surprise</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalObject -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalObject"/>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#Port -->
+
+    <owl:Class rdf:about="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

@@ -1,0 +1,280 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY schema "http://schema.org/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY iuo "http://siemens.com/knowledge_graph/industrial_upper_ontology#" >
+]>
+
+
+<rdf:RDF xmlns="http://siemens.com/knowledge_graph/industrial_upper_ontology#"
+     xml:base="http://siemens.com/knowledge_graph/industrial_upper_ontology"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:schema="http://schema.org/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:iuo="http://siemens.com/knowledge_graph/industrial_upper_ontology#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="http://siemens.com/knowledge_graph/industrial_upper_ontology">
+        <rdfs:label>Upper Ontology</rdfs:label>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#connects -->
+
+    <owl:ObjectProperty rdf:about="&iuo;connects">
+        <rdfs:label>connects</rdfs:label>
+        <rdfs:comment>&quot;connects&quot; is the generic connection property. Any specific connection property will be a subproperty of this.</rdfs:comment>
+        <rdfs:domain rdf:resource="&iuo;PhysicalConnection"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="&iuo;PhysicalObject"/>
+                    <rdf:Description rdf:about="&iuo;Port"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#connectsFrom -->
+
+    <owl:ObjectProperty rdf:about="&iuo;connectsFrom">
+        <rdfs:label>connectsFrom</rdfs:label>
+        <rdfs:comment>Associates a connection object with its source port or physical object (for directed connections).</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&iuo;connects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#connectsTo -->
+
+    <owl:ObjectProperty rdf:about="&iuo;connectsTo">
+        <rdfs:comment>Associates a connection object with its target port or physical object (for directed connections).</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&iuo;connects"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#hasPart -->
+
+    <owl:ObjectProperty rdf:about="&iuo;hasPart">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:label>hasPart</rdfs:label>
+        <rdfs:comment>hasPart denotes the fact that the object of this property is the part of the subject. It is inverse to the &quot;isPartOf&quot; property.</rdfs:comment>
+        <rdfs:range rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:domain rdf:resource="&iuo;PhysicalObject"/>
+        <owl:inverseOf rdf:resource="&iuo;isPartOf"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#hasPort -->
+
+    <owl:ObjectProperty rdf:about="&iuo;hasPort">
+        <rdfs:label>hasPort</rdfs:label>
+        <rdfs:comment>&quot;hasPort&quot; denotes that a port belongs to a physical object.</rdfs:comment>
+        <rdfs:domain rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:range rdf:resource="&iuo;Port"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#hasProperPart -->
+
+    <owl:ObjectProperty rdf:about="&iuo;hasProperPart">
+        <rdfs:label>hasProperPart</rdfs:label>
+        <rdfs:comment>hasProperPart denotes the fact that the object of this property is a direct (proper) part of the subject. (This is a non-transitive partonomic relation.)</rdfs:comment>
+        <rdfs:subPropertyOf rdf:resource="&iuo;hasPart"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#isConnectedTo -->
+
+    <owl:ObjectProperty rdf:about="&iuo;isConnectedTo">
+        <rdf:type rdf:resource="&owl;SymmetricProperty"/>
+        <rdfs:label>isConnectedTo</rdfs:label>
+        <rdfs:comment>Connects two physical objects. Shortcut for connection objects with ports.
+(possibly add the following role chain as superproperty: &quot;providesPort o  inverse (connects) o connects o  inverse (providesPort)&quot;</rdfs:comment>
+        <rdfs:range rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:domain rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#isPartOf -->
+
+    <owl:ObjectProperty rdf:about="&iuo;isPartOf">
+        <rdf:type rdf:resource="&owl;TransitiveProperty"/>
+        <rdfs:label>isPartOf</rdfs:label>
+        <rdfs:comment>isPartOf denotes the fact that the subject of this property is the part of the object. It is inverse to the &quot;hasPart&quot; property.</rdfs:comment>
+        <rdfs:domain rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:range rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:subPropertyOf rdf:resource="&owl;topObjectProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#attribute -->
+
+    <owl:DatatypeProperty rdf:about="&iuo;attribute">
+        <rdfs:label>attribute</rdfs:label>
+        <rdfs:comment>attribute is the highest data attribute in the hierarchy. Any object can have attributes and all specific attributes are derived from this one.</rdfs:comment>
+        <rdfs:domain rdf:resource="&iuo;Object"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#hasWeight_kg -->
+
+    <owl:DatatypeProperty rdf:about="&iuo;hasWeight_kg">
+        <rdfs:label>has Weight (in kg)</rdfs:label>
+        <rdfs:comment>has Weight ( in kg)</rdfs:comment>
+        <rdfs:domain rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:subPropertyOf rdf:resource="&iuo;attribute"/>
+        <rdfs:range rdf:resource="&xsd;float"/>
+    </owl:DatatypeProperty>
+    <owl:Axiom>
+        <rdfs:comment>the range xsd float is chosen according to the recommendation of using float for measurement values (google for sec values examples)</rdfs:comment>
+        <owl:annotatedSource rdf:resource="&iuo;hasWeight_kg"/>
+        <owl:annotatedProperty rdf:resource="&rdfs;range"/>
+        <owl:annotatedTarget rdf:resource="&xsd;float"/>
+    </owl:Axiom>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#Aggregate -->
+
+    <owl:Class rdf:about="&iuo;Aggregate">
+        <rdfs:label>Aggregate</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="&iuo;isPartOf"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:someValuesFrom rdf:resource="&owl;Thing"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:comment>An aggregate is a partonomic composition of physical objects that and, as such, has some part(s)</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#InformationObject -->
+
+    <owl:Class rdf:about="&iuo;InformationObject">
+        <rdfs:label>Information Object</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&iuo;Object"/>
+        <owl:disjointWith rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:comment>An information object is any kind of virtual object used for categorizing types of information. Examples would be &apos;event&apos;, &apos;state&apos;, &apos;capability&apos;.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#Object -->
+
+    <owl:Class rdf:about="&iuo;Object">
+        <rdfs:label>Object</rdfs:label>
+        <rdfs:comment>The Object class serves as an upper type for any kind of object in any industrial domain. Any concept used in more specific ontologies should be derived from either PhysicalObject or InformationObject, its subclasses.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#Part -->
+
+    <owl:Class rdf:about="&iuo;Part">
+        <rdfs:label>Part</rdfs:label>
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="&iuo;isPartOf"/>
+                <owl:someValuesFrom rdf:resource="&owl;Thing"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="&iuo;PhysicalObject"/>
+        <rdfs:comment>A part is a physical object that appears in a partonomic composition of physical objects</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection -->
+
+    <owl:Class rdf:about="&iuo;PhysicalConnection">
+        <rdfs:label>Physical Connection</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&iuo;InformationObject"/>
+        <rdfs:comment>A physical connection represents a connection between two or more physical objects via their ports.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalObject -->
+
+    <owl:Class rdf:about="&iuo;PhysicalObject">
+        <rdfs:label>PhysicalObject</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&iuo;Object"/>
+        <rdfs:comment>A physical object is a tangible physical entity. In the context of industrial machinery, examples of physical objects are a &apos;machine tool&apos;, a &apos;work piece&apos; or a &apos;processed liquid&apos;.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/industrial_upper_ontology#Port -->
+
+    <owl:Class rdf:about="&iuo;Port">
+        <rdfs:label>Port</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&iuo;InformationObject"/>
+        <rdfs:comment>A port is a region where physical objects may interact.</rdfs:comment>
+    </owl:Class>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+

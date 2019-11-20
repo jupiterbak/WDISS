@@ -1,1 +1,1 @@
-npm start
+java -jar SkillKnowledgeBase.jar

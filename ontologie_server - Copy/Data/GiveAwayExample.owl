@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#"
+     xml:base="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample"
+     xmlns:schema="http://schema.org/"
+     xmlns:iuo="http://siemens.com/knowledge_graph/industrial_upper_ontology#"
+     xmlns:prd="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:industrial_cps_df="http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps_df#">
+    <owl:Ontology rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample">
+        <owl:imports rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product"/>
+        <owl:imports rdf:resource="http://siemens.com/knowledgegraph/presentation"/>
+        <rdfs:label>GiveAway Example</rdfs:label>
+        <rdfs:comment>An example for a fully produced GiveAway instance</rdfs:comment>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#ET200SPBlock -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#ET200SPBlock">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#ET200SP"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaETPort"/>
+        <rdfs:comment>ET200SP Block for example product</rdfs:comment>
+        <rdfs:label>ET200SP Block</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#EmergencyStopBlock -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#EmergencyStopBlock">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#EmergencyStop"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaESPort"/>
+        <rdfs:comment>EmergencyStop Block for example product</rdfs:comment>
+        <rdfs:label>EmergencyStop Block</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <prd:hasPosition>1</prd:hasPosition>
+        <rdfs:comment>The 1st port of the baseplate, intended for glassblocks. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example Baseplate Port 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <prd:hasPosition>2</prd:hasPosition>
+        <rdfs:comment>The 2nd port of the baseplate, intended for glassblocks. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example Baseplate Port 2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_3 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_3">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <prd:hasPosition>3</prd:hasPosition>
+        <rdfs:comment>The 3rd port of the baseplate, intended for glassblocks. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example Baseplate Port 3</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_4 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_4">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <prd:hasPosition>4</prd:hasPosition>
+        <rdfs:comment>The 4th port of the baseplate, intended for glassblocks. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example Baseplate Port 4</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_SP -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_SP">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:comment>The port of the baseplate intended for the sign plate. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example Baseplate Port SignPlate</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_1 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_1">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_1"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaMSPort"/>
+        <rdfs:comment>connects the first position of the baseplate to the port of the assigned block</rdfs:comment>
+        <rdfs:label>GiveAway Example Connection 1</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_2 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_2">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_2"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaETPort"/>
+        <rdfs:comment>connects the second position of the baseplate to the port of the assigned block</rdfs:comment>
+        <rdfs:label>GiveAway Example Connection 2</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_3 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_3">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_3"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaESPort"/>
+        <rdfs:comment>connects the third position of the baseplate to the port of the assigned block</rdfs:comment>
+        <rdfs:label>GiveAway Example Connection 3</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_4 -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_4">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_4"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaS7Port"/>
+        <rdfs:comment>connects the fourth position of the baseplate to the port of the assigned block</rdfs:comment>
+        <rdfs:label>GiveAway Example Connection 4</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_SP -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaConnection_SP">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#PhysicalConnection"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_SP"/>
+        <iuo:connects rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaSPPort"/>
+        <rdfs:comment>connects the signplate port of the baseplate to the port of the signplate</rdfs:comment>
+        <rdfs:label>GiveAway Example Connection SignPlate</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaESPort -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaESPort">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:comment>The bottom port of the Emergency Stop glass block. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example Emergency Stop Port</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaETPort -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaETPort">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:comment>The bottom port of the ET200SP glass block. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example ET200SP Port</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaMSPort -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaMSPort">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:comment>The bottom port of the MindSphere glass block. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example MindSphere Port</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaS7Port -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaS7Port">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:comment>The bottom port of the S7-1500 glass block. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example S7-1500 Port</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaSPPort -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaSPPort">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/industrial_upper_ontology#Port"/>
+        <rdfs:comment>The bottom port of the sign plate. (GiveAway Example) </rdfs:comment>
+        <rdfs:label>GiveAway Example SignPlate Port</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GiveAwayBaseplate -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GiveAwayBaseplate">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GiveAwayBaseplate"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_1"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_2"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_3"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_4"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaBasePort_SP"/>
+        <rdfs:comment>Give Away Baseplate for example project</rdfs:comment>
+        <rdfs:label>GiveAway Baseplate</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GiveAway_Example -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GiveAway_Example">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#GiveAwayProduct"/>
+        <iuo:hasPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#ET200SPBlock"/>
+        <iuo:hasPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#EmergencyStopBlock"/>
+        <iuo:hasPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GiveAwayBaseplate"/>
+        <iuo:hasPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#MindSphereBlock"/>
+        <iuo:hasPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#PLC1500Block"/>
+        <iuo:hasPart rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#SignPlate_Example"/>
+        <schema:image rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#Img_GiveAwayExample"/>
+        <rdfs:comment>A fully produced GiveAway example</rdfs:comment>
+        <rdfs:label>GiveAway Example</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#Img_GiveAwayExample -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#Img_GiveAwayExample">
+        <rdf:type rdf:resource="http://schema.org/ImageObject"/>
+        <schema:contentUrl>/assets/images/sma/Give-Away.png</schema:contentUrl>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#MindSphereBlock -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#MindSphereBlock">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#MindSphere"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaMSPort"/>
+        <rdfs:comment>MindSphere Block instance for example product</rdfs:comment>
+        <rdfs:label>MindSphere Block</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#PLC1500Block -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#PLC1500Block">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#PLC1500"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaS7Port"/>
+        <rdfs:comment>S7-1500 block for example project</rdfs:comment>
+        <rdfs:label>PLC1500 Block</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#SignPlate_Example -->
+
+    <owl:NamedIndividual rdf:about="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#SignPlate_Example">
+        <rdf:type rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/product#AluminiumPlate"/>
+        <iuo:hasPort rdf:resource="http://siemens.com/knowledge_graph/cyber_physical_systems/sma/GiveAwayExample#GaSPPort"/>
+        <prd:GrippingPoint1x rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">-41.25</prd:GrippingPoint1x>
+        <prd:GrippingPoint1y rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</prd:GrippingPoint1y>
+        <prd:GrippingPoint1z rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.5</prd:GrippingPoint1z>
+        <prd:GrippingPoint2x rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">41.25</prd:GrippingPoint2x>
+        <prd:GrippingPoint2y rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</prd:GrippingPoint2y>
+        <prd:GrippingPoint2z rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.5</prd:GrippingPoint2z>
+        <prd:Thickness rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1.5</prd:Thickness>
+        <prd:plateText>Dr. Matthias Loskyll</prd:plateText>
+        <prd:substanceType>Aluminium</prd:substanceType>
+        <iuo:hasWeight_kg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.00776746842862732</iuo:hasWeight_kg>
+        <rdfs:comment>SignPlate example for product example</rdfs:comment>
+        <rdfs:label>SignPlate_Example</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+
