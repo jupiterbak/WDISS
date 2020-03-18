@@ -106,18 +106,16 @@ try {
 
 // Start the plattform
 application.start().then(function() {
-    process.title = "Application SP 164";
+    process.title = "Skill Invocation Client Demo - SP347";
 }).otherwise(function(err) {
     console.log("Application failed to start!" + err);
     process.exit(1);
 });
 
-
-
-// process.on('uncaughtException', function(err) {
-//     console.log('[application] Uncaught Exception:' + err.stack);
-//     //     process.exit(1);
-// });
+process.on('uncaughtException', function(err) {
+    console.log('[application] Uncaught Exception:' + err.stack);
+    process.exit(1);
+});
 
 // Stop the platform if the user request it
 process.on('SIGINT', function() {
