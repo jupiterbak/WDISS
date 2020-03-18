@@ -7,6 +7,8 @@ let gSkill = "";
 let gSERVERNAME = "SP347DEMO";
 let gSOCKETId = "8548585858";
 var globalStateConfiguration;
+var current_server_url = window.location;
+
 // Get all Parameters
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -50,6 +52,7 @@ $(function() {
             port: gPORT,
             serverName: gSERVERNAME,
             socketID: gSOCKETId,
+            skillName: gSkill,
             actionName: self.dataset["actionname"],
             parameters: []
         };
@@ -76,7 +79,7 @@ $(function() {
 
 
     /** SOCKET IO Handler **/
-    const socket = io("http://localhost:8080/");
+    const socket = io("/");
     socket.on('connected', (data) => {
         gSOCKETId = "8548585858"; //data;
         /** Start a new connection */
@@ -91,22 +94,29 @@ $(function() {
 
     // Listen to all events
     socket.on("serverstatus", function(data) {
-        if (data.connection) {
-            $('#ressourceStatus').removeClass("text-red").addClass("text-green");
-            $('#ressourceStatus').text("Connected");
-        } else {
-            $('#ressourceStatus').removeClass("text-green").addClass("text-red");
-            $('#ressourceStatus').text("Not connected");
-        }
-        if (data.ip) {
-            $('#ressourceIP').text(data.ip);
-        }
-        if (data.port) {
-            $('#ressourceName').text(gSkill);
-        }
-        if (data.ip) {
-            $('#ressourceIP').text(data.ip);
-        }
+        for (var prop in data) {
+            if (Object.prototype.hasOwnProperty.call(data, prop)) {
+                var con_status = data[prop];
+                if(gIP === con_status.ip || gPORT === con_status.port ){
+
+                    if (con_status.connection) {
+                        $('#ressourceStatus').removeClass("text-red").addClass("text-green");
+                        $('#ressourceStatus').text("Connected");
+                    } else {
+                        $('#ressourceStatus').removeClass("text-green").addClass("text-red");
+                        $('#ressourceStatus').text("Not connected");
+                    }
+                    if (con_status.ip) {
+                        $('#ressourceIP').text(con_status.ip);
+                    }
+                    
+                    $('#ressourceName').text(gSkill);
+                    if (con_status.port) {
+                        $('#ressourcePort').text(con_status.port);
+                    }
+                }
+            }
+        }        
     });
 
     socket.on("StatesChanged", function(data) {
@@ -114,19 +124,34 @@ $(function() {
         var _keys = [];
         for (var prop in data) {
             if (Object.prototype.hasOwnProperty.call(data, prop)) {
-                var candidates = globalStateConfiguration.nodeDataArray.filter(item => item.id === data[prop].state.value);
-                // filter with the nodeId
-                if (candidates.length == 0) {
-                    candidates = globalStateConfiguration.nodeDataArray.filter(function(item) {
-                        var src = data[prop].state.value;
-                        var target = item.nid;
-                        var rslt = ("" + src).indexOf(target);
-                        return rslt >= 0;
-                    });
-                }
-                if (candidates.length > 0) {
-                    _keys.push(candidates[0].id);
-                    $('span#CurrentState').text(candidates[0].id);
+                var el = data[prop];
+                if (el.ip === gIP && el.port === gPORT && el.skill === gSkill) {
+                    var candidates = globalStateConfiguration.nodeDataArray.filter(item => item.id === el.state.value);
+                    // filter with the nodeId
+                    if (candidates.length == 0) {
+                        candidates = globalStateConfiguration.nodeDataArray.filter(function(item) {
+                            var src = el.state.value;
+                            var target = item.nid;
+                            var rslt = ("" + src).indexOf(target);
+                            return rslt >= 0;
+                        });
+                    }
+
+                    /*
+                    // filter with the type State Name
+                    if (candidates.length == 0) {
+                        candidates = globalStateConfiguration.nodeDataArray.filter(function(item) {
+                            var src = el.state_object_from_type.browseName.value;
+                            var target = item.nid;
+                            var rslt = ("" + src).indexOf(target);
+                            return rslt >= 0;
+                        });
+                    }
+                    */
+                    if (candidates.length > 0) {
+                        _keys.push(candidates[0].id);
+                        $('span#CurrentState').text(candidates[0].id);
+                    }
                 }
             }
         }

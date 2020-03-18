@@ -1,0 +1,1387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V15.1" />
+  <DocumentInfo>
+    <Created>2019-08-14T06:26:55.3891978Z</Created>
+    <ExportSetting>None</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v3">
+  <Section Name="Input">
+    <Member Name="ModulToSkill" Datatype="&quot;typeModulSkillInterface_IN&quot;" />
+  </Section>
+  <Section Name="Output">
+    <Member Name="SkillToModul" Datatype="&quot;typeModulSkillInterface_OUT&quot;" />
+  </Section>
+  <Section Name="InOut" />
+  <Section Name="Static">
+    <Member Name="State" Datatype="UInt"><AttributeList><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="StateOfExecute" Datatype="UInt" />
+    <Member Name="ResultTrigger" Datatype="DInt">
+      <Comment>
+        <MultiLanguageText Lang="en-US">value increases at new result available</MultiLanguageText>
+      </Comment>
+    </Member>
+    <Member Name="ResultFeched" Datatype="Bool">
+      <Comment>
+        <MultiLanguageText Lang="en-US">true= result fechted</MultiLanguageText>
+      </Comment>
+    </Member>
+    <Member Name="oldResultTrigger" Datatype="DInt" />
+    <Member Name="NextStep" Datatype="Bool" />
+    <Member Name="Parameter_In" Datatype="&quot;type#SKILL_NAME#StartParameter_In&quot;" />
+    <Member Name="Parameter_Out" Datatype="&quot;type#SKILL_NAME#GetResultParameter_Out&quot;" />
+    <Member Name="statErrorId" Datatype="Int"><AttributeList><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ResultAcknowledge" Datatype="Bool" />
+    <Member Name="StartByMES" Datatype="Bool"><AttributeList><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="rtStart" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtStop" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtAbort" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtReset" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtStep" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtNextStep" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="Start" Datatype="&quot;#SKILL_NAME#_Start&quot;" />
+    <Member Name="GetResult" Datatype="&quot;#SKILL_NAME#_GetResult&quot;" />
+  </Section>
+  <Section Name="Temp" />
+  <Section Name="Constant">
+    <Member Name="StateInit" Datatype="UInt">
+      <StartValue>0</StartValue>
+    </Member>
+    <Member Name="StateIdle" Datatype="UInt">
+      <StartValue>100</StartValue>
+    </Member>
+    <Member Name="StateExecute" Datatype="UInt">
+      <StartValue>200</StartValue>
+    </Member>
+    <Member Name="StateCompleting" Datatype="UInt">
+      <StartValue>300</StartValue>
+    </Member>
+    <Member Name="StateComplete" Datatype="UInt">
+      <StartValue>400</StartValue>
+    </Member>
+    <Member Name="StateProvideResult" Datatype="UInt">
+      <StartValue>8998</StartValue>
+    </Member>
+    <Member Name="StatePreDone" Datatype="UInt">
+      <StartValue>8999</StartValue>
+    </Member>
+    <Member Name="StateDone" Datatype="UInt">
+      <StartValue>9000</StartValue>
+    </Member>
+    <Member Name="StateError" Datatype="UInt">
+      <StartValue>9001</StartValue>
+    </Member>
+    <Member Name="ExecuteSkill" Datatype="UInt">
+      <StartValue>100</StartValue>
+    </Member>
+    <Member Name="ERRORID_NO_ERROR" Datatype="Int">
+      <StartValue>0</StartValue>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>Skill_#SKILL_NAME#</Name>
+      <Number>13</Number>
+      <ProgrammingLanguage>SCL</ProgrammingLanguage>
+      <SetENOAutomatically>False</SetENOAutomatically>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="3" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v2">
+  <LineComment Inserted="true" UId="21">
+    <Text UId="22">******************************************************************
+// Description
+//   #####
+// Version
+// V0.01 2019-07-24 
+
+// Authors
+// Michael Elting evtl. durch SiOME Version ersetzen
+//
+// © Alle Rechte vorbehalten/All rights reserved, Siemens AG, 2019
+******************************************************************</Text>
+  </LineComment>
+  <NewLine Num="2" UId="23" />
+  <Token Text="REGION" UId="24" />
+  <Blank UId="25" />
+  <Text UId="26">##Enabled</Text>
+  <NewLine UId="27" />
+  <Blank Num="4" UId="28" />
+  <Token Text="IF" UId="29" />
+  <Blank UId="30" />
+  <Token Text="NOT" UId="31" />
+  <Blank UId="32" />
+  <Access Scope="LocalVariable" UId="33">
+    <Symbol UId="34">
+      <Component Name="ModulToSkill" UId="35" />
+      <Token Text="." UId="36" />
+      <Component Name="Enable" UId="37" />
+    </Symbol>
+  </Access>
+  <Blank UId="38" />
+  <Token Text="THEN" UId="39" />
+  <NewLine UId="40" />
+  <Blank Num="8" UId="41" />
+  <Token Text="RETURN" UId="42" />
+  <Token Text=";" UId="43" />
+  <NewLine UId="44" />
+  <Blank Num="4" UId="45" />
+  <Token Text="END_IF" UId="46" />
+  <Token Text=";" UId="47" />
+  <NewLine UId="48" />
+  <Token Text="END_REGION" UId="49" />
+  <NewLine Num="2" UId="50" />
+  <Token Text="REGION" UId="51" />
+  <Blank UId="52" />
+  <Text UId="53">##Init or Reset</Text>
+  <NewLine UId="54" />
+  <Blank Num="4" UId="55" />
+  <Token Text="IF" UId="56" />
+  <Blank UId="57" />
+  <Access Scope="LocalVariable" UId="58">
+    <Symbol UId="59">
+      <Component Name="ModulToSkill" UId="60" />
+      <Token Text="." UId="61" />
+      <Component Name="Init" UId="62" />
+    </Symbol>
+  </Access>
+  <Blank UId="63" />
+  <Token Text="OR" UId="64" />
+  <Blank UId="65" />
+  <Access Scope="LocalVariable" UId="66">
+    <Symbol UId="67">
+      <Component Name="ModulToSkill" UId="68" />
+      <Token Text="." UId="69" />
+      <Component Name="Reset" UId="70" />
+    </Symbol>
+  </Access>
+  <Blank UId="71" />
+  <Token Text="THEN" UId="72" />
+  <NewLine UId="73" />
+  <Blank Num="8" UId="74" />
+  <Access Scope="LocalVariable" UId="75">
+    <Symbol UId="76">
+      <Component Name="State" UId="77" />
+    </Symbol>
+  </Access>
+  <Blank UId="78" />
+  <Token Text=":=" UId="79" />
+  <Blank UId="80" />
+  <Access Scope="LiteralConstant" UId="81">
+    <Constant UId="82">
+      <ConstantValue UId="84">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="85" />
+  <NewLine UId="86" />
+  <Blank Num="8" UId="87" />
+  <Access Scope="LocalVariable" UId="88">
+    <Symbol UId="89">
+      <Component Name="ResultTrigger" UId="90" />
+    </Symbol>
+  </Access>
+  <Blank UId="91" />
+  <Token Text=":=" UId="92" />
+  <Blank UId="93" />
+  <Access Scope="LiteralConstant" UId="94">
+    <Constant UId="95">
+      <ConstantValue UId="97">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="98" />
+  <NewLine UId="99" />
+  <Blank Num="8" UId="100" />
+  <Access Scope="LocalVariable" UId="101">
+    <Symbol UId="102">
+      <Component Name="statErrorId" UId="103" />
+    </Symbol>
+  </Access>
+  <Blank UId="104" />
+  <Token Text=":=" UId="105" />
+  <Blank UId="106" />
+  <Access Scope="LocalConstant" UId="107">
+    <Constant Name="ERRORID_NO_ERROR" UId="108" />
+  </Access>
+  <Token Text=";" UId="111" />
+  <NewLine UId="112" />
+  <Blank Num="8" UId="113" />
+  <NewLine UId="114" />
+  <Blank Num="8" UId="115" />
+  <Access Scope="LocalVariable" UId="116">
+    <Symbol UId="117">
+      <Component Name="SkillToModul" UId="118" />
+      <Token Text="." UId="119" />
+      <Component Name="TaskBusy" UId="120" />
+    </Symbol>
+  </Access>
+  <Blank UId="121" />
+  <Token Text=":=" UId="122" />
+  <Blank UId="123" />
+  <Access Scope="LiteralConstant" UId="124">
+    <Constant UId="125">
+      <ConstantValue UId="127">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="128" />
+  <NewLine UId="129" />
+  <Blank Num="8" UId="130" />
+  <Access Scope="LocalVariable" UId="131">
+    <Symbol UId="132">
+      <Component Name="SkillToModul" UId="133" />
+      <Token Text="." UId="134" />
+      <Component Name="TaskDone" UId="135" />
+    </Symbol>
+  </Access>
+  <Blank UId="136" />
+  <Token Text=":=" UId="137" />
+  <Blank UId="138" />
+  <Access Scope="LiteralConstant" UId="139">
+    <Constant UId="140">
+      <ConstantValue UId="142">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="143" />
+  <NewLine UId="144" />
+  <Blank Num="8" UId="145" />
+  <Access Scope="LocalVariable" UId="146">
+    <Symbol UId="147">
+      <Component Name="SkillToModul" UId="148" />
+      <Token Text="." UId="149" />
+      <Component Name="TaskError" UId="150" />
+    </Symbol>
+  </Access>
+  <Blank UId="151" />
+  <Token Text=":=" UId="152" />
+  <Blank UId="153" />
+  <Access Scope="LiteralConstant" UId="154">
+    <Constant UId="155">
+      <ConstantValue UId="157">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="158" />
+  <NewLine UId="159" />
+  <Blank Num="8" UId="160" />
+  <Access Scope="LocalVariable" UId="161">
+    <Symbol UId="162">
+      <Component Name="SkillToModul" UId="163" />
+      <Token Text="." UId="164" />
+      <Component Name="TaskReady" UId="165" />
+    </Symbol>
+  </Access>
+  <Blank UId="166" />
+  <Token Text=":=" UId="167" />
+  <Blank UId="168" />
+  <Access Scope="LiteralConstant" UId="169">
+    <Constant UId="170">
+      <ConstantValue UId="172">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="173" />
+  <NewLine UId="174" />
+  <Blank Num="8" UId="175" />
+  <Access Scope="LocalVariable" UId="176">
+    <Symbol UId="177">
+      <Component Name="SkillToModul" UId="178" />
+      <Token Text="." UId="179" />
+      <Component Name="TaskInitPos" UId="180" />
+    </Symbol>
+  </Access>
+  <Blank UId="181" />
+  <Token Text=":=" UId="182" />
+  <Blank UId="183" />
+  <Access Scope="LiteralConstant" UId="184">
+    <Constant UId="185">
+      <ConstantValue UId="187">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="188" />
+  <NewLine UId="189" />
+  <Blank Num="4" UId="190" />
+  <Token Text="END_IF" UId="191" />
+  <Token Text=";" UId="192" />
+  <NewLine UId="193" />
+  <Token Text="END_REGION" UId="194" />
+  <NewLine Num="2" UId="195" />
+  <Token Text="REGION" UId="196" />
+  <Blank UId="197" />
+  <Text UId="198">OPC_UA_Method_Calls</Text>
+  <NewLine UId="199" />
+  <Blank Num="4" UId="200" />
+  <Token Text="REGION" UId="201" />
+  <Blank UId="202" />
+  <Text UId="203">Start Skill</Text>
+  <NewLine UId="204" />
+  <Blank Num="8" UId="205" />
+  <Access Scope="Call" UId="206">
+    <CallInfo UId="207" BlockType="FB" Name="#SKILL_NAME#_Start">
+      <Instance Scope="LocalVariable" UId="208">
+        <Component Name="Start" UId="209" />
+      </Instance>
+      <Token Text="(" UId="210" />
+      <Parameter Name="ModulToSkill" UId="211">
+        <Token Text=":=" UId="212" />
+        <Access Scope="LocalVariable" UId="213">
+          <Symbol UId="214">
+            <Component Name="ModulToSkill" UId="215" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="216" />
+      <NewLine UId="217" />
+      <Blank Num="15" UId="218" />
+      <Parameter Name="SkillToModul" UId="219">
+        <Token Text=":=" UId="220" />
+        <Access Scope="LocalVariable" UId="221">
+          <Symbol UId="222">
+            <Component Name="SkillToModul" UId="223" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="224" />
+      <NewLine UId="225" />
+      <Blank Num="15" UId="226" />
+      <Parameter Name="StartSkill" UId="227">
+        <Blank UId="228" />
+        <Token Text=":=" UId="229" />
+        <Blank UId="230" />
+        <Access Scope="LocalVariable" UId="231">
+          <Symbol UId="232">
+            <Component Name="StartByMES" UId="233" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="234" />
+      <NewLine UId="235" />
+      <Blank Num="15" UId="236" />
+      <Parameter Name="Parameter" UId="237">
+        <Blank UId="238" />
+        <Token Text=":=" UId="239" />
+        <Blank UId="240" />
+        <Access Scope="LocalVariable" UId="241">
+          <Symbol UId="242">
+            <Component Name="Parameter_In" UId="243" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="244" />
+    </CallInfo>
+  </Access>
+  <Token Text=";" UId="245" />
+  <NewLine UId="246" />
+  <Blank Num="4" UId="247" />
+  <Token Text="END_REGION" UId="248" />
+  <NewLine UId="249" />
+  <Blank Num="4" UId="250" />
+  <NewLine UId="251" />
+  <Blank Num="4" UId="252" />
+  <Token Text="REGION" UId="253" />
+  <Blank UId="254" />
+  <Text UId="255">Provide Results</Text>
+  <NewLine UId="256" />
+  <Blank Num="8" UId="257" />
+  <Access Scope="Call" UId="258">
+    <CallInfo UId="259" BlockType="FB" Name="#SKILL_NAME#_GetResult">
+      <Instance Scope="LocalVariable" UId="260">
+        <Component Name="GetResult" UId="261" />
+      </Instance>
+      <Token Text="(" UId="262" />
+      <Parameter Name="Automatic" UId="263">
+        <Blank UId="264" />
+        <Token Text=":=" UId="265" />
+        <Blank UId="266" />
+        <Access Scope="LocalVariable" UId="267">
+          <Symbol UId="268">
+            <Component Name="ModulToSkill" UId="269" />
+            <Token Text="." UId="270" />
+            <Component Name="Automatic" UId="271" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="272" />
+      <NewLine UId="273" />
+      <Blank Num="19" UId="274" />
+      <Parameter Name="ResultTrigger" UId="275">
+        <Blank UId="276" />
+        <Token Text=":=" UId="277" />
+        <Blank UId="278" />
+        <Access Scope="LocalVariable" UId="279">
+          <Symbol UId="280">
+            <Component Name="ResultTrigger" UId="281" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="282" />
+      <NewLine UId="283" />
+      <Blank Num="19" UId="284" />
+      <Parameter Name="ResultFeched" UId="285">
+        <Token Text=":=" UId="286" />
+        <Access Scope="LocalVariable" UId="287">
+          <Symbol UId="288">
+            <Component Name="ResultFeched" UId="289" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="290" />
+      <NewLine UId="291" />
+      <Blank Num="19" UId="292" />
+      <Parameter Name="Parameter_Out" UId="293">
+        <Blank UId="294" />
+        <Token Text=":=" UId="295" />
+        <Blank UId="296" />
+        <Access Scope="LocalVariable" UId="297">
+          <Symbol UId="298">
+            <Component Name="Parameter_Out" UId="299" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="301" />
+    </CallInfo>
+  </Access>
+  <Token Text=";" UId="302" />
+  <NewLine UId="303" />
+  <Blank Num="4" UId="304" />
+  <Token Text="END_REGION" UId="305" />
+  <NewLine UId="306" />
+  <Token Text="END_REGION" UId="307" />
+  <NewLine Num="2" UId="308" />
+  <Token Text="REGION" UId="309" />
+  <Blank UId="310" />
+  <Text UId="311">##Edge detection</Text>
+  <NewLine UId="312" />
+  <Blank Num="4" UId="313" />
+  <Access Scope="LocalVariable" UId="314">
+    <Symbol UId="315">
+      <Component Name="rtStart" UId="316" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="317">
+    <Instruction UId="318">
+      <Token Text="(" UId="319" />
+      <Parameter Name="CLK" UId="320">
+        <Blank UId="321" />
+        <Token Text=":=" UId="322" />
+        <Blank UId="323" />
+        <Access Scope="LocalVariable" UId="324">
+          <Symbol UId="325">
+            <Component Name="StartByMES" UId="326" />
+          </Symbol>
+        </Access>
+        <Blank UId="327" />
+        <Token Text="OR" UId="328" />
+        <Blank UId="329" />
+        <Access Scope="LocalVariable" UId="330">
+          <Symbol UId="331">
+            <Component Name="ModulToSkill" UId="332" />
+            <Token Text="." UId="333" />
+            <Component Name="Start" UId="334" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="335" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="336" />
+  <NewLine UId="337" />
+  <Blank Num="4" UId="338" />
+  <Access Scope="LocalVariable" UId="339">
+    <Symbol UId="340">
+      <Component Name="rtStop" UId="341" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="342">
+    <Instruction UId="343">
+      <Token Text="(" UId="344" />
+      <Parameter Name="CLK" UId="345">
+        <Blank UId="346" />
+        <Token Text=":=" UId="347" />
+        <Blank UId="348" />
+        <Access Scope="LocalVariable" UId="349">
+          <Symbol UId="350">
+            <Component Name="ModulToSkill" UId="351" />
+            <Token Text="." UId="352" />
+            <Component Name="Stop" UId="353" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="354" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="355" />
+  <NewLine UId="356" />
+  <Blank Num="4" UId="357" />
+  <Access Scope="LocalVariable" UId="358">
+    <Symbol UId="359">
+      <Component Name="rtReset" UId="360" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="361">
+    <Instruction UId="362">
+      <Token Text="(" UId="363" />
+      <Parameter Name="CLK" UId="364">
+        <Blank UId="365" />
+        <Token Text=":=" UId="366" />
+        <Blank UId="367" />
+        <Access Scope="LocalVariable" UId="368">
+          <Symbol UId="369">
+            <Component Name="ModulToSkill" UId="370" />
+            <Token Text="." UId="371" />
+            <Component Name="Reset" UId="372" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="373" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="374" />
+  <NewLine UId="375" />
+  <Blank Num="4" UId="376" />
+  <Access Scope="LocalVariable" UId="377">
+    <Symbol UId="378">
+      <Component Name="rtNextStep" UId="379" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="380">
+    <Instruction UId="381">
+      <Token Text="(" UId="382" />
+      <Parameter Name="CLK" UId="383">
+        <Blank UId="384" />
+        <Token Text=":=" UId="385" />
+        <Blank UId="386" />
+        <Access Scope="LocalVariable" UId="387">
+          <Symbol UId="388">
+            <Component Name="ModulToSkill" UId="389" />
+            <Token Text="." UId="390" />
+            <Component Name="Step" UId="391" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="392" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="393" />
+  <NewLine UId="394" />
+  <Token Text="END_REGION" UId="395" />
+  <NewLine Num="2" UId="396" />
+  <Token Text="REGION" UId="397" />
+  <Blank UId="398" />
+  <Text UId="399">##NextState</Text>
+  <NewLine UId="400" />
+  <Blank Num="4" UId="401" />
+  <Access Scope="LocalVariable" UId="402">
+    <Symbol UId="403">
+      <Component Name="NextStep" UId="404" />
+    </Symbol>
+  </Access>
+  <Blank UId="405" />
+  <Token Text=":=" UId="406" />
+  <Blank UId="407" />
+  <Token Text="(" UId="408" />
+  <Access Scope="LocalVariable" UId="409">
+    <Symbol UId="410">
+      <Component Name="ModulToSkill" UId="411" />
+      <Token Text="." UId="412" />
+      <Component Name="Automatic" UId="413" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="414" />
+  <Blank UId="415" />
+  <Token Text="OR" UId="416" />
+  <NewLine UId="417" />
+  <Blank Num="4" UId="418" />
+  <Token Text="(" UId="419" />
+  <Access Scope="LocalVariable" UId="420">
+    <Symbol UId="421">
+      <Component Name="ModulToSkill" UId="422" />
+      <Token Text="." UId="423" />
+      <Component Name="SingleStep" UId="424" />
+    </Symbol>
+  </Access>
+  <Blank UId="425" />
+  <Token Text="AND" UId="426" />
+  <Blank UId="427" />
+  <Access Scope="LocalVariable" UId="428">
+    <Symbol UId="429">
+      <Component Name="rtNextStep" UId="430" />
+      <Token Text="." UId="431" />
+      <Component Name="Q" UId="432" />
+    </Symbol>
+  </Access>
+  <Token Text=")" UId="433" />
+  <Token Text=";" UId="434" />
+  <NewLine UId="435" />
+  <Token Text="END_REGION" UId="436" />
+  <NewLine Num="2" UId="437" />
+  <Token Text="REGION" UId="438" />
+  <Blank UId="439" />
+  <Text UId="440">StateMachine</Text>
+  <NewLine UId="441" />
+  <Blank Num="4" UId="442" />
+  <Token Text="CASE" UId="443" />
+  <Blank UId="444" />
+  <Access Scope="LocalVariable" UId="445">
+    <Symbol UId="446">
+      <Component Name="State" UId="447" />
+    </Symbol>
+  </Access>
+  <Blank UId="448" />
+  <Token Text="OF" UId="449" />
+  <NewLine UId="450" />
+  <Blank Num="8" UId="451" />
+  <Access Scope="LocalConstant" UId="452">
+    <Constant Name="StateInit" UId="453" />
+  </Access>
+  <Token Text=":" UId="456" />
+  <Blank UId="457" />
+  <LineComment UId="458">
+    <Text UId="459"> Init skill state maschine</Text>
+  </LineComment>
+  <NewLine UId="460" />
+  <Blank Num="12" UId="461" />
+  <Token Text="REGION" UId="462" />
+  <Blank UId="463" />
+  <Text UId="464">Init</Text>
+  <NewLine UId="465" />
+  <Blank Num="12" UId="466" />
+  <LineComment Inserted="true" UId="467">
+    <Text UId="468">
+            Enter here code for init skill purpose
+            </Text>
+  </LineComment>
+  <NewLine UId="469" />
+  <Blank Num="16" UId="470" />
+  <Access Scope="LocalVariable" UId="471">
+    <Symbol UId="472">
+      <Component Name="State" UId="473" />
+    </Symbol>
+  </Access>
+  <Blank UId="474" />
+  <Token Text=":=" UId="475" />
+  <Blank UId="476" />
+  <Token Text="+" UId="477" />
+  <Blank UId="478" />
+  <Access Scope="LocalConstant" UId="479">
+    <Constant Name="StateIdle" UId="480" />
+  </Access>
+  <Token Text=";" UId="483" />
+  <NewLine UId="484" />
+  <Blank Num="12" UId="485" />
+  <Token Text="END_REGION" UId="486" />
+  <NewLine UId="487" />
+  <Blank Num="12" UId="488" />
+  <NewLine UId="489" />
+  <Blank Num="12" UId="490" />
+  <NewLine UId="491" />
+  <Blank Num="8" UId="492" />
+  <Access Scope="LocalConstant" UId="493">
+    <Constant Name="StateIdle" UId="494" />
+  </Access>
+  <Token Text=":" UId="497" />
+  <Blank UId="498" />
+  <LineComment UId="499">
+    <Text UId="500"> wait for incomming skill request</Text>
+  </LineComment>
+  <NewLine UId="501" />
+  <Blank Num="12" UId="502" />
+  <Token Text="REGION" UId="503" />
+  <Blank UId="504" />
+  <Text UId="505">IDLE</Text>
+  <NewLine UId="506" />
+  <Blank Num="16" UId="507" />
+  <NewLine UId="508" />
+  <Blank Num="16" UId="509" />
+  <Token Text="IF" UId="510" />
+  <Blank UId="511" />
+  <Access Scope="LocalVariable" UId="512">
+    <Symbol UId="513">
+      <Component Name="rtStart" UId="514" />
+      <Token Text="." UId="515" />
+      <Component Name="Q" UId="516" />
+    </Symbol>
+  </Access>
+  <Blank UId="517" />
+  <Token Text="THEN" UId="518" />
+  <NewLine UId="519" />
+  <Blank Num="20" UId="520" />
+  <Access Scope="LocalVariable" UId="521">
+    <Symbol UId="522">
+      <Component Name="statErrorId" UId="523" />
+    </Symbol>
+  </Access>
+  <Blank UId="524" />
+  <Token Text=":=" UId="525" />
+  <Blank UId="526" />
+  <Access Scope="LiteralConstant" UId="527">
+    <Constant UId="528">
+      <ConstantValue UId="530">0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="531" />
+  <NewLine UId="532" />
+  <Blank Num="20" UId="533" />
+  <Access Scope="LocalVariable" UId="534">
+    <Symbol UId="535">
+      <Component Name="SkillToModul" UId="536" />
+      <Token Text="." UId="537" />
+      <Component Name="TaskBusy" UId="538" />
+    </Symbol>
+  </Access>
+  <Blank UId="539" />
+  <Token Text=":=" UId="540" />
+  <Blank UId="541" />
+  <Access Scope="LiteralConstant" UId="542">
+    <Constant UId="543">
+      <ConstantValue UId="545">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="546" />
+  <NewLine UId="547" />
+  <Blank Num="20" UId="548" />
+  <Access Scope="LocalVariable" UId="549">
+    <Symbol UId="550">
+      <Component Name="SkillToModul" UId="551" />
+      <Token Text="." UId="552" />
+      <Component Name="TaskDone" UId="553" />
+    </Symbol>
+  </Access>
+  <Blank UId="554" />
+  <Token Text=":=" UId="555" />
+  <Blank UId="556" />
+  <Access Scope="LiteralConstant" UId="557">
+    <Constant UId="558">
+      <ConstantValue UId="560">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="561" />
+  <NewLine UId="562" />
+  <Blank Num="20" UId="563" />
+  <Access Scope="LocalVariable" UId="564">
+    <Symbol UId="565">
+      <Component Name="SkillToModul" UId="566" />
+      <Token Text="." UId="567" />
+      <Component Name="TaskError" UId="568" />
+    </Symbol>
+  </Access>
+  <Blank UId="569" />
+  <Token Text=":=" UId="570" />
+  <Blank UId="571" />
+  <Access Scope="LiteralConstant" UId="572">
+    <Constant UId="573">
+      <ConstantValue UId="575">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="576" />
+  <NewLine UId="577" />
+  <Blank Num="20" UId="578" />
+  <Access Scope="LocalVariable" UId="579">
+    <Symbol UId="580">
+      <Component Name="State" UId="581" />
+    </Symbol>
+  </Access>
+  <Blank UId="582" />
+  <Token Text=":=" UId="583" />
+  <Blank UId="584" />
+  <Access Scope="LocalConstant" UId="585">
+    <Constant Name="StateExecute" UId="586" />
+  </Access>
+  <Token Text=";" UId="589" />
+  <NewLine UId="590" />
+  <Blank Num="16" UId="591" />
+  <Token Text="END_IF" UId="592" />
+  <Token Text=";" UId="593" />
+  <NewLine UId="594" />
+  <Blank Num="12" UId="595" />
+  <Token Text="END_REGION" UId="596" />
+  <NewLine UId="597" />
+  <Blank Num="12" UId="598" />
+  <NewLine UId="599" />
+  <Blank Num="8" UId="600" />
+  <Access Scope="LocalConstant" UId="601">
+    <Constant Name="StateExecute" UId="602" />
+  </Access>
+  <Token Text=":" UId="605" />
+  <NewLine UId="606" />
+  <Blank Num="12" UId="607" />
+  <Access Scope="LocalVariable" UId="608">
+    <Symbol UId="609">
+      <Component Name="State" UId="610" />
+    </Symbol>
+  </Access>
+  <Blank UId="611" />
+  <Token Text="+=" UId="612" />
+  <Blank UId="613" />
+  <Access Scope="LiteralConstant" UId="614">
+    <Constant UId="615">
+      <ConstantValue UId="617">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="618" />
+  <NewLine UId="619" />
+  <Blank Num="12" UId="620" />
+  <LineComment UId="621">
+    <Text UId="622"> CASE #StateOfExecute OF</Text>
+  </LineComment>
+  <NewLine UId="623" />
+  <Blank Num="12" UId="624" />
+  <LineComment UId="625">
+    <Text UId="626">     #ExecuteSkill:  // Statement section case 1</Text>
+  </LineComment>
+  <NewLine UId="627" />
+  <Blank Num="12" UId="628" />
+  <LineComment UId="629">
+    <Text UId="630">         // do Execution</Text>
+  </LineComment>
+  <NewLine UId="631" />
+  <Blank Num="12" UId="632" />
+  <LineComment UId="633">
+    <Text UId="634">         // </Text>
+  </LineComment>
+  <NewLine UId="635" />
+  <Blank Num="20" UId="636" />
+  <NewLine UId="637" />
+  <Blank Num="12" UId="638" />
+  <LineComment UId="639">
+    <Text UId="640">         IF true THEN</Text>
+  </LineComment>
+  <NewLine UId="641" />
+  <Blank Num="12" UId="642" />
+  <LineComment UId="643">
+    <Text UId="644">             ;</Text>
+  </LineComment>
+  <NewLine UId="645" />
+  <Blank Num="12" UId="646" />
+  <LineComment UId="647">
+    <Text UId="648">         END_IF;</Text>
+  </LineComment>
+  <NewLine UId="649" />
+  <Blank Num="12" UId="650" />
+  <LineComment UId="651">
+    <Text UId="652">         ;</Text>
+  </LineComment>
+  <NewLine UId="653" />
+  <Blank Num="12" UId="654" />
+  <LineComment UId="655">
+    <Text UId="656">     #NextStep:  // Statement section case 2 to 4</Text>
+  </LineComment>
+  <NewLine UId="657" />
+  <Blank Num="12" UId="658" />
+  <LineComment UId="659">
+    <Text UId="660">         ;</Text>
+  </LineComment>
+  <NewLine UId="661" />
+  <Blank Num="12" UId="662" />
+  <LineComment UId="663">
+    <Text UId="664">     ELSE  // Statement section ELSE</Text>
+  </LineComment>
+  <NewLine UId="665" />
+  <Blank Num="12" UId="666" />
+  <LineComment UId="667">
+    <Text UId="668">         ;</Text>
+  </LineComment>
+  <NewLine UId="669" />
+  <Blank Num="12" UId="670" />
+  <LineComment UId="671">
+    <Text UId="672"> END_CASE;</Text>
+  </LineComment>
+  <NewLine UId="673" />
+  <Blank Num="12" UId="674" />
+  <Token Text=";" UId="675" />
+  <NewLine UId="676" />
+  <Blank Num="12" UId="677" />
+  <NewLine UId="678" />
+  <Blank Num="8" UId="679" />
+  <Access Scope="LiteralConstant" UId="680">
+    <Constant UId="681">
+      <ConstantValue UId="683">201</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=".." UId="684" />
+  <Access Scope="LiteralConstant" UId="685">
+    <Constant UId="686">
+      <ConstantValue UId="688">8997</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=":" UId="689" />
+  <Blank Num="2" UId="690" />
+  <LineComment UId="691">
+    <Text UId="692"> States to do skill actions</Text>
+  </LineComment>
+  <NewLine UId="693" />
+  <Blank Num="12" UId="694" />
+  <Access Scope="LocalVariable" UId="695">
+    <Symbol UId="696">
+      <Component Name="State" UId="697" />
+    </Symbol>
+  </Access>
+  <Blank UId="698" />
+  <Token Text="+=" UId="699" />
+  <Blank UId="700" />
+  <Access Scope="LiteralConstant" UId="701">
+    <Constant UId="702">
+      <ConstantValue UId="704">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="705" />
+  <NewLine UId="706" />
+  <Blank Num="12" UId="707" />
+  <NewLine UId="708" />
+  <Blank Num="8" UId="709" />
+  <Access Scope="LocalConstant" UId="710">
+    <Constant Name="StateProvideResult" UId="711" />
+  </Access>
+  <Token Text=":" UId="714" />
+  <NewLine UId="715" />
+  <Blank Num="12" UId="716" />
+  <Token Text="REGION" UId="717" />
+  <Blank UId="718" />
+  <Text UId="719">Provide Result</Text>
+  <NewLine UId="720" />
+  <Blank Num="16" UId="721" />
+  <LineComment UId="722">
+    <Text UId="723"> Trigger Get Values</Text>
+  </LineComment>
+  <NewLine UId="724" />
+  <Blank Num="16" UId="725" />
+  <Access Scope="LocalVariable" UId="726">
+    <Symbol UId="727">
+      <Component Name="ResultTrigger" UId="728" />
+    </Symbol>
+  </Access>
+  <Blank UId="729" />
+  <Token Text="+=" UId="730" />
+  <Blank UId="731" />
+  <Access Scope="LiteralConstant" UId="732">
+    <Constant UId="733">
+      <ConstantValue UId="735">1</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="736" />
+  <NewLine UId="737" />
+  <Blank Num="16" UId="738" />
+  <Access Scope="LocalVariable" UId="739">
+    <Symbol UId="740">
+      <Component Name="ResultFeched" UId="741" />
+    </Symbol>
+  </Access>
+  <Blank UId="742" />
+  <Token Text=":=" UId="743" />
+  <Blank UId="744" />
+  <Access Scope="LiteralConstant" UId="745">
+    <Constant UId="746">
+      <ConstantValue UId="748">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="749" />
+  <NewLine UId="750" />
+  <Blank Num="16" UId="751" />
+  <Access Scope="LocalVariable" UId="752">
+    <Symbol UId="753">
+      <Component Name="Parameter_Out" UId="754" />
+      <Token Text="." UId="755" />
+      <Component Name="ErrorId" UId="756" />
+    </Symbol>
+  </Access>
+  <Blank UId="757" />
+  <Token Text=":=" UId="758" />
+  <Blank UId="759" />
+  <Access Scope="LocalConstant" UId="760">
+    <Constant Name="ERRORID_NO_ERROR" UId="761" />
+  </Access>
+  <Token Text=";" UId="764" />
+  <NewLine UId="765" />
+  <Blank Num="16" UId="766" />
+  <Access Scope="LocalVariable" UId="767">
+    <Symbol UId="768">
+      <Component Name="State" UId="769" />
+    </Symbol>
+  </Access>
+  <Blank UId="770" />
+  <Token Text=":=" UId="771" />
+  <Blank UId="772" />
+  <Access Scope="LocalConstant" UId="773">
+    <Constant Name="StatePreDone" UId="774" />
+  </Access>
+  <Token Text=";" UId="777" />
+  <NewLine UId="778" />
+  <Blank Num="16" UId="779" />
+  <Token Text=";" UId="780" />
+  <NewLine UId="781" />
+  <Blank Num="12" UId="782" />
+  <Token Text="END_REGION" UId="783" />
+  <NewLine UId="784" />
+  <Blank Num="12" UId="785" />
+  <NewLine UId="786" />
+  <Blank Num="8" UId="787" />
+  <Access Scope="LocalConstant" UId="788">
+    <Constant Name="StatePreDone" UId="789" />
+  </Access>
+  <Token Text=":" UId="792" />
+  <NewLine UId="793" />
+  <Blank Num="12" UId="794" />
+  <Token Text="REGION" UId="795" />
+  <Blank UId="796" />
+  <Text UId="797">##PreDone</Text>
+  <NewLine UId="798" />
+  <Blank Num="16" UId="799" />
+  <Token Text="IF" UId="800" />
+  <Blank UId="801" />
+  <Access Scope="LocalVariable" UId="802">
+    <Symbol UId="803">
+      <Component Name="ResultFeched" UId="804" />
+    </Symbol>
+  </Access>
+  <Blank UId="805" />
+  <Token Text="THEN" UId="806" />
+  <NewLine UId="807" />
+  <Blank Num="20" UId="808" />
+  <Access Scope="LocalVariable" UId="809">
+    <Symbol UId="810">
+      <Component Name="State" UId="811" />
+    </Symbol>
+  </Access>
+  <Blank UId="812" />
+  <Token Text=":=" UId="813" />
+  <Blank UId="814" />
+  <Access Scope="LocalConstant" UId="815">
+    <Constant Name="StateDone" UId="816" />
+  </Access>
+  <Token Text=";" UId="819" />
+  <NewLine UId="820" />
+  <Blank Num="16" UId="821" />
+  <Token Text="END_IF" UId="822" />
+  <Token Text=";" UId="823" />
+  <NewLine UId="824" />
+  <Blank Num="12" UId="825" />
+  <Token Text="END_REGION" UId="826" />
+  <NewLine UId="827" />
+  <Blank Num="12" UId="828" />
+  <NewLine UId="829" />
+  <Blank Num="12" UId="830" />
+  <NewLine UId="831" />
+  <Blank Num="8" UId="832" />
+  <Access Scope="LocalConstant" UId="833">
+    <Constant Name="StateDone" UId="834" />
+  </Access>
+  <Token Text=":" UId="837" />
+  <NewLine UId="838" />
+  <Blank Num="12" UId="839" />
+  <Token Text="REGION" UId="840" />
+  <Blank UId="841" />
+  <Text UId="842">##Done</Text>
+  <NewLine UId="843" />
+  <Blank Num="16" UId="844" />
+  <Access Scope="LocalVariable" UId="845">
+    <Symbol UId="846">
+      <Component Name="SkillToModul" UId="847" />
+      <Token Text="." UId="848" />
+      <Component Name="TaskBusy" UId="849" />
+    </Symbol>
+  </Access>
+  <Blank UId="850" />
+  <Token Text=":=" UId="851" />
+  <Blank UId="852" />
+  <Access Scope="LiteralConstant" UId="853">
+    <Constant UId="854">
+      <ConstantValue UId="856">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="857" />
+  <NewLine UId="858" />
+  <Blank Num="16" UId="859" />
+  <Access Scope="LocalVariable" UId="860">
+    <Symbol UId="861">
+      <Component Name="SkillToModul" UId="862" />
+      <Token Text="." UId="863" />
+      <Component Name="TaskDone" UId="864" />
+    </Symbol>
+  </Access>
+  <Blank UId="865" />
+  <Token Text=":=" UId="866" />
+  <Blank UId="867" />
+  <Access Scope="LiteralConstant" UId="868">
+    <Constant UId="869">
+      <ConstantValue UId="871">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="872" />
+  <NewLine UId="873" />
+  <Blank Num="16" UId="874" />
+  <Token Text="IF" UId="875" />
+  <Blank UId="876" />
+  <Access Scope="LocalVariable" UId="877">
+    <Symbol UId="878">
+      <Component Name="statErrorId" UId="879" />
+    </Symbol>
+  </Access>
+  <Blank UId="880" />
+  <Token Text="&lt;&gt;" UId="881" />
+  <Blank UId="882" />
+  <Access Scope="LocalConstant" UId="883">
+    <Constant Name="ERRORID_NO_ERROR" UId="884" />
+  </Access>
+  <Blank UId="887" />
+  <Token Text="THEN" UId="888" />
+  <NewLine UId="889" />
+  <Blank Num="20" UId="890" />
+  <Access Scope="LocalVariable" UId="891">
+    <Symbol UId="892">
+      <Component Name="SkillToModul" UId="893" />
+      <Token Text="." UId="894" />
+      <Component Name="TaskError" UId="895" />
+    </Symbol>
+  </Access>
+  <Blank UId="896" />
+  <Token Text=":=" UId="897" />
+  <Blank UId="898" />
+  <Access Scope="LiteralConstant" UId="899">
+    <Constant UId="900">
+      <ConstantValue UId="902">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="903" />
+  <NewLine UId="904" />
+  <Blank Num="20" UId="905" />
+  <Access Scope="LocalVariable" UId="906">
+    <Symbol UId="907">
+      <Component Name="Parameter_Out" UId="908" />
+      <Token Text="." UId="909" />
+      <Component Name="ErrorId" UId="910" />
+    </Symbol>
+  </Access>
+  <Blank UId="911" />
+  <Token Text=":=" UId="912" />
+  <Blank UId="913" />
+  <Access Scope="LocalVariable" UId="914">
+    <Symbol UId="915">
+      <Component Name="statErrorId" UId="916" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="917" />
+  <NewLine UId="918" />
+  <Blank Num="20" UId="919" />
+  <Access Scope="LocalVariable" UId="920">
+    <Symbol UId="921">
+      <Component Name="State" UId="922" />
+    </Symbol>
+  </Access>
+  <Blank UId="923" />
+  <Token Text=":=" UId="924" />
+  <Blank UId="925" />
+  <Access Scope="LocalConstant" UId="926">
+    <Constant Name="StateError" UId="927" />
+  </Access>
+  <Token Text=";" UId="930" />
+  <NewLine UId="931" />
+  <Blank Num="16" UId="932" />
+  <Token Text="ELSE" UId="933" />
+  <NewLine UId="934" />
+  <Blank Num="20" UId="935" />
+  <Access Scope="LocalVariable" UId="936">
+    <Symbol UId="937">
+      <Component Name="State" UId="938" />
+    </Symbol>
+  </Access>
+  <Blank UId="939" />
+  <Token Text=":=" UId="940" />
+  <Blank UId="941" />
+  <Access Scope="LocalConstant" UId="942">
+    <Constant Name="StateIdle" UId="943" />
+  </Access>
+  <Token Text=";" UId="946" />
+  <NewLine UId="947" />
+  <Blank Num="16" UId="948" />
+  <Token Text="END_IF" UId="949" />
+  <Token Text=";" UId="950" />
+  <NewLine UId="951" />
+  <Blank Num="12" UId="952" />
+  <Token Text="END_REGION" UId="953" />
+  <NewLine UId="954" />
+  <Blank Num="12" UId="955" />
+  <NewLine UId="956" />
+  <Blank Num="12" UId="957" />
+  <NewLine UId="958" />
+  <Blank Num="8" UId="959" />
+  <Access Scope="LocalConstant" UId="960">
+    <Constant Name="StateError" UId="961" />
+  </Access>
+  <Token Text=":" UId="964" />
+  <NewLine UId="965" />
+  <Blank Num="12" UId="966" />
+  <Token Text="REGION" UId="967" />
+  <Blank UId="968" />
+  <Text UId="969">##Error</Text>
+  <NewLine UId="970" />
+  <Blank Num="16" UId="971" />
+  <Access Scope="LocalVariable" UId="972">
+    <Symbol UId="973">
+      <Component Name="SkillToModul" UId="974" />
+      <Token Text="." UId="975" />
+      <Component Name="TaskBusy" UId="976" />
+    </Symbol>
+  </Access>
+  <Blank UId="977" />
+  <Token Text=":=" UId="978" />
+  <Blank UId="979" />
+  <Access Scope="LiteralConstant" UId="980">
+    <Constant UId="981">
+      <ConstantValue UId="983">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="984" />
+  <NewLine UId="985" />
+  <Blank Num="16" UId="986" />
+  <Access Scope="LocalVariable" UId="987">
+    <Symbol UId="988">
+      <Component Name="SkillToModul" UId="989" />
+      <Token Text="." UId="990" />
+      <Component Name="TaskDone" UId="991" />
+    </Symbol>
+  </Access>
+  <Blank UId="992" />
+  <Token Text=":=" UId="993" />
+  <Blank UId="994" />
+  <Access Scope="LiteralConstant" UId="995">
+    <Constant UId="996">
+      <ConstantValue UId="998">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="999" />
+  <NewLine UId="1000" />
+  <Blank Num="16" UId="1001" />
+  <Access Scope="LocalVariable" UId="1002">
+    <Symbol UId="1003">
+      <Component Name="SkillToModul" UId="1004" />
+      <Token Text="." UId="1005" />
+      <Component Name="TaskError" UId="1006" />
+    </Symbol>
+  </Access>
+  <Blank UId="1007" />
+  <Token Text=":=" UId="1008" />
+  <Blank UId="1009" />
+  <Access Scope="LiteralConstant" UId="1010">
+    <Constant UId="1011">
+      <ConstantValue UId="1013">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="1014" />
+  <NewLine UId="1015" />
+  <Blank Num="16" UId="1016" />
+  <Token Text=";" UId="1017" />
+  <Blank UId="1018" />
+  <LineComment UId="1019">
+    <Text UId="1020">wait FOR #Reset OR Init</Text>
+  </LineComment>
+  <NewLine UId="1021" />
+  <Blank Num="12" UId="1022" />
+  <Token Text="END_REGION" UId="1023" />
+  <NewLine UId="1024" />
+  <Blank Num="8" UId="1025" />
+  <NewLine UId="1026" />
+  <Blank Num="8" UId="1027" />
+  <Token Text="ELSE" UId="1028" />
+  <Blank Num="2" UId="1029" />
+  <LineComment UId="1030">
+    <Text UId="1031"> Statement section ELSE</Text>
+  </LineComment>
+  <NewLine UId="1032" />
+  <Blank Num="12" UId="1033" />
+  <Access Scope="LocalVariable" UId="1034">
+    <Symbol UId="1035">
+      <Component Name="State" UId="1036" />
+    </Symbol>
+  </Access>
+  <Blank UId="1037" />
+  <Token Text=":=" UId="1038" />
+  <Blank UId="1039" />
+  <Access Scope="LocalConstant" UId="1040">
+    <Constant Name="StateError" UId="1041" />
+  </Access>
+  <Token Text=";" UId="1044" />
+  <NewLine UId="1045" />
+  <Blank Num="4" UId="1046" />
+  <Token Text="END_CASE" UId="1047" />
+  <Token Text=";" UId="1048" />
+  <NewLine Num="2" UId="1049" />
+  <Token Text="END_REGION" UId="1050" />
+  <NewLine Num="2" UId="1051" />
+  <Token Text="REGION" UId="1052" />
+  <Blank UId="1053" />
+  <Text UId="1054">##State Mapping</Text>
+  <NewLine UId="1055" />
+  <Blank Num="4" UId="1056" />
+  <NewLine UId="1057" />
+  <Token Text="END_REGION" UId="1058" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="4" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="5" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="6" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="8" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="9" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

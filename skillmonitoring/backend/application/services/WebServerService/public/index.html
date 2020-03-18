@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SP347 Skill Engineering</title>
+    <link rel="icon" type="./image/png" href="dist/img/siemens_favicon.ico" >
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -35,8 +36,8 @@
     <![endif]-->
 
     <!-- Google Font -->
-    <!-- <link rel="stylesheet" href="dist/css/Source_Sans_Pro/font.css"> -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="dist/css/Source_Sans_Pro/font.css">
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
 </head>
 
 <body class="hold-transition skin-siemens-light sidebar-mini sidebar-collapse">
@@ -73,9 +74,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="skill-monitoring.html">
-                            <i class="fa fa-dashboard"></i>
-                            <span>Skill Monitoring</span>
+                        <a href="http://localhost:7400/circuit/" target="_blank">
+                            <i class="fa fa-exchange"></i>
+                            <span>Orchestration</span>
                             <span class="pull-right-container">
                             <span class="label label-primary pull-right">4</span>
                             </span>
@@ -105,15 +106,15 @@
                     <div class="col-md-6">
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs " role="tablist">
-                                    <li role="presentation" class="active"><a href="#treeview" data-toggle="tab">Treeview</a></li>
-                                    <li role="presentation" ><a href="#graph" data-toggle="tab">Graph</a></li>
-                                    <li role="presentation" class="pull-right"><a href="#" class="text-muted" data-toggle="modal" data-target="#addKG"><i class="fa fa-cloud-download"></i></a></li>                                    
+                                <li role="presentation" class="active"><a href="#treeview" data-toggle="tab">Treeview</a></li>
+                                <li role="presentation" ><a href="#graph" data-toggle="tab">Graph</a></li>
+                                <li role="presentation" class="pull-right"><a href="#" class="text-muted" data-toggle="modal" data-target="#addKG"><span class="label label-success label-small"><i class="fa fa-plug"></i></span></a></li>                                    
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane active" role="tabpanel" id="treeview" style="min-height: 70vh">
+                                <div class="tab-pane active" role="tabpanel" id="treeview" style="min-height: 50vh">
                                     <div class="row">
-                                        <div class="col-md-12" id="tree_header">   
-                                            <h4 class="bg-info">SPARQL Server</h4>                                         
+                                        <div class="col-md-12 clear-fix" id="tree_header">   
+                                            <h4 class="bg-success">SPARQL Server</h4>                                         
                                             <span class="col-md-2 font-weight-bold" >IP: </span> <span class="col-md-10" id="labelKGIP">No Connection </span>
                                             <span class="col-md-2 font-weight-bold">Port: </span> <span class="col-md-10" id="labelKGPort">No Connection</span>                                            
                                         </div>
@@ -132,7 +133,7 @@
                                             <div id="resource_tree"  class="proton-demo">
                                                 <span class="nodata">No Connection</span>
                                             </div>
-                                            <h4 class="bg-info">Skill</h4>
+                                            <h4 class="bg-warning">Skills in Knowledge Graph</h4>
                                             <div id="skill_tree" class="proton-demo">
                                                 <span class="nodata">No Connection</span>
                                             </div>
@@ -166,7 +167,7 @@
                                                                     <span aria-hidden="true">×</span></button>
                                         <h4 class="modal-title">Connect to Knowledge Graph</h4>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" >
                                         <form class="form-horizontal" role="form">
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label" for="paramIP">IP: </label>
@@ -192,41 +193,36 @@
                             <!-- /.modal-dialog -->
                         </div>
                         <!-- /.modal -->
-                    </div> <!-- /.col -->
+                    </div> <!-- /.col SPARQL Server-->
                     <div class="col-md-6">
                         <div class="box box-solid">
                             <div class="box-header">
                                 <h3 class="box-title text-uppercase">Avialable Skills</h3>
                                 <div class="box-tools pull-right">
-                                    <button type="button" class="btn btn-box-tool" data-toggle="modal" data-target="#addRessource"><i class="fa fa-search"></i></button>
+                                    <button type="button" class="btn btn-box-tool" data-toggle="modal" data-target="#addRessource"><span class="pull-left label label-success label-small"><i class="fa fa-search"></i></span></button>
+                                    <button type="button" class="btn btn-box-tool" data-toggle="modal" data-target="#validateSkill"><span class="pull-left label label-success label-small"><i class="fa fa-refresh"></i></span></button>
+                                    
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                     <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
                                 </div>
                             </div>
                             <!-- /.box-header -->
-                            <div class="box-body">
-                                <div class="row  clearfix ">
-                                    <div class="col-md-12 hidden" id="opcua_header"> 
-                                        <h4 class="bg-info">SPARQL Server</h4>                                          
-                                        <span class="col-md-2 font-weight-bold" >IP: </span> <span class="col-md-10" id="labelOPCIP">No Connection </span>
-                                        <span class="col-md-2 font-weight-bold">Port: </span> <span class="col-md-10" id="labelOPCPort">No Connection</span>                                            
-                                    </div>
-                                </div>
+                            <div class="box-body" >
                                 <div class="row clearfix hidden" id="opcua_overlay">
                                     <div class="overlay card col-md-2 col-md-offset-5" style="min-height: 10vh;">
                                         <i class="fa fa-refresh fa-spin"></i>
                                     </div>    
                                 </div>                         
                                 <div class="row  clearfix">                                    
-                                    <div class="col-md-12 hidden" id="opcua_content">
-                                        <table class="table" id="opcua_content_table">
+                                    <div class="col-md-12 hidden" id="opcua_content" style="min-height: 50vh">
+                                        <table class="table table-hover" id="opcua_content_table">
                                             <thead>
                                                 <tr>
-                                                    <th class="col-md-4">Name</th>
-                                                    <th>IP</th>
-                                                    <th>Port</th>
+                                                    <th class="col-md-2">Name</th>
+                                                    <th class="col-md-2">IP</th>
+                                                    <th class="col-md-1">Port</th>
                                                     <th>NodeId</th>
-                                                    <th>Details</th>
+                                                    <th class="col-md-1">Details</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="opcua_content_table_tbody">
@@ -243,71 +239,179 @@
                                 </div>
                                 <!-- /.row -->
                                 <!-- nav-tabs-custom -->
-                                <div class="modal fade" id="addRessource">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">×</span></button>
-                                                <h4 class="modal-title">Connect  OPC UA Server</h4>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <div class="modal fade" id="addRessource">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title">Search Skill on OPC UA Server</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="paramIPOPCUA">IP: </label>
+                                                <div class="col-sm-9">
+                                                    <input  data-slider-orientation="horizontal" class="form-control" id="paramIPOPCUA" placeholder="localhost" value="localhost"/>       
+                                                </div>
                                             </div>
-                                            <div class="modal-body">
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label" for="paramPortOPCUA">Port: </label>
+                                                <div class="col-sm-9">
+                                                    <input type="number" class="form-control" id="paramPortOPCUA" placeholder="4840" value="4840" />
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                        <button type="button" id="connectOPCUA" class="btn btn-primary">Execute</button>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div><!-- /.modal #addRessource -->
+                        <div class="modal fade" id="validateSkill">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span></button>
+                                        <h4 class="modal-title">Validate an implemented Skill</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row no-padding">
+                                            <div class="col-md-10">
                                                 <form class="form-horizontal" role="form">
                                                     <div class="form-group">
-                                                        <label class="col-sm-3 control-label" for="paramIPOPCUA">IP: </label>
+                                                        <label class="col-sm-3 control-label" for="paramIPOPCUA">Required Skill: </label>
                                                         <div class="col-sm-9">
-                                                            <input  data-slider-orientation="horizontal" class="form-control" id="paramIPOPCUA" placeholder="localhost" value="localhost"/>       
+                                                            <select class="form-control" id="selectedSkillKG" value="localhost"> 
+                                                                
+                                                            </select>      
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="col-sm-3 control-label" for="paramPortOPCUA">Port: </label>
+                                                        <label class="col-sm-3 control-label" for="paramPortOPCUA">Implemented Skill: </label>
                                                         <div class="col-sm-9">
-                                                            <input type="number" class="form-control" id="paramPortOPCUA" placeholder="4840" value="4840" />
+                                                            <select class="form-control" id="selectedSkillOPCUA" value="localhost"> 
+                                                                
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </form>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                                                <button type="button" id="connectOPCUA" class="btn btn-primary">Execute</button>
+                                            <div class="col-md-2">
+                                                <button type="button" id="validateOPCUASkill" class="btn btn-default btn-lg">    Check    </button>
                                             </div>
                                         </div>
-                                        <!-- /.modal-content -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <textarea id="CompatibilityResults" class="form-control" rows="20" placeholder="..." readonly></textarea>
+                                                </div>
+                                            </div>                                            
+                                        </div>                                        
                                     </div>
-                                    <!-- /.modal-dialog -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success" >Link</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
-                        <!-- /.modal -->
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div><!-- /.modal #addRessource -->
+                    </div> <!-- /.col OPC UA Skills-->
+                    <div class="col-md-12 hidden">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title text-uppercase">Event Logs</h3>
+                                <div class="box-tools pull-right">
+                                    <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">                      
+                                        <div class="input-group-btn">
+                                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                        </div>                                        
+                                      </div>                                      
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive no-padding" >                                       
+                                <table class="table table-hover" id="log_content_table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-2">Time</th>
+                                            <th>Log</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="log_content_table_tbody">
+                                    </tbody>
+                
+                                </table>
                             </div>
                             <!-- /.box-body -->
                         </div>
-                    </div>
+                    </div> <!-- /.col OPC UA Skills-->
                 </div>
             </section>
         </div>
         <!-- End Row -->
 
         <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+            <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="pull-right-xs">
-            <b>DF TI AT / SP 367</b> Innovation Fair
+            <strong>Copyright &copy; 2019 Siemens AG.</strong> - DF TI AT / SP 367
+            
         </div>
-        <strong>Copyright &copy; 2019 Siemens AG.</strong>
+        
     </footer>
+    </div>
+
 
     <!-- ./wrapper -->
 
     <!-- Template 7 Avialable SKills-->
     <script id="Skilltemplate" type="text/template7">
-        <tr>
+        <tr data-ip="{{ip}}" data-port="{{port}}" data-skillnodeid="{{nodeId}}">
             <td>{{name}}</td>
             <td>{{ip}}</td>
             <td>{{port}}</td>
             <td>{{nodeId}}</td>
-            <td> <a href="http://localhost:8080/skill-monitoring.html?skill={{name}}&ip={{ip}}&port={{port}}" target="_blank"><span class="pull-left label label-success label-small">...</span></a></td>
+            <td><a href="http://localhost:8080/skill-monitoring.html?skill={{name}}&ip={{ip}}&port={{port}}" target="_blank"><span class="pull-left label label-default label-small">...</span></a></td>
         </tr>
     </script>
+    <script id="LogTemplate" type="text/template7">
+        <tr>
+            <td>{{time}}</td>
+            <td>{{log}}</td>
+        </tr>
+    </script>
+<script id="SkillTypeTemplate" type="text/template7">{{#if match}}
+[+] Required Skill '{{r_skill}}'' and Implemented Skills '{{i_skill}}' are of same type (VDI 2860).
+{{else}}
+[x] Required Skill '{{r_skill}}'' is not compatible with Implemented Skills '{{i_skill}}':
+    [-] Required Skill Type: {{r_skill}} 
+    [-] Implemented Skill Type: {{i_skill}}
+{{/if}}
+</script>
+<script id="MatchingConstraintTemplate" type="text/template7">{{#if match}}[x] Implemented Skills '{{i_skill}}' fulfills all matching constrainsts.{{else}}
+[x] Some matching constraints are not meet.
+    {{#each constraints}}
+    [-] {{constraints}} {{/each}}{{/if}}    
+</script>
+<script id="MatchingParameterTemplate" type="text/template7">{{#if match}}[x] All calling Parameters are compatibles.{{else}}
+[x] Some calling prameters are not compatibles.
+    [+] Input parameters:{{#each in_parameters}}
+        [-] {{name}}: Type: Input, Datatype: {{dataType}}, ValueRank: {{valueRank}}{{/each}}
+    [+] Output parameters:{{#each out_parameters}}
+        [-] {{name}}: Type: Output, Datatype: {{dataType}}, ValueRank: {{valueRank}}{{/each}}{{/if}}
+</script>
 
     <!-- jQuery 3 -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>

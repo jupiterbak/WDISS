@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SP347 Skill Monitoring</title>
+    <link rel="icon" type="./image/png" href="dist/img/siemens_favicon.ico" >
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -159,19 +160,19 @@
                                             <tbody>
                                                 <tr>
                                                     <td>Name</td>
-                                                    <td><span id="ressourceName">AssemblyModule 1</span></td>
+                                                    <td><span id="ressourceName">Module X</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td >IP</td>
-                                                    <td><span id="ressourceIP">000.000.000.000</span></td>
+                                                    <td><span id="ressourceIP">XXX.XXX.XXX.XXX</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Port</td>
-                                                    <td><span id="ressourcePort">4803</span></td>
+                                                    <td><span id="ressourcePort">xxxx</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Status</td>
-                                                    <td><span id="ressourceStatus">Connected</span></td>
+                                                    <td><span id="ressourceStatus">Connection status</span></td>
                                                 </tr>
                                                
                                             </tbody>
@@ -203,7 +204,7 @@
                                                     <td>Skill State Machine</td>
                                                 </tr>
                                                 <tr class="">
-                                                    <td>Current State</td>
+                                                    <td>State Path</td>
                                                     <td><span id="CurrentState" class="label label-success label-medium">##</span></td>
                                                 </tr>
                                                 
@@ -229,7 +230,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="box box-solid collapsed-box">
+                        <div class="box box-solid">
                             <div class="box-header">
                                 <h3 class="box-title text-uppercase text-bold">Avialables Actions
                                 </h3>
@@ -340,7 +341,7 @@
     <script id="SkillActionList" type="text/template7">
         <li id="Start" >
             <a href="#" class="EFlexAction" data-toggle="modal" data-target="#paramModal{{name}}" data-action="{{name}}">
-                <span class="info-box-text">{{name}}<i class="fa fa-circle text-red pull-right "></i> </span>
+                <span class="info-box-text">{{name}}<i class="fa fa-circle text-siemens pull-right "></i> </span>
                 <span class="info-box-number" id="{{name}}_method_label"></span>
             </a>
         </li>

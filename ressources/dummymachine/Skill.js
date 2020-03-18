@@ -220,7 +220,7 @@ class Skill {
                 opcua.StatusCodes.Good, new Date());
             this.skill_state_machine_cs_nid.setValueFromSource({
                     dataType: opcua.DataType.NodeId,
-                    value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING.cleared)
+                    value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING.cleared)
                 },
                 opcua.StatusCodes.Good, new Date()
             );
@@ -229,7 +229,7 @@ class Skill {
                     opcua.StatusCodes.Good, new Date());
                 this.cleared_state_machine_cs_nid.setValueFromSource({
                         dataType: opcua.DataType.NodeId,
-                        value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING.running)
+                        value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING.running)
                     },
                     opcua.StatusCodes.Good, new Date()
                 );
@@ -240,7 +240,7 @@ class Skill {
 
                     this.running_state_machine_cs_nid.setValueFromSource({
                             dataType: opcua.DataType.NodeId,
-                            value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING.resetting)
+                            value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING.resetting)
                         },
                         opcua.StatusCodes.Good, new Date()
                     );
@@ -250,7 +250,7 @@ class Skill {
 
                     this.resetting_state_machine_cs_nid.setValueFromSource({
                             dataType: opcua.DataType.NodeId,
-                            value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running.resetting])
+                            value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running.resetting])
                         },
                         opcua.StatusCodes.Good, new Date()
                     );
@@ -259,7 +259,7 @@ class Skill {
                         opcua.StatusCodes.Good, new Date());
                     this.running_state_machine_cs_nid.setValueFromSource({
                             dataType: opcua.DataType.NodeId,
-                            value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING.idle)
+                            value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING.idle)
                         },
                         opcua.StatusCodes.Good, new Date()
                     );
@@ -267,7 +267,7 @@ class Skill {
                         opcua.StatusCodes.Good, new Date());
                     this.idle_state_machine_cs_nid.setValueFromSource({
                             dataType: opcua.DataType.NodeId,
-                            value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running.idle])
+                            value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running.idle])
                         },
                         opcua.StatusCodes.Good, new Date()
                     );
@@ -276,7 +276,7 @@ class Skill {
                         opcua.StatusCodes.Good, new Date());
                     this.running_state_machine_cs_nid.setValueFromSource({
                             dataType: opcua.DataType.NodeId,
-                            value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING.hold)
+                            value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING.hold)
                         },
                         opcua.StatusCodes.Good, new Date()
                     );
@@ -284,7 +284,7 @@ class Skill {
                         opcua.StatusCodes.Good, new Date());
                     this.hold_state_machine_cs_nid.setValueFromSource({
                             dataType: opcua.DataType.NodeId,
-                            value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running.hold])
+                            value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running.hold])
                         },
                         opcua.StatusCodes.Good, new Date()
                     );
@@ -293,7 +293,7 @@ class Skill {
                         opcua.StatusCodes.Good, new Date());
                     this.running_state_machine_cs_nid.setValueFromSource({
                             dataType: opcua.DataType.NodeId,
-                            value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING.execute)
+                            value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING.execute)
                         },
                         opcua.StatusCodes.Good, new Date()
                     );
@@ -301,7 +301,7 @@ class Skill {
                         opcua.StatusCodes.Good, new Date());
                     this.execute_state_machine_cs_nid.setValueFromSource({
                             dataType: opcua.DataType.NodeId,
-                            value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running.execute])
+                            value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running.execute])
                         },
                         opcua.StatusCodes.Good, new Date()
                     );
@@ -310,7 +310,7 @@ class Skill {
                         opcua.StatusCodes.Good, new Date());
                     this.running_state_machine_cs_nid.setValueFromSource({
                             dataType: opcua.DataType.NodeId,
-                            value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running])
+                            value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared.running])
                         },
                         opcua.StatusCodes.Good, new Date()
                     );
@@ -320,7 +320,7 @@ class Skill {
                     opcua.StatusCodes.Good, new Date());
                 this.cleared_state_machine_cs_nid.setValueFromSource({
                         dataType: opcua.DataType.NodeId,
-                        value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared])
+                        value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state.cleared])
                     },
                     opcua.StatusCodes.Good, new Date()
                 );
@@ -330,7 +330,7 @@ class Skill {
                 opcua.StatusCodes.Good, new Date());
             this.skill_state_machine_cs_nid.setValueFromSource({
                     dataType: opcua.DataType.NodeId,
-                    value: opcua.resolveNodeId("ns=" + this.skill_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state])
+                    value: opcua.resolveNodeId("ns=" + this.skill_type_namespace_index + ";i=" + STATENODEIDMAPPING[this.skill_state_machine.current_state])
                 },
                 opcua.StatusCodes.Good, new Date()
             );

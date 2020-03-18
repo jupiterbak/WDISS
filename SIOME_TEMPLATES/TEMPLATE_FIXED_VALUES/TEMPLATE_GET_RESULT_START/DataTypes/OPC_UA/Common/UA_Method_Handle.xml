@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V15.1" />
+  <DocumentInfo>
+    <Created>2019-08-08T13:49:45.9546209Z</Created>
+    <ExportSetting>None</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Types.PlcStruct ID="0">
+    <AttributeList>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v3">
+  <Section Name="None">
+    <Member Name="Pre" Datatype="Struct">
+      <Comment>
+        <MultiLanguageText Lang="en-US">PreCall Parameter</MultiLanguageText>
+      </Comment>
+      <Member Name="Done" Datatype="Bool" />
+      <Member Name="Busy" Datatype="Bool" />
+      <Member Name="Error" Datatype="Bool" />
+      <Member Name="Status" Datatype="DWord" />
+    </Member>
+    <Member Name="Post" Datatype="Struct">
+      <Comment>
+        <MultiLanguageText Lang="en-US">PostCall Parameter</MultiLanguageText>
+      </Comment>
+      <Member Name="Done" Datatype="Bool" />
+      <Member Name="Busy" Datatype="Bool" />
+      <Member Name="Error" Datatype="Bool" />
+      <Member Name="Status" Datatype="DWord" />
+    </Member>
+    <Member Name="Started" Datatype="Bool">
+      <Comment>
+        <MultiLanguageText Lang="en-US">true=MethodCall started (pre done)</MultiLanguageText>
+      </Comment>
+    </Member>
+    <Member Name="Finished" Datatype="Bool">
+      <Comment>
+        <MultiLanguageText Lang="en-US">true=MethodCall ended</MultiLanguageText>
+      </Comment>
+    </Member>
+    <Member Name="Result" Datatype="DWord">
+      <Comment>
+        <MultiLanguageText Lang="en-US">Result of the Method Call</MultiLanguageText>
+      </Comment>
+    </Member>
+    <Member Name="Called" Datatype="Bool">
+      <Comment>
+        <MultiLanguageText Lang="en-US">true=MethodeCall is called</MultiLanguageText>
+      </Comment>
+    </Member>
+    <Member Name="ErrorMessage" Datatype="WString">
+      <Comment>
+        <MultiLanguageText Lang="en-US">Erroro Message</MultiLanguageText>
+      </Comment>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <Name>UA_Method_Handle</Name>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <MultilingualText ID="3" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="4" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Types.PlcStruct>
+</Document>

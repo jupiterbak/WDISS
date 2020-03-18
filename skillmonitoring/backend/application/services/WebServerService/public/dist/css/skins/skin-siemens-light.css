@@ -105,7 +105,7 @@
 }
 
 .skin-siemens-light .sidebar-menu>li.active {
-    border-left-color: #00a65a;
+    border-left-color: #41aaaa;
 }
 
 .skin-siemens-light .sidebar-menu>li.active>a {
@@ -307,4 +307,13 @@
 
 .label-success{
     background-color: #41aaaa !important;
+}
+
+.btn-success {
+    background-color: #41aaaa;
+    border-color: #008d4c;
+}
+
+.text-siemens {
+    color: #41aaaa !important;
 }

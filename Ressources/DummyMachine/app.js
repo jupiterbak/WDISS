@@ -70,7 +70,7 @@ function post_initialize() {
     internal_kill.initialize();
 
     server.start(function() {
-        process.title = "LEMS SP 164";
+        process.title = "InsertSkill - SP347 Dummy server";
         logger.info("Server is now listening ... ( press CTRL+C to stop)");
         logger.info("port " + server.endpoints[0].port);
         const endpointUrl = server.endpoints[0].endpointDescriptions()[0].endpointUrl;

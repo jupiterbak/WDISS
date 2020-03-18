@@ -36,12 +36,7 @@ var WebServerService = function() {
     this.express = require('express');
     this.wapp = module.exports.app = this.express();
     this.sockets = {};
-    this.connectionMsg = {
-        msg: "Not connected",
-        ip: "0.0.0.0",
-        port: "4840",
-        connection: false
-    };
+    this.connectionMsg = {};
 
     this.lastStateChangeEvent = {};
 
@@ -68,6 +63,14 @@ WebServerService.prototype.init = function(_app, _settings) {
         socket.emit("connected", socket.id.replace("/#", ""));
         socket.emit("serverstatus", self.connectionMsg);
         socket.emit("skillModels", gFoundedSkills);
+        // Get KGEndponts
+        var end_points = [];
+        for (var prop in KGEnpoints) {
+            var el = KGEnpoints[prop];
+            end_points.push({ip:el.ip, port:el.port});
+        }
+        
+        socket.emit("KGConnected", end_points);
         socket.emit("StatesChanged", self.lastStateChangeEvent);
         socket.emit("KPIChanged", self.lastKPIChangedEvent);
         socket.emit("STATESDescriptionChanged", self.lastSTATESDescriptionChangedEvent);
@@ -88,7 +91,6 @@ WebServerService.prototype.init = function(_app, _settings) {
     });
 
     // Configure the webserver
-    // Configure the webserver
     this.wapp.disable('x-powered-by');
     this.wapp.use(self.express.static(__dirname + '/public'));
     this.wapp.use(self.sessionMiddleware);
@@ -104,6 +106,11 @@ WebServerService.prototype.start = function() {
 
     // Initialize the OPCUA Client Service
     self.opcuaclientservice.start();
+
+    self.wapp.get('/getAllSkillOPCUASkills', function(req, res) {        
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(gFoundedSkills));
+    });
 
     self.wapp.get('/ExecuteMethod', function(req, res) {
         let action = JSON.parse(req.query.action);
@@ -125,6 +132,9 @@ WebServerService.prototype.start = function() {
     self.wapp.get('/connect', function(req, res) {
         let params = JSON.parse(req.query.parameter);
         self.opcuaclientservice.ConnectPLC(params, self, function(err, client, results) {
+            // SockeiIO feedback
+            self.emitAll("serverstatus", self.connectionMsg);
+            self.emitAll("skillModels", gFoundedSkills);
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify({ err: err, results: results }));
         });
@@ -203,6 +213,22 @@ WebServerService.prototype.start = function() {
         }
     });
 
+    self.wapp.get('/getAllSkillKGInstances', function(req, res) {
+        var ID = req.query.ID;
+        var _endpoint = KGEnpoints[ID];
+        var parentID = req.query.parent.id;
+        if (_endpoint) {
+            if (parentID && parentID === "#") {
+                _endpoint.getAllSkillInstances(res);
+            } else {
+                _endpoint.getChildBySubType(res, parentID);
+            }            
+        } else {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify([]));
+        }
+    });
+
     // Start the webserver
     self.webServer.listen(self.settings.uiPort, function() {
         self.app.log.info("MICROSERVICE[" + self.settings.name + "] ######### ==> Web app listening on port " + self.settings.uiPort + ".");
@@ -223,22 +249,22 @@ WebServerService.prototype.stop = function() {
 WebServerService.prototype.emit = function(eventID, data) {
     var self = this;
     if (eventID === "PLCConnected") {
-        self.connectionMsg = data;
+        self.connectionMsg["" + data.ip + "_" + data.port]  = data;
         self.emitAll("serverstatus", data);
     } else if (eventID === "PLCDisconnected") {
-        self.connectionMsg = data;
+        self.connectionMsg["" + data.ip + "_" + data.port]  = data;
         self.emitAll("serverstatus", data);
     } else if (eventID === "serverstatus") {
-        self.connectionMsg = data;
+        self.connectionMsg["" + data.ip + "_" + data.port]  = data;
         self.emitAll("serverstatus", data);
     } else if (eventID === "skillModelFounded") {
         gFoundedSkills["" + data.ip + "_" + data.port + "_" + data.skill.name] = data;
         self.emitAll("skillModels", gFoundedSkills);
     } else if (eventID === "StatesChanged") {
-        self.lastStateChangeEvent[data.state.ID] = data;
+        self.lastStateChangeEvent["" + data.ip + "_" + data.port + "_"  + data.state.ID] = data;
         self.emitAll("StatesChanged", self.lastStateChangeEvent);
     } else if (eventID === "KPIChanged") {
-        self.lastKPIChangedEvent[data.name] = data;
+        self.lastKPIChangedEvent["" + data.ip + "_" + data.port + "_" + data.name] = data;
         self.emitAll("KPIChanged", self.lastKPIChangedEvent);
     } else if (eventID === "STATESDescriptionChanged") {
         self.lastSTATESDescriptionChangedEvent = data;

@@ -83,16 +83,16 @@ var DAISYOPCClient = function(ip, port, serverName, socketID, socketHandler) {
     this.socketID = socketID;
 
     var options = {
-        applicationName: "SP164_ENERGY_DEMONSTRATOR",
+        applicationName: "SP367_SKILL_ORCHESTRATOR",
         endpoint_must_exist: false,
         connectionStrategy: {
-            maxRetry: 200,
-            initialDelay: 4000,
-            maxDelay: 50000
+            maxRetry: 20000000,
+            initialDelay: 10000,
+            maxDelay: 50000000
         },
         securityMode: opcua.MessageSecurityMode.NONE,
         securityPolicy: opcua.SecurityPolicy.None,
-        requestedSessionTimeout: 20000,
+        requestedSessionTimeout: 2000000,
         //serverCertificate: serverCertificate,
         defaultSecureTokenLifetime: 40000,
         keepSessionAlive: true
@@ -100,6 +100,9 @@ var DAISYOPCClient = function(ip, port, serverName, socketID, socketHandler) {
 
     this.client = new opcua.OPCUAClient(options);
     this.connected = false;
+    this.monitored = false;
+    this.information_model_checked = false;
+    this.skill_array = [];
     this.session = null;
     this.subscription = null;
     this.monitoredItems = [];
@@ -160,6 +163,10 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
                         connection: false
                     });
                     self.connected = false;
+                    self.monitored = false;
+                    self.information_model_checked = false;
+                    self.skill_array = [];
+
                     console.log("timed_out_request ");
                 });
                 self.client.on("start_reconnection", function() {
@@ -170,6 +177,9 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
                         connection: false
                     });
                     self.connected = false;
+                    self.monitored = false;
+                    self.information_model_checked = false;
+                    self.skill_array = [];
                     console.log("start_reconnection not working so aborting");
                 });
                 self.client.on("connection_reestablished", function() {
@@ -190,6 +200,9 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
                         port: port,
                     });
                     self.connected = false;
+                    self.monitored = false;
+                    self.information_model_checked = false;
+                    self.skill_array = [];
                     console.log("close and abort");
                     //	opcuaServerUp = false;
                 });
@@ -201,6 +214,9 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
                         connection: false
                     });
                     self.connected = false;
+                    self.monitored = false;
+                    self.information_model_checked = false;
+                    self.skill_array = [];
                     console.log("  connection failed for the", nb,
                         " time ... We will retry in ", delay, " ms");
                     //opcuaServerUp = false;
@@ -216,6 +232,9 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
                             connection: false
                         });
                         self.connected = false;
+                        self.monitored = false;
+                        self.information_model_checked = false;
+                        self.skill_array = [];
                     } else {
 
                         //console.log("Connected to: ".green + url.green);
@@ -255,7 +274,7 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
                 self.subscription = new opcua.ClientSubscription(self.session, {
                     requestedPublishingInterval: 10,
                     requestedLifetimeCount: 60000,
-                    requestedMaxKeepAliveCount: 2000,
+                    requestedMaxKeepAliveCount: 2000000,
                     maxNotificationsPerPublish: 1000,
                     publishingEnabled: true,
                     priority: 1
@@ -686,6 +705,12 @@ DAISYOPCClient.prototype.readAllAttributes = function(ns, nid, callback) {
     var type = guidtest(nid);
     var nodes_to_read = "ns=" + ns + ";" + type + "=" + nid;
 
+    this.session.readAllAttributes(nodes_to_read, function(err, nodesToRead, dataValues, diagnostics) {
+        callback(err, nodesToRead, dataValues, diagnostics);
+    });
+};
+
+DAISYOPCClient.prototype.readAllAttributes = function(nodes_to_read, callback) {
     this.session.readAllAttributes(nodes_to_read, function(err, nodesToRead, dataValues, diagnostics) {
         callback(err, nodesToRead, dataValues, diagnostics);
     });

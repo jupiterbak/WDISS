@@ -163,7 +163,7 @@ module.exports = {
                     ip: "0.0.0.0",
                     port: 4840,
                     defaultObjectModel: {
-                        _states: ["CurrentStateExt", "CurrentState", "Id"],
+                        _states: ["Id"], // ["CurrentStateExt", "CurrentState", "Id"],
                         _kpi: ["CurrentLoads", "CurrentLoad", "CurrMachSpeed", "TargetLoad", "Product", "MachSpeed", "StateChangeInProgress", "Interlocked", "EnergySource", "SupportedModes", "Version", "MachSpeed_AC", "MachSpeed_DC"],
                         _actions: ["Abort", "Clear", "Reset", "Stop", "Hold", "Start", "UnHold", "GetResult"],
                         _data: [{

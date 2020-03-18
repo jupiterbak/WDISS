@@ -45,11 +45,13 @@ OPCUAClientInterface.prototype.init = function(_app, sio, _settings) {
         defaultObjectModel: { CURRENT_STATES: [], STATES: [], KPI: [], ACTIONS: [] }
     };
     self.settings.defaultObjectModel = self.settings.defaultObjectModel || {};
+    self.settings.skillsModel = self.settings.skillsModel || {};
 
     self.started = false;
     self.manager = new DAISYOPCClientManager(sio);
     self.app.log.info("MICROSERVICE[" + self.settings.name + "] initialized successfully!");
     self.current_state_objects = [];
+    self.current_state_object_types = {};
 };
 OPCUAClientInterface.prototype.start = function() {
     var self = this;
@@ -111,27 +113,41 @@ OPCUAClientInterface.prototype.ConnectPLC = function(arg, sio, fCallBack) {
                 }
             },
             function(client, callback) { // Check the server information model
-                // Check Server Model
-                checkServerModel(self, client, sio, function(err, skillArray) {
-                    if (err) {
-                        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server is not compatible to the Skill model.");
-                        callback(err, client, []);
-                    } else {
-                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server implements compatible Automation Skill. Client will start monitoring.");
-                        callback(null, client, skillArray);
-                    }
-                });
+                if (client.information_model_checked  === false) {
+                    // Check Server Model
+                    checkServerModel(self, client, sio, function(err, skillArray) {
+                        if (err) {
+                            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server is not compatible to the Skill model.");
+                            callback(err, client, []);
+                        } else {
+                            self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server implements compatible Automation Skill. Client will start monitoring.");
+                            client.skill_array = skillArray;
+                            client.information_model_checked = true;
+                            callback(null, client, skillArray);
+                        }
+                    });
+                }else{
+                    self.app.log.info("MICROSERVICE[" + self.settings.name + "] client information model is already checked." );
+                    callback(null, client, client.skill_array);
+                }
+                
             },
             function(client, skillArray, callback) { // Monitor the PLC assuming that it is compatible to our model
-                monitorServerInformationModel(self, client, sio, skillArray, function(err) {
-                    if (err) {
-                        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server Information model could not be monitored.");
-                        callback(err, client, []);
-                    } else {
-                        self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server Information model is being monitored.");
-                        callback(null, client, skillArray);
-                    }
-                });
+                if (client.monitored  === false) {
+                    monitorServerInformationModel(self, client, sio, skillArray, function(err) {
+                        if (err) {
+                            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] PLC Server Information model could not be monitored.");
+                            callback(err, client, []);
+                        } else {
+                            self.app.log.info("MICROSERVICE[" + self.settings.name + "] PLC Server Information model is being monitored.");
+                            client.monitored = true;
+                            callback(null, client, skillArray);
+                        }
+                    });
+                }else{
+                    self.app.log.info("MICROSERVICE[" + self.settings.name + "] client information model is already monitored." );
+                    callback(null, client, client.skill_array);
+                }                
             }
         ], function(err, client, results) {
             fCallBack(err, client, results);
@@ -172,40 +188,50 @@ OPCUAClientInterface.prototype.DisconnectPLC = function(arg, fCallBack) {
 OPCUAClientInterface.prototype.ExecuteMethod = function(arg, fCallBack) {
     var self = this;
     //Initialize a new client
-    if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.actionName) {
+    if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.skillName && arg.actionName) {
         var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
         if (client) {
-            if (client.connected === true) {
+            if (client.connected === true && client.information_model_checked === true) {
+                // Search for the action parameters
                 var action = null;
-                for (var i = 0; i < self.settings.modulesetting.defaultObjectModel.ACTIONS.length; i++) {
-                    if (self.settings.modulesetting.defaultObjectModel.ACTIONS[i].name === arg.actionName) {
-                        action = self.settings.modulesetting.defaultObjectModel.ACTIONS[i];
+                for (let _s = 0; _s < client.skill_array.length; _s++) {
+                    const _skill = client.skill_array[_s];
+                    if(_skill.skill.name === arg.skillName){
+                        for (var i = 0; i < _skill.objectMonitor.ACTIONS.length; i++) {
+                            if (_skill.objectMonitor.ACTIONS[i].name === arg.actionName) {
+                                action = _skill.objectMonitor.ACTIONS[i];
+                                break;
+                            }
+                        }
                         break;
-                    }
+                    }                    
                 }
+                
                 if (action) {
                     if (action.objectId && action.methodId && client) {
                         // Initialize the parameters
                         var inputArguments = [];
                         if (action.parameters) {
-                            var k = 0;
-                            action.parameters.inputArguments.forEach(function(el) {
-                                // Filter Datatype
-                                // TODO: Only basic datatypes are supported
-                                //const keys = Object.keys(opcua.DataType).filter(k => opcua.DataType[k] === el.dataType.value);
-                                /*
-                                 *     nodeId = opcua.coerceNodeId("ns=2;s=Scalar_Static_ImagePNG");
-                                 *     session.getBuildInDataType(nodeId,function(err,dataType) {
-                                 *        assert(dataType === opcua.DataType.ByteString);
-                                 *     });
-                                 * */
-                                inputArguments.push({
-                                    dataType: el.dataType.value, // only basic datatypes are supported
-                                    arrayType: el.valueRank !== -1 ? opcua.VariantArrayType.Array : opcua.VariantArrayType.Scalar,
-                                    value: el.valueRank !== -1 ? [0] : 0
+                            if (action.parameters.inputArguments && action.parameters.inputArguments.length > 0) {
+                                var k = 0;
+                                action.parameters.inputArguments.forEach(function(el) {
+                                    // Filter Datatype
+                                    // TODO: Only basic datatypes are supported
+                                    //const keys = Object.keys(opcua.DataType).filter(k => opcua.DataType[k] === el.dataType.value);
+                                    /*
+                                    *     nodeId = opcua.coerceNodeId("ns=2;s=Scalar_Static_ImagePNG");
+                                    *     session.getBuildInDataType(nodeId,function(err,dataType) {
+                                    *        assert(dataType === opcua.DataType.ByteString);
+                                    *     });
+                                    * */
+                                    inputArguments.push({
+                                        dataType: el.dataType.value, // only basic datatypes are supported
+                                        arrayType: el.valueRank !== -1 ? opcua.VariantArrayType.Array : opcua.VariantArrayType.Scalar,
+                                        value: el.valueRank !== -1 ? [0] : 0
+                                    });
+                                    k++;
                                 });
-                                k++;
-                            });
+                            }                            
                         }
 
                         client.callMethod(action.objectId.ns, action.objectId.nid, action.methodId.ns, action.methodId.nid, inputArguments, function(err, response) {
@@ -222,6 +248,9 @@ OPCUAClientInterface.prototype.ExecuteMethod = function(arg, fCallBack) {
                                 }
                             }
                         });
+                    } else {
+                        fCallBack({ text: "Could not execute action. Parameters not provided." }, null);
+                        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not execute action. Parameters not provided.");
                     }
                 } else {
                     fCallBack({ text: "Could not execute action. Action was not found on OPC UA Server." }, null);
@@ -240,18 +269,24 @@ OPCUAClientInterface.prototype.ExecuteMethod = function(arg, fCallBack) {
 
 OPCUAClientInterface.prototype.WriteVariable = function(arg, fCallBack) {
     var self = this;
-    let _variable = null;
-    for (let i = 0; i < self.settings.modulesetting.defaultObjectModel.KPI.length; i++) {
-        const element = self.settings.modulesetting.defaultObjectModel.KPI[i];
-        if (element.name === arg.name) {
-            _variable = element;
-        }
-    }
-    if (_variable) {
-        if (arg.ip && arg.socketID && arg.port && arg.serverName) {
-            var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
-            if (client) {
-                if (client.connected === true && _variable.nodeId) {
+    if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.skillName && arg.variableName) {
+        var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
+        if (client && client.connected === true && client.information_model_checked === true) {
+                // Search for the action parameters
+                var _variable = null;
+                for (let _s = 0; _s < client.skill_array.length; _s++) {
+                    const _skill = array[_s];
+                    if(_skill.skill.name === arg.skillName){
+                        for (var i = 0; i < _skill.objectMonitor.KPI.length; i++) {
+                            if (_skill.objectMonitor.KPI[i].name === arg.variableName) {
+                                _variable = _skill.objectMonitor.KPI[i];
+                                break;
+                            }
+                        }
+                        break;
+                    }                    
+                }
+                if (_variable) {
                     // Initialize the parameters
                     let _value = {
                         value: { /* Variant */
@@ -268,20 +303,18 @@ OPCUAClientInterface.prototype.WriteVariable = function(arg, fCallBack) {
                             fCallBack(null, statusCode);
                         }
                     });
+                }else {
+                    self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Variable not found.");
+                    fCallBack({ text: "Could not write variable. Variable not found" }, null);
                 }
-
-            } else {
-                self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Client is disconnected.");
-                fCallBack({ text: "Could not execute action. Client is disconnected." }, null);
-            }
         } else {
             self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Client is disconnected.");
             fCallBack({ text: "Could not execute action. Client is disconnected." }, null);
         }
     } else {
-        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Invalid arguments.");
-        fCallBack({ text: "Invalid Arguments" }, null);
-    }
+        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Client and skills are not defined.");
+        fCallBack({ text: "Could not execute action. Client and skill are not defined." }, null);
+    }    
 };
 
 // ---------------------------------------------------------------------------------------------------
@@ -290,180 +323,202 @@ function monitorServerInformationModel(self, client, sio, skillArray, fCallBack)
     async.series([
         function(callback) { // Monitor the current state Machines
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring CURRENT STATES.");
-            var _current_states = self.settings.modulesetting.defaultObjectModel.CURRENT_STATES;
-            if (_current_states) {
-                var ii = 0;
-                _current_states.forEach(function(el) {
-                    if (el.nodeId && client) {
-                        client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, el.interval, function(err) {
-                            if (err) {
-                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
-                            }
-                        }, function(dataValue) {
-                            if (dataValue.value) {
-                                el["value"] = dataValue.value.value;
-                                el["ID"] = "ns=" + el.nodeId.ns + ";i=" + el.nodeId.nid;
-                                self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE = dataValue.value.value;
-                            } else {
-                                el["value"] = 1;
-                                self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE = 1;
-                            }
-                            //TODO Optimize SocketIO Communication
-                            // Wait 500 ms to get all notification changes before sending the result
-                            if (self.started) {
-                                // Collect all transitions that are enabled
-                                let transitions = [];
-                                let transitionsObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
-                                for (const key in transitionsObj) {
-                                    if (transitionsObj.hasOwnProperty(key)) {
-                                        const trans = transitionsObj[key];
-                                        if (trans.EnableFlag) {
-                                            //if (trans.EnableFlag.value) {
-                                            transitions.push(trans);
-                                            //}
+            // For each skill collect the states
+            skillArray.forEach(_skill => {
+                var _current_states = _skill.objectMonitor.CURRENT_STATES || [];
+                if (_current_states.length > 0) {
+                    var ii = 0;
+                    _current_states.forEach(function(el) {
+                        if (el.nodeId && client) {
+                            client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, el.interval, function(err) {
+                                if (err) {
+                                    self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
+                                }
+                            }, function(dataValue) {
+                                if (self.started) {
+                                    if (dataValue.value) {
+                                        el["value"] = dataValue.value.value;
+                                        el["ID"] = "ns=" + el.nodeId.ns + ";i=" + el.nodeId.nid;
+                                        _skill.objectMonitor['CURRENT_STATE_VALUE'] = dataValue.value.value;
+                                    } else {
+                                        el["value"] = 1;
+                                        _skill.objectMonitor['CURRENT_STATE_VALUE'] = 1;
+                                    }
+    
+                                    // Collect all transitions that are enabled
+                                    let transitions = [];
+                                    let transitionsObj = _skill.TRANSITIONS;
+                                    for (const key in transitionsObj) {
+                                        if (transitionsObj.hasOwnProperty(key)) {
+                                            const trans = transitionsObj[key];
+                                            if (trans.EnableFlag) {
+                                                //if (trans.EnableFlag.value) {
+                                                transitions.push(trans);
+                                                //}
+                                            }
                                         }
                                     }
+    
+                                    // TODO: Change to make an extra browse of the type Node
+                                    sio.emit("StatesChanged", {
+                                        ip: "" + client.ip,
+                                        port: "" + client.port,
+                                        skill: _skill.skill.name,
+                                        state: el,
+                                        transitions: transitions
+                                    });
+                                    /*
+                                    // Get the state name from the object type
+                                    var state_object_from_type = self.current_state_object_types["ns=" + el.nodeId.ns + ";i=" + el.nodeId.nid];
+                                    if(state_object_from_type){
+                                        sio.emit("StatesChanged", {
+                                            ip: "" + client.ip,
+                                            port: "" + client.port,
+                                            state_object_from_type: state_object_from_type,
+                                            state: el,
+                                            transitions: transitions
+                                        });
+                                    }else{
+                                        // browse the object type and read the state name
+                                        var node_to_read = el["value"];
+                                        client.readAllAttributes(node_to_read, function(err, nodesToRead, dataValues, diagnostics) {
+                                            self.current_state_object_types["ns=" + el.nodeId.ns + ";i=" + el.nodeId.nid] = nodesToRead;
+                                            state_object_from_type = nodesToRead;
+                                            sio.emit("StatesChanged", {
+                                                ip: "" + client.ip,
+                                                port: "" + client.port,
+                                                state_object_from_type: state_object_from_type,
+                                                state: el,
+                                                transitions: transitions
+                                            });
+                                        });
+                                    }
+                                    */
                                 }
-
-                                sio.emit("StatesChanged", {
-                                    ip: "" + client.ip,
-                                    port: "" + client.port,
-                                    state: el,
-                                    transitions: transitions
-                                });
-                                // setTimeout(function() {
-                                //     // Collect all transitions that are enabled
-                                //     let transitions = [];
-                                //     let transitionsObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
-                                //     for (const key in transitionsObj) {
-                                //         if (transitionsObj.hasOwnProperty(key)) {
-                                //             const trans = transitionsObj[key];
-                                //             if (trans.EnableFlag) {
-                                //                 //if (trans.EnableFlag.value) {
-                                //                 transitions.push(trans);
-                                //                 //}
-                                //             }
-                                //         }
-                                //     }
-
-                                //     sio.emit("StatesChanged", {
-                                //         ip: "" + client.ip,
-                                //         port: "" + client.port,
-                                //         state: el,
-                                //         transitions: transitions
-                                //     });
-                                // }, 500);
-                            }
-                        });
-                    }
-                    ii++;
-                });
-            }
+                            });
+                        }
+                        ii++;
+                    });
+                }
+            });
             callback();
         },
         function(callback) { // Monitor KPI
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring KPIS.");
-            var _kpis = self.settings.modulesetting.defaultObjectModel.KPI;
-            if (_kpis) {
-                _kpis.forEach(function(el) {
-                    if (el.nodeId && client) {
-                        client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, 20, function(err) { //el.interval
-                            if (err) {
-                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
-                            }
-                        }, function(dataValue) {
-                            if (dataValue.value) {
-                                el["value"] = dataValue.value.value;
-                            }
-
-                            if (self.started)
-                                sio("KPIChanged", {
-                                    ip: "" + client.ip,
-                                    port: "" + client.port,
-                                    item: el
-                                });
-                        });
-                    }
-                    iii++;
-                });
-            }
-
+            // For each skills monitor the KPIs
+            skillArray.forEach(_skill => {
+                var _kpis = _skill.objectMonitor.KPI;
+                if (_kpis) {
+                    _kpis.forEach(function(el) {
+                        if (el.nodeId && client) {
+                            client.monitorNode(el.nodeId.ns, el.nodeId.nid, el.name, 20, function(err) { //el.interval
+                                if (err) {
+                                    self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + el.name + "] - [" + el.nodeId.ns + ":" + el.nodeId.nid + "]: " + err);
+                                }
+                            }, function(dataValue) {
+                                if (dataValue.value) {
+                                    el["value"] = dataValue.value.value;
+                                }
+    
+                                if (self.started)
+                                    sio("KPIChanged", {
+                                        ip: "" + client.ip,
+                                        port: "" + client.port,
+                                        skill: _skill.name,
+                                        item: el
+                                    });
+                            });
+                        }
+                        iii++;
+                    });
+                }
+    
+            });
             callback();
         },
         function(callback) { // Monitor all STATES DESCRIPTIONS
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring possibles STATES.");
-            var statesObj = self.settings.modulesetting.defaultObjectModel.STATES;
-            if (statesObj) {
-                for (const key in statesObj) {
-                    if (statesObj.hasOwnProperty(key)) {
-                        const eState = statesObj[key];
-                        //Monitors Properties and Variable of this state
-                        for (const key_ in eState) {
-                            if (eState.hasOwnProperty(key_) && key_ != "name" && key_ !== "nodeId" && key_ !== "type" && key_ !== "parent" && key_ !== "interval" && key_ !== "hasCause") {
-                                const eStateProp = eState[key_];
-                                if (eStateProp.type === "Variable") {
-                                    client.monitorNode(eStateProp.nodeId.ns, eStateProp.nodeId.nid, eStateProp.name, eStateProp.interval, function(err) {
-                                        if (err) {
-                                            self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + eStateProp.name + "] - [" + eStateProp.nodeId.ns + ":" + eStateProp.nodeId.nid + "]: " + err);
-                                        }
-                                    }, function(dataValue) {
-                                        if (dataValue.value) {
-                                            eStateProp["value"] = dataValue.value.value;
-                                        }
-                                        if (self.started && self.settings.modulesetting.defaultObjectModel.CURRENT_STATE_VALUE) { // === eState.StateNumber.value) {
-                                            sio("STATESDescriptionChanged", {
-                                                ip: "" + client.ip,
-                                                port: "" + client.port,
-                                                item: eState
-                                            });
-                                        }
-                                    });
+            // For each skill monitor the skill descriptions
+            skillArray.forEach(_skill => {
+                var statesObj = _skill.objectMonitor.STATES;
+                if (statesObj) {
+                    for (const key in statesObj) {
+                        if (statesObj.hasOwnProperty(key)) {
+                            const eState = statesObj[key];
+                            //Monitors Properties and Variable of this state
+                            for (const key_ in eState) {
+                                if (eState.hasOwnProperty(key_) && key_ != "name" && key_ !== "nodeId" && key_ !== "type" && key_ !== "parent" && key_ !== "interval" && key_ !== "hasCause") {
+                                    const eStateProp = eState[key_];
+                                    if (eStateProp.type === "Variable") {
+                                        client.monitorNode(eStateProp.nodeId.ns, eStateProp.nodeId.nid, eStateProp.name, eStateProp.interval, function(err) {
+                                            if (err) {
+                                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + eStateProp.name + "] - [" + eStateProp.nodeId.ns + ":" + eStateProp.nodeId.nid + "]: " + err);
+                                            }
+                                        }, function(dataValue) {
+                                            if (dataValue.value) {
+                                                eStateProp["value"] = dataValue.value.value;
+                                            }
+                                            if (self.started && _skill.objectMonitor.CURRENT_STATE_VALUE) { // === eState.StateNumber.value) {
+                                                sio("STATESDescriptionChanged", {
+                                                    ip: "" + client.ip,
+                                                    port: "" + client.port,
+                                                    skill: _skill.name,
+                                                    item: eState
+                                                });
+                                            }
+                                        });
+                                    }
+    
                                 }
-
-                            }
+                            }    
                         }
-
                     }
                 }
-            }
+            });
+
             callback();
         },
         function(callback) { // Monitor all TRANSITION DESCRIPTIONS
             self.app.log.info("MICROSERVICE[" + self.settings.name + "] started monitoring possibles TRANSITIONS.");
-            let transitionObj = self.settings.modulesetting.defaultObjectModel.TRANSITIONS;
-            if (transitionObj) {
-                for (const key in transitionObj) {
-                    if (transitionObj.hasOwnProperty(key)) {
-                        const eTransition = transitionObj[key];
-                        //Monitors Properties and Variable of this state
-                        for (const key_ in eTransition) {
-                            if (eTransition.hasOwnProperty(key_) && key_ != "name" && key_ !== "nodeId" && key_ !== "type" && key_ !== "parent" && key_ !== "interval" && key_ !== "hasCause") {
-                                const eTransitionProp = eTransition[key_];
-                                if (eTransitionProp.type === "Variable") {
-                                    client.monitorNode(eTransitionProp.nodeId.ns, eTransitionProp.nodeId.nid, eTransitionProp.name, eTransitionProp.interval, function(err) {
-                                        if (err) {
-                                            self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + eTransitionProp.name + "] - [" + eTransitionProp.nodeId.ns + ":" + eTransitionProp.nodeId.nid + "]: " + err);
-                                        }
-                                    }, function(dataValue) {
-                                        if (dataValue.value) {
-                                            eTransitionProp["value"] = dataValue.value.value;
-                                        }
-                                        if (eTransition.EnableFlag) {
-                                            if (self.started) {
-                                                sio.emit("TRANSITIONDescriptionChanged", {
-                                                    ip: "" + client.ip,
-                                                    port: "" + client.port,
-                                                    item: eTransition
-                                                });
+            // For Each Skill monitor the skill transitions
+            skillArray.forEach(_skill => {
+                let transitionObj = _skill.objectMonitor.TRANSITIONS;
+                if (transitionObj) {
+                    for (const key in transitionObj) {
+                        if (transitionObj.hasOwnProperty(key)) {
+                            const eTransition = transitionObj[key];
+                            //Monitors Properties and Variable of this state
+                            for (const key_ in eTransition) {
+                                if (eTransition.hasOwnProperty(key_) && key_ != "name" && key_ !== "nodeId" && key_ !== "type" && key_ !== "parent" && key_ !== "interval" && key_ !== "hasCause") {
+                                    const eTransitionProp = eTransition[key_];
+                                    if (eTransitionProp.type === "Variable") {
+                                        client.monitorNode(eTransitionProp.nodeId.ns, eTransitionProp.nodeId.nid, eTransitionProp.name, eTransitionProp.interval, function(err) {
+                                            if (err) {
+                                                self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + eTransitionProp.name + "] - [" + eTransitionProp.nodeId.ns + ":" + eTransitionProp.nodeId.nid + "]: " + err);
                                             }
-                                        }
-                                    });
+                                        }, function(dataValue) {
+                                            if (dataValue.value) {
+                                                eTransitionProp["value"] = dataValue.value.value;
+                                            }
+                                            if (eTransition.EnableFlag) {
+                                                if (self.started) {
+                                                    sio.emit("TRANSITIONDescriptionChanged", {
+                                                        ip: "" + client.ip,
+                                                        port: "" + client.port,
+                                                        skill: _skill.name,
+                                                        item: eTransition
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
+            });
+
             callback();
         }
     ], function(err) {
@@ -492,10 +547,11 @@ function checkServerModel(self, client, sio, fCallBack) {
                     foundedObjects.forEach(el => {
                         FindTasks.push(
                             new Promise((resolve, reject) => {
+                                var _globalObjectResult = {};
                                 parseSkillObject(client, {
                                         ns: el.nodeId.namespace,
                                         nid: el.nodeId.value
-                                    }, {}, self.settings.modulesetting.defaultObjectModel)
+                                    }, {}, self.settings.modulesetting.defaultObjectModel,_globalObjectResult)
                                     .then(
                                         function(parsedModel) {
                                             // propagate the model to the clients
@@ -509,7 +565,8 @@ function checkServerModel(self, client, sio, fCallBack) {
                                                 ip: "" + client.ip,
                                                 port: "" + client.port,
                                                 skill: el,
-                                                skillModel: parsedModel
+                                                skillModel: parsedModel,
+                                                objectMonitor: _globalObjectResult
                                             });
                                         }
                                     );
@@ -673,8 +730,9 @@ async function superTypeStateChangePropertiesType(types) {
     return false;
 }
 
-async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObject) {
+async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObject, globalObjectResult) {
     var ObjectResult = ObjectResult || {};
+    var globalObjectResult = globalObjectResult || {};
     // Prepare the Object
     return await new Promise((resolve, reject) => {
         client.browseNode(BaseObjectNodeId.ns, BaseObjectNodeId.nid, async function(err, browse_results) {
@@ -725,7 +783,7 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                             await parseSkillObject(client, {
                                 ns: element.nodeId.namespace,
                                 nid: element.nodeId.value
-                            }, item, RootObject);
+                            }, item, RootObject, globalObjectResult);
 
                             if (item.type === "StateType") {
                                 // Check if state is subState of a state
@@ -744,7 +802,14 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                                 item.interval = 100;
 
                                 RootObject.STATES = RootObject.STATES || {};
+                                globalObjectResult['STATES'] = globalObjectResult.STATES || {};
                                 Object.defineProperty(RootObject.STATES, "" + element.browseName.name, {
+                                    value: item,
+                                    writable: true,
+                                    enumerable: true,
+                                    configurable: true
+                                });
+                                Object.defineProperty(globalObjectResult.STATES, "" + element.browseName.name, {
                                     value: item,
                                     writable: true,
                                     enumerable: true,
@@ -768,7 +833,14 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                                 item.interval = 100;
 
                                 RootObject.TRANSITIONS = RootObject.TRANSITIONS || {};
+                                globalObjectResult['TRANSITIONS'] = globalObjectResult.TRANSITIONS || {};
                                 Object.defineProperty(RootObject.TRANSITIONS, "" + element.browseName.name, {
+                                    value: item,
+                                    writable: true,
+                                    enumerable: true,
+                                    configurable: true
+                                });
+                                Object.defineProperty(globalObjectResult.TRANSITIONS, "" + element.browseName.name, {
                                     value: item,
                                     writable: true,
                                     enumerable: true,
@@ -789,17 +861,21 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                             await parseSkillObject(client, {
                                 ns: element.nodeId.namespace,
                                 nid: element.nodeId.value
-                            }, item, RootObject);
+                            }, item, RootObject, globalObjectResult);
 
                             RootObject.CURRENT_STATES = RootObject.CURRENT_STATES || [];
+                            globalObjectResult['CURRENT_STATES'] = globalObjectResult.CURRENT_STATES || [];
                             if (RootObject._states.includes(element.browseName.name)) {
                                 item.interval = 50;
                                 RootObject.CURRENT_STATES.push(item);
+                                globalObjectResult.CURRENT_STATES.push(item);
                             }
                             RootObject.KPI = RootObject.KPI || [];
+                            globalObjectResult['KPI'] = globalObjectResult.KPI || [];
                             if (RootObject._kpi.includes(element.browseName.name)) {
                                 item.interval = 50;
                                 RootObject.KPI.push(item);
+                                globalObjectResult.KPI.push(item);
                             }
                         } else if (NodeClass === "Method") {
                             type = "Method";
@@ -818,22 +894,26 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                             await new Promise((resolve) => {
 
                                 client.getArgumentDefinition(element.nodeId.namespace, element.nodeId.value, async function(err, inputArguments) {
-                                    item.parameters = inputArguments;
+                                    item.parameters = inputArguments || [];
                                     resolve(item);
                                 });
                             });
                             await parseSkillObject(client, {
                                 ns: element.nodeId.namespace,
                                 nid: element.nodeId.value
-                            }, item, RootObject);
+                            }, item, RootObject, globalObjectResult);
 
                             RootObject.ACTIONS = RootObject.ACTIONS || [];
+                            globalObjectResult['ACTIONS'] = globalObjectResult.ACTIONS || [];
                             if (RootObject._actions.includes(element.browseName.name)) {
                                 RootObject.ACTIONS.push(item);
+                                globalObjectResult.ACTIONS.push(item);
                             }
                         }
 
                         Object.defineProperty(ObjectResult, "" + element.browseName.name, {
+                            ip: client.ip,
+                            port:client.port,
                             value: item,
                             writable: true,
                             enumerable: true,

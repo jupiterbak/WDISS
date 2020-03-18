@@ -1,0 +1,32 @@
+###########################
+# UaModeler Project File  #
+# Generated at 28.02.2020 #
+###########################
+
+PROJECTNAME = example_opcua
+
+TEMPLATESET = ($TEMPLATES)/ansi_c/v1_8/t2/ansi_c.tt2set
+
+MODELS += ($MODELS)/Opc.Ua.NodeSet2.ua \
+    OPCUA/AutomationSkill - 20190710.ua \
+    OPCUA/test.ua \
+    example_opcua.ua
+
+COLORS = ($MODELS)/Opc.Ua.NodeSet2.ua: #0000ff\
+    OPCUA/AutomationSkill - 20190710.ua: #0000ff\
+    OPCUA/test.ua: #0000ff\
+    example_opcua.ua: #008000
+
+PROJECTVARIABLES += ProviderName = example_opcua \
+    alarmAndEvents = true
+
+OUTPUTPATH = ../../../../Documents/02_DIGITALIZATION/00_Dissertation/Papers/Skizze_Paper_Jupiter-Andreas_V0.01/Example_OPCUA
+
+GENERATE += example_opcua.ua
+
+NODEACCESSINFOROLES += Administrator \
+    SecurityAdmin \
+    ConfigurationAdmin \
+    Operator \
+    Observer
+

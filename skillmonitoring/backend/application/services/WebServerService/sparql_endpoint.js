@@ -61,13 +61,37 @@ SELECT ?subClass ?label ?comment WHERE { \
   ?subClass rdfs:comment ?comment . \
 }";
 
-const Q_TYPED_CHILD = "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\
+const Q_TYPED_CHILD = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\
 PREFIX cps: <http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#> \
 SELECT ?subClass ?label ?comment WHERE { \
   ?subClass rdfs:subClassOf <####> . \
   ?subClass rdfs:label ?label . \
   ?subClass rdfs:comment ?comment . \
 }";
+
+const Q_GET_SKILL_KG = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\
+PREFIX owl: <http://www.w3.org/2002/07/owl#>\
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\
+PREFIX eq: <http://siemens.com/knowledge_graph/cyber_physical_systems/sma/equipment#>\
+PREFIX cps: <http://siemens.com/knowledge_graph/cyber_physical_systems/industrial_cps#>\
+PREFIX upper: <http://siemens.com/knowledge_graph/industrial_upper_ontology#>\
+SELECT  DISTINCT  ?machine ?skill  ?label ?skill2 ?label2 \
+WHERE {\
+  ?machine rdf:type ?q.\
+  ?machine rdf:type owl:NamedIndividual.\
+  ?q  owl:onProperty cps:performs.\
+  ?q owl:allValuesFrom ?skill.\
+  {\
+       ?skill rdfs:label ?label .\
+  } UNION {\
+       ?skill owl:unionOf ?k .\
+       ?k rdf:rest*/rdf:first? ?skill2 .\
+       ?skill2 rdfs:label ?label2.\
+       FILTER EXISTS{ ?skill2 rdfs:label ?label2. }\
+  }\
+}"
 
 
 
@@ -248,6 +272,44 @@ SparqlEndpoint.prototype.getChildBySubType = function(original_res, parentID) {
     }).catch(function(err) {
         original_res.setHeader('Content-Type', 'application/json');
         original_res.send(JSON.stringify(rslts));
+    });
+};
+
+SparqlEndpoint.prototype.getAllSkillInstances = function(original_res) {
+    return this.endpoint.selectQuery(Q_GET_SKILL_KG).then(function(res) {
+        return res.text();
+        // result body of the query
+    }).then(function(body) {
+        // Filter the results
+        obj = JSON.parse(body);
+        var rslts = [];
+        if (obj.results) {
+            obj.results.bindings.forEach(el => {
+                if (Object.keys(el).length > 0) {
+                    var label = el.label;
+                    var label2 = el.label2;
+                    var machine = el.machine;
+                    var skill = el.skill.value.split("#").pop(-1);
+                    var skill2 = el.skill2? el.skill2.value.split("#").pop(-1):skill;
+                    rslts.push({
+                        "id": label ? el.skill.value: el.skill2.value,
+                        "key": label ? el.skill.value: el.skill2.value,
+                        "text": label ? label.value : label2.value,
+                        "comment": machine ? machine.value : skill,
+                        'state': {
+                            'opened': false,
+                            'selected': false
+                        },
+                        "children": true
+                    });
+                }
+            });
+        }
+        original_res.setHeader('Content-Type', 'application/json');
+        original_res.send(JSON.stringify(rslts));
+
+    }).catch(function(err) {
+        console.error(err);
     });
 };
 

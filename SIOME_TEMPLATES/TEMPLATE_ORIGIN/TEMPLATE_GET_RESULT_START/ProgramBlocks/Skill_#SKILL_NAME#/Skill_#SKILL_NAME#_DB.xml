@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V15.1" />
+  <DocumentInfo>
+    <Created>2019-08-14T06:29:50.5674523Z</Created>
+    <ExportSetting>None</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.InstanceDB ID="0">
+    <AttributeList>
+      <InstanceOfName>Skill_#SKILL_NAME#</InstanceOfName>
+      <InstanceOfType>FB</InstanceOfType>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v3">
+  <Section Name="Input">
+    <Member Name="ModulToSkill" Datatype="&quot;typeModulSkillInterface_IN&quot;" />
+  </Section>
+  <Section Name="Output">
+    <Member Name="SkillToModul" Datatype="&quot;typeModulSkillInterface_OUT&quot;" />
+  </Section>
+  <Section Name="InOut" />
+  <Section Name="Static">
+    <Member Name="State" Datatype="UInt"><AttributeList><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="StateOfExecute" Datatype="UInt" />
+    <Member Name="ResultTrigger" Datatype="DInt" />
+    <Member Name="ResultFeched" Datatype="Bool" />
+    <Member Name="oldResultTrigger" Datatype="DInt" />
+    <Member Name="NextStep" Datatype="Bool" />
+    <Member Name="Parameter_In" Datatype="&quot;type#SKILL_NAME#StartParameter_In&quot;" />
+    <Member Name="Parameter_Out" Datatype="&quot;type#SKILL_NAME#GetResultParameter_Out&quot;" />
+    <Member Name="statErrorId" Datatype="Int"><AttributeList><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="ResultAcknowledge" Datatype="Bool" />
+    <Member Name="StartByMES" Datatype="Bool"><AttributeList><BooleanAttribute Name="SetPoint" SystemDefined="true">true</BooleanAttribute></AttributeList></Member>
+    <Member Name="rtStart" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtStop" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtAbort" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtReset" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtStep" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="rtNextStep" Datatype="R_TRIG" Version="1.0" />
+    <Member Name="Start" Datatype="&quot;#SKILL_NAME#_Start&quot;" />
+    <Member Name="GetResult" Datatype="&quot;#SKILL_NAME#_GetResult&quot;" />
+  </Section>
+</Sections></Interface>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <Name>Skill_#SKILL_NAME#_DB</Name>
+      <Number>4</Number>
+      <ProgrammingLanguage>DB</ProgrammingLanguage>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <MultilingualText ID="3" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="4" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.InstanceDB>
+</Document>

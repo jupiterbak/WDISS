@@ -1,0 +1,825 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V15.1" />
+  <DocumentInfo>
+    <Created>2019-08-08T13:49:45.9027601Z</Created>
+    <ExportSetting>None</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Types.PlcStruct ID="0">
+    <AttributeList>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v3">
+  <Section Name="None">
+    <Member Name="StateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'71'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'61'</StartValue>
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue>WSTRING#'62'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableStates_Names" Datatype="Array[0..2] of String">
+        <Subelement Path="0">
+          <StartValue>'Cleared'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'Aborting'</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>'Aborted'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..2] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>3</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'1007'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'1008'</StartValue>
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue>WSTRING#'66'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..2] of String">
+        <Subelement Path="0">
+          <StartValue>'ClearedToAborting'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'AbortedToCleared'</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>'AbortingToAborted'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..2] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>3</StartValue>
+        </Subelement>
+      </Member>
+    </Member>
+    <Member Name="ClearedStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..3] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="3">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'55'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'53'</StartValue>
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue>WSTRING#'75'</StartValue>
+              </Subelement>
+              <Subelement Path="3">
+                <StartValue>WSTRING#'54'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableStates_Names" Datatype="Array[0..3] of String">
+        <Subelement Path="0">
+          <StartValue>'Clearing'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'Stopped'</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>'Running'</StartValue>
+        </Subelement>
+        <Subelement Path="3">
+          <StartValue>'Stopping'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..3] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>3</StartValue>
+        </Subelement>
+        <Subelement Path="3">
+          <StartValue>4</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..3] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="3">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'58'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'1000'</StartValue>
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue>WSTRING#'1006'</StartValue>
+              </Subelement>
+              <Subelement Path="3">
+                <StartValue>WSTRING#'57'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..3] of String">
+        <Subelement Path="0">
+          <StartValue>'ClearingToStopped'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'StoppedToRunning'</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>'RunningToStopping'</StartValue>
+        </Subelement>
+        <Subelement Path="3">
+          <StartValue>'StoppingToStopped'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..3] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>3</StartValue>
+        </Subelement>
+        <Subelement Path="3">
+          <StartValue>4</StartValue>
+        </Subelement>
+      </Member>
+    </Member>
+    <Member Name="RunningStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..5] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="3">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="4">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="5">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'27'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'28'</StartValue>
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue>WSTRING#'36'</StartValue>
+              </Subelement>
+              <Subelement Path="3">
+                <StartValue>WSTRING#'1036'</StartValue>
+              </Subelement>
+              <Subelement Path="4">
+                <StartValue>WSTRING#'37'</StartValue>
+              </Subelement>
+              <Subelement Path="5">
+                <StartValue>WSTRING#'38'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableStates_Names" Datatype="Array[0..5] of String">
+        <Subelement Path="0">
+          <StartValue>'Resetting'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'Idle'</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>'Execute'</StartValue>
+        </Subelement>
+        <Subelement Path="3">
+          <StartValue>'Hold'</StartValue>
+        </Subelement>
+        <Subelement Path="4">
+          <StartValue>'Completing'</StartValue>
+        </Subelement>
+        <Subelement Path="5">
+          <StartValue>'Complete'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..5] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>3</StartValue>
+        </Subelement>
+        <Subelement Path="3">
+          <StartValue>4</StartValue>
+        </Subelement>
+        <Subelement Path="4">
+          <StartValue>5</StartValue>
+        </Subelement>
+        <Subelement Path="5">
+          <StartValue>6</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..6] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="3">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="4">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="5">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="6">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'39'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'1002'</StartValue>
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue>WSTRING#'1041'</StartValue>
+              </Subelement>
+              <Subelement Path="3">
+                <StartValue>WSTRING#'1040'</StartValue>
+              </Subelement>
+              <Subelement Path="4">
+                <StartValue>WSTRING#'1003'</StartValue>
+              </Subelement>
+              <Subelement Path="5">
+                <StartValue>WSTRING#'50'</StartValue>
+              </Subelement>
+              <Subelement Path="6">
+                <StartValue>WSTRING#'1042'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..6] of String">
+        <Subelement Path="0">
+          <StartValue>'ResettingToIdle'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'IdleToExecute'</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>'ExecuteToHold'</StartValue>
+        </Subelement>
+        <Subelement Path="3">
+          <StartValue>'HoldToExecute'</StartValue>
+        </Subelement>
+        <Subelement Path="4">
+          <StartValue>'ExecuteToCompleting'</StartValue>
+        </Subelement>
+        <Subelement Path="5">
+          <StartValue>'CompletingToComplete'</StartValue>
+        </Subelement>
+        <Subelement Path="6">
+          <StartValue>'CompleteToIdle'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..6] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>3</StartValue>
+        </Subelement>
+        <Subelement Path="3">
+          <StartValue>4</StartValue>
+        </Subelement>
+        <Subelement Path="4">
+          <StartValue>5</StartValue>
+        </Subelement>
+        <Subelement Path="5">
+          <StartValue>6</StartValue>
+        </Subelement>
+        <Subelement Path="6">
+          <StartValue>7</StartValue>
+        </Subelement>
+      </Member>
+    </Member>
+    <Member Name="IdleStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..1] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'1018'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'1017'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableStates_Names" Datatype="Array[0..1] of String">
+        <Subelement Path="0">
+          <StartValue>'InitializeSkill'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'SkillReady'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..1] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..0] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'1019'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..0] of String">
+        <Subelement Path="0">
+          <StartValue>'InitializeSkillToSkillReady'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..0] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+      </Member>
+    </Member>
+    <Member Name="HoldStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'1020'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'1021'</StartValue>
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue>WSTRING#'1022'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableStates_Names" Datatype="Array[0..2] of String">
+        <Subelement Path="0">
+          <StartValue>'Holding'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'Held'</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>'Unholding'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..2] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>3</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..1] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'1024'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'1023'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..1] of String">
+        <Subelement Path="0">
+          <StartValue>'HeldToUnholding'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'HoldingToHeld'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..1] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+      </Member>
+    </Member>
+    <Member Name="ResettingStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'1026'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'1025'</StartValue>
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue>WSTRING#'1027'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableStates_Names" Datatype="Array[0..2] of String">
+        <Subelement Path="0">
+          <StartValue>'CheckSkillComponent'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'InitializeSkillComponent'</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>'SkillComponentsReady'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..2] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>3</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'1028'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'10230'</StartValue>
+              </Subelement>
+              <Subelement Path="2">
+                <StartValue>WSTRING#'1029'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..2] of String">
+        <Subelement Path="0">
+          <StartValue>'CheckSkillComponentToInitializeSkillComponent'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'CheckSkillComponentToSkillComponentsReady'</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>'InitializeSkillComponentToCheckSkillComponent'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..2] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+        <Subelement Path="2">
+          <StartValue>3</StartValue>
+        </Subelement>
+      </Member>
+    </Member>
+    <Member Name="ExecuteStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..1] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'1013'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'1014'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableStates_Names" Datatype="Array[0..1] of String">
+        <Subelement Path="0">
+          <StartValue>'ExecuteSkill'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'WaitForNextStep'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..1] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..1] of OPC_UA_NodeId" Version="1.0">
+        <Sections>
+          <Section Name="None">
+            <Member Name="NamespaceIndex" Datatype="UInt">
+              <Subelement Path="0">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue ConstantName="&quot;AutomationSkillNS&quot;" />
+              </Subelement>
+            </Member>
+            <Member Name="Identifier" Datatype="WString[254]">
+              <Subelement Path="0">
+                <StartValue>WSTRING#'1015'</StartValue>
+              </Subelement>
+              <Subelement Path="1">
+                <StartValue>WSTRING#'1016'</StartValue>
+              </Subelement>
+            </Member>
+          </Section>
+        </Sections>
+      </Member>
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..1] of String">
+        <Subelement Path="0">
+          <StartValue>'ExecuteSkillToWaitForNextStep'</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>'WaitForNextStepToExecuteSkill'</StartValue>
+        </Subelement>
+      </Member>
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..1] of Byte">
+        <Subelement Path="0">
+          <StartValue>1</StartValue>
+        </Subelement>
+        <Subelement Path="1">
+          <StartValue>2</StartValue>
+        </Subelement>
+      </Member>
+    </Member>
+  </Section>
+</Sections></Interface>
+      <Name>typeSkillStateMachineMapping</Name>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <MultilingualText ID="3" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="4" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Types.PlcStruct>
+</Document>

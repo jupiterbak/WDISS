@@ -1,0 +1,843 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V15.1" />
+  <DocumentInfo>
+    <Created>2019-08-14T06:26:11.8498234Z</Created>
+    <ExportSetting>None</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.FB ID="0">
+    <AttributeList>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v3">
+  <Section Name="Input">
+    <Member Name="ModulToSkill" Datatype="&quot;typeModulSkillInterface_IN&quot;"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+    <Member Name="SkillToModul" Datatype="&quot;typeModulSkillInterface_OUT&quot;"><AttributeList><BooleanAttribute Name="ExternalAccessible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalVisible" SystemDefined="true">false</BooleanAttribute><BooleanAttribute Name="ExternalWritable" SystemDefined="true">false</BooleanAttribute></AttributeList></Member>
+  </Section>
+  <Section Name="Output" />
+  <Section Name="InOut">
+    <Member Name="StartSkill" Datatype="Bool" />
+    <Member Name="Parameter" Datatype="&quot;type#SKILL_NAME#StartParameter_In&quot;" />
+  </Section>
+  <Section Name="Static">
+    <Member Name="OPC_UA_ServerMethodPre_Instance" Datatype="OPC_UA_ServerMethodPre" Version="1.0" />
+    <Member Name="OPC_UA_ServerMethodPost_Instance" Datatype="OPC_UA_ServerMethodPost" Version="1.0" />
+    <Member Name="UAMethod_InParameters" Datatype="&quot;type#SKILL_NAME#StartParameter_In&quot;" />
+    <Member Name="UAMethod_OutParameters" Datatype="&quot;type#SKILL_NAME#StartParameter_Out&quot;" />
+    <Member Name="UAMethod" Datatype="&quot;UA_Method_Handle&quot;" />
+  </Section>
+  <Section Name="Temp">
+    <Member Name="Temp" Datatype="Bool" />
+  </Section>
+  <Section Name="Constant" />
+</Sections></Interface>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <MemoryReserve>100</MemoryReserve>
+      <Name>#SKILL_NAME#_Start</Name>
+      <Number>14</Number>
+      <ProgrammingLanguage>SCL</ProgrammingLanguage>
+      <SetENOAutomatically>False</SetENOAutomatically>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <SW.Blocks.CompileUnit ID="3" CompositionName="CompileUnits">
+        <AttributeList>
+          <NetworkSource><StructuredText xmlns="http://www.siemens.com/automation/Openness/SW/NetworkSource/StructuredText/v2">
+  <Token Text="REGION" UId="21" />
+  <Blank UId="22" />
+  <Text UId="23">PRE</Text>
+  <NewLine UId="24" />
+  <Blank Num="4" UId="25" />
+  <Token Text="IF" UId="26" />
+  <Blank UId="27" />
+  <Access Scope="LocalVariable" UId="28">
+    <Symbol UId="29">
+      <Component Name="UAMethod" UId="30" />
+      <Token Text="." UId="31" />
+      <Component Name="Started" UId="32" />
+    </Symbol>
+  </Access>
+  <Blank UId="33" />
+  <Token Text="=" UId="34" />
+  <Blank UId="35" />
+  <Access Scope="LiteralConstant" UId="36">
+    <Constant UId="37">
+      <ConstantValue UId="39">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank UId="40" />
+  <Token Text="AND" UId="41" />
+  <Blank UId="42" />
+  <Access Scope="LocalVariable" UId="43">
+    <Symbol UId="44">
+      <Component Name="UAMethod" UId="45" />
+      <Token Text="." UId="46" />
+      <Component Name="Finished" UId="47" />
+    </Symbol>
+  </Access>
+  <Blank UId="48" />
+  <Token Text="=" UId="49" />
+  <Blank UId="50" />
+  <Access Scope="LiteralConstant" UId="51">
+    <Constant UId="52">
+      <ConstantValue UId="54">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank UId="55" />
+  <Token Text="THEN" UId="56" />
+  <NewLine UId="57" />
+  <Blank Num="8" UId="58" />
+  <NewLine UId="59" />
+  <Blank Num="8" UId="60" />
+  <Access Scope="LocalVariable" UId="61">
+    <Symbol UId="62">
+      <Component Name="OPC_UA_ServerMethodPre_Instance" UId="63" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="64">
+    <Instruction UId="65">
+      <Token Text="(" UId="66" />
+      <Parameter Name="Busy" UId="67">
+        <Blank UId="68" />
+        <Token Text="=&gt;" UId="69" />
+        <Blank UId="70" />
+        <Access Scope="LocalVariable" UId="71">
+          <Symbol UId="72">
+            <Component Name="UAMethod" UId="73" />
+            <Token Text="." UId="74" />
+            <Component Name="Pre" UId="75" />
+            <Token Text="." UId="76" />
+            <Component Name="Busy" UId="77" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="78" />
+      <NewLine UId="79" />
+      <Blank Num="41" UId="80" />
+      <Parameter Name="Done" UId="81">
+        <Blank UId="82" />
+        <Token Text="=&gt;" UId="83" />
+        <Blank UId="84" />
+        <Access Scope="LocalVariable" UId="85">
+          <Symbol UId="86">
+            <Component Name="UAMethod" UId="87" />
+            <Token Text="." UId="88" />
+            <Component Name="Pre" UId="89" />
+            <Token Text="." UId="90" />
+            <Component Name="Done" UId="91" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="92" />
+      <NewLine UId="93" />
+      <Blank Num="41" UId="94" />
+      <Parameter Name="Status" UId="95">
+        <Blank UId="96" />
+        <Token Text="=&gt;" UId="97" />
+        <Blank UId="98" />
+        <Access Scope="LocalVariable" UId="99">
+          <Symbol UId="100">
+            <Component Name="UAMethod" UId="101" />
+            <Token Text="." UId="102" />
+            <Component Name="Pre" UId="103" />
+            <Token Text="." UId="104" />
+            <Component Name="Status" UId="105" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="106" />
+      <NewLine UId="107" />
+      <Blank Num="41" UId="108" />
+      <Parameter Name="Error" UId="109">
+        <Blank UId="110" />
+        <Token Text="=&gt;" UId="111" />
+        <Blank UId="112" />
+        <Access Scope="LocalVariable" UId="113">
+          <Symbol UId="114">
+            <Component Name="UAMethod" UId="115" />
+            <Token Text="." UId="116" />
+            <Component Name="Pre" UId="117" />
+            <Token Text="." UId="118" />
+            <Component Name="Error" UId="119" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="120" />
+      <NewLine UId="121" />
+      <Blank Num="41" UId="122" />
+      <Parameter Name="UAMethod_Called" UId="123">
+        <Blank UId="124" />
+        <Token Text="=&gt;" UId="125" />
+        <Blank UId="126" />
+        <Access Scope="LocalVariable" UId="127">
+          <Symbol UId="128">
+            <Component Name="UAMethod" UId="129" />
+            <Token Text="." UId="130" />
+            <Component Name="Called" UId="131" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="132" />
+      <NewLine UId="133" />
+      <Blank Num="41" UId="134" />
+      <Parameter Name="UAMethod_InParameters" UId="135">
+        <Blank UId="136" />
+        <Token Text=":=" UId="137" />
+        <Blank UId="138" />
+        <Access Scope="LocalVariable" UId="139">
+          <Symbol UId="140">
+            <Component Name="UAMethod_InParameters" UId="141" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="142" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="143" />
+  <NewLine UId="144" />
+  <Blank Num="8" UId="145" />
+  <NewLine UId="146" />
+  <Blank Num="8" UId="147" />
+  <Token Text="IF" UId="148" />
+  <Blank UId="149" />
+  <Access Scope="LocalVariable" UId="150">
+    <Symbol UId="151">
+      <Component Name="UAMethod" UId="152" />
+      <Token Text="." UId="153" />
+      <Component Name="Pre" UId="154" />
+      <Token Text="." UId="155" />
+      <Component Name="Error" UId="156" />
+    </Symbol>
+  </Access>
+  <Blank UId="157" />
+  <Token Text="THEN" UId="158" />
+  <NewLine UId="159" />
+  <Blank Num="12" UId="160" />
+  <Access Scope="LocalVariable" UId="161">
+    <Symbol UId="162">
+      <Component Name="UAMethod" UId="163" />
+      <Token Text="." UId="164" />
+      <Component Name="ErrorMessage" UId="165" />
+    </Symbol>
+  </Access>
+  <Blank UId="166" />
+  <Token Text=":=" UId="167" />
+  <Blank UId="168" />
+  <Access Scope="TypedConstant" UId="169">
+    <Constant UId="170">
+      <ConstantValue UId="171">WString#'Error at OPC_UA_ServerMethodPre'</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="172" />
+  <NewLine UId="173" />
+  <Blank Num="8" UId="174" />
+  <Token Text="END_IF" UId="175" />
+  <Token Text=";" UId="176" />
+  <NewLine UId="177" />
+  <Blank Num="8" UId="178" />
+  <NewLine UId="179" />
+  <Blank Num="8" UId="180" />
+  <Token Text="IF" UId="181" />
+  <Blank UId="182" />
+  <Access Scope="LocalVariable" UId="183">
+    <Symbol UId="184">
+      <Component Name="UAMethod" UId="185" />
+      <Token Text="." UId="186" />
+      <Component Name="Pre" UId="187" />
+      <Token Text="." UId="188" />
+      <Component Name="Done" UId="189" />
+    </Symbol>
+  </Access>
+  <Blank UId="190" />
+  <Token Text="AND" UId="191" />
+  <Blank UId="192" />
+  <Access Scope="LocalVariable" UId="193">
+    <Symbol UId="194">
+      <Component Name="UAMethod" UId="195" />
+      <Token Text="." UId="196" />
+      <Component Name="Called" UId="197" />
+    </Symbol>
+  </Access>
+  <Blank UId="198" />
+  <Token Text="THEN" UId="199" />
+  <NewLine UId="200" />
+  <Blank Num="12" UId="201" />
+  <Access Scope="LocalVariable" UId="202">
+    <Symbol UId="203">
+      <Component Name="UAMethod" UId="204" />
+      <Token Text="." UId="205" />
+      <Component Name="Started" UId="206" />
+    </Symbol>
+  </Access>
+  <Blank UId="207" />
+  <Token Text=":=" UId="208" />
+  <Blank UId="209" />
+  <Access Scope="LiteralConstant" UId="210">
+    <Constant UId="211">
+      <ConstantValue UId="213">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="214" />
+  <NewLine UId="215" />
+  <Blank Num="12" UId="216" />
+  <Access Scope="LocalVariable" UId="217">
+    <Symbol UId="218">
+      <Component Name="UAMethod" UId="219" />
+      <Token Text="." UId="220" />
+      <Component Name="ErrorMessage" UId="221" />
+    </Symbol>
+  </Access>
+  <Blank UId="222" />
+  <Token Text=":=" UId="223" />
+  <Blank UId="224" />
+  <Access Scope="TypedConstant" UId="225">
+    <Constant UId="226">
+      <ConstantValue UId="227">WString#''</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="228" />
+  <NewLine UId="229" />
+  <Blank Num="8" UId="230" />
+  <Token Text="END_IF" UId="231" />
+  <Token Text=";" UId="232" />
+  <NewLine UId="233" />
+  <Blank Num="8" UId="234" />
+  <NewLine UId="235" />
+  <Blank Num="4" UId="236" />
+  <Token Text="END_IF" UId="237" />
+  <Token Text=";" UId="238" />
+  <NewLine UId="239" />
+  <Token Text="END_REGION" UId="240" />
+  <NewLine Num="2" UId="241" />
+  <Token Text="REGION" UId="242" />
+  <Blank UId="243" />
+  <Text UId="244">FUNCTIONALITY </Text>
+  <NewLine UId="245" />
+  <Blank Num="4" UId="246" />
+  <NewLine UId="247" />
+  <Blank Num="4" UId="248" />
+  <Token Text="IF" UId="249" />
+  <Blank UId="250" />
+  <Access Scope="LocalVariable" UId="251">
+    <Symbol UId="252">
+      <Component Name="UAMethod" UId="253" />
+      <Token Text="." UId="254" />
+      <Component Name="Started" UId="255" />
+    </Symbol>
+  </Access>
+  <Blank UId="256" />
+  <Token Text="THEN" UId="257" />
+  <NewLine UId="258" />
+  <Blank Num="8" UId="259" />
+  <LineComment Inserted="true" UId="260">
+    <Text UId="261">
+        // Enter User Code here
+        //  - Check state of modul and skill control
+        //  - Check incomming parameters
+        // 
+        </Text>
+  </LineComment>
+  <NewLine UId="262" />
+  <Blank Num="8" UId="263" />
+  <NewLine UId="264" />
+  <Blank Num="8" UId="265" />
+  <NewLine UId="266" />
+  <Blank Num="8" UId="267" />
+  <LineComment UId="268">
+    <Text UId="269"> submit parameter and start to main skill FB</Text>
+  </LineComment>
+  <NewLine UId="270" />
+  <Blank Num="8" UId="271" />
+  <LineComment UId="272">
+    <Text UId="273"> parameter is skill dependent</Text>
+  </LineComment>
+  <NewLine UId="274" />
+  <Blank Num="8" UId="275" />
+  <Access Scope="LocalVariable" UId="276">
+    <Symbol UId="277">
+      <Component Name="Parameter" UId="278" />
+    </Symbol>
+  </Access>
+  <Blank UId="279" />
+  <Token Text=":=" UId="280" />
+  <Blank UId="281" />
+  <Access Scope="LocalVariable" UId="282">
+    <Symbol UId="283">
+      <Component Name="UAMethod_InParameters" UId="284" />
+    </Symbol>
+  </Access>
+  <Token Text=";" UId="285" />
+  <NewLine UId="286" />
+  <Blank Num="8" UId="287" />
+  <Access Scope="LocalVariable" UId="288">
+    <Symbol UId="289">
+      <Component Name="StartSkill" UId="290" />
+    </Symbol>
+  </Access>
+  <Blank UId="291" />
+  <Token Text=":=" UId="292" />
+  <Blank UId="293" />
+  <Access Scope="LiteralConstant" UId="294">
+    <Constant UId="295">
+      <ConstantValue UId="297">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="298" />
+  <NewLine UId="299" />
+  <Blank Num="8" UId="300" />
+  <NewLine UId="301" />
+  <Blank Num="8" UId="302" />
+  <Access Scope="LocalVariable" UId="303">
+    <Symbol UId="304">
+      <Component Name="UAMethod" UId="305" />
+      <Token Text="." UId="306" />
+      <Component Name="Result" UId="307" />
+    </Symbol>
+  </Access>
+  <Blank UId="308" />
+  <Token Text=":=" UId="309" />
+  <Blank UId="310" />
+  <Access Scope="LiteralConstant" UId="311">
+    <Constant UId="312">
+      <ConstantValue UId="314">16#0</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="315" />
+  <NewLine UId="316" />
+  <Blank Num="8" UId="317" />
+  <Access Scope="LocalVariable" UId="318">
+    <Symbol UId="319">
+      <Component Name="UAMethod" UId="320" />
+      <Token Text="." UId="321" />
+      <Component Name="ErrorMessage" UId="322" />
+    </Symbol>
+  </Access>
+  <Blank UId="323" />
+  <Token Text=":=" UId="324" />
+  <Blank UId="325" />
+  <Access Scope="TypedConstant" UId="326">
+    <Constant UId="327">
+      <ConstantValue UId="328">WString#''</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="329" />
+  <NewLine UId="330" />
+  <Blank Num="8" UId="331" />
+  <NewLine UId="332" />
+  <Blank Num="8" UId="333" />
+  <Access Scope="LocalVariable" UId="334">
+    <Symbol UId="335">
+      <Component Name="UAMethod" UId="336" />
+      <Token Text="." UId="337" />
+      <Component Name="Finished" UId="338" />
+    </Symbol>
+  </Access>
+  <Blank UId="339" />
+  <Token Text=":=" UId="340" />
+  <Blank UId="341" />
+  <Access Scope="LiteralConstant" UId="342">
+    <Constant UId="343">
+      <ConstantValue UId="345">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="346" />
+  <NewLine UId="347" />
+  <Blank Num="8" UId="348" />
+  <Access Scope="LocalVariable" UId="349">
+    <Symbol UId="350">
+      <Component Name="UAMethod" UId="351" />
+      <Token Text="." UId="352" />
+      <Component Name="Started" UId="353" />
+    </Symbol>
+  </Access>
+  <Blank UId="354" />
+  <Token Text=":=" UId="355" />
+  <Blank UId="356" />
+  <Access Scope="LiteralConstant" UId="357">
+    <Constant UId="358">
+      <ConstantValue UId="360">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="361" />
+  <NewLine UId="362" />
+  <Blank Num="4" UId="363" />
+  <Token Text="END_IF" UId="364" />
+  <Token Text=";" UId="365" />
+  <NewLine UId="366" />
+  <Blank Num="4" UId="367" />
+  <NewLine UId="368" />
+  <Token Text="END_REGION" UId="369" />
+  <NewLine Num="3" UId="370" />
+  <Token Text="REGION" UId="371" />
+  <Blank UId="372" />
+  <Text UId="373">POST</Text>
+  <NewLine UId="374" />
+  <Blank Num="4" UId="375" />
+  <Token Text="IF" UId="376" />
+  <Blank UId="377" />
+  <Access Scope="LocalVariable" UId="378">
+    <Symbol UId="379">
+      <Component Name="UAMethod" UId="380" />
+      <Token Text="." UId="381" />
+      <Component Name="Finished" UId="382" />
+    </Symbol>
+  </Access>
+  <Blank UId="383" />
+  <Token Text="=" UId="384" />
+  <Blank UId="385" />
+  <Access Scope="LiteralConstant" UId="386">
+    <Constant UId="387">
+      <ConstantValue UId="389">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank UId="390" />
+  <Token Text="THEN" UId="391" />
+  <NewLine UId="392" />
+  <Blank Num="8" UId="393" />
+  <NewLine UId="394" />
+  <Blank Num="8" UId="395" />
+  <Access Scope="LocalVariable" UId="396">
+    <Symbol UId="397">
+      <Component Name="OPC_UA_ServerMethodPost_Instance" UId="398" />
+    </Symbol>
+  </Access>
+  <Access Scope="Call" UId="399">
+    <Instruction UId="400">
+      <Token Text="(" UId="401" />
+      <Parameter Name="UAMethod_Result" UId="402">
+        <Blank UId="403" />
+        <Token Text=":=" UId="404" />
+        <Blank UId="405" />
+        <Access Scope="LocalVariable" UId="406">
+          <Symbol UId="407">
+            <Component Name="UAMethod" UId="408" />
+            <Token Text="." UId="409" />
+            <Component Name="Result" UId="410" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="411" />
+      <NewLine UId="412" />
+      <Blank Num="42" UId="413" />
+      <Parameter Name="UAMethod_Finished" UId="414">
+        <Blank UId="415" />
+        <Token Text=":=" UId="416" />
+        <Blank UId="417" />
+        <Access Scope="LocalVariable" UId="418">
+          <Symbol UId="419">
+            <Component Name="UAMethod" UId="420" />
+            <Token Text="." UId="421" />
+            <Component Name="Finished" UId="422" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="423" />
+      <NewLine UId="424" />
+      <Blank Num="42" UId="425" />
+      <Parameter Name="Busy" UId="426">
+        <Blank UId="427" />
+        <Token Text="=&gt;" UId="428" />
+        <Blank UId="429" />
+        <Access Scope="LocalVariable" UId="430">
+          <Symbol UId="431">
+            <Component Name="UAMethod" UId="432" />
+            <Token Text="." UId="433" />
+            <Component Name="Post" UId="434" />
+            <Token Text="." UId="435" />
+            <Component Name="Busy" UId="436" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="437" />
+      <NewLine UId="438" />
+      <Blank Num="42" UId="439" />
+      <Parameter Name="Done" UId="440">
+        <Blank UId="441" />
+        <Token Text="=&gt;" UId="442" />
+        <Blank UId="443" />
+        <Access Scope="LocalVariable" UId="444">
+          <Symbol UId="445">
+            <Component Name="UAMethod" UId="446" />
+            <Token Text="." UId="447" />
+            <Component Name="Post" UId="448" />
+            <Token Text="." UId="449" />
+            <Component Name="Done" UId="450" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="451" />
+      <NewLine UId="452" />
+      <Blank Num="42" UId="453" />
+      <Parameter Name="Error" UId="454">
+        <Blank UId="455" />
+        <Token Text="=&gt;" UId="456" />
+        <Blank UId="457" />
+        <Access Scope="LocalVariable" UId="458">
+          <Symbol UId="459">
+            <Component Name="UAMethod" UId="460" />
+            <Token Text="." UId="461" />
+            <Component Name="Post" UId="462" />
+            <Token Text="." UId="463" />
+            <Component Name="Error" UId="464" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="465" />
+      <NewLine UId="466" />
+      <Blank Num="42" UId="467" />
+      <Parameter Name="Status" UId="468">
+        <Blank UId="469" />
+        <Token Text="=&gt;" UId="470" />
+        <Blank UId="471" />
+        <Access Scope="LocalVariable" UId="472">
+          <Symbol UId="473">
+            <Component Name="UAMethod" UId="474" />
+            <Token Text="." UId="475" />
+            <Component Name="Post" UId="476" />
+            <Token Text="." UId="477" />
+            <Component Name="Status" UId="478" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text="," UId="479" />
+      <NewLine UId="480" />
+      <Blank Num="42" UId="481" />
+      <Parameter Name="UAMethod_OutParameters" UId="482">
+        <Blank UId="483" />
+        <Token Text=":=" UId="484" />
+        <Blank UId="485" />
+        <Access Scope="LocalVariable" UId="486">
+          <Symbol UId="487">
+            <Component Name="UAMethod_OutParameters" UId="488" />
+          </Symbol>
+        </Access>
+      </Parameter>
+      <Token Text=")" UId="489" />
+    </Instruction>
+  </Access>
+  <Token Text=";" UId="490" />
+  <NewLine UId="491" />
+  <Blank Num="8" UId="492" />
+  <NewLine UId="493" />
+  <Blank Num="8" UId="494" />
+  <Token Text="IF" UId="495" />
+  <Blank UId="496" />
+  <Access Scope="LocalVariable" UId="497">
+    <Symbol UId="498">
+      <Component Name="UAMethod" UId="499" />
+      <Token Text="." UId="500" />
+      <Component Name="Post" UId="501" />
+      <Token Text="." UId="502" />
+      <Component Name="Error" UId="503" />
+    </Symbol>
+  </Access>
+  <Blank UId="504" />
+  <Token Text="=" UId="505" />
+  <Blank UId="506" />
+  <Access Scope="LiteralConstant" UId="507">
+    <Constant UId="508">
+      <ConstantValue UId="510">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank UId="511" />
+  <Token Text="THEN" UId="512" />
+  <NewLine UId="513" />
+  <Blank Num="12" UId="514" />
+  <Access Scope="LocalVariable" UId="515">
+    <Symbol UId="516">
+      <Component Name="StartSkill" UId="517" />
+    </Symbol>
+  </Access>
+  <Blank UId="518" />
+  <Token Text=":=" UId="519" />
+  <Blank UId="520" />
+  <Access Scope="LiteralConstant" UId="521">
+    <Constant UId="522">
+      <ConstantValue UId="524">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="525" />
+  <NewLine UId="526" />
+  <Blank Num="12" UId="527" />
+  <NewLine UId="528" />
+  <Blank Num="12" UId="529" />
+  <Access Scope="LocalVariable" UId="530">
+    <Symbol UId="531">
+      <Component Name="UAMethod" UId="532" />
+      <Token Text="." UId="533" />
+      <Component Name="ErrorMessage" UId="534" />
+    </Symbol>
+  </Access>
+  <Blank UId="535" />
+  <Token Text=":=" UId="536" />
+  <Blank UId="537" />
+  <Access Scope="TypedConstant" UId="538">
+    <Constant UId="539">
+      <ConstantValue UId="540">WString#'Error at OPC_UA_ServerMethodPost'</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="541" />
+  <NewLine UId="542" />
+  <Blank Num="12" UId="543" />
+  <Access Scope="LocalVariable" UId="544">
+    <Symbol UId="545">
+      <Component Name="UAMethod" UId="546" />
+      <Token Text="." UId="547" />
+      <Component Name="Finished" UId="548" />
+    </Symbol>
+  </Access>
+  <Blank UId="549" />
+  <Token Text=":=" UId="550" />
+  <Blank UId="551" />
+  <Access Scope="LiteralConstant" UId="552">
+    <Constant UId="553">
+      <ConstantValue UId="555">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="556" />
+  <NewLine UId="557" />
+  <Blank Num="8" UId="558" />
+  <Token Text="END_IF" UId="559" />
+  <Token Text=";" UId="560" />
+  <NewLine UId="561" />
+  <Blank Num="8" UId="562" />
+  <NewLine UId="563" />
+  <Blank Num="8" UId="564" />
+  <Token Text="IF" UId="565" />
+  <Blank UId="566" />
+  <Access Scope="LocalVariable" UId="567">
+    <Symbol UId="568">
+      <Component Name="UAMethod" UId="569" />
+      <Token Text="." UId="570" />
+      <Component Name="Post" UId="571" />
+      <Token Text="." UId="572" />
+      <Component Name="Done" UId="573" />
+    </Symbol>
+  </Access>
+  <Blank UId="574" />
+  <Token Text="=" UId="575" />
+  <Blank UId="576" />
+  <Access Scope="LiteralConstant" UId="577">
+    <Constant UId="578">
+      <ConstantValue UId="580">TRUE</ConstantValue>
+    </Constant>
+  </Access>
+  <Blank UId="581" />
+  <Token Text="THEN" UId="582" />
+  <NewLine UId="583" />
+  <Blank Num="12" UId="584" />
+  <Access Scope="LocalVariable" UId="585">
+    <Symbol UId="586">
+      <Component Name="StartSkill" UId="587" />
+    </Symbol>
+  </Access>
+  <Blank UId="588" />
+  <Token Text=":=" UId="589" />
+  <Blank UId="590" />
+  <Access Scope="LiteralConstant" UId="591">
+    <Constant UId="592">
+      <ConstantValue UId="594">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="595" />
+  <NewLine UId="596" />
+  <Blank Num="12" UId="597" />
+  <Access Scope="LocalVariable" UId="598">
+    <Symbol UId="599">
+      <Component Name="UAMethod" UId="600" />
+      <Token Text="." UId="601" />
+      <Component Name="Finished" UId="602" />
+    </Symbol>
+  </Access>
+  <Blank UId="603" />
+  <Token Text=":=" UId="604" />
+  <Blank UId="605" />
+  <Access Scope="LiteralConstant" UId="606">
+    <Constant UId="607">
+      <ConstantValue UId="609">FALSE</ConstantValue>
+    </Constant>
+  </Access>
+  <Token Text=";" UId="610" />
+  <NewLine UId="611" />
+  <Blank Num="8" UId="612" />
+  <Token Text="END_IF" UId="613" />
+  <Token Text=";" UId="614" />
+  <NewLine UId="615" />
+  <Blank Num="8" UId="616" />
+  <NewLine UId="617" />
+  <Blank Num="4" UId="618" />
+  <Token Text="END_IF" UId="619" />
+  <Token Text=";" UId="620" />
+  <NewLine UId="621" />
+  <Blank Num="4" UId="622" />
+  <NewLine UId="623" />
+  <Token Text="END_REGION" UId="624" />
+  <NewLine UId="625" />
+</StructuredText></NetworkSource>
+          <ProgrammingLanguage>SCL</ProgrammingLanguage>
+        </AttributeList>
+        <ObjectList>
+          <MultilingualText ID="4" CompositionName="Comment">
+            <ObjectList>
+              <MultilingualTextItem ID="5" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+          <MultilingualText ID="6" CompositionName="Title">
+            <ObjectList>
+              <MultilingualTextItem ID="7" CompositionName="Items">
+                <AttributeList>
+                  <Culture>en-US</Culture>
+                  <Text />
+                </AttributeList>
+              </MultilingualTextItem>
+            </ObjectList>
+          </MultilingualText>
+        </ObjectList>
+      </SW.Blocks.CompileUnit>
+      <MultilingualText ID="8" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="9" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.FB>
+</Document>

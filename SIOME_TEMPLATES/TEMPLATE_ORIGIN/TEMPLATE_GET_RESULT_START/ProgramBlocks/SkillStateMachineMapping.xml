@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document>
+  <Engineering version="V15.1" />
+  <DocumentInfo>
+    <Created>2019-08-14T06:24:31.9270763Z</Created>
+    <ExportSetting>None</ExportSetting>
+    <InstalledProducts>
+      <Product>
+        <DisplayName>Totally Integrated Automation Portal</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>TIA Portal Openness</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>STEP 7 Professional</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+      <OptionPackage>
+        <DisplayName>STEP 7 Safety</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </OptionPackage>
+      <Product>
+        <DisplayName>WinCC Advanced</DisplayName>
+        <DisplayVersion>V15.1</DisplayVersion>
+      </Product>
+    </InstalledProducts>
+  </DocumentInfo>
+  <SW.Blocks.InstanceDB ID="0">
+    <AttributeList>
+      <InstanceOfName>typeSkillStateMachineMapping</InstanceOfName>
+      <InstanceOfType>UDT</InstanceOfType>
+      <Interface><Sections xmlns="http://www.siemens.com/automation/Openness/SW/Interface/v3">
+  <Section Name="Static">
+    <Member Name="SkillStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_Names" Datatype="Array[0..2] of String" />
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..2] of Byte" />
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..2] of String" />
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..2] of Byte" />
+    </Member>
+    <Member Name="ClearedStatMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..3] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_Names" Datatype="Array[0..3] of String" />
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..3] of Byte" />
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..3] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..3] of String" />
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..3] of Byte" />
+    </Member>
+    <Member Name="RunningStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..5] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_Names" Datatype="Array[0..5] of String" />
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..5] of Byte" />
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..6] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..6] of String" />
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..6] of Byte" />
+    </Member>
+    <Member Name="IdleStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..1] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_Names" Datatype="Array[0..1] of String" />
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..1] of Byte" />
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..0] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..0] of String" />
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..0] of Byte" />
+    </Member>
+    <Member Name="HoldStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_Names" Datatype="Array[0..2] of String" />
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..2] of Byte" />
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..1] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..1] of String" />
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..1] of Byte" />
+    </Member>
+    <Member Name="ResettingStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_Names" Datatype="Array[0..2] of String" />
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..2] of Byte" />
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..2] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..2] of String" />
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..2] of Byte" />
+    </Member>
+    <Member Name="ExecuteStateMachine" Datatype="Struct">
+      <Member Name="CurrentState_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="LastTransition_Id" Datatype="OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_NodeIds" Datatype="Array[0..1] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableStates_Names" Datatype="Array[0..1] of String" />
+      <Member Name="AvailableStates_Numbers" Datatype="Array[0..1] of Byte" />
+      <Member Name="AvailableTransitions_NodeIds" Datatype="Array[0..1] of OPC_UA_NodeId" Version="1.0" />
+      <Member Name="AvailableTransitions_Names" Datatype="Array[0..1] of String" />
+      <Member Name="AvailableTransitions_Numbers" Datatype="Array[0..1] of Byte" />
+    </Member>
+  </Section>
+</Sections></Interface>
+      <MemoryLayout>Optimized</MemoryLayout>
+      <Name>SkillStateMachineMapping</Name>
+      <Number>5</Number>
+      <ProgrammingLanguage>DB</ProgrammingLanguage>
+    </AttributeList>
+    <ObjectList>
+      <MultilingualText ID="1" CompositionName="Comment">
+        <ObjectList>
+          <MultilingualTextItem ID="2" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+      <MultilingualText ID="3" CompositionName="Title">
+        <ObjectList>
+          <MultilingualTextItem ID="4" CompositionName="Items">
+            <AttributeList>
+              <Culture>en-US</Culture>
+              <Text />
+            </AttributeList>
+          </MultilingualTextItem>
+        </ObjectList>
+      </MultilingualText>
+    </ObjectList>
+  </SW.Blocks.InstanceDB>
+</Document>
