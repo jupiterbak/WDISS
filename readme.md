@@ -36,12 +36,12 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     $ npm install npm -g
 
 ---
+## Installation
 
-## Download the project
+### Download the project
 
     $ git clone https://github.com/jupiterbak/WDISS
     $ cd WDISS
-
 
 
 ### Install all dependencies via `npm`
