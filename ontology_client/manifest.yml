@@ -1,0 +1,13 @@
+applications:
+- path: .
+  memory: 1024M
+  instances: 1
+  domain: mybluemix.net
+  name: EHomeIndoorlokalisation
+  host: EHomeIndoorlokalisation
+  disk_quota: 1024M
+  services:
+  - EHomeIndoorlokalisation-MAS
+  - EHomeIndoorlokalisation-Push
+  - EHomeIndoorlokalisation-MobileData
+  - EHomeIndoorlokalisation-Mobile Quality Assurance

@@ -1,0 +1,92 @@
+count instances
+
+PREFIX opcua:      <http://opcfoundation.org/UA/> 
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT count(?y)  WHERE { opcua:N2253 ?t ?y  } ORDER BY (?t)
+
+select another namespace:
+
+PREFIX opcua:			<http://opcfoundation.org/UA/> 
+PREFIX rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: 			<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX opcuauserns1: 	<urn:eclipse:milo:hello-world>	
+SELECT ?y ?name
+  WHERE {
+    ?y opcua:HasAttributeNodeId ?t .
+    ?y rdfs:label ?name
+  } 
+ORDER BY (?y)
+
+second select:
+PREFIX opcua:			<http://opcfoundation.org/UA/> 
+PREFIX rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: 			<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX opcuauserns1: 	<urn:eclipse:milo:hello-world>	
+SELECT ?y ?name
+  WHERE {
+    ?y opcua:HasAttributeNodeId ?t .
+    ?t rdfs:label ?name .
+    ?y rdfs:label "ScalarTypes"
+  } 
+ORDER BY (?y)
+
+Get all siblings:
+PREFIX opcua:			<http://opcfoundation.org/UA/> 
+PREFIX rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: 			<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX opcuauserns1: 	<urn:eclipse:milo:hello-world>	
+SELECT ?sibling ?name
+  WHERE {
+    ?p opcua:N33 ?y .
+    ?p opcua:N33 ?sibling .
+    ?sibling rdfs:label ?name .    
+    ?y rdfs:label "ScalarTypes"
+  }  
+ORDER BY (?y)
+
+Describe instance:
+PREFIX opcua:			<http://opcfoundation.org/UA/> 
+PREFIX rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: 			<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX opcuauserns1: 	<urn:eclipse:milo:hello-world>	
+DESCRIBE ?y
+  WHERE {    
+    ?y rdfs:label "ScalarTypes"
+  }  
+ORDER BY (?y)
+
+ask an instance:
+
+PREFIX opcua:			<http://opcfoundation.org/UA/> 
+PREFIX rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: 			<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX opcuauserns1: 	<urn:eclipse:milo:hello-world>	
+ASK {    
+    ?y rdfs:label "ScalarTypes"
+  } 
+  
+ask an instance negative:
+
+PREFIX opcua:			<http://opcfoundation.org/UA/> 
+PREFIX rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: 			<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX opcuauserns1: 	<urn:eclipse:milo:hello-world>	
+ASK {    
+    ?y opcua:N35 ?child .
+    ?y rdfs:label "ScalarTypes" .
+    ?child rdfs:label "Boolean0"
+  } 
+  
+  Example Paper:
+  PREFIX opcua:			<http://opcfoundation.org/UA/> 
+PREFIX rdf:  			<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: 			<http://www.w3.org/2000/01/rdf-schema#>
+PREFIX opcuauserns1: 	<urn:eclipse:milo:hello-world>	
+ASK {    
+    ?boiler opcua:N40 ?boilertype .
+    ?boilertype   rdfs:label "BoilerType" .
+    ?y opcua:N47 ?temp_sensor . 
+    ?temp_sensor opcua:N40 ?temp_sensor_type .
+    ?temp_sensor_type   rdfs:label "TemperatureSensorType"
+  } 

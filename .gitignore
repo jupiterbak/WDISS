@@ -97,7 +97,7 @@ typings/
 .application_settings
 
 # Ontology client
-ontology_client/
+# ontology_client/
 
 #TDB files
 tdb/
