@@ -1,0 +1,11 @@
+@echo off
+SET original=%CD%
+cd %original%/ressources/dummymachine
+call install_dummymachine_via_npm.bat
+cd %original%/ressources/dummymachine2
+call install_dummymachine_via_npm.bat
+cd %original%/skillmonitoring
+call install_skillmonitoring_via_npm.bat
+cd %original%/ontology_client
+call install_ontology_client_via_npm.bat
+cd %original%

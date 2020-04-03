@@ -5,7 +5,7 @@ SP 347 Skill Invocation Client Example
 ---
 ## Requirements
 
-For development, you will only need Node.js and a node global package, `npm`, installed in your environement.
+For development, you will only need Node.js and a node global package, `npm`, installed in your environement. If your host have no internet connection make sure to install `7-Zip`.
 
 ### Node
 - #### Node installation on Windows
@@ -35,6 +35,16 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
     $ npm install npm -g
 
+### 7-Zip
+  Just go on [official 7-Zip website](https://www.7-zip.de/), download the x64 installer and follow the instructions.
+
+If the installation was successful, you should be able to run the following command on a windows OS.
+
+    $ "C:\Program Files\7-Zip\7z.exe" --help
+    $ 7-Zip [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+    $ Usage: 7z <command> [<switches>...] <archive_name> [<file_names>...]
+    $   [<@listfiles...>]
+
 ---
 ## Installation
 
@@ -43,18 +53,24 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     $ git clone https://github.com/jupiterbak/WDISS
     $ cd WDISS
 
-
-### Install all dependencies via `npm`
+### Unpack and Install all dependencies using `7-Zip`
 
 ```
-$ call _install_all.bat
+$ _install_all.bat
+```
+
+### Install all precompiled dependencies via `npm`
+Alternatively, if the host has an internet connection, update and install the packages using `npm`.
+
+```
+$ _install_all_via_npm.bat
 ```
 
 ## Start the DEMO (recommended)
 
 Step 1: start the ontology server annd the skill invocation client. To do it, run the following script:
 ```bash
-call _start_simple.bat
+$ _start_simple.bat
 ```
 
 Step 2:
