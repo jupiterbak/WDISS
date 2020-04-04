@@ -78,7 +78,7 @@ function post_initialize() {
         logger.info("Server is now listening ... ( press CTRL+C to stop)");
         logger.info("port " + server.endpoints[0].port);
         const endpointUrl = server.endpoints[0].endpointDescriptions()[0].endpointUrl;
-        logger.info(" the primary server endpoint url is" + endpointUrl);
+        logger.info("The primary server endpoint url is: " + endpointUrl);
 
         // Start the state machine
         internal_kill_unload.start();
@@ -92,17 +92,19 @@ function post_initialize() {
     });
 }
 server.initialize(post_initialize);
-// process.on('uncaughtException', function(err) {
-//     logger.info('[LEMS] Uncaught Exception:' + err.stack);
+process.on('uncaughtException', function(err) {
+    logger.info('Uncaught Exception:' + err.stack);
 
-//     process.exit(1);
-// });
+    process.exit(1);
+});
 
 // Stop the platform if the user request it
 process.on('SIGINT', function() {
     logger.info("Shuting down Server  ... ( press CTRL+C to stop)");
     internal_kill_unload.stop();
     internal_kill_unload.clear();
+    internal_kill_load.stop();
+    internal_kill_load.clear();
 
     server.shutdown();
     process.exit(0);

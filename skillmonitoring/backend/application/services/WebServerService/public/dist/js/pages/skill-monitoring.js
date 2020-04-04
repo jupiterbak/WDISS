@@ -46,7 +46,8 @@ $(function() {
     initGoJsGraph("StateChart");
 
     function executeMethod(self, params) {
-        var all_parameters = $(self).parent().parent().find("input");
+        var all_parameters = $(self).parent().parent().find('.input_param_div input');
+        var all_parameters = $(self).parent().parent().find('.output_param_div input');
         let data = {
             ip: gIP,
             port: gPORT,
@@ -70,6 +71,7 @@ $(function() {
             function(result) {
                 if (result.err) {
                     // TODO: make a nice error feedback
+                    $('.alert').alert('open');
                 } else {
                     $('.modal').modal('hide');
                 }
@@ -165,6 +167,7 @@ $(function() {
                 if (el.ip === gIP && el.port === gPORT && el.skill.name === gSkill) {
                     // Dismiss all modal
                     $('.modal').modal('hide');
+                    $('.alert').alert('close');
                     $("#modalContainers").empty();
                     $("#modelActionBtn").empty();
                     // extract the methods --> TODO: Make it more generic

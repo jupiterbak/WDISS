@@ -533,7 +533,7 @@ function checkServerModel(self, client, sio, fCallBack) {
                 getSkillObject(client, { ns: 0, nid: 85 }, []).then(
                     function(foundedObjects) {
                         if (foundedObjects.length > 0) {
-                            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] Client found a EFLEX LObject with the nodeId: " + JSON.stringify(foundedObjects[0]));
+                            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] Client found at least one skill object with the nodeId: " + JSON.stringify(foundedObjects[0]));
                             callback(null, foundedObjects);
                         } else {
                             self.app.log.warn("MICROSERVICE[" + self.settings.name + "] No SkillObject exists in the PLC information model.");
@@ -893,8 +893,9 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                             };
                             await new Promise((resolve) => {
 
-                                client.getArgumentDefinition(element.nodeId.namespace, element.nodeId.value, async function(err, inputArguments) {
+                                client.getOptionalArgumentDefinition(element.nodeId.namespace, element.nodeId.value, async function(err, inputArguments, outputArguments) {
                                     item.parameters = inputArguments || [];
+                                    //item.out_parameters = outputArguments || [];
                                     resolve(item);
                                 });
                             });

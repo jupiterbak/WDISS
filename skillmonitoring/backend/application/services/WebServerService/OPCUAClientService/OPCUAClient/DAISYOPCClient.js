@@ -30,6 +30,7 @@ var opcua = require("node-opcua");
 var async = require("async");
 var md5 = require('md5');
 var IOBusHandler = require('./IOBusHandler');
+const makeResultMask = require("node-opcua-data-model").makeResultMask;
 
 var regexGUID = /^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$/;
 var isValidGuid = function(guid) {
@@ -176,10 +177,10 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
                         port: port,
                         connection: false
                     });
-                    self.connected = false;
-                    self.monitored = false;
-                    self.information_model_checked = false;
-                    self.skill_array = [];
+                    // self.connected = false;
+                    // self.monitored = false;
+                    // self.information_model_checked = false;
+                    // self.skill_array = [];
                     console.log("start_reconnection not working so aborting");
                 });
                 self.client.on("connection_reestablished", function() {
@@ -981,6 +982,132 @@ DAISYOPCClient.prototype.getArgumentDefinition = function(ns, methodNodeId, call
 
     this.session.getArgumentDefinition(methodNodeID, function(err, inputArguments, outputArguments) {
         callback(err, inputArguments, outputArguments);
+    });
+};
+
+/**
+ * extract the argument definition of a method
+ * @method getOptionalArgumentDefinition
+ * @param ns {String} - The namespace index of the node
+ * @param methodNodeId {String} - the nodeId
+ * @param callback  {Function}
+ * @param {Error|null} callback.err
+ * @param {Argument<>} callback.inputArguments
+ * @param {Argument<>} callback.outputArguments
+ */
+DAISYOPCClient.prototype.getOptionalArgumentDefinition = function(ns, methodNodeId, callback) {
+    var mErr = "";
+
+    // TODO; fehlerbehandlung
+    if (this.session === undefined) {
+        mErr = "Session is not opened.";
+        callback(mErr, null, null);
+        return;
+    }
+
+    var type = guidtest(methodNodeId);
+    var method_nodes_to_read = "ns=" + ns + ";" + type + "=" + methodNodeId;
+    var methodNodeID = opcua.resolveNodeId(method_nodes_to_read);
+
+    this.getOptionalArgumentDefinitionFromSession(methodNodeID, function(err, inputArguments, outputArguments) {
+        callback(err, inputArguments, outputArguments);
+    });
+};
+
+/**
+ * @method getOptionalArgumentDefinitionFromSession
+ *    extract the argument definition of a method
+ * @param methodId {NodeId}
+ * @param callback  {Function}
+ * @param {Error|null} callback.err
+ * @param [object} callback.args
+ * @param {Argument<>} callback.args.inputArguments
+ * @param {Argument<>} callback.args.outputArguments
+ * @async
+ *
+ * @method getOptionalArgumentDefinitionFromSession
+ * @param  methodId {NodeId}
+ * @return {Promise<obj>}  {inputArguments: .., outputArguments: ...}
+ * @async
+ *
+ */
+DAISYOPCClient.prototype.getOptionalArgumentDefinitionFromSession = function (methodId, callback) {
+    var self = this;
+    const browseDescription = new opcua.browse_service.BrowseDescription({
+        nodeId: methodId,
+        referenceTypeId: opcua.resolveNodeId("HasProperty"),
+        browseDirection: opcua.BrowseDirection.Forward,
+        nodeClassMask: 0,// makeNodeClassMask("Variable"),
+        includeSubtypes: true,
+        resultMask: makeResultMask("BrowseName")
+    });
+
+    self.session.browse(browseDescription, function (err, browseResult) {
+
+        /* istanbul ignore next */
+        if (err) {
+            return callback(err);
+        }
+        browseResult.references = browseResult.references || [];
+
+        //xx console.log("xxxx results", util.inspect(results, {colors: true, depth: 10}));
+        let inputArgumentRef = browseResult.references.filter(function (r) {
+            return r.browseName.name === "InputArguments";
+        });
+
+        // note : InputArguments property is optional thus may be missing
+        inputArgumentRef = (inputArgumentRef.length === 1) ? inputArgumentRef[0] : null;
+
+        let outputArgumentRef = browseResult.references.filter(function (r) {
+            return r.browseName.name === "OutputArguments";
+        });
+
+        // note : OutputArguments property is optional thus may be missing
+        outputArgumentRef = (outputArgumentRef.length === 1) ? outputArgumentRef[0] : null;
+
+        let inputArguments = [], outputArguments = [];
+
+        const nodesToRead = [];
+        const actions = [];
+
+        if (inputArgumentRef) {
+            nodesToRead.push({
+                nodeId: inputArgumentRef.nodeId,
+                attributeId: opcua.read_service.AttributeIds.Value
+            });
+            actions.push(function (result) {
+                inputArguments = result.value?result.value.value:null;
+            });
+        }
+        if (outputArgumentRef) {
+            nodesToRead.push({
+                nodeId: outputArgumentRef.nodeId,
+                attributeId: opcua.read_service.AttributeIds.Value
+            });
+            actions.push(function (result) {
+                outputArguments = result.value?result.value.value:null;
+            });
+        }
+
+        if (nodesToRead.length === 0) {
+            return callback(null, { inputArguments, outputArguments });
+        }
+        // now read the variable
+        self.session.read(nodesToRead, function (err, dataValues) {
+
+            /* istanbul ignore next */
+            if (err) {
+                return callback(err);
+            }
+
+            dataValues.forEach(function (dataValue, index) {
+                actions[index].call(null, dataValue);
+            });
+
+            //xx console.log("xxxx result", util.inspect(result, {colors: true, depth: 10}));
+            callback(null, { inputArguments, outputArguments });
+        });
+
     });
 };
 

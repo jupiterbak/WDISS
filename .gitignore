@@ -96,8 +96,9 @@ typings/
 .idea 
 .application_settings
 
-# Ontology client
-# ontology_client/
-
 #TDB files
 tdb/
+
+# Module to ignore
+# ontology_client/
+simple_add/
