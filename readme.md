@@ -1,4 +1,4 @@
-# Skill Invocation Cllient
+# Skill Invocation Client (Under Devellopment - 01.04.2020)
 
 SP 347 Skill Invocation Client Example
 
