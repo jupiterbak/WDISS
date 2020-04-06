@@ -36,7 +36,7 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
     $ npm install npm -g
 
 ### 7-Zip
-Ff your Host/edge do not have an internet connection, we also provide a precompiled version. For the installation of these pacakges, you will need 7-Zip. to install it, just go on [official 7-Zip website](https://www.7-zip.de/), download the x64 installer and follow the instructions.
+If your host/edge do not have an internet connection, we also provide a precompiled version. For the installation of these pacakges, you will need 7-Zip. to install it, just go on [official 7-Zip website](https://www.7-zip.de/), download the x64 installer and follow the instructions.
 
 If the installation was successful, you should be able to run the following command on a windows OS.
 
