@@ -317,14 +317,14 @@
                     <h4 class="modal-title"><span id="paramHeader">{{name}}</span>()</h4>
                 </div>                
                 <div class="modal-body">
-                    <div class="alert alert-warning alert-dismissible" id="paramModalAlert{{name}}" role="alert">
+                    <div class="alert alert-warning alert-dismissible fade show" id="paramModalAlert{{name}}" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         ...
                     </div>
                     <form  role="form">
                     <div class="row">
                         <div class="col-md-6 input_param_div" >
-                            <h3>Inputs</h3>
+                            <h3>Input parameters</h3>
                             {{#each parameters.inputArguments}}
                             <div class="form-group">
                                 <label class="control-label" for="param{{name}}">{{name}}  <span class="label label-default label-small"> {{#js_if "this.valueRank > 0"}}Array of {{dataType}} {{else}} {{dataType}} {{/js_if}} </span></label>
@@ -333,7 +333,7 @@
                             {{/each}}
                         </div><!-- # col-md-6-->
                         <div class="col-md-6 output_param_div">
-                            <h3>Outputs</h3>
+                            <h3>Output parameters</h3>
                             {{#each parameters.outputArguments}}
                             <div class="form-group">
                                 <label class="control-label" for="param{{name}}">{{name}}  <span class="label label-default label-small"> {{#js_if "this.valueRank > 0"}}Array of {{dataType}} {{else}} {{dataType}} {{/js_if}} </span></label>

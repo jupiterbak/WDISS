@@ -45,6 +45,25 @@ $(function() {
 
     initGoJsGraph("StateChart");
 
+    function showAlert(_text, _type){
+        if (_type === 'success'){
+            $(".alert").removeClass('alert-warning').removeClass('alert-success').addClass('alert-success');
+        }else{
+            $(".alert").removeClass('alert-warning').removeClass('alert-success').addClass('alert-warning');
+        }
+        $(".alert").addClass('in out');
+        $('.alert').show();
+        $('.alert').text(_text);
+        return false; // Keep close.bs.alert event from removing from DOM
+    }
+
+    function removeAlert(){
+        $('.alert').hide();
+        $('.alert').removeClass('in out');
+        $('input').removeClass('has-success').removeClass('has-warning');
+        return false; // Keep close.bs.alert event from removing from DOM
+    }
+
     function executeMethod(self, params) {
         var all_parameters = $(self).parent().parent().find('.input_param_div input');
         var all_parameters = $(self).parent().parent().find('.output_param_div input');
@@ -71,9 +90,27 @@ $(function() {
             function(result) {
                 if (result.err) {
                     // TODO: make a nice error feedback
-                    $('.alert').alert('open');
+                    $(".alert").removeClass('alert-warning').removeClass('alert-success').addClass('alert-warning');
+                    showAlert(result.err.text, 'error');
+                    $('.output_param_div input').filter(function(index){
+                        if(index < result.results.outputArguments.length){
+                            $( this ).val(result.results.outputArguments[index].value);
+                            $( this ).addClass('has-warning');
+                        }                        
+                        return true;
+                    });
                 } else {
-                    $('.modal').modal('hide');
+                    $(".alert").removeClass('alert-warning').removeClass('alert-success').addClass('alert-success');
+                    showAlert("Execusion was sucessfull.", 'success');
+                    // $('.modal').modal('hide');
+                    // Update the output values
+                    $('.output_param_div input').filter(function(index){
+                        if(index < result.results.outputArguments.length){
+                            $( this ).val(result.results.outputArguments[index].value);
+                            $( this ).addClass('has-success');
+                        }
+                        return true;
+                    });
                 }
             }
         );
@@ -167,9 +204,9 @@ $(function() {
                 if (el.ip === gIP && el.port === gPORT && el.skill.name === gSkill) {
                     // Dismiss all modal
                     $('.modal').modal('hide');
-                    $('.alert').alert('close');
                     $("#modalContainers").empty();
                     $("#modelActionBtn").empty();
+                    removeAlert();
                     // extract the methods --> TODO: Make it more generic
                     var methods = [el.skillModel.Invokation.Start, el.skillModel.Invokation.GetResult];
                     methods.forEach(m => {
@@ -182,6 +219,7 @@ $(function() {
                         var compiledTemplate = Template7.compile(template);
                         var html = compiledTemplate(m);
                         $("#modelActionBtn").append(html);
+                        removeAlert();
                     });
 
                     // Add the listener
