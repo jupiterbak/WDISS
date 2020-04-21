@@ -2,5 +2,4 @@
 SET original=%CD%
 cd %original%/ressources/dummymachine2
 start start_dummymachine.bat
-ping 127.0.0.1 -n 16 > nul
 cd %original%
