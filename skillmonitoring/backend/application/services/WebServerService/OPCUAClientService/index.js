@@ -28,6 +28,7 @@ var when = require('when');
 var async = require("async");
 var opcua = require("node-opcua");
 
+
 var DAISYOPCClientManager = require('./OPCUAClient/DAISYOPCClientManager');
 
 var OPCUAClientInterface = function() {};
@@ -744,11 +745,11 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                 } else {
                     for (let i = 0; i < browse_results[0].references.length; i++) {
                         const element = browse_results[0].references[i];
-                        const NodeClass = element.nodeClass.key;
+                        const NodeClass = element.nodeClass;
                         var item = {};
                         let type = "Object";
                         let types = [];
-                        if (NodeClass === "Object") {
+                        if (NodeClass === opcua.NodeClass.Object) {
                             // Get all superTypes
                             let opcuaType = await getOpcUAType(client, {
                                 ns: element.nodeId.namespace,
@@ -848,7 +849,7 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                                 });
                             }
 
-                        } else if (NodeClass === "Variable" || NodeClass === "Property") {
+                        } else if (NodeClass ===opcua.NodeClass.Variable ) {
                             type = "Variable";
                             item = {
                                 name: element.browseName.name,
@@ -877,7 +878,7 @@ async function parseSkillObject(client, BaseObjectNodeId, ObjectResult, RootObje
                                 RootObject.KPI.push(item);
                                 globalObjectResult.KPI.push(item);
                             }
-                        } else if (NodeClass === "Method") {
+                        } else if (NodeClass === opcua.NodeClass.Method) {
                             type = "Method";
                             item = {
                                 name: element.browseName.name,

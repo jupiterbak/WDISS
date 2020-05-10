@@ -15,7 +15,7 @@
     "author": "Jupiter Bakakeu",
     "license": "MIT",
     "dependencies": {
-        "node-opcua": "^2.5.8",
+        "node-opcua": "^2.5.12",
         "node-yaml-config": "0.0.5",
         "winston": "^3.2.1",
         "xstate": "^4.9.1"

@@ -158,7 +158,8 @@ $(function() {
         }        
     });
 
-    socket.on("StatesChanged", function(data) {
+
+    socket.on( 'StatesChanged', function(data) {
         // Highlight the current state
         var _keys = [];
         for (var prop in data) {

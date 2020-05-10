@@ -98,10 +98,10 @@ var DAISYOPCClient = function(ip, port, serverName, socketID, socketHandler) {
         securityPolicy: opcua.SecurityPolicy.None,
         //requestedSessionTimeout: 2000000,
         //serverCertificate: serverCertificate,
-        //defaultSecureTokenLifetime: 400000,
+        defaultSecureTokenLifetime: 400000,
     };
 
-    this.client = new opcua.OPCUAClient(options);
+    this.client = opcua.OPCUAClient.create(options);
     this.connected = false;
     this.monitored = false;
     this.information_model_checked = false;
@@ -274,7 +274,7 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
             // step 3: initialize a subscription
             function(callback) {
 
-                self.subscription = new opcua.ClientSubscription(self.session, {
+                self.subscription = opcua.ClientSubscription.create(self.session, {
                     requestedPublishingInterval: 10,
                     requestedLifetimeCount: 60000,
                     requestedMaxKeepAliveCount: 2000000,
@@ -754,28 +754,39 @@ DAISYOPCClient.prototype.monitorNode = function(ns, nid, browseName, samplingInt
 
     var type = guidtest(nid);
     //console.log(this.monitoredItems["ns=" + ns + ";" + type + "=" + nid]);
-    this.monitoredItems["ns=" + ns + ";" + type + "=" + nid] = this.subscription.monitor({
+    this.subscription.monitor(
+        {
             nodeId: opcua.resolveNodeId("ns=" + ns + ";" + type + "=" + nid),
-            attributeId: 13
-        }, {
+            attributeId: opcua.AttributeIds.Value
+        }, 
+        {
             samplingInterval: samplingInterval,
             discardOldest: true,
-            queueSize: 100
+            queueSize: 10
         },
-        opcua.read_service.TimestampsToReturn.Both);
+        opcua.TimestampsToReturn.Both,
+        (err, monitoredItem) => {
+            if(err){
+                fCallback(err);
+            }else{
+                self.monitoredItems["ns=" + ns + ";" + type + "=" + nid] = monitoredItem;
+                monitoredItem.on("changed", function(dataValue) {
 
-    this.monitoredItems["ns=" + ns + ";" + type + "=" + nid].on("changed", function(dataValue) {
+                    newValueCallback(dataValue);
+            
+                });
+                monitoredItem.on("initialized", function() {
+                    //console.log("monitoredItem initialized");
+                });
+                monitoredItem.on("err", function(err) {
+                    console.log(self.monitoredItems["ns=" + ns + ";" + type + "=" + nid].itemToMonitor.nodeId.toString(), " ERROR".red, err);
+                    fCallback(err);
+                });
+            }
+          }
+    );
 
-        newValueCallback(dataValue);
-
-    });
-    this.monitoredItems["ns=" + ns + ";" + type + "=" + nid].on("initialized", function() {
-        //console.log("monitoredItem initialized");
-    });
-    this.monitoredItems["ns=" + ns + ";" + type + "=" + nid].on("err", function(err) {
-        console.log(self.monitoredItems["ns=" + ns + ";" + type + "=" + nid].itemToMonitor.nodeId.toString(), " ERROR".red, err);
-        fCallback(err);
-    });
+    
 };
 
 /**
@@ -1035,14 +1046,14 @@ DAISYOPCClient.prototype.getOptionalArgumentDefinition = function(ns, methodNode
  */
 DAISYOPCClient.prototype.getOptionalArgumentDefinitionFromSession = function (methodId, callback) {
     var self = this;
-    const browseDescription = new opcua.browse_service.BrowseDescription({
+    var browseDescription = {
         nodeId: methodId,
         referenceTypeId: opcua.resolveNodeId("HasProperty"),
         browseDirection: opcua.BrowseDirection.Forward,
         nodeClassMask: 0,// makeNodeClassMask("Variable"),
         includeSubtypes: true,
         resultMask: makeResultMask("BrowseName")
-    });
+    };
 
     self.session.browse(browseDescription, function (err, browseResult) {
 
@@ -1075,7 +1086,7 @@ DAISYOPCClient.prototype.getOptionalArgumentDefinitionFromSession = function (me
         if (inputArgumentRef) {
             nodesToRead.push({
                 nodeId: inputArgumentRef.nodeId,
-                attributeId: opcua.read_service.AttributeIds.Value
+                attributeId: opcua.AttributeIds.Value
             });
             actions.push(function (result) {
                 inputArguments = result.value?result.value.value:null;
@@ -1084,7 +1095,7 @@ DAISYOPCClient.prototype.getOptionalArgumentDefinitionFromSession = function (me
         if (outputArgumentRef) {
             nodesToRead.push({
                 nodeId: outputArgumentRef.nodeId,
-                attributeId: opcua.read_service.AttributeIds.Value
+                attributeId: opcua.AttributeIds.Value
             });
             actions.push(function (result) {
                 outputArguments = result.value?result.value.value:null;
