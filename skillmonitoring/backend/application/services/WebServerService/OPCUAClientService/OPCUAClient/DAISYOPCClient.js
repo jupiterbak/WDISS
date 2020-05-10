@@ -86,17 +86,19 @@ var DAISYOPCClient = function(ip, port, serverName, socketID, socketHandler) {
     var options = {
         applicationName: "SP367_SKILL_ORCHESTRATOR",
         endpoint_must_exist: false,
+        keepSessionAlive: true,
+        requestedSessionTimeout: 60000,
+
         connectionStrategy: {
-            maxRetry: 20000000,
-            initialDelay: 10000,
-            maxDelay: 50000000
+            maxRetry: 10, //20000000,
+            initialDelay: 1000,
+            maxDelay: 20000
         },
         securityMode: opcua.MessageSecurityMode.NONE,
         securityPolicy: opcua.SecurityPolicy.None,
-        requestedSessionTimeout: 2000000,
+        //requestedSessionTimeout: 2000000,
         //serverCertificate: serverCertificate,
-        defaultSecureTokenLifetime: 40000,
-        keepSessionAlive: true
+        //defaultSecureTokenLifetime: 400000,
     };
 
     this.client = new opcua.OPCUAClient(options);
@@ -181,7 +183,7 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
                     // self.monitored = false;
                     // self.information_model_checked = false;
                     // self.skill_array = [];
-                    console.log("start_reconnection not working so aborting");
+                    //console.log("start_reconnection not working so aborting");
                 });
                 self.client.on("connection_reestablished", function() {
                     self.socketHandler.emitAll(socketID, "serverstatus", {
@@ -191,7 +193,7 @@ DAISYOPCClient.prototype.connect = function(ip, port, serverName, socketID, fCal
                         connection: true
                     });
                     self.connected = true;
-                    console.log("connection_reestablished ");
+                    //console.log("connection_reestablished ");
                 });
                 self.client.on("close", function() {
                     self.socketHandler.emitAll(socketID, "serverstatus", {
