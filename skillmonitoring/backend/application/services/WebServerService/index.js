@@ -121,9 +121,9 @@ WebServerService.prototype.start = function() {
         });
     });
 
-    self.wapp.get('/MonitorResultTrigger', function(req, res) {
+    self.wapp.get('/monitorResultTrigger', function(req, res) {
         let node = JSON.parse(req.query.node);
-        self.opcuaclientservice.monitorResultsTrigger(node, function(err, results) {
+        self.opcuaclientservice.monitorResultTrigger(node, self, function(err, results) {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify({ err: err, results: results }));
         });

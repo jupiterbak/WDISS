@@ -215,7 +215,7 @@ OPCUAClientInterface.prototype.ExecuteMethod = function(arg, fCallBack) {
                         if (action.parameters) {
                             if (action.parameters.inputArguments && action.parameters.inputArguments.length > 0) {
                                 var k = 0;
-                                action.parameters.inputArguments.forEach(function(el) {
+                                action.parameters.inputArguments.forEach(function(el, index) {
                                     // Filter Datatype
                                     // TODO: Only basic datatypes are supported
                                     //const keys = Object.keys(opcua.DataType).filter(k => opcua.DataType[k] === el.dataType.value);
@@ -225,10 +225,11 @@ OPCUAClientInterface.prototype.ExecuteMethod = function(arg, fCallBack) {
                                     *        assert(dataType === opcua.DataType.ByteString);
                                     *     });
                                     * */
+
                                     inputArguments.push({
                                         dataType: el.dataType.value, // only basic datatypes are supported
                                         arrayType: el.valueRank !== -1 ? opcua.VariantArrayType.Array : opcua.VariantArrayType.Scalar,
-                                        value: el.valueRank !== -1 ? [0] : el.value?el.value:0
+                                        value: el.valueRank !== -1 ? [0] : arg.parameters[index]?arg.parameters[index].value:0
                                     });
                                     k++;
                                 });
@@ -363,12 +364,13 @@ OPCUAClientInterface.prototype.monitorNode = function(arg, fCallBack) {
     }    
 };
 
-OPCUAClientInterface.prototype.monitorResultTrigger = function(arg, fCallBack) {
+OPCUAClientInterface.prototype.monitorResultTrigger = function(arg, sio, fCallBack) {
     var self = this;
+    var called = false;
     if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.skillName && arg.node) {
         var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
         if (client && client.connected === true && client.information_model_checked === true) {
-            if (arg.ResultTriggerNodeID) {
+            if (arg.node) {
                 client.monitorNode(arg.node.nodeId.ns, arg.node.nodeId.nid, arg.name, self.settings.modulesetting.interval, function(err) {
                     if (err) {
                         self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + arg.node.name + "] - [" + arg.node.nodeId.ns + ":" + arg.node.nodeId.nid + "]: " + err);
@@ -390,9 +392,12 @@ OPCUAClientInterface.prototype.monitorResultTrigger = function(arg, fCallBack) {
                         node: arg.node,
                         value: el
                     };
-
-                    fCallBack(null, _rslt);
-                    sio.emit("ResultTriggerChanged",_rslt);
+                    if(called){
+                        sio.emit("ResultTriggerChanged",_rslt);
+                    }else{
+                        fCallBack(null, _rslt);
+                        called = true;
+                    }
                 });
             }else {
                 self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not monitor variable. Variable not found.");
