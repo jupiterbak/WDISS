@@ -1,0 +1,16 @@
+default:
+  server:
+    port: 4843
+    buildInfo:
+      productName: "DummySkillServer - Add"
+      buildNumber: "0001"
+    ip: "0.0.0.0"
+    endpointName: 'OPCUA@Siemens'
+    username: 'root'
+    password: 'root'
+    allowAnonymous: false,
+    serverInfo:
+      applicationUri: "http://siemens.com/SkillOPCUA"
+      productUri: "siemens.com/SP347_Example"
+      applicationName: "SP347SkillEngineering@Siemens" 
+    serverNodeSet: ["AutomationSkillType_OptionalStateMachine.xml","SkillADD_OptionalStateMachine.xml"]

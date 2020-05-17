@@ -1,0 +1,23 @@
+{
+    "name": "dummymachine",
+    "version": "1.0.0",
+    "description": "Dummy OPC UA Server implementing a Skill Interface",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    },
+    "keywords": [
+        "OPC",
+        "UA",
+        "Skill"
+    ],
+    "author": "Jupiter Bakakeu",
+    "license": "MIT",
+    "dependencies": {
+        "node-opcua": "^2.5.12",
+        "node-yaml-config": "0.0.5",
+        "winston": "^3.2.1",
+        "xstate": "^4.9.1"
+    }
+}

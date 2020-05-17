@@ -1,0 +1,972 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CAEXFile FileName="AML.aml" SchemaVersion="2.15" xsi:noNamespaceSchemaLocation="CAEX_ClassModel_V2.15.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<AdditionalInformation>
+		<WriterHeader>
+			<WriterName>AutomationML Editor</WriterName>
+			<WriterID>916578CA-FE0D-474E-A4FC-9E1719892369</WriterID>
+			<WriterVendor>AutomationML e.V.</WriterVendor>
+			<WriterVendorURL>www.AutomationML.org</WriterVendorURL>
+			<WriterVersion>4.3.11.0</WriterVersion>
+			<WriterRelease>4.3.11.0</WriterRelease>
+			<LastWritingDateTime>2019-07-24T11:16:06.7453793+02:00</LastWritingDateTime>
+			<WriterProjectTitle>unspecified</WriterProjectTitle>
+			<WriterProjectID>unspecified</WriterProjectID>
+		</WriterHeader>
+	</AdditionalInformation>
+	<AdditionalInformation AutomationMLVersion="2.0" />
+	<AdditionalInformation DocumentVersions="Recommendations">
+		<Document DocumentIdentifier="CW" Version="20.02.17" />
+	</AdditionalInformation>
+	<InstanceHierarchy Name="SmA skill modelling">
+		<Version>0</Version>
+		<InternalElement Name="Functional Model" ID="fe3c7641-6818-44c9-b6fb-9ec181922d1e">
+			<InternalElement Name="ProductHierarchy" ID="6741e347-532b-4b8c-8106-dc50e4d7085a">
+				<InternalElement Name="GiveAwayProduct" ID="6ecb8e26-bcc6-41d4-b436-32ed9772b366">
+					<ExternalInterface Name="Product_Flow_In1" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="7ad05e84-b65e-48fa-a6fb-e3fcd723915f">
+						<Attribute Name="Direction" AttributeDataType="xs:string">
+							<Description>in or out as Value</Description>
+							<Value>in</Value>
+						</Attribute>
+					</ExternalInterface>
+					<ExternalInterface Name="Product_Flow_Out1" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="62b40daa-2f5a-4f93-98cc-e1b0fc5baaef">
+						<Attribute Name="Direction" AttributeDataType="xs:string">
+							<Description>in or out as Value</Description>
+						</Attribute>
+					</ExternalInterface>
+					<InternalElement Name="Base Plate" ID="46e73e13-e5b0-4888-97ed-403a47e5493a">
+						<ExternalInterface Name="Product_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="13ef2e9b-7b92-4d6b-a71f-2381e3621a26">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Product_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="5d3be85d-bbf3-48f9-b787-2ff5c8152b68">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+								<Value>out</Value>
+							</Attribute>
+						</ExternalInterface>
+					</InternalElement>
+					<InternalElement Name="Material A" ID="c0879122-6b72-4e22-831c-91dc9f400647">
+						<ExternalInterface Name="Product_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="5ea84d05-3591-4c0d-a228-9aa52fca2cd4">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Product_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="723d40b6-38c1-40b2-b7fb-11ca02d78730">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+								<Value>out</Value>
+							</Attribute>
+							<Attribute Name="Type" AttributeDataType="xs:string">
+								<Value>alternative</Value>
+							</Attribute>
+							<Attribute Name="Level" AttributeDataType="xs:string">
+								<Value>1</Value>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Product_Flow_Out1" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="08a03b85-f7f4-424f-94bb-eda8bd400811">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+								<Value>out</Value>
+							</Attribute>
+							<Attribute Name="Type" AttributeDataType="xs:string">
+								<Value>alternative</Value>
+							</Attribute>
+							<Attribute Name="Level" AttributeDataType="xs:string">
+								<Value>1</Value>
+							</Attribute>
+						</ExternalInterface>
+					</InternalElement>
+					<InternalElement Name="Material C" ID="4701f3ed-105b-4626-96ab-cfb174062c6c">
+						<ExternalInterface Name="Product_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="7b059a01-6ec1-4258-9b28-24e8ee1638c9">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Product_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="bb4607b7-4796-4a7b-a5eb-35ba6fd56862">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+							<Attribute Name="Type" AttributeDataType="xs:string">
+								<Value>alternative</Value>
+							</Attribute>
+							<Attribute Name="Level" AttributeDataType="xs:string">
+								<Value>1</Value>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Product_Flow_Out1" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="a954d82a-6ea4-4169-baae-4c4b2d78c245">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+								<Value>out</Value>
+							</Attribute>
+							<Attribute Name="Type" AttributeDataType="xs:string">
+								<Value>alternative</Value>
+							</Attribute>
+							<Attribute Name="Level" AttributeDataType="xs:string">
+								<Value>2</Value>
+							</Attribute>
+						</ExternalInterface>
+					</InternalElement>
+					<InternalElement Name="IP_Base Plate1" ID="76725d30-ee5b-4ea8-ba9d-6ea806a3cfc3">
+						<Description>Intermediate product</Description>
+						<ExternalInterface Name="Product_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="5ebec5c1-083e-43fb-b1e3-2a1343eadd32">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Product_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="94770a76-1e8f-4b36-ae34-531f33216df9">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+					</InternalElement>
+					<InternalElement Name="IP_Base Plate with Material" ID="340ab7ab-47ce-4956-afa1-cdf272756c12">
+						<Description>Intermediate product</Description>
+						<ExternalInterface Name="Product_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="3e3d55e6-303a-42d0-a150-b32b66f57e49">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+								<Value>in</Value>
+							</Attribute>
+							<Attribute Name="Type" AttributeDataType="xs:string" />
+							<Attribute Name="Level" AttributeDataType="xs:string">
+								<Value>1</Value>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Product_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="60e3e9fa-70a3-4d54-8b7c-7ec27d0e2815">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Product_Flow_In1" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="67b3e6d4-d40c-4df8-bece-247b6cdc0b47">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+								<Value>in</Value>
+							</Attribute>
+							<Attribute Name="Type" AttributeDataType="xs:string" />
+							<Attribute Name="Level" AttributeDataType="xs:string">
+								<Value>2</Value>
+							</Attribute>
+						</ExternalInterface>
+						<InternalElement Name="IP_distributed Material" ID="b4a77405-d68a-4dad-bad6-e2bcd2c0192f">
+							<Description>Intermediate product</Description>
+							<ExternalInterface Name="Product_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="398876e7-6d94-49bd-9cac-878aacd4a88e">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Product_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="1d0fa526-d8e2-4ea3-bb04-28fc564239a8">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+						</InternalElement>
+						<InternalElement Name="IP_scanned Material" ID="a93e7bba-217a-4645-9da2-b8fbf9da6805">
+							<Description>Intermediate product</Description>
+							<ExternalInterface Name="Product_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="5687e0a2-4786-41e6-b056-ef8990d05930">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Product_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="e34326ff-39fb-40db-aceb-24c7afea8979">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+						</InternalElement>
+					</InternalElement>
+				</InternalElement>
+				<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy/ProductHierarchy" />
+			</InternalElement>
+			<InternalElement Name="ProcessHierarchy" ID="c59e250a-dbd3-431c-9a68-d2a9d86da8d7">
+				<InternalElement Name="Insert" ID="30622494-7da5-4872-8085-4b7abf0d3de2">
+					<ExternalInterface Name="FunctionalUse" ID="8d9774ee-6254-4e2c-81cc-aa34ec6bc95a" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" />
+					<ExternalInterface Name="LinkToSkillInterface" ID="363503ca-2dd5-47b4-9235-aca78b1c85bf" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/LinkToSkillInterfaceClass" />
+					<InternalElement Name="move in" ID="ab11615a-c89d-43c0-bbe1-907dee6b89d6">
+						<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="7ed479f5-4566-4ad4-86b5-f81b71e8f9a9">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+								<Value>in</Value>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="78a679e7-630f-4e8d-be02-bd71a6cb8707">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="a1b2fb8c-f3f5-4a82-8a33-3a26d41ae309" />
+						<ExternalInterface Name="LinkToSkillInterface" ID="c05c8280-0e5e-4bfe-a802-58f21141594a" />
+						<InternalElement Name="xxx" ID="e09c3b54-c1ed-4008-8c61-c9d9f05c1a66" RefBaseSystemUnitPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen">
+							<Attribute Name="Attribute1"></Attribute>
+						</InternalElement>
+						<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+					</InternalElement>
+					<InternalElement Name="pick &amp; place" ID="1c4d0a4b-1a58-4f4c-b71d-7190a3ee9ec5">
+						<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="e22b1151-9c8b-4d16-8788-e6ece70b030a">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="e623867a-8d42-4b92-9f77-0cfdceb2bc3a">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="5177fe8a-ae70-4a47-ae3e-490287aa5954" />
+						<ExternalInterface Name="LinkToSkillInterface" ID="64f75d25-b8f6-46e5-aae4-d1cd23b443ef" />
+						<InternalElement Name="distribute" ID="ee79cbcb-4458-42c2-8e20-b3283664529c">
+							<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="f424b0b9-9536-43dc-a409-1566e340981c">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="c91c337f-21e3-4e21-84ea-d81ddd018d4a">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="daa99deb-6a09-475f-ac37-aa014037ec33" />
+							<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+						</InternalElement>
+						<InternalElement Name="scan" ID="e01011c0-16f2-4ff8-869c-68ccad97ee68">
+							<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="dfd91fd9-5653-4b9a-b2a3-7a2d970ad7a5">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="53f0d561-0249-4591-85eb-fbdcf5d1f43e">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="ec009b9a-a22e-41f0-a0e3-fb7e18ba9b1c" />
+							<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+						</InternalElement>
+						<InternalElement Name="place" ID="222b9944-f323-4a0d-9dc0-c41d440a469e">
+							<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="0012f07e-68d6-46ab-a225-1284f6125ca6">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="2c4da291-6390-4edf-848d-e0ec98472534">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="13390ba1-a3e4-498c-b5ec-922a44a1710e" />
+							<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+						</InternalElement>
+						<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+					</InternalElement>
+					<InternalElement Name="move out" ID="3622d625-9e8d-4d61-b2de-bc496df8a04c">
+						<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="426b5686-d8aa-4a24-bc08-0f51d5dde7d4">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="1a318437-7274-4df8-a526-373ccb51753e">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="4ae5dba6-ac4c-4388-82ef-f4159004e205" />
+						<ExternalInterface Name="LinkToSkillInterface" ID="0358a7a2-da3d-48ce-b640-e6205f85544d" />
+						<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+					</InternalElement>
+					<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+				</InternalElement><InternalElement Name="Add" ID="a71d2773-b193-4816-bcb8-f7e7699dfe37">
+					<ExternalInterface Name="FunctionalUse" ID="47d84df1-3df2-48b8-933e-54cccc1def12" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" />
+					<ExternalInterface Name="LinkToSkillInterface" ID="511cc38c-a207-46b3-b9ff-7d99105471ba" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/LinkToSkillInterfaceClass" />
+					<InternalElement Name="move in" ID="e790f57c-3cf4-475e-9bd6-4e05b283c841">
+						<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="06fe6fd4-4bce-4658-a117-ab5761b3760c">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+								<Value>in</Value>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="e01b2859-cf5f-4929-aa90-fa20cde13d3b">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="a0a89bbe-b2ff-43bc-ad4b-91ce1ff47531" />
+						<ExternalInterface Name="LinkToSkillInterface" ID="ea7cc8aa-e1b2-4129-9e63-40f72d920217" />
+						<InternalElement Name="xxx" ID="d4f8b49a-dbc1-487e-89e1-e6a1e56226b5" RefBaseSystemUnitPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen">
+							<Attribute Name="Attribute1"></Attribute>
+						</InternalElement>
+						<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+					</InternalElement>
+					<InternalElement Name="pick &amp; place" ID="b25a62e9-c9d9-4413-869f-d4511ce9a52e">
+						<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="906bf959-2beb-43b4-9c3e-3f51c1854624">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="8084a191-0168-401d-ac67-b7faa1e6eb23">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="9ac44beb-4364-4075-ab2e-41fa7f0825b7" />
+						<ExternalInterface Name="LinkToSkillInterface" ID="a4d984e1-e768-4305-8159-28120a9e9916" />
+						<InternalElement Name="distribute" ID="65c7ea79-ee56-4f40-a712-870e7a03d434">
+							<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="4f66ce4f-e343-4907-89ec-7fe42b6f9005">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="2184c432-730f-422d-a6be-bf47827cb87c">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="7adaeb65-f12d-43fc-b1b0-e344cbf39a96" />
+							<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+						</InternalElement>
+						<InternalElement Name="scan" ID="830877a1-11df-4b06-9e31-2d945c4262fc">
+							<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="ef5af267-ac4b-439d-b9d7-c5a3b7543dfb">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="d053a3df-f343-44ef-be75-1fa1491811db">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="ccfac06b-281f-4c3f-8796-0d97cb0e694d" />
+							<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+						</InternalElement>
+						<InternalElement Name="place" ID="2982ed2d-d287-4ff2-8721-b248762e35d3">
+							<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="85884e4a-7e28-4e96-9694-46bc890713ac">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="df0a709a-55d5-43ea-b7f6-e65f7077d9b0">
+								<Attribute Name="Direction" AttributeDataType="xs:string">
+									<Description>in or out as Value</Description>
+								</Attribute>
+							</ExternalInterface>
+							<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="d38332de-9f8e-4543-8042-2f179a65f9fe" />
+							<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+						</InternalElement>
+						<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+					</InternalElement>
+					<InternalElement Name="move out" ID="9015ba67-8ae4-4f7d-8f89-09e42f8bad65">
+						<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="edbb4e03-38f9-45ef-a99e-c789620bad0e">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="b4deb07d-288e-49aa-8e96-35f22312bcb1">
+							<Attribute Name="Direction" AttributeDataType="xs:string">
+								<Description>in or out as Value</Description>
+							</Attribute>
+						</ExternalInterface>
+						<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="9f965a9d-87ca-4dcb-a4b3-da27c0de0c7a" />
+						<ExternalInterface Name="LinkToSkillInterface" ID="abbfca51-96f4-4598-a583-d561c218f5a0" />
+						<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+					</InternalElement>
+					<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Process" />
+				</InternalElement>
+				<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy/ProcessHierarchy" />
+			</InternalElement>
+			<InternalElement Name="ResourceHierarchy" ID="976f3b9b-41e5-4947-b6df-1f5cd862e5c7">
+				<InternalElement Name="AssemblyModule3" ID="46be11c9-2a9f-46b1-b877-d01e9b928c3d">
+					<ExternalInterface Name="Ressource_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="b5c5bd74-b1e7-41ab-8c47-570cc562b859" />
+					<ExternalInterface Name="Resource_Represents" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_HW" ID="b9cbd7e8-c622-4af9-9329-283af7e477d0" />
+					<ExternalInterface Name="Represents_SW" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_SW" ID="05d15565-0ad9-478a-b831-6afefc419776" />
+					<InternalElement Name="Gripper 1" ID="3b75d919-cd87-4a9b-b52f-1a3c88509d8a">
+						<ExternalInterface Name="Ressource_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="5cf8a29e-371c-44b2-b223-0922e4d3234c" />
+						<ExternalInterface Name="Resource_Represents" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_HW" ID="7903cf4f-53e5-4fcb-82b1-6585e2b23deb" />
+						<ExternalInterface Name="Represents_SW" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_SW" ID="fcda8e54-83fb-4a24-90b5-a6eaf00ad0e1" />
+					</InternalElement>
+					<InternalElement Name="Gripping Unit" ID="59d38d9f-4d13-4b61-8ff4-c76887c2aafa">
+						<ExternalInterface Name="Ressource_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="a6fce31b-cb2d-43dc-8900-e7071a664185" />
+						<ExternalInterface Name="Resource_Represents" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_HW" ID="28256633-638c-4a6f-b814-5236b4cb6d87" />
+						<ExternalInterface Name="Represents_SW" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_SW" ID="ba40863c-a428-4624-9eee-a3945edd43d6" />
+						<InternalElement Name="Scanner" ID="7c645a14-b57a-4e89-9650-693e9a20a647">
+							<ExternalInterface Name="Ressource_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="696cd65a-8306-42c2-aa48-a688fbbe7bf8" />
+							<ExternalInterface Name="Resource_Represents" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_HW" ID="3e9c6615-0121-44e4-8e73-bb3b97e8e65a" />
+							<ExternalInterface Name="Represents_SW" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_SW" ID="9e06ed70-5775-4985-81b8-6b58495b1052" />
+						</InternalElement>
+						<InternalElement Name="Magazin" ID="e4495f37-0933-416d-85e6-4a9af4a7c6e0">
+							<ExternalInterface Name="Ressource_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="c6bd4fce-349c-4509-a829-b2237428d8f9" />
+							<ExternalInterface Name="Resource_Represents" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_HW" ID="3063338b-b734-4dba-8dc5-079ac6ed29f0" />
+							<ExternalInterface Name="Represents_SW" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_SW" ID="a73e10f4-b16f-48a3-899a-2e28f0f92b20" />
+						</InternalElement>
+						<InternalElement Name="Gripper 2" ID="71a3104f-2b5f-4d5b-a290-f312476ac80f">
+							<ExternalInterface Name="Ressource_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="507ac8bf-0469-4737-a8cb-8152d14a4f0a" />
+							<ExternalInterface Name="Resource_Represents" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_HW" ID="88da5f3a-0183-4604-8804-71fec34ef14a" />
+							<ExternalInterface Name="Represents_SW" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_SW" ID="1fbb4f79-d5f0-4457-aff1-754043ad40a6" />
+						</InternalElement>
+					</InternalElement>
+				</InternalElement>
+				<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy/ResourceHierarchy" />
+			</InternalElement>
+			<InternalElement Name="InformationHierarchy" ID="8f6e1f3a-e998-42ac-a48d-bccdf88316d4">
+				<InternalElement Name="Part ID" ID="4585dee5-4c43-477c-9714-11bb0474a718">
+					<ExternalInterface Name="Information_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="628fae2d-2dd3-4e88-99e2-da6dce875dcb">
+						<Attribute Name="Direction" AttributeDataType="xs:string">
+							<Description>in or out as Value</Description>
+						</Attribute>
+					</ExternalInterface>
+					<ExternalInterface Name="Information_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="d2d906c7-b5f9-4555-8dd9-fb1b5878c418">
+						<Attribute Name="Direction" AttributeDataType="xs:string">
+							<Description>in or out as Value</Description>
+						</Attribute>
+						<Attribute Name="Type" AttributeDataType="xs:string">
+							<Value>parallel</Value>
+						</Attribute>
+						<Attribute Name="Level" AttributeDataType="xs:string">
+							<Value>1</Value>
+						</Attribute>
+					</ExternalInterface>
+				</InternalElement>
+				<InternalElement Name="Part &amp; Position" ID="eccf4913-6e3e-4168-8276-6b96540f47b8">
+					<ExternalInterface Name="Information_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="c289378f-d913-4b85-ae01-08b7d55fdf30">
+						<Attribute Name="Direction" AttributeDataType="xs:string">
+							<Description>in or out as Value</Description>
+						</Attribute>
+					</ExternalInterface>
+					<ExternalInterface Name="Information_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="938ff9a2-4568-4137-94ba-b6a57a99393b">
+						<Attribute Name="Direction" AttributeDataType="xs:string">
+							<Description>in or out as Value</Description>
+						</Attribute>
+						<Attribute Name="Type" AttributeDataType="xs:string">
+							<Value>parallel</Value>
+						</Attribute>
+						<Attribute Name="Level" AttributeDataType="xs:string">
+							<Value>1</Value>
+						</Attribute>
+					</ExternalInterface>
+					<ExternalInterface Name="Information_Flow_Out1" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="fa87d48a-9067-4289-8afc-1de9022a1c19">
+						<Attribute Name="Direction" AttributeDataType="xs:string">
+							<Description>in or out as Value</Description>
+						</Attribute>
+						<Attribute Name="Type" AttributeDataType="xs:string">
+							<Value>parallel</Value>
+						</Attribute>
+						<Attribute Name="Level" AttributeDataType="xs:string">
+							<Value>2</Value>
+						</Attribute>
+					</ExternalInterface>
+				</InternalElement>
+				<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy/InformationHierarchy" />
+			</InternalElement>
+			<InternalLink Name="Link" RefPartnerSideA="46e73e13-e5b0-4888-97ed-403a47e5493a:Product_Flow_Out" RefPartnerSideB="ab11615a-c89d-43c0-bbe1-907dee6b89d6:Process_Flow_In" />
+			<InternalLink Name="InternalLink" RefPartnerSideA="ab11615a-c89d-43c0-bbe1-907dee6b89d6:Process_Flow_Out" RefPartnerSideB="76725d30-ee5b-4ea8-ba9d-6ea806a3cfc3:Product_Flow_In" />
+			<InternalLink Name="InternalLink1" RefPartnerSideA="3b75d919-cd87-4a9b-b52f-1a3c88509d8a:Ressource_Use" RefPartnerSideB="ab11615a-c89d-43c0-bbe1-907dee6b89d6:Process_Use" />
+			<InternalLink Name="InternalLink2" RefPartnerSideA="4701f3ed-105b-4626-96ab-cfb174062c6c:Product_Flow_Out" RefPartnerSideB="1c4d0a4b-1a58-4f4c-b71d-7190a3ee9ec5:Process_Flow_In" />
+			<InternalLink Name="InternalLink3" RefPartnerSideA="c0879122-6b72-4e22-831c-91dc9f400647:Product_Flow_Out" RefPartnerSideB="1c4d0a4b-1a58-4f4c-b71d-7190a3ee9ec5:Process_Flow_In" />
+			<InternalLink Name="InternalLink5" RefPartnerSideA="1c4d0a4b-1a58-4f4c-b71d-7190a3ee9ec5:Process_Use" RefPartnerSideB="59d38d9f-4d13-4b61-8ff4-c76887c2aafa:Ressource_Use" />
+			<InternalLink Name="InternalLink6" RefPartnerSideA="1c4d0a4b-1a58-4f4c-b71d-7190a3ee9ec5:Process_Flow_Out" RefPartnerSideB="4585dee5-4c43-477c-9714-11bb0474a718:Information_Flow_In" />
+			<InternalLink Name="InternalLink7" RefPartnerSideA="340ab7ab-47ce-4956-afa1-cdf272756c12:Product_Flow_Out" RefPartnerSideB="3622d625-9e8d-4d61-b2de-bc496df8a04c:Process_Flow_In" />
+			<InternalLink Name="InternalLink8" RefPartnerSideA="3622d625-9e8d-4d61-b2de-bc496df8a04c:Process_Flow_Out" RefPartnerSideB="6ecb8e26-bcc6-41d4-b436-32ed9772b366:Product_Flow_In1" />
+			<InternalLink Name="InternalLink9" RefPartnerSideA="3622d625-9e8d-4d61-b2de-bc496df8a04c:Process_Use" RefPartnerSideB="3b75d919-cd87-4a9b-b52f-1a3c88509d8a:Ressource_Use" />
+			<InternalLink Name="InternalLink10" RefPartnerSideA="c0879122-6b72-4e22-831c-91dc9f400647:Product_Flow_Out1" RefPartnerSideB="ee79cbcb-4458-42c2-8e20-b3283664529c:Process_Flow_In" />
+			<InternalLink Name="InternalLink11" RefPartnerSideA="4701f3ed-105b-4626-96ab-cfb174062c6c:Product_Flow_Out1" RefPartnerSideB="ee79cbcb-4458-42c2-8e20-b3283664529c:Process_Flow_In" />
+			<InternalLink Name="InternalLink12" RefPartnerSideA="ee79cbcb-4458-42c2-8e20-b3283664529c:Process_Flow_Out" RefPartnerSideB="b4a77405-d68a-4dad-bad6-e2bcd2c0192f:Product_Flow_In" />
+			<InternalLink Name="InternalLink13" RefPartnerSideA="b4a77405-d68a-4dad-bad6-e2bcd2c0192f:Product_Flow_Out" RefPartnerSideB="e01011c0-16f2-4ff8-869c-68ccad97ee68:Process_Flow_In" />
+			<InternalLink Name="InternalLink14" RefPartnerSideA="e01011c0-16f2-4ff8-869c-68ccad97ee68:Process_Flow_Out" RefPartnerSideB="a93e7bba-217a-4645-9da2-b8fbf9da6805:Product_Flow_In" />
+			<InternalLink Name="InternalLink15" RefPartnerSideA="a93e7bba-217a-4645-9da2-b8fbf9da6805:Product_Flow_Out" RefPartnerSideB="222b9944-f323-4a0d-9dc0-c41d440a469e:Process_Flow_In" />
+			<InternalLink Name="InternalLink16" RefPartnerSideA="1c4d0a4b-1a58-4f4c-b71d-7190a3ee9ec5:Process_Flow_Out" RefPartnerSideB="340ab7ab-47ce-4956-afa1-cdf272756c12:Product_Flow_In" />
+			<InternalLink Name="InternalLink17" RefPartnerSideA="222b9944-f323-4a0d-9dc0-c41d440a469e:Process_Flow_Out" RefPartnerSideB="340ab7ab-47ce-4956-afa1-cdf272756c12:Product_Flow_In1" />
+			<InternalLink Name="InternalLink18" RefPartnerSideA="ee79cbcb-4458-42c2-8e20-b3283664529c:Process_Use" RefPartnerSideB="e4495f37-0933-416d-85e6-4a9af4a7c6e0:Ressource_Use" />
+			<InternalLink Name="InternalLink19" RefPartnerSideA="e01011c0-16f2-4ff8-869c-68ccad97ee68:Process_Use" RefPartnerSideB="7c645a14-b57a-4e89-9650-693e9a20a647:Ressource_Use" />
+			<InternalLink Name="InternalLink20" RefPartnerSideA="222b9944-f323-4a0d-9dc0-c41d440a469e:Process_Use" RefPartnerSideB="71a3104f-2b5f-4d5b-a290-f312476ac80f:Ressource_Use" />
+			<InternalLink Name="InternalLink21" RefPartnerSideA="eccf4913-6e3e-4168-8276-6b96540f47b8:Information_Flow_Out" RefPartnerSideB="1c4d0a4b-1a58-4f4c-b71d-7190a3ee9ec5:Process_Flow_In" />
+			<InternalLink Name="InternalLink22" RefPartnerSideA="eccf4913-6e3e-4168-8276-6b96540f47b8:Information_Flow_Out1" RefPartnerSideB="ee79cbcb-4458-42c2-8e20-b3283664529c:Process_Flow_In" />
+			<InternalLink Name="InternalLink23" RefPartnerSideA="30622494-7da5-4872-8085-4b7abf0d3de2:FunctionalUse" RefPartnerSideB="46be11c9-2a9f-46b1-b877-d01e9b928c3d:Ressource_Use" /><InternalLink Name="Link1" RefPartnerSideA="a71d2773-b193-4816-bcb8-f7e7699dfe37:FunctionalUse" /><InternalLink Name="InternalLink24" RefPartnerSideA="a71d2773-b193-4816-bcb8-f7e7699dfe37:FunctionalUse" RefPartnerSideB="46be11c9-2a9f-46b1-b877-d01e9b928c3d:Ressource_Use" />
+			<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy" />
+		</InternalElement>
+		<InternalElement Name="Skill Interfaces" ID="f213237d-1d10-4ca6-a502-b7dcf7ef78a6">
+			<Attribute Name="name" AttributeDataType="xs:string" />
+			<InternalElement Name="Insert" ID="16639a6c-b8c5-4e48-8222-b12261823b78" RefBaseSystemUnitPath="Skill implementation/SkillCallInterface">
+				
+				<Attribute Name="MethodName" AttributeDataType="xs:string" /><ExternalInterface Name="LinkToSkillDescription" ID="afaf83ed-f613-4900-a3cc-0ca83d88f589" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/LinkToSkillDescriptionClass" />
+				<InternalElement Name="InvocationInterface" ID="25c1baad-839a-4251-a2e2-55fd4dd37670" RefBaseSystemUnitPath="Skill implementation/InvocationInterfaceClass"><Attribute Name="CommunicationPattern" AttributeDataType="xs:string"><DefaultValue>OPCUA</DefaultValue><Constraint Name="CommunicationPatternEnumeration"><NominalScaledType><RequiredValue>OPCUA</RequiredValue><RequiredValue>OtherPattern</RequiredValue></NominalScaledType></Constraint></Attribute><ExternalInterface Name="ErrorId" ID="7c3eab5a-6892-4adc-8134-a1735a6ae71f" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter"><Attribute Name="DataType" AttributeDataType="xs:nonNegativeInteger" /><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Out</DefaultValue><Value>SyncOut</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><ExternalInterface Name="Position" ID="5ba609a7-3cc3-47de-9611-1554c1bb4e30" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter"><Attribute Name="DataType" AttributeDataType="xs:int" /><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Input</DefaultValue><Value>Input</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><ExternalInterface Name="BuildingBlockTypeId" ID="ba12da4e-0b06-4377-a05b-86134fe57370" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter"><Attribute Name="DataType" AttributeDataType="xs:int" /><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Input</DefaultValue><Value>Input</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><ExternalInterface Name="Orientation" ID="862cdbd0-d37e-4ecc-8ab7-8e99424d9ccb" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter"><Attribute Name="DataType" AttributeDataType="xs:int" /><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Input</DefaultValue><Value>Input</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><ExternalInterface Name="RFID" ID="d734fc7b-5da9-441f-8bc2-c40e529c803d" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter"><Attribute Name="DataType" AttributeDataType="xs:int" /><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Input</DefaultValue><Value>Input</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><ExternalInterface Name="CurrentConfiguration_BuildingBlockTypeId" ID="5d646049-6644-4637-9959-cead0d34f963" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter">
+					<Attribute Name="DataType" AttributeDataType="xs:ENTITIES">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</Attribute><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Input</DefaultValue><Value>Input</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><ExternalInterface Name="CurrentConfiguration_Orientation" ID="37ffc749-f936-4fe0-bbaf-8d3922b31b41" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter">
+						<Attribute Name="DataType" AttributeDataType="xs:ENTITIES">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+						</Attribute>
+					<Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Input</DefaultValue><Value>Input</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><InternalElement Name="ResultStatus" ID="4c91a6af-f258-40e4-8bac-f5bc79866e6f" RefBaseSystemUnitPath="Skill implementation/ResultStatus" /></InternalElement>
+				<InternalLink Name="InternalLink" RefPartnerSideA="16639a6c-b8c5-4e48-8222-b12261823b78:LinkToSkillDescription" RefPartnerSideB="30622494-7da5-4872-8085-4b7abf0d3de2:LinkToSkillInterface" />
+			</InternalElement>
+			<InternalElement Name="MoveIn" ID="c01aa4c5-6a01-4319-995c-19fd1a962375" RefBaseSystemUnitPath="Skill implementation/SkillCallInterface">
+				<Attribute Name="MethodName" AttributeDataType="xs:string" />
+				<ExternalInterface Name="LinkToSkillDescription" ID="d41b0175-1f36-4999-8b10-eb880fd93860" />
+				<InternalElement Name="InvocationInterface" ID="d4138fcb-feda-406c-afdf-adecc865adcf" RefBaseSystemUnitPath="Skill implementation/InvocationInterfaceClass"><Attribute Name="CommunicationPattern" AttributeDataType="xs:string"><DefaultValue>OPCUA</DefaultValue><Constraint Name="CommunicationPatternEnumeration"><NominalScaledType><RequiredValue>OPCUA</RequiredValue><RequiredValue>OtherPattern</RequiredValue></NominalScaledType></Constraint></Attribute><ExternalInterface Name="ErrorId" ID="08148867-d02a-46ce-b217-f297d2cb12f9">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</ExternalInterface><ExternalInterface Name="CurrentConfiguration_BuildingBlockTypeId" ID="ff3d7336-6466-4b74-be5c-551ac14c42f1">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</ExternalInterface><ExternalInterface Name="CurrentConfiguration_Orientation" ID="081e4c50-8f0b-4da1-8fbc-dbbbbe9ea4fa">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</ExternalInterface><InternalElement Name="ResultStatus" ID="672757bb-c381-49e1-845d-c0d201ae7164" RefBaseSystemUnitPath="Skill implementation/ResultStatus" /></InternalElement>
+				<InternalLink Name="InternalLink" RefPartnerSideA="c01aa4c5-6a01-4319-995c-19fd1a962375:LinkToSkillDescription" RefPartnerSideB="ab11615a-c89d-43c0-bbe1-907dee6b89d6:LinkToSkillInterface" />
+			</InternalElement>
+			<InternalElement Name="MoveOut" ID="88475dc2-47af-4356-bf4f-4c2452ad1a46" RefBaseSystemUnitPath="Skill implementation/SkillCallInterface">
+				<Attribute Name="MethodName" AttributeDataType="xs:string" />
+				<ExternalInterface Name="LinkToSkillDescription" ID="8657eb2d-bf66-437f-81b4-964f605354ef" />
+				<InternalElement Name="InvocationInterface" ID="fae8d5fb-aab4-4c8e-87ba-7c979cbeb5db" RefBaseSystemUnitPath="Skill implementation/InvocationInterfaceClass"><Attribute Name="CommunicationPattern" AttributeDataType="xs:string"><DefaultValue>OPCUA</DefaultValue><Constraint Name="CommunicationPatternEnumeration"><NominalScaledType><RequiredValue>OPCUA</RequiredValue><RequiredValue>OtherPattern</RequiredValue></NominalScaledType></Constraint></Attribute><ExternalInterface Name="ErrorId" ID="c50bac46-29f1-4f05-875a-44ebc691d6a2">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</ExternalInterface><ExternalInterface Name="CurrentConfiguration_BuildingBlockTypeId" ID="6ca43192-e2a8-4c38-ad7e-98087ddf4c5a">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</ExternalInterface><ExternalInterface Name="CurrentConfiguration_Orientation" ID="d7d91e02-bd20-4d92-8782-a770d49f894a">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</ExternalInterface><InternalElement Name="ResultStatus" ID="dd8bb2cb-75ce-4038-b65b-50f13a139674" RefBaseSystemUnitPath="Skill implementation/ResultStatus" /></InternalElement>
+				<InternalLink Name="InternalLink" RefPartnerSideA="88475dc2-47af-4356-bf4f-4c2452ad1a46:LinkToSkillDescription" RefPartnerSideB="3622d625-9e8d-4d61-b2de-bc496df8a04c:LinkToSkillInterface" />
+			</InternalElement>
+			<InternalElement Name="Pick&amp;Place" ID="494196ca-07a0-4db2-a40d-2e01ea41923b" RefBaseSystemUnitPath="Skill implementation/SkillCallInterface">
+				<Attribute Name="MethodName" AttributeDataType="xs:string" />
+				<ExternalInterface Name="LinkToSkillDescription" ID="aeb9c8f8-5e74-4070-83cc-eb3020f6a9f6" /><InternalElement Name="InvocationInterface" ID="1c64df95-fe48-40f4-970a-0850cc61e363" RefBaseSystemUnitPath="Skill implementation/InvocationInterfaceClass"><Attribute Name="CommunicationPattern" AttributeDataType="xs:string"><DefaultValue>OPCUA</DefaultValue><Constraint Name="CommunicationPatternEnumeration"><NominalScaledType><RequiredValue>OPCUA</RequiredValue><RequiredValue>OtherPattern</RequiredValue></NominalScaledType></Constraint></Attribute><ExternalInterface Name="ErrorId" ID="7290dd0c-dc08-43c7-a3f9-2d8ed22cbef6">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</ExternalInterface><ExternalInterface Name="CurrentConfiguration_BuildingBlockTypeId" ID="3ced3afb-2988-48d4-a29a-2d0311879f92">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</ExternalInterface><ExternalInterface Name="CurrentConfiguration_Orientation" ID="e7d0d285-f189-4ec2-8262-40800b5636b2">
+						<Attribute Name="Value" AttributeDataType="xs:int" />
+					</ExternalInterface><InternalElement Name="ResultStatus" ID="c709a873-ae67-4495-ab35-e1b654f133d1" RefBaseSystemUnitPath="Skill implementation/ResultStatus" /></InternalElement>
+				
+				<InternalLink Name="InternalLink" RefPartnerSideA="494196ca-07a0-4db2-a40d-2e01ea41923b:LinkToSkillDescription" RefPartnerSideB="1c4d0a4b-1a58-4f4c-b71d-7190a3ee9ec5:LinkToSkillInterface" />
+			</InternalElement><InternalElement Name="Add" ID="da8cedf9-3d99-4e24-beaa-09eb68be4355" RefBaseSystemUnitPath="Skill implementation/SkillCallInterface">
+				
+				<Attribute Name="MethodName" AttributeDataType="xs:string" /><ExternalInterface Name="LinkToSkillDescription" ID="ff95b6f6-c67d-471a-a5f8-7fde5d2d0366" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/LinkToSkillDescriptionClass" />
+				<InternalElement Name="InvocationInterface" ID="87ddfd7f-a681-442a-8fa0-91daa57b3687" RefBaseSystemUnitPath="Skill implementation/InvocationInterfaceClass"><Attribute Name="CommunicationPattern" AttributeDataType="xs:string"><DefaultValue>OPCUA</DefaultValue><Constraint Name="CommunicationPatternEnumeration"><NominalScaledType><RequiredValue>OPCUA</RequiredValue><RequiredValue>OtherPattern</RequiredValue></NominalScaledType></Constraint></Attribute><ExternalInterface Name="Value1" ID="32915307-e450-4158-a5f7-1ceced18e517" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter"><Attribute Name="DataType" AttributeDataType="xs:int" /><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Input</DefaultValue><Value>Input</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><ExternalInterface Name="Value2" ID="6a3419de-9ef1-4221-b311-086c6a72bbb2" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter"><Attribute Name="DataType" AttributeDataType="xs:int" /><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Input</DefaultValue><Value>Input</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><ExternalInterface Name="ValueOut" ID="d9af5d06-7afc-46a1-a8de-60d11b8cfedd" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/InvocationParameter"><Attribute Name="DataType" AttributeDataType="xs:int" /><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Out</DefaultValue><Value>Out</Value><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></ExternalInterface><InternalElement Name="ResultStatus" ID="4c802f09-f25c-4f92-8c6b-63a08c51755e" RefBaseSystemUnitPath="Skill implementation/ResultStatus" /></InternalElement><InternalLink Name="InternalLink" RefPartnerSideA="da8cedf9-3d99-4e24-beaa-09eb68be4355:LinkToSkillDescription" RefPartnerSideB="a71d2773-b193-4816-bcb8-f7e7699dfe37:LinkToSkillInterface" />
+				
+			</InternalElement>
+			<RoleRequirements RefBaseRoleClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/SkillInterfacesDefinition" />
+		</InternalElement>
+	</InstanceHierarchy>
+	<InterfaceClassLib Name="AutomationMLInterfaceClassLib">
+		<Description>Standard Automation Markup Language Interface Class Library</Description>
+		<Version>2.2.0</Version>
+		<InterfaceClass Name="AutomationMLBaseInterface">
+			<InterfaceClass Name="StructuralPPRConnector">
+				<InterfaceClass Name="StructuralFlowMaterial" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector" />
+				<InterfaceClass Name="StructuralFlowEnergy" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector" />
+				<InterfaceClass Name="StructuralFlowInformation" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector" />
+				<InterfaceClass Name="StructuralConnection" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector" />
+				<InterfaceClass Name="FunctionalConnection" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector" />
+			</InterfaceClass>
+			<InterfaceClass Name="FunctionalPPRConnector" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface">
+				<InterfaceClass Name="FunctionalFlow" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector">
+					<Attribute Name="Direction" AttributeDataType="xs:string">
+						<Description>in or out as Value</Description>
+					</Attribute>
+				</InterfaceClass>
+				<InterfaceClass Name="FunctionalUse" ID="5aaa2a3d-183c-4c85-afd2-66d511b11ef2" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector" />
+				<InterfaceClass Name="Represents_HW" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector" />
+				<InterfaceClass Name="Represents_SW" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector" />
+			</InterfaceClass>
+			<InterfaceClass Name="ExternalDataConnector" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface">
+				<Attribute Name="refURI" AttributeDataType="xs:anyURI" />
+				<InterfaceClass Name="COLLADAInterface" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/ExternalDataConnector" />
+				<InterfaceClass Name="PLCopenXMLInterface" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/ExternalDataConnector" />
+			</InterfaceClass>
+			<InterfaceClass Name="Communication" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface">
+				<InterfaceClass Name="SignalInterface" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/Communication" />
+			</InterfaceClass>
+			<InterfaceClass Name="LinkToSkillInterfaceClass" />
+			<InterfaceClass Name="LinkToSkillDescriptionClass" />
+		</InterfaceClass>
+	</InterfaceClassLib>
+	<InterfaceClassLib Name="AutomationMLInterfaceClassLib">
+		<Description>Standard Automation Markup Language Interface Class Library</Description>
+		<Version>2.2.0</Version>
+		<InterfaceClass Name="AutomationMLBaseInterface">
+			<InterfaceClass Name="Order" RefBaseClassPath="AutomationMLBaseInterface">
+				<Attribute Name="Direction" AttributeDataType="xs:string" />
+			</InterfaceClass>
+			<InterfaceClass Name="PortConnector" RefBaseClassPath="AutomationMLBaseInterface" />
+			<InterfaceClass Name="InterlockingConnector" RefBaseClassPath="AutomationMLBaseInterface" />
+			<InterfaceClass Name="PPRConnector" RefBaseClassPath="AutomationMLBaseInterface" />
+			<InterfaceClass Name="ExternalDataConnector" RefBaseClassPath="AutomationMLBaseInterface">
+				<Attribute Name="refURI" AttributeDataType="xs:anyURI" />
+				<InterfaceClass Name="COLLADAInterface" RefBaseClassPath="ExternalDataConnector" />
+				<InterfaceClass Name="PLCopenXMLInterface" RefBaseClassPath="ExternalDataConnector" />
+			</InterfaceClass>
+			<InterfaceClass Name="Communication" RefBaseClassPath="AutomationMLBaseInterface">
+				<InterfaceClass Name="SignalInterface" RefBaseClassPath="Communication" />
+			</InterfaceClass>
+			
+			<InterfaceClass Name="InvocationParameter"><Attribute Name="DataType" AttributeDataType="xs:string" /><Attribute Name="ParameterType" AttributeDataType="xs:string"><DefaultValue>Out</DefaultValue><Constraint Name="Parameter Type Enumeration"><NominalScaledType><RequiredValue>Input</RequiredValue><RequiredValue>SyncOut</RequiredValue><RequiredValue>Out</RequiredValue></NominalScaledType></Constraint></Attribute></InterfaceClass>
+		</InterfaceClass>
+	</InterfaceClassLib>
+	<RoleClassLib Name="AutomationMLBaseRoleClassLib">
+		<Description>Automation Markup Language base role class library</Description>
+		<Version>2.2.0</Version>
+		<RoleClass Name="AutomationMLFunctionalRole">
+			<RoleClass Name="FunctionalHierarchy" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole">
+				<RoleClass Name="ProductHierarchy" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy" />
+				<RoleClass Name="ProcessHierarchy" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy" />
+				<RoleClass Name="ResourceHierarchy" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy" />
+				<RoleClass Name="InformationHierarchy" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy" />
+				<RoleClass Name="EnergyHierarchy" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/FunctionalHierarchy" />
+			</RoleClass>
+			<RoleClass Name="Resource" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole">
+				<ExternalInterface Name="Ressource_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="20538588-34a1-4721-a059-fb07cc6b1e78" />
+				<ExternalInterface Name="Resource_Represents" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_HW" />
+				<ExternalInterface Name="Represents_SW" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/Represents_SW" ID="730a22cd-1443-423f-8118-a670e38e8003" />
+				<RoleClass Name="HMIFacet" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource" />
+				<RoleClass Name="Turntable" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource" />
+				<RoleClass Name="Conveyor" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource">
+					<RoleClass Name="BeltConveyor" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource/Conveyor" />
+					<RoleClass Name="RollConveyor" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource/Conveyor" />
+					<RoleClass Name="ChainConveyor" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource/Conveyor" />
+					<RoleClass Name="PalletConveyor" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource/Conveyor" />
+					<RoleClass Name="OverheadConveyor" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource/Conveyor" />
+				</RoleClass>
+				<RoleClass Name="Lift" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource" />
+				<RoleClass Name="MillingMachine" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource" />
+				<RoleClass Name="Pump" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole/Resource" />
+			</RoleClass>
+			<RoleClass Name="Product" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole">
+				<ExternalInterface Name="Product_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="a5a4d0a6-13ad-4c85-939d-c79470decd0e">
+					<Attribute Name="Direction" AttributeDataType="xs:string">
+						<Description>in or out as Value</Description>
+					</Attribute>
+				</ExternalInterface>
+				<ExternalInterface Name="Product_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="66c36528-2829-4abc-acd0-3a5b2db5ff78">
+					<Attribute Name="Direction" AttributeDataType="xs:string">
+						<Description>in or out as Value</Description>
+					</Attribute>
+				</ExternalInterface>
+			</RoleClass>
+			<RoleClass Name="Process" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole">
+				<ExternalInterface Name="Process_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="e35645f3-e725-4c91-83e7-80e5bf6f774f">
+					<Attribute Name="Direction" AttributeDataType="xs:string">
+						<Description>in or out as Value</Description>
+					</Attribute>
+				</ExternalInterface>
+				<ExternalInterface Name="Process_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow" ID="8318fbae-ba0c-40ba-9691-26ca9d58a12b">
+					<Attribute Name="Direction" AttributeDataType="xs:string">
+						<Description>in or out as Value</Description>
+					</Attribute>
+				</ExternalInterface>
+				<ExternalInterface Name="Process_Use" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalUse" ID="28422693-6f50-41b5-8262-423e22faf50b" />
+			</RoleClass>
+			<RoleClass Name="Information" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole">
+				<ExternalInterface Name="Information_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow">
+					<Attribute Name="Direction" AttributeDataType="xs:string">
+						<Description>in or out as Value</Description>
+					</Attribute>
+				</ExternalInterface>
+				<ExternalInterface Name="Information_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow">
+					<Attribute Name="Direction" AttributeDataType="xs:string">
+						<Description>in or out as Value</Description>
+					</Attribute>
+				</ExternalInterface>
+			</RoleClass>
+			<RoleClass Name="Energy" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole">
+				<ExternalInterface Name="Energy_Flow_In" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow">
+					<Attribute Name="Direction" AttributeDataType="xs:string">
+						<Description>in or out as Value</Description>
+					</Attribute>
+				</ExternalInterface>
+				<ExternalInterface Name="Energy_Flow_Out" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/FunctionalPPRConnector/FunctionalFlow">
+					<Attribute Name="Direction" AttributeDataType="xs:string">
+						<Description>in or out as Value</Description>
+					</Attribute>
+				</ExternalInterface>
+			</RoleClass>
+			<RoleClass Name="SkillInterfacesDefinition" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLFunctionalRole" />
+		</RoleClass>
+		<RoleClass Name="AutomationMLStructuralRole">
+			<ExternalInterface Name="StructuralFlowMaterial" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector/StructuralFlowMaterial" ID="fcf5f7a6-3d40-4c30-a712-ff6127cab5b9" />
+			<ExternalInterface Name="StructuralFlowEnergy" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector/StructuralFlowEnergy" ID="90c71cb7-a026-4f57-b374-6c674522499e" />
+			<ExternalInterface Name="StructuralFlowInformation" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector/StructuralFlowInformation" ID="aea0d0db-f70d-4095-8feb-74e806ec32d1" />
+			<ExternalInterface Name="StructuralConnection" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector/StructuralConnection" ID="1215f610-4502-412a-84f2-7f85e130eb90" />
+			<ExternalInterface Name="FunctionalConnection" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/StructuralPPRConnector/FunctionalConnection" ID="03b18d3d-0668-4781-92fd-420d6838c7c8" />
+			<RoleClass Name="StructuralHierarchy" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="Enterprise" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="Site" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="Area" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="WorkCenter" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="WorkCell" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="WorkUnit" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="Unit" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="ProcessCell" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="ProductionLine" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="ProductionUnit" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="StorageZone" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="StorageUnit" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+			<RoleClass Name="Element" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLStructuralRole" />
+		</RoleClass>
+		<RoleClass Name="AutomationMLBehavioralRole">
+			<ExternalInterface Name="PLCopenXMLInterface" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/ExternalDataConnector/PLCopenXMLInterface" ID="a08d7b52-8550-4b5b-b265-b64443ad319b">
+				<Attribute Name="refURI" AttributeDataType="xs:anyURI" />
+			</ExternalInterface>
+			<ExternalInterface Name="SignalInterface" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/Communication/SignalInterface" ID="32c8db7d-e8ed-4bfe-ab6e-4e5bc33d6d0b" />
+			<RoleClass Name="BehaviorHierarchy" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBehavioralRole" />
+			<RoleClass Name="PLCPgramm" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBehavioralRole" />
+			<RoleClass Name="NCProgramm" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBehavioralRole" />
+			<RoleClass Name="NetworkPlan" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBehavioralRole" />
+			<RoleClass Name="Variable" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBehavioralRole" />
+		</RoleClass>
+	</RoleClassLib>
+	<RoleClassLib Name="AutomationMLBaseRoleClassLib">
+		<Description>Automation Markup Language base role class library</Description>
+		<Version>2.2.0</Version>
+		<RoleClass Name="AutomationMLBaseRole">
+			<RoleClass Name="Group" RefBaseClassPath="AutomationMLBaseRole">
+				<Attribute Name="AssociatedFacet" AttributeDataType="xs:string" />
+			</RoleClass>
+			<RoleClass Name="Facet" RefBaseClassPath="AutomationMLBaseRole" />
+			<RoleClass Name="Port" RefBaseClassPath="AutomationMLBaseRole">
+				<Attribute Name="Direction" AttributeDataType="xs:string" />
+				<Attribute Name="Cardinality">
+					<Attribute Name="MinOccur" AttributeDataType="xs:unsignedInt" />
+					<Attribute Name="MaxOccur" AttributeDataType="xs:unsignedInt" />
+				</Attribute>
+				<Attribute Name="Category" AttributeDataType="xs:string" />
+				<ExternalInterface Name="ConnectionPoint" ID="9942bd9c-c19d-44e4-a197-11b9edf264e7" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/PortConnector" />
+			</RoleClass>
+			<RoleClass Name="Resource" RefBaseClassPath="AutomationMLBaseRole" />
+			<RoleClass Name="Product" RefBaseClassPath="AutomationMLBaseRole" />
+			<RoleClass Name="Process" RefBaseClassPath="AutomationMLBaseRole" />
+			<RoleClass Name="Structure" RefBaseClassPath="AutomationMLBaseRole">
+				<RoleClass Name="ProductStructure" RefBaseClassPath="Structure" />
+				<RoleClass Name="ProcessStructure" RefBaseClassPath="Structure" />
+				<RoleClass Name="ResourceStructure" RefBaseClassPath="Structure" />
+				<RoleClass Name="InformationStructure" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure" />
+				<RoleClass Name="EnergyStructure" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure" />
+			</RoleClass>
+			<RoleClass Name="PropertySet" RefBaseClassPath="AutomationMLBaseRole" />
+		</RoleClass>
+	</RoleClassLib>
+	<RoleClassLib Name="AutomationMLBMIRoleClassLib">
+		<Description>Automation Markup Language Batch Manufacturing Industry Role Class Library</Description>
+		<Version>1.1.0</Version>
+		<RoleClass Name="BatchManufacturingEquipment" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource" />
+	</RoleClassLib>
+	<RoleClassLib Name="AutomationMLCMIRoleClassLib">
+		<Description>Automation Markup Language Continuous Manufacturing Industry Role Class Library</Description>
+		<Version>1.1.0</Version>
+		<RoleClass Name="ContManufacturingEquipment" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource" />
+	</RoleClassLib>
+	<RoleClassLib Name="AutomationMLCSRoleClassLib">
+		<Description>Automation Markup Language Control Industry Role Class Library</Description>
+		<Version>2.3.0</Version>
+		<RoleClass Name="ControlEquipment" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+			<RoleClass Name="Communication" RefBaseClassPath="ControlEquipment" />
+			<RoleClass Name="ControlHardware" RefBaseClassPath="ControlEquipment">
+				<RoleClass Name="PC" RefBaseClassPath="ControlHardware" />
+				<RoleClass Name="IPC" RefBaseClassPath="ControlHardware" />
+				<RoleClass Name="EmbeddedDevice" RefBaseClassPath="ControlHardware" />
+				<RoleClass Name="Handheld" RefBaseClassPath="ControlHardware" />
+			</RoleClass>
+			<RoleClass Name="Sensor" RefBaseClassPath="ControlEquipment" />
+			<RoleClass Name="Actuator" RefBaseClassPath="ControlEquipment" />
+			<RoleClass Name="Controller" RefBaseClassPath="ControlEquipment">
+				<RoleClass Name="PLC" RefBaseClassPath="Controller" />
+				<RoleClass Name="NC" RefBaseClassPath="Controller" />
+				<RoleClass Name="RC" RefBaseClassPath="Controller" />
+				<RoleClass Name="PAC" RefBaseClassPath="Controller" />
+			</RoleClass>
+		</RoleClass>
+	</RoleClassLib>
+	<RoleClassLib Name="AutomationMLDMIRoleClassLib">
+		<Description>Automation Markup Language  Discrete Manufacturing Industry Role Class Library</Description>
+		<Version>2.4.0</Version>
+		<RoleClass Name="DiscManufacturingEquipment" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+			<RoleClass Name="Transport" RefBaseClassPath="DiscManufacturingEquipment" />
+			<RoleClass Name="Storage" RefBaseClassPath="DiscManufacturingEquipment" />
+			<RoleClass Name="Fixture" RefBaseClassPath="DiscManufacturingEquipment" />
+			<RoleClass Name="Gate" RefBaseClassPath="DiscManufacturingEquipment" />
+			<RoleClass Name="Robot" RefBaseClassPath="DiscManufacturingEquipment" />
+			<RoleClass Name="Tool" RefBaseClassPath="DiscManufacturingEquipment" />
+			<RoleClass Name="Carrier" RefBaseClassPath="DiscManufacturingEquipment" />
+			<RoleClass Name="Machine" RefBaseClassPath="DiscManufacturingEquipment" />
+			<RoleClass Name="StaticObject" RefBaseClassPath="DiscManufacturingEquipment" />
+		</RoleClass>
+	</RoleClassLib>
+	<RoleClassLib Name="AutomationMLExtendedRoleClassLib">
+		<Version>2.7.0</Version>
+		<RoleClass Name="PLCFacet" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Facet" />
+		<RoleClass Name="HMIFacet" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Facet" />
+		<RoleClass Name="Enterprise" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="Site" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="Area" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="ProductionLine" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="WorkCell" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="ProcessCell" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="Unit" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="ProductionUnit" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="StorageZone" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="StorageUnit" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Structure/ResourceStructure" />
+		<RoleClass Name="Turntable" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Transport" />
+		<RoleClass Name="Conveyor" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Transport">
+			<RoleClass Name="BeltConveyor" RefBaseClassPath="Conveyor" />
+			<RoleClass Name="RollConveyor" RefBaseClassPath="Conveyor" />
+			<RoleClass Name="ChainConveyor" RefBaseClassPath="Conveyor" />
+			<RoleClass Name="PalletConveyor" RefBaseClassPath="Conveyor" />
+			<RoleClass Name="OverheadConveyor" RefBaseClassPath="Conveyor" />
+		</RoleClass>
+		<RoleClass Name="LiftingTable" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Transport" />
+		<RoleClass Name="AGV" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Transport" />
+		<RoleClass Name="Transposer" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Transport" />
+		<RoleClass Name="CarrierHandlingSystem" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Transport" />
+		<RoleClass Name="BodyStore" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Storage" />
+		<RoleClass Name="Lift" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Transport" />
+		<RoleClass Name="Rollerbed" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Transport" />
+		<RoleClass Name="StationaryTool" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Tool" />
+		<RoleClass Name="MovableTool" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Tool" />
+		<RoleClass Name="ControlCabinet" RefBaseClassPath="AutomationMLCSRoleClassLib/ControlEquipment" />
+		<RoleClass Name="IODevice" RefBaseClassPath="AutomationMLCSRoleClassLib/ControlEquipment" />
+		<RoleClass Name="HMI" RefBaseClassPath="AutomationMLCSRoleClassLib/ControlEquipment">
+			<RoleClass Name="WarningEquipment" RefBaseClassPath="AutomationMLExtendedRoleClassLib/HMI" />
+		</RoleClass>
+		<RoleClass Name="ActuatingDrive" RefBaseClassPath="AutomationMLCSRoleClassLib/ControlEquipment/Actuator" />
+		<RoleClass Name="MotionController" RefBaseClassPath="AutomationMLCSRoleClassLib/ControlEquipment" />
+		<RoleClass Name="Panel" RefBaseClassPath="AutomationMLCSRoleClassLib/ControlEquipment/ControlHardware" />
+		<RoleClass Name="MeasuringEquipment" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource" />
+		<RoleClass Name="Clamp" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Fixture" />
+		<RoleClass Name="ProcessController" RefBaseClassPath="AutomationMLCSRoleClassLib/ControlEquipment/Controller" />
+		<RoleClass Name="Loader" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Storage" />
+		<RoleClass Name="Unloader" RefBaseClassPath="AutomationMLDMIRoleClassLib/DiscManufacturingEquipment/Storage" />
+	</RoleClassLib>
+	<SystemUnitClassLib Name="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)">
+		<Version>1.0.0</Version>
+		<SystemUnitClass Name="Speichern">
+			<Description>Aufbewahren von Vorräten</Description>
+			<Attribute Name="Attribute1"></Attribute>
+			<SystemUnitClass Name="Geordnetes Speichern" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Speichern" />
+			<SystemUnitClass Name="Teilgeordnetes Speichern" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Speichern" />
+			<SystemUnitClass Name="Ungeordnetes Speichern" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Speichern" />
+		</SystemUnitClass>
+		<SystemUnitClass Name="Mengen verändern">
+			<Description>im Materialfluss</Description>
+			<Attribute Name="Attribute1"></Attribute>
+			<SystemUnitClass Name="Teilen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Mengen verändern">
+				<Description>Bilden von Teilmengen aus einer Menge</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Vereinigen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Mengen verändern">
+				<Description>Bilden von Mengen aus Teilmengen</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Abteilen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Mengen verändern" />
+			<SystemUnitClass Name="Zuteilen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Mengen verändern" />
+			<SystemUnitClass Name="Verzweigen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Mengen verändern" />
+			<SystemUnitClass Name="Zusammenführen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Mengen verändern" />
+			<SystemUnitClass Name="Sortieren" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Mengen verändern" />
+		</SystemUnitClass>
+		<SystemUnitClass Name="Bewegen">
+			<Description>Verändern der räumlichen Anordnung von Körpern</Description>
+			<Attribute Name="Attribute1"></Attribute>
+			<SystemUnitClass Name="Drehen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen">
+				<Description>Bewegen eines Körpers aus einer bestimmten Lage in eine andere bestimmte Lage (Rotation um eine Achse)</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Verschieben" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen">
+				<Description>Bewegen eines Körpers aus einer vorgegebenen in eine andere vorgegebene Position entlang einer Geraden (translatorisch)</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Schwenken" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen" />
+			<SystemUnitClass Name="Orientieren" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen" />
+			<SystemUnitClass Name="Positionieren" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen">
+				<Description>Bewegen eines Körpers aus einer unbestimmten Position in eine vorgebene Position</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Ordnen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen" />
+			<SystemUnitClass Name="Führen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen">
+				<Description>Bewegen von Körpern aus einer vorgegebenen in eine andere vorgegebene Position entlang einer definierten Bahn</Description>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Weitergeben" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen">
+				<Description>Bewegen von Körpern aus einer vorgegebenen in eine andere vorgegebene Position entlang einer undefinierten Bahn</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Fördern" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Bewegen" />
+		</SystemUnitClass>
+		<SystemUnitClass Name="Sichern">
+			<Description>Erhalten definierter Zustände</Description>
+			<Attribute Name="Attribute1"></Attribute>
+			<SystemUnitClass Name="Halten" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Sichern">
+				<Description>Vorrübergehendes Sichern eines Körpers in einer bestimmten Position und Orientierung</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Lösen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Sichern">
+				<Description>Umkehrung des Haltens</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Spannen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Sichern">
+				<Description>Vorrübergehende Sichern eines Körpers in einer bestimmten Position und Orientierung unter Beteiligung von Kraftschluss</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Entspannen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Sichern">
+				<Description>Umkehrung des Spannens</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+		</SystemUnitClass>
+		<SystemUnitClass Name="Kontrollieren">
+			<Description>Kontrolle ob bestimmte Eigenschaften, Zustände erfüllt sind</Description>
+			<Attribute Name="Attribute1"></Attribute>
+			<SystemUnitClass Name="Prüfen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren">
+				<Description>Feststellen, ob Körper vorgegebene Bedingungen erfüllen</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="Anwesenheit prüfen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Identität prüfen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Form prüfen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Größe prüfen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Farbe prüfen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Gewicht prüfen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Position prüfen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Orientierung prüfen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Messen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Zählen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Orientierung messen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+			<SystemUnitClass Name="Position messen" RefBaseClassPath="Kategorisierung nach VDI 2860 (Montage &amp; Handhabung)/Kontrollieren" />
+		</SystemUnitClass>
+	</SystemUnitClassLib>
+	<SystemUnitClassLib Name="Kategorisierung nach DIN 8580 (Fertigungsverfahren)">
+		<Version>1.0.0</Version>
+		<SystemUnitClass Name="Zusammenhalt vermehren">
+			<Attribute Name="Attribute1"></Attribute>
+			<SystemUnitClass Name="HG 4: Fügen" RefBaseClassPath="Kategorisierung nach DIN 8580 (Fertigungsverfahren)/Zusammenhalt vermehren">
+				<Description>z.B. Löten, Nieten</Description>
+				<Attribute Name="Attribute1"></Attribute>
+			</SystemUnitClass>
+			<SystemUnitClass Name="HG 5: Beschichten" RefBaseClassPath="Kategorisierung nach DIN 8580 (Fertigungsverfahren)/Zusammenhalt vermehren" />
+		</SystemUnitClass>
+	</SystemUnitClassLib>
+	<SystemUnitClassLib Name="Kategorisierung nach MTM-UAS">
+		<Version>1.0.0</Version>
+		<SystemUnitClass Name="Aufnehmen&amp;Platzieren">
+			<Description>entspricht VDI 2860 Halten, Drehen, Positionieren/Vereinigen/Zusammenführen und Lösen</Description>
+		</SystemUnitClass>
+		<SystemUnitClass Name="Platzieren">
+			<Description>entspricht VDI 2860 Positionieren und Lösen</Description>
+		</SystemUnitClass>
+		<SystemUnitClass Name="Hilfsmittel handhaben">
+			<Description>entspricht VDI 2860 Führen, Spannen, Teilen, Abteilen oder Drehen von Hilfsmitteln</Description>
+		</SystemUnitClass>
+		<SystemUnitClass Name="Betätigen">
+			<Description>entspricht VDI 2860 Führen von Hilfsmitteln</Description>
+		</SystemUnitClass>
+		<SystemUnitClass Name="Bewegungszyklen">
+			<Description>keine direkte Entsprechung in der VDI 2860 da es um bestimmte und spezielle Bewegungszyklen handelt</Description>
+		</SystemUnitClass>
+		<SystemUnitClass Name="Körperbewegung">
+			<Description>keine Entsprechung in der VDI 2860, da Körperbewegung keine Handhabungsfunktion darstellt</Description>
+		</SystemUnitClass>
+		<SystemUnitClass Name="Visuelle Kontrolle">
+			<Description>enspricht VDI 2860 Prüfen</Description>
+		</SystemUnitClass>
+	</SystemUnitClassLib>
+	<SystemUnitClassLib Name="Skill implementation">
+		<Version>0</Version>
+		<SystemUnitClass Name="ResultStatus" ID="85d0d313-c6c6-4fde-97a9-117bd829813d" />
+		<SystemUnitClass Name="SkillCallInterface" ID="70c1ab8b-5bcc-45bd-8d23-a21ef7dd4976"><Attribute Name="MethodName" AttributeDataType="xs:string" /></SystemUnitClass><SystemUnitClass Name="InvocationInterfaceClass" ID="13a56857-7efa-4ca3-8973-ad13568d8cbe"><Attribute Name="CommunicationPattern" AttributeDataType="xs:string"><DefaultValue>OPCUA</DefaultValue><Constraint Name=""><NominalScaledType><RequiredValue>OPCUA</RequiredValue><RequiredValue>OtherPattern</RequiredValue></NominalScaledType></Constraint></Attribute><Attribute Name="MethodName" AttributeDataType="xs:string" /></SystemUnitClass>
+	</SystemUnitClassLib>
+</CAEXFile>

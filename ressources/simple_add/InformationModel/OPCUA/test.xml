@@ -1,0 +1,1037 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet LastModified="2019-07-10T12:19:42.787Z" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd" xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:si="http://www.siemens.com/OPCUA/2017/SimaticNodeSetExtensions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://www.siemens.com/AutomationSkills/Types.xsd" xmlns:ua="http://unifiedautomation.com/Configuration/NodeSet.xsd">
+    <NamespaceUris>
+        <Uri>http://www.siemens.com/AutomationSkills</Uri>
+        <Uri>http://siemens.com/automation_skills_test</Uri>
+    </NamespaceUris>
+    <Models>
+        <Model ModelUri="http://siemens.com/automation_skills_test" PublicationDate="2019-07-09T00:00:00Z" Version="1.00">
+            <RequiredModel ModelUri="http://opcfoundation.org/UA/" PublicationDate="2019-05-01T00:00:00Z" Version="1.05"/>
+            <RequiredModel ModelUri="http://www.siemens.com/AutomationSkills" PublicationDate="2019-06-28T00:00:00Z" Version="1.00"/>
+        </Model>
+    </Models>
+    <Aliases>
+        <Alias Alias="Boolean">i=1</Alias>
+        <Alias Alias="Int16">i=4</Alias>
+        <Alias Alias="DateTime">i=13</Alias>
+        <Alias Alias="String">i=12</Alias>
+        <Alias Alias="NodeId">i=17</Alias>
+        <Alias Alias="LocalizedText">i=21</Alias>
+        <Alias Alias="HasComponent">i=47</Alias>
+        <Alias Alias="HasProperty">i=46</Alias>
+        <Alias Alias="Organizes">i=35</Alias>
+        <Alias Alias="HasTypeDefinition">i=40</Alias>
+        <Alias Alias="HasModellingRule">i=37</Alias>
+        <Alias Alias="IdType">i=256</Alias>
+        <Alias Alias="NumericRange">i=291</Alias>
+        <Alias Alias="Argument">i=296</Alias>
+    </Aliases>
+    <Extensions>
+        <Extension>
+            <si:Generator Product="SiOME" Edition="Standard" Version="1.9.4"/>
+        </Extension>
+    </Extensions>
+    <UAObject SymbolicName="http___siemens_com_automation_skills_test" NodeId="ns=2;i=1000" BrowseName="2:http://siemens.com/automation_skills_test">
+        <DisplayName>http://siemens.com/automation_skills_test</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">i=11715</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=11616</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="Boolean" NodeId="ns=2;i=1001" BrowseName="IsNamespaceSubset" ParentNodeId="ns=2;i=1000">
+        <DisplayName>IsNamespaceSubset</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1000</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="DateTime" NodeId="ns=2;i=1002" BrowseName="NamespacePublicationDate" ParentNodeId="ns=2;i=1000">
+        <DisplayName>NamespacePublicationDate</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1000</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Value>
+            <uax:DateTime>2019-07-09T00:00:00Z</uax:DateTime>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=2;i=1003" BrowseName="NamespaceUri" ParentNodeId="ns=2;i=1000">
+        <DisplayName>NamespaceUri</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1000</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Value>
+            <uax:String>http://siemens.com/automation_skills_test</uax:String>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=2;i=1004" BrowseName="NamespaceVersion" ParentNodeId="ns=2;i=1000">
+        <DisplayName>NamespaceVersion</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1000</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Value>
+            <uax:String>1.00</uax:String>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="IdType" ValueRank="1" NodeId="ns=2;i=1005" ArrayDimensions="0" BrowseName="StaticNodeIdTypes" ParentNodeId="ns=2;i=1000">
+        <DisplayName>StaticNodeIdTypes</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1000</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="NumericRange" ValueRank="1" NodeId="ns=2;i=1006" ArrayDimensions="0" BrowseName="StaticNumericNodeIdRange" ParentNodeId="ns=2;i=1000">
+        <DisplayName>StaticNumericNodeIdRange</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1000</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="String" NodeId="ns=2;i=1007" BrowseName="StaticStringNodeIdPattern" ParentNodeId="ns=2;i=1000">
+        <DisplayName>StaticStringNodeIdPattern</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1000</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="i=96" ValueRank="1" NodeId="ns=2;i=1008" ArrayDimensions="0" BrowseName="DefaultRolePermissions">
+        <DisplayName>DefaultRolePermissions</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1000</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+    </UAVariable>
+    <UAObject NodeId="ns=2;i=1009" BrowseName="2:Skills">
+        <DisplayName>Skills</DisplayName>
+        <References>
+            <Reference ReferenceType="Organizes" IsForward="false">i=85</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+        </References>
+    </UAObject>
+    <UAObject NodeId="ns=2;i=1027" BrowseName="2:InsertSkill">
+        <DisplayName>InsertSkill</DisplayName>
+        <References>
+            <Reference ReferenceType="Organizes" IsForward="false">ns=2;i=1009</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=1032</Reference>
+        </References>
+    </UAObject>
+    <UAObject NodeId="ns=2;i=1028" BrowseName="1:Description">
+        <DisplayName>Description</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1027</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+        </References>
+    </UAObject>
+    <UAObject NodeId="ns=2;i=1029" BrowseName="1:Invokation">
+        <DisplayName>Invokation</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1027</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=58</Reference>
+        </References>
+    </UAObject>
+    <UAObject NodeId="ns=2;i=1030" BrowseName="1:StateMachine">
+        <DisplayName>StateMachine</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1027</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=3</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1031" ArrayDimensions="3" BrowseName="AvailableStates">
+        <DisplayName>AvailableStates</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1030</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."SkillStateMachine"."AvailableStates_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=71</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=61</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=62</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1032" ArrayDimensions="3" BrowseName="AvailableTransitions">
+        <DisplayName>AvailableTransitions</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1030</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."SkillStateMachine"."AvailableTransitions_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1007</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1008</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=66</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAObject NodeId="ns=2;i=1033" BrowseName="1:ClearedStateMachine">
+        <DisplayName>ClearedStateMachine</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1030</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=2</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1034" BrowseName="CurrentState">
+        <DisplayName>CurrentState</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1030</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2760</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1035" BrowseName="LastTransition">
+        <DisplayName>LastTransition</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1030</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2767</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1036" ArrayDimensions="4" BrowseName="AvailableStates">
+        <DisplayName>AvailableStates</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1033</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ClearedStatMachine"."AvailableStates_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=55</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=53</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=75</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=54</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1037" ArrayDimensions="4" BrowseName="AvailableTransitions">
+        <DisplayName>AvailableTransitions</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1033</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ClearedStatMachine"."AvailableTransitions_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=58</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1000</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1006</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=57</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1038" BrowseName="CurrentState">
+        <DisplayName>CurrentState</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1033</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2760</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1039" BrowseName="LastTransition">
+        <DisplayName>LastTransition</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1033</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2767</Reference>
+        </References>
+    </UAVariable>
+    <UAObject NodeId="ns=2;i=1040" BrowseName="1:RunningStateMachine">
+        <DisplayName>RunningStateMachine</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1033</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=1</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1041" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1034</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."SkillStateMachine"."CurrentState_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1042" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1035</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."SkillStateMachine"."LastTransition_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1043" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1038</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ClearedStatMachine"."CurrentState_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1044" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1039</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ClearedStatMachine"."LastTransition_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1045" ArrayDimensions="6" BrowseName="AvailableStates">
+        <DisplayName>AvailableStates</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1040</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."RunningStateMachine"."AvailableStates_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=27</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=28</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=36</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1036</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=37</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=38</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1046" ArrayDimensions="7" BrowseName="AvailableTransitions">
+        <DisplayName>AvailableTransitions</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1040</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."RunningStateMachine"."AvailableTransitions_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=39</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1002</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1041</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1040</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1003</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=50</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1042</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1047" BrowseName="CurrentState">
+        <DisplayName>CurrentState</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1040</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2760</Reference>
+        </References>
+    </UAVariable>
+    <UAObject NodeId="ns=2;i=1048" BrowseName="1:ExecuteStateMachine">
+        <DisplayName>ExecuteStateMachine</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1040</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=1009</Reference>
+        </References>
+    </UAObject>
+    <UAObject NodeId="ns=2;i=1049" BrowseName="1:HoldStateMachine">
+        <DisplayName>HoldStateMachine</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1040</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=1011</Reference>
+        </References>
+    </UAObject>
+    <UAObject NodeId="ns=2;i=1050" BrowseName="1:IdleStateMachine">
+        <DisplayName>IdleStateMachine</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1040</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=1010</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1051" BrowseName="LastTransition">
+        <DisplayName>LastTransition</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1040</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2767</Reference>
+        </References>
+    </UAVariable>
+    <UAObject NodeId="ns=2;i=1052" BrowseName="1:ResettingStateMachine">
+        <DisplayName>ResettingStateMachine</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1040</Reference>
+            <Reference ReferenceType="HasTypeDefinition">ns=1;i=1012</Reference>
+        </References>
+    </UAObject>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1053" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1047</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."RunningStateMachine"."CurrentState_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1054" ArrayDimensions="2" BrowseName="AvailableStates">
+        <DisplayName>AvailableStates</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1048</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ExecuteStateMachine"."AvailableStates_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1013</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1014</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1055" ArrayDimensions="2" BrowseName="AvailableTransitions">
+        <DisplayName>AvailableTransitions</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1048</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ExecuteStateMachine"."AvailableTransitions_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1015</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1016</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1056" BrowseName="CurrentState">
+        <DisplayName>CurrentState</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1048</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2760</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1057" BrowseName="LastTransition">
+        <DisplayName>LastTransition</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1048</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2767</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1058" ArrayDimensions="3" BrowseName="AvailableStates">
+        <DisplayName>AvailableStates</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1049</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."HoldStateMachine"."AvailableStates_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1020</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1021</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1022</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1059" ArrayDimensions="2" BrowseName="AvailableTransitions">
+        <DisplayName>AvailableTransitions</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1049</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."HoldStateMachine"."AvailableTransitions_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1024</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1023</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1060" BrowseName="CurrentState">
+        <DisplayName>CurrentState</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1049</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2760</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1061" BrowseName="LastTransition">
+        <DisplayName>LastTransition</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1049</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2767</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1062" ArrayDimensions="2" BrowseName="AvailableStates">
+        <DisplayName>AvailableStates</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1050</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."IdleStateMachine"."AvailableStates_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1018</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1017</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1063" ArrayDimensions="1" BrowseName="AvailableTransitions">
+        <DisplayName>AvailableTransitions</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1050</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."IdleStateMachine"."AvailableTransitions_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1019</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1064" BrowseName="CurrentState">
+        <DisplayName>CurrentState</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1050</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2760</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1065" BrowseName="LastTransition">
+        <DisplayName>LastTransition</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1050</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2767</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1066" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1051</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."RunningStateMachine"."LastTransition_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1067" ArrayDimensions="3" BrowseName="AvailableStates">
+        <DisplayName>AvailableStates</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1052</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ResettingStateMachine"."AvailableStates_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1026</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1025</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1027</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="NodeId" ValueRank="1" NodeId="ns=2;i=1068" ArrayDimensions="3" BrowseName="AvailableTransitions">
+        <DisplayName>AvailableTransitions</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1052</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ResettingStateMachine"."AvailableTransitions_NodeIds"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+        <Value>
+            <uax:ListOfNodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1028</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1030</uax:Identifier>
+                </uax:NodeId>
+                <uax:NodeId>
+                    <uax:Identifier>ns=1;i=1029</uax:Identifier>
+                </uax:NodeId>
+            </uax:ListOfNodeId>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1069" BrowseName="CurrentState">
+        <DisplayName>CurrentState</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1052</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2760</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="LocalizedText" NodeId="ns=2;i=1070" BrowseName="LastTransition">
+        <DisplayName>LastTransition</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1052</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=2767</Reference>
+        </References>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1071" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1056</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ExecuteStateMachine"."CurrentState_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1072" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1057</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ExecuteStateMachine"."LastTransition_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1073" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1060</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."HoldStateMachine"."CurrentState_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1074" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1061</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."HoldStateMachine"."LastTransition_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1075" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1064</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."IdleStateMachine"."CurrentState_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1076" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1065</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."IdleStateMachine"."LastTransition_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1077" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1069</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ResettingStateMachine"."CurrentState_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAVariable DataType="NodeId" NodeId="ns=2;i=1078" BrowseName="Id">
+        <DisplayName>Id</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1070</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:VariableMapping>"SkillStateMachineMapping"."Mapping"."ResettingStateMachine"."LastTransition_Id"</si:VariableMapping>
+            </Extension>
+        </Extensions>
+    </UAVariable>
+    <UAMethod NodeId="ns=2;i=1079" BrowseName="2:Start">
+        <DisplayName>Start</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1029</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:MethodMapping>"Insert_Start_DB".Method</si:MethodMapping>
+            </Extension>
+        </Extensions>
+    </UAMethod>
+    <UAVariable DataType="Argument" ValueRank="1" NodeId="ns=2;i=1080" ArrayDimensions="6" BrowseName="InputArguments">
+        <DisplayName>InputArguments</DisplayName>
+        <Description>the definition of the input argument of method 1:Invokation.2:Start</Description>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1079</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+        <Value>
+            <uax:ListOfExtensionObject>
+                <uax:ExtensionObject>
+                    <uax:TypeId>
+                        <uax:Identifier>i=297</uax:Identifier>
+                    </uax:TypeId>
+                    <uax:Body>
+                        <uax:Argument>
+                            <uax:Name>Position</uax:Name>
+                            <uax:DataType>
+                                <uax:Identifier>i=4</uax:Identifier>
+                            </uax:DataType>
+                            <uax:ValueRank>-1</uax:ValueRank>
+                            <uax:ArrayDimensions/>
+                            <uax:Description/>
+                        </uax:Argument>
+                    </uax:Body>
+                </uax:ExtensionObject>
+                <uax:ExtensionObject>
+                    <uax:TypeId>
+                        <uax:Identifier>i=297</uax:Identifier>
+                    </uax:TypeId>
+                    <uax:Body>
+                        <uax:Argument>
+                            <uax:Name>BuildingBlockTypeId</uax:Name>
+                            <uax:DataType>
+                                <uax:Identifier>i=4</uax:Identifier>
+                            </uax:DataType>
+                            <uax:ValueRank>-1</uax:ValueRank>
+                            <uax:ArrayDimensions/>
+                            <uax:Description/>
+                        </uax:Argument>
+                    </uax:Body>
+                </uax:ExtensionObject>
+                <uax:ExtensionObject>
+                    <uax:TypeId>
+                        <uax:Identifier>i=297</uax:Identifier>
+                    </uax:TypeId>
+                    <uax:Body>
+                        <uax:Argument>
+                            <uax:Name>Orientation</uax:Name>
+                            <uax:DataType>
+                                <uax:Identifier>i=4</uax:Identifier>
+                            </uax:DataType>
+                            <uax:ValueRank>-1</uax:ValueRank>
+                            <uax:ArrayDimensions/>
+                            <uax:Description/>
+                        </uax:Argument>
+                    </uax:Body>
+                </uax:ExtensionObject>
+                <uax:ExtensionObject>
+                    <uax:TypeId>
+                        <uax:Identifier>i=297</uax:Identifier>
+                    </uax:TypeId>
+                    <uax:Body>
+                        <uax:Argument>
+                            <uax:Name>RFID</uax:Name>
+                            <uax:DataType>
+                                <uax:Identifier>i=4</uax:Identifier>
+                            </uax:DataType>
+                            <uax:ValueRank>-1</uax:ValueRank>
+                            <uax:ArrayDimensions/>
+                            <uax:Description/>
+                        </uax:Argument>
+                    </uax:Body>
+                </uax:ExtensionObject>
+                <uax:ExtensionObject>
+                    <uax:TypeId>
+                        <uax:Identifier>i=297</uax:Identifier>
+                    </uax:TypeId>
+                    <uax:Body>
+                        <uax:Argument>
+                            <uax:Name>CurrentConfiguration_BuildingBlockTypeId</uax:Name>
+                            <uax:DataType>
+                                <uax:Identifier>i=4</uax:Identifier>
+                            </uax:DataType>
+                            <uax:ValueRank>1</uax:ValueRank>
+                            <uax:ArrayDimensions>
+                                <uax:UInt32>5</uax:UInt32>
+                            </uax:ArrayDimensions>
+                            <uax:Description/>
+                        </uax:Argument>
+                    </uax:Body>
+                </uax:ExtensionObject>
+                <uax:ExtensionObject>
+                    <uax:TypeId>
+                        <uax:Identifier>i=297</uax:Identifier>
+                    </uax:TypeId>
+                    <uax:Body>
+                        <uax:Argument>
+                            <uax:Name>CurrentConfiguration_Orientation</uax:Name>
+                            <uax:DataType>
+                                <uax:Identifier>i=4</uax:Identifier>
+                            </uax:DataType>
+                            <uax:ValueRank>1</uax:ValueRank>
+                            <uax:ArrayDimensions>
+                                <uax:UInt32>5</uax:UInt32>
+                            </uax:ArrayDimensions>
+                            <uax:Description/>
+                        </uax:Argument>
+                    </uax:Body>
+                </uax:ExtensionObject>
+            </uax:ListOfExtensionObject>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="Argument" ValueRank="1" NodeId="ns=2;i=1081" ArrayDimensions="1" BrowseName="OutputArguments">
+        <DisplayName>OutputArguments</DisplayName>
+        <Description>the definition of the output arguments of method 1:Invokation.2:Start</Description>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1079</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+        <Value>
+            <uax:ListOfExtensionObject>
+                <uax:ExtensionObject>
+                    <uax:TypeId>
+                        <uax:Identifier>i=297</uax:Identifier>
+                    </uax:TypeId>
+                    <uax:Body>
+                        <uax:Argument>
+                            <uax:Name>ErrorId</uax:Name>
+                            <uax:DataType>
+                                <uax:Identifier>i=4</uax:Identifier>
+                            </uax:DataType>
+                            <uax:ValueRank>-1</uax:ValueRank>
+                            <uax:ArrayDimensions/>
+                            <uax:Description/>
+                        </uax:Argument>
+                    </uax:Body>
+                </uax:ExtensionObject>
+            </uax:ListOfExtensionObject>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="Int16" NodeId="ns=2;i=1091" BrowseName="2:ResultTrigger" UserAccessLevel="3" AccessLevel="3">
+        <DisplayName>ResultTrigger</DisplayName>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1029</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+        </References>
+    </UAVariable>
+    <UAMethod NodeId="ns=2;i=1092" BrowseName="2:GetResult">
+        <DisplayName>GetResult</DisplayName>
+        <References>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=2;i=1029</Reference>
+        </References>
+        <Extensions>
+            <Extension>
+                <si:MethodMapping>"Insert_GetResult_DB".Method</si:MethodMapping>
+            </Extension>
+        </Extensions>
+    </UAMethod>
+    <UAVariable DataType="Argument" ValueRank="1" NodeId="ns=2;i=1093" ArrayDimensions="1" BrowseName="InputArguments">
+        <DisplayName>InputArguments</DisplayName>
+        <Description>the definition of the input argument of method 1:Invokation.2:GetResult</Description>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1092</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+        <Value>
+            <uax:ListOfExtensionObject>
+                <uax:ExtensionObject>
+                    <uax:TypeId>
+                        <uax:Identifier>i=297</uax:Identifier>
+                    </uax:TypeId>
+                    <uax:Body>
+                        <uax:Argument>
+                            <uax:Name>RFID</uax:Name>
+                            <uax:DataType>
+                                <uax:Identifier>i=4</uax:Identifier>
+                            </uax:DataType>
+                            <uax:ValueRank>-1</uax:ValueRank>
+                            <uax:ArrayDimensions/>
+                            <uax:Description/>
+                        </uax:Argument>
+                    </uax:Body>
+                </uax:ExtensionObject>
+            </uax:ListOfExtensionObject>
+        </Value>
+    </UAVariable>
+    <UAVariable DataType="Argument" ValueRank="1" NodeId="ns=2;i=1094" ArrayDimensions="1" BrowseName="OutputArguments">
+        <DisplayName>OutputArguments</DisplayName>
+        <Description>the definition of the output arguments of method 1:Invokation.2:GetResult</Description>
+        <References>
+            <Reference ReferenceType="HasProperty" IsForward="false">ns=2;i=1092</Reference>
+            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+        </References>
+        <Value>
+            <uax:ListOfExtensionObject>
+                <uax:ExtensionObject>
+                    <uax:TypeId>
+                        <uax:Identifier>i=297</uax:Identifier>
+                    </uax:TypeId>
+                    <uax:Body>
+                        <uax:Argument>
+                            <uax:Name>ErrorId</uax:Name>
+                            <uax:DataType>
+                                <uax:Identifier>i=4</uax:Identifier>
+                            </uax:DataType>
+                            <uax:ValueRank>-1</uax:ValueRank>
+                            <uax:ArrayDimensions/>
+                            <uax:Description/>
+                        </uax:Argument>
+                    </uax:Body>
+                </uax:ExtensionObject>
+            </uax:ListOfExtensionObject>
+        </Value>
+    </UAVariable>
+</UANodeSet>
