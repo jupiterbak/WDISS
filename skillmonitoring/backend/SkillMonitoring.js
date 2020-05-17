@@ -2,7 +2,7 @@
  * Copyright 2018 Siemens AG.
  * 
  * File: application.js
- * Project: SP 164
+ * Project: SP 347
  * Author:
  *  - Jupiter Bakakeu
  *

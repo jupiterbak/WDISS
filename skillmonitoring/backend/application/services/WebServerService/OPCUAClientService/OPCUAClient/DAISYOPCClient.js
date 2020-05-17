@@ -771,9 +771,7 @@ DAISYOPCClient.prototype.monitorNode = function(ns, nid, browseName, samplingInt
             }else{
                 self.monitoredItems["ns=" + ns + ";" + type + "=" + nid] = monitoredItem;
                 monitoredItem.on("changed", function(dataValue) {
-
                     newValueCallback(dataValue);
-            
                 });
                 monitoredItem.on("initialized", function() {
                     //console.log("monitoredItem initialized");

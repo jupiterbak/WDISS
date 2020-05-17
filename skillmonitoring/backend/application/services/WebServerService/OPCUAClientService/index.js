@@ -228,7 +228,7 @@ OPCUAClientInterface.prototype.ExecuteMethod = function(arg, fCallBack) {
                                     inputArguments.push({
                                         dataType: el.dataType.value, // only basic datatypes are supported
                                         arrayType: el.valueRank !== -1 ? opcua.VariantArrayType.Array : opcua.VariantArrayType.Scalar,
-                                        value: el.valueRank !== -1 ? [0] : 0
+                                        value: el.valueRank !== -1 ? [0] : el.value?el.value:0
                                     });
                                     k++;
                                 });
@@ -314,6 +314,96 @@ OPCUAClientInterface.prototype.WriteVariable = function(arg, fCallBack) {
         }
     } else {
         self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not write variable. Client and skills are not defined.");
+        fCallBack({ text: "Could not execute action. Client and skill are not defined." }, null);
+    }    
+};
+
+OPCUAClientInterface.prototype.monitorNode = function(arg, fCallBack) {
+    var self = this;
+    if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.skillName && arg.node) {
+        var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
+        if (client && client.connected === true && client.information_model_checked === true) {
+            if (arg.ResultTriggerNodeID) {
+                client.monitorNode(arg.node.nodeId.ns, arg.node.nodeId.nid, arg.name, self.settings.modulesetting.interval, function(err) {
+                    if (err) {
+                        self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + arg.node.name + "] - [" + arg.node.nodeId.ns + ":" + arg.node.nodeId.nid + "]: " + err);
+                        fCallBack({ text: "Could not monitor variable.", err: err }, null);
+                    }
+                }, function(dataValue) {
+                    var el = {};
+                    if (dataValue.value) {                        
+                        el['value'] = dataValue.value.value;
+                    } else {
+                        el["value"] = 0;
+                    }
+
+                    el["ID"] = "ns=" + arg.node.nodeId.ns + ";i=" + arg.node.nodeId.nid;
+                    var _rslt = {
+                        ip: "" + client.ip,
+                        port: "" + client.port,
+                        skill: arg.skillName,
+                        node: arg.node,
+                        value: el
+                    };
+
+                    fCallBack(null, _rslt);
+                    sio.emit("MonitoringNodeChanged",_rslt);
+                });
+            }else {
+                self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not monitor variable. Variable not found.");
+                fCallBack({ text: "Could not monitor variable. Variable not found" }, null);
+            }
+        } else {
+            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not monitor variable. Client is disconnected.");
+            fCallBack({ text: "Could not execute action. Client is disconnected." }, null);
+        }
+    } else {
+        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not monitor variable. Client and skills are not defined.");
+        fCallBack({ text: "Could not execute action. Client and skill are not defined." }, null);
+    }    
+};
+
+OPCUAClientInterface.prototype.monitorResultTrigger = function(arg, fCallBack) {
+    var self = this;
+    if (arg.ip && arg.socketID && arg.port && arg.serverName && arg.skillName && arg.node) {
+        var client = self.manager.getClient(self.manager.getClientID(arg.ip, arg.port, arg.serverName, arg.socketID));
+        if (client && client.connected === true && client.information_model_checked === true) {
+            if (arg.ResultTriggerNodeID) {
+                client.monitorNode(arg.node.nodeId.ns, arg.node.nodeId.nid, arg.name, self.settings.modulesetting.interval, function(err) {
+                    if (err) {
+                        self.app.log.error("MICROSERVICE[" + self.settings.name + "] could not monitor item [" + arg.node.name + "] - [" + arg.node.nodeId.ns + ":" + arg.node.nodeId.nid + "]: " + err);
+                        fCallBack({ text: "Could not monitor variable.", err: err }, null);
+                    }
+                }, function(dataValue) {
+                    var el = {};
+                    if (dataValue.value) {                        
+                        el['value'] = dataValue.value.value;
+                    } else {
+                        el["value"] = 0;
+                    }
+
+                    el["ID"] = "ns=" + arg.node.nodeId.ns + ";i=" + arg.node.nodeId.nid;
+                    var _rslt = {
+                        ip: "" + client.ip,
+                        port: "" + client.port,
+                        skill: arg.skillName,
+                        node: arg.node,
+                        value: el
+                    };
+
+                    fCallBack(null, _rslt);
+                    sio.emit("ResultTriggerChanged",_rslt);
+                });
+            }else {
+                self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not monitor variable. Variable not found.");
+                fCallBack({ text: "Could not monitor variable. Variable not found" }, null);
+            }
+        } else {
+            self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not monitor variable. Client is disconnected.");
+            fCallBack({ text: "Could not execute action. Client is disconnected." }, null);
+        }
+    } else {
+        self.app.log.warn("MICROSERVICE[" + self.settings.name + "] could not monitor variable. Client and skills are not defined.");
         fCallBack({ text: "Could not execute action. Client and skill are not defined." }, null);
     }    
 };

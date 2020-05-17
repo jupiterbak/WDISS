@@ -39,6 +39,7 @@ var WebServerService = function() {
     this.connectionMsg = {};
 
     this.lastStateChangeEvent = {};
+    this.lastResultTriggerChangeEvent = {};
 
     this.lastKPIChangedEvent = {};
     this.lastSTATESDescriptionChangedEvent = null;
@@ -115,6 +116,14 @@ WebServerService.prototype.start = function() {
     self.wapp.get('/ExecuteMethod', function(req, res) {
         let action = JSON.parse(req.query.action);
         self.opcuaclientservice.ExecuteMethod(action, function(err, results) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify({ err: err, results: results }));
+        });
+    });
+
+    self.wapp.get('/MonitorResultTrigger', function(req, res) {
+        let node = JSON.parse(req.query.node);
+        self.opcuaclientservice.monitorResultsTrigger(node, function(err, results) {
             res.setHeader('Content-Type', 'application/json');
             res.send(JSON.stringify({ err: err, results: results }));
         });
@@ -263,6 +272,9 @@ WebServerService.prototype.emit = function(eventID, data) {
     } else if (eventID === "StatesChanged") {
         self.lastStateChangeEvent["" + data.ip + "_" + data.port + "_"  + data.state.ID] = data;
         self.emitAll("StatesChanged", self.lastStateChangeEvent);
+    } else if (eventID === "ResultTriggerChanged") {
+        self.lastResultTriggerChangeEvent["" + data.ip + "_" + data.port + "_"  + data.node.ns + "_" + data.node.nid] = data;
+        self.emitAll("ResultTriggerChanged", self.lastResultTriggerChangeEvent);
     } else if (eventID === "KPIChanged") {
         self.lastKPIChangedEvent["" + data.ip + "_" + data.port + "_" + data.name] = data;
         self.emitAll("KPIChanged", self.lastKPIChangedEvent);
