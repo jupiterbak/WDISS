@@ -17,4 +17,5 @@ RUN npm install --save node-opcua
 COPY . .
 
 EXPOSE 8080
+EXPOSE 3800
 CMD [ "node", "run", "start" ]

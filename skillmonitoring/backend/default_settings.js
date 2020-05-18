@@ -2,7 +2,7 @@
  * Copyright 2018 Siemens AG.
  * 
  * File: LEMS.js
- * Project: SP 164
+ * Project: SP 347
  * Author:
  *  - Jupiter Bakakeu
  *
@@ -161,7 +161,7 @@ module.exports = {
                 modulesetting: {
                     interval: 10,
                     ip: "0.0.0.0",
-                    port: 4840,
+                    port: 4840, // default OPC UA Port to initialize the input text fields
                     defaultObjectModel: {
                         _states: ["Id"], // ["CurrentStateExt", "CurrentState", "Id"],
                         _kpi: ["CurrentLoads", "CurrentLoad", "CurrMachSpeed", "TargetLoad", "Product", "MachSpeed", "StateChangeInProgress", "Interlocked", "EnergySource", "SupportedModes", "Version", "MachSpeed_AC", "MachSpeed_DC"],
