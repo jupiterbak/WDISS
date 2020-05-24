@@ -62,7 +62,8 @@ $(function() {
                     name: el.skill.name,
                     nodeId: el.skill.nodeId,
                     ip: el.ip,
-                    port: el.port
+                    port: el.port,
+                    hostname: window.location.hostname,
                 };
                 var html = compiledTemplate(context);
                 $("#opcua_content_table_tbody").append(html);

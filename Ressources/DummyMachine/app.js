@@ -4,7 +4,7 @@ const opcua = require("node-opcua");
 var yaml_config = require('node-yaml-config');
 var config = yaml_config.load(__dirname + '/config.yml');
 
-var Skill = require("./Skill.js");
+var Skill = require("./Skill");
 var internal_kill = null;
 
 const winston = require('winston');

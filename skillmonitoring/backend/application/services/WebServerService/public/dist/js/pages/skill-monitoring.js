@@ -66,9 +66,9 @@ $(function() {
 
     function executeMethod(self, params) {
         var all_parameters = $(self).parent().parent().find('.input_param_div input');
-        var all_parameters = $(self).parent().parent().find('.output_param_div input');
         let data = {
             ip: gIP,
+            hostname: window.location.hostname,
             port: gPORT,
             serverName: gSERVERNAME,
             socketID: gSOCKETId,
@@ -79,10 +79,11 @@ $(function() {
 
         for (let index = 0; index < all_parameters.length; index++) {
             const el = all_parameters[index];
+            var _val = el.value?el.value:0;
             data.parameters.push({
                 dataType: el.dataset["datatype"], // Null: 0, Boolean: 1, SByte: 2, // signed Byte = Int8 Byte : 3, // unsigned Byte = UInt8 Int16: 4, UInt16: 5, Int32: 6, UInt32: 7, Int64: 8, UInt64: 9, Float: 10, Double: 11, String: 12, DateTime: 13, Guid: 14, ByteString: 15, XmlElement: 16, NodeId: 17, ExpandedNodeId: 18, StatusCode: 19, QualifiedName: 20, LocalizedText: 21, ExtensionObject: 22, DataValue: 23, Variant: 24, DiagnosticInfo: 25
                 arrayType: el.dataset["arraytype"], //Scalar: 0x00, Array: 0x01, Matrix: 0x02
-                value: el.value
+                value: _val
             });
         }
 

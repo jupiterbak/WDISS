@@ -4,8 +4,8 @@ const opcua = require("node-opcua");
 var yaml_config = require('node-yaml-config');
 var config = yaml_config.load(__dirname + '/config.yml');
 
-var SkillUnload = require("./SkillUnload.js");
-var Skillload = require("./Skillload.js");
+var SkillUnload = require("./SkillUnload");
+var Skillload = require("./Skillload");
 var internal_kill_unload = null;
 var internal_kill_load = null;
 

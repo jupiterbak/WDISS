@@ -8,7 +8,7 @@
  **/
 
 const opcua = require("node-opcua");
-const SkillStateMachine = require('./SkillStateMachine');
+const SkillStateMachine = require('../SkillStateMachine');
 var hasOwnNestedProperty = function(obj, propertyPath) {
     if (!propertyPath)
         return false;

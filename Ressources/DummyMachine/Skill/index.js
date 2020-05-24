@@ -8,7 +8,7 @@
  **/
 
 const opcua = require("node-opcua");
-const SkillStateMachine = require('./SkillStateMachine');
+const SkillStateMachine = require('../SkillStateMachine');
 var hasOwnNestedProperty = function(obj, propertyPath) {
     if (!propertyPath)
         return false;
@@ -56,7 +56,7 @@ const STATENODEIDMAPPING = {
     skill_initialized: 1027
 };
 
-class SkillLoad {
+class Skill {
     constructor(logger, opcua_server) {
         this.logger = logger;
         this.skill_state_machine = new SkillStateMachine(logger, this);
@@ -83,8 +83,8 @@ class SkillLoad {
         this.skill_type_namespace_index = this.addressSpace.getNamespaceIndex("http://www.siemens.com/AutomationSkills");
 
         // Find the methods
-        this.start_method_node = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1016");
-        this.GetResult_method_node = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1014");
+        this.start_method_node = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1079");
+        this.GetResult_method_node = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1092");
         this.start_method = this.addressSpace.findMethod(this.start_method_node.nodeId);
         this.GetResult_method = this.addressSpace.findMethod(this.GetResult_method_node.nodeId);
 
@@ -96,22 +96,22 @@ class SkillLoad {
             self.getSkillResultsMethod(inputArguments, context, callback);
         });
         // Find and initialize current state variables nodes
-        this.skill_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1020");
-        this.cleared_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1083");
-        this.running_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1096");
-        this.idle_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1113");
-        this.execute_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1105");
-        this.hold_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1109");
-        this.resetting_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1118");
+        this.skill_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1034");
+        this.cleared_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1038");
+        this.running_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1047");
+        this.idle_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1064");
+        this.execute_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1056");
+        this.hold_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1060");
+        this.resetting_state_machine_cs = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1069");
 
         // Find and initialize the current state "Id" properties
-        this.skill_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1086");
-        this.cleared_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1088");
-        this.running_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1102");
-        this.idle_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1124");
-        this.execute_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1120");
-        this.hold_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1122");
-        this.resetting_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1126");
+        this.skill_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1041");
+        this.cleared_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1043");
+        this.running_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1053");
+        this.idle_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1075");
+        this.execute_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1071");
+        this.hold_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1073");
+        this.resetting_state_machine_cs_nid = this.addressSpace.findNode("ns=" + this.skill_namespace_index + ";i=1077");
 
         this.initializeCurrentStateVariables();
         this.initializeCurrentStateVariablesId();
@@ -350,4 +350,4 @@ class SkillLoad {
     }
 }
 
-module.exports = SkillLoad;
+module.exports = Skill;
